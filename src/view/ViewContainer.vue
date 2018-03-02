@@ -1,7 +1,7 @@
 <template>
   <div id="container" style="margin: 30px">
     <div class="title">按钮</div>
-    <yu-button disabled>默认</yu-button>
+    <yu-button>默认</yu-button>
     <yu-button icon="icon-home" autoFocus>默认</yu-button>
     <yu-button type="primary" disabled>主要</yu-button>
     <yu-button type="success">成功</yu-button>
@@ -10,6 +10,7 @@
     <yu-button type="info">信息</yu-button>
     <yu-button size="big">大按钮</yu-button>
     <yu-button size="small">小按钮</yu-button>
+    <yu-button size="small" disabled>小按钮</yu-button>
     <yu-button shape="circle" icon="icon-user"/>
     <yu-buttons>
       <yu-button>1</yu-button>
@@ -58,6 +59,10 @@
       <yu-option label="狗" value="2"/>
       <yu-option label="狗" value="2"/>
     </yu-select>
+    <div class="title">计数器</div>
+    <yu-counter/>
+    <yu-counter disabled/>
+    <yu-counter :step=5 />
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -70,6 +75,7 @@ import YuOption from '../components/option';
 import YuRadio from '../components/radio';
 import YuRadios from '../components/radios';
 import YuSelect from '../components/select';
+import YuCounter from '../components/counter';
 
 
 export default {
@@ -90,6 +96,7 @@ export default {
     YuRadio,
     YuRadios,
     YuSelect,
+    YuCounter,
   },
 };
 </script>

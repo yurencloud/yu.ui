@@ -20,13 +20,14 @@
       @change="handleChange"
       :class="[{prefix:prefix},{suffix:suffix}]">
 
+    <span class="suffix icon" v-if="suffix">
+    <i class="iconfont" :class="[suffix]"></i>
+  </span>
+
     <span class="clearable" v-if="clearable && value" @click="clear">
     <i class="iconfont icon-close-circle "></i>
   </span>
 
-    <span class="suffix icon" v-if="suffix">
-    <i class="iconfont" :class="[suffix]"></i>
-  </span>
 
     <textarea
       v-if="type==='textarea'"
@@ -47,10 +48,13 @@ export default {
   name: 'YuInput',
   data() {
     return {
-      value: '',
+      value: this.defaultValue ? this.defaultValue : '',
     };
   },
   props: {
+    defaultValue: {
+      type: [String, Number],
+    },
     placeholder: {
       type: String,
     },
@@ -101,6 +105,9 @@ export default {
     handleChange() {
       this.$emit('change', this.value);
     },
+    changeValue(value) {
+      this.value = value;
+    },
   },
 };
 </script>
@@ -139,6 +146,7 @@ export default {
     }
     &.disabled {
       input {
+        color: $lighter-text;
         background-color: $background;
         &:hover {
           border: 1px solid $border;
@@ -156,7 +164,7 @@ export default {
         color: $light-text;
         position: absolute;
         left: -25px;
-        top: 9px;
+        top: 4px;
       }
     }
 
@@ -167,7 +175,7 @@ export default {
         color: $lighter-text;
         position: absolute;
         left: 10px;
-        top: 7px;
+        top: 4px;
       }
     }
 
@@ -178,7 +186,7 @@ export default {
         color: $lighter-text;
         position: absolute;
         left: -25px;
-        top: 7px;
+        top: 4px;
       }
     }
 

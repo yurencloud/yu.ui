@@ -1,5 +1,6 @@
 <template>
   <button
+    @click="handleClick"
     class="yu-button"
     :autofocus="autofocus"
     :type="nativeType"
@@ -41,6 +42,13 @@ export default {
       default: 'button',
     },
   },
+  methods: {
+    handleClick(event) {
+      if (!this.disabled) {
+        this.$emit('click', event)
+      }
+    },
+  },
 };
 </script>
 
@@ -72,10 +80,17 @@ export default {
       height: 35px;
       border-radius: 50%;
     }
-    &:focus{
+    &:focus:not(.disabled){
       color: $primary;
       border: 1px solid lighten($primary,10);
       background-color: lighten($primary,35);
+      outline: none;
+    }
+    &.disabled{
+      color:$lighter-text;
+      background: $background;
+    }
+    &.disabled:focus{
       outline: none;
     }
     @include generalAllColorButton();

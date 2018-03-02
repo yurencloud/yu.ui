@@ -1,5 +1,5 @@
 <template>
-  <div class="option" @mousedown.prevent="handleClick" :value="value">{{label}}</div>
+  <div class="option" :class="[{active:active}]" @mousedown.prevent="handleClick" :value="value">{{label}}</div>
 </template>
 
 <script>
@@ -8,7 +8,9 @@ import emitter from '../utils/emitter';
 export default {
   name: 'YuOption',
   data() {
-    return {};
+    return {
+      active: false,
+    };
   },
   mixins: [emitter],
   props: {
@@ -22,6 +24,11 @@ export default {
   methods: {
     handleClick() {
       this.dispatch('YuSelect', 'handleSelect', { label: this.label, value: this.value });
+      //
+      this.$parent.$children.forEach((item) => {
+        item.active = false;
+      })
+      this.active = true;
     },
   },
 };
@@ -32,9 +39,13 @@ export default {
 
   .yu-select>.options>.option{
     font-size: $normal;
-    padding:0 8px;
+    padding:4px 8px;
     &:hover{
       background-color: $background;
+    }
+    &.active{
+      font-weight: bold;
+      color: $primary;
     }
   }
 

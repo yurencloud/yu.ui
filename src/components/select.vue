@@ -58,7 +58,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped type="text/scss">
+<style lang="scss" type="text/scss">
   @import "../assets/css/varible";
 
   .yu-select {
@@ -69,7 +69,7 @@ export default {
       position: absolute;
       top: 35px;
       z-index: 1000;
-      width: 175px;
+      width: 214px;
       border: 1px solid $border;
       padding: 8px 0;
       margin-top: 8px;
@@ -98,7 +98,7 @@ export default {
       }
       &:focus {
         border: 1px solid $primary;
-        & + span.suffix > i {
+        & + span.suffix > i.icon-angle-down {
           transform: rotate(-180deg);
         }
       }
