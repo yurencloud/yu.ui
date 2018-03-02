@@ -1,0 +1,27 @@
+@import "./varible";
+// 动态变量只能通过 map-get这样来实现
+@mixin generalAllColorButton() {
+  @each $type in $types{
+    &.#{$type} {
+      color: #fff;
+      border: none;
+      background-color: map-get($colors,$type);
+      transition: all .3s ease;
+      &.disabled{
+        background-color: lighten(map-get($colors,$type),25);
+      }
+      &:hover:not(.disabled) {
+        background-color: lighten(map-get($colors,$type),10);
+      }
+      &.circle{
+        width:35px;
+        height: 35px;
+        border-radius: 50%;
+      }
+      &:focus{
+        background-color: lighten(map-get($colors,$type),10);
+        outline: none;
+      }
+    }
+  }
+}
