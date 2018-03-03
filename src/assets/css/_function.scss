@@ -2,26 +2,68 @@
 // 动态变量只能通过 map-get这样来实现
 @mixin generalAllColorButton() {
   @each $type in $types{
+    $color: map-get($colors,$type);
     &.#{$type} {
       color: #fff;
-      border: none;
-      background-color: map-get($colors,$type);
+      border: 1px solid $color;
+      background-color: $color;
       transition: all .3s ease;
       &.disabled{
-        background-color: lighten(map-get($colors,$type),25);
+        border: 1px solid lighten($color,25);
+        background-color: lighten($color,25);
       }
-      &:hover:not(.disabled) {
-        background-color: lighten(map-get($colors,$type),10);
+      &:hover:not(.disabled),&:focus:not(.disabled) {
+        color:#fff;
+        border: 1px solid lighten($color,10);
+        background-color: lighten($color,10);
       }
-      &.circle{
-        width:35px;
-        height: 35px;
-        border-radius: 50%;
+    }
+  }
+}
+
+@mixin generalAllColorPlainButton() {
+  @each $type in $types{
+    $color: map-get($colors,$type);
+    &.#{$type} {
+      color: $color;
+      border: 1px solid $color;
+      background-color: lighten($color,25);
+      transition: all .3s ease;
+      &.disabled{
+        color: lighten($color,25);
+        border: 1px solid lighten($color,25);
+        background-color: lighten($color,50);
       }
-      &:focus{
-        background-color: lighten(map-get($colors,$type),10);
-        outline: none;
+      &:hover:not(.disabled),&:focus:not(.disabled) {
+        border: 1px solid $color;
+        background-color: $color;
+        color:#fff;
       }
+    }
+  }
+}
+
+@mixin generalAllSizeCircleButton() {
+  @each $size in $sizes{
+    &.#{$size} {
+      $height: map-get($size-map,$size);
+      height: $height;
+      width: $height;
+      line-height: $height;
+      @if $height > $small-height  { font-size: $normal }
+      @else { font-size: $tiny }
+    }
+  }
+}
+
+@mixin generalAllSizeButton() {
+  @each $size in $sizes{
+    &.#{$size} {
+      $height: map-get($size-map,$size);
+      height: $height;
+      line-height: $height;
+      @if $height > $small-height  { font-size: $normal }
+      @else { font-size: $tiny }
     }
   }
 }

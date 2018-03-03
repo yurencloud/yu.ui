@@ -1,17 +1,55 @@
 <template>
   <div id="container" style="margin: 30px">
+    <h2>YU.UI</h2>
+
     <div class="title">按钮</div>
-    <yu-button>默认</yu-button>
-    <yu-button icon="icon-home" autoFocus>默认</yu-button>
-    <yu-button type="primary" disabled>主要</yu-button>
-    <yu-button type="success">成功</yu-button>
-    <yu-button type="warming" array="">警告</yu-button>
-    <yu-button type="danger">危险</yu-button>
-    <yu-button type="info">信息</yu-button>
-    <yu-button size="big">大按钮</yu-button>
+
+    <div class="sub-title">基础用法</div>
+    <yu-button>默认按钮</yu-button>
+    <yu-button type="primary">主要按钮</yu-button>
+    <yu-button type="success">成功按钮</yu-button>
+    <yu-button type="warming">警告按钮</yu-button>
+    <yu-button type="danger">危险按钮</yu-button>
+    <yu-button type="info">信息按钮</yu-button>
+    <br/>
+    <yu-button plain>朴素按钮</yu-button>
+    <yu-button type="primary" plain>主要按钮</yu-button>
+    <yu-button type="success" plain>成功按钮</yu-button>
+    <yu-button type="warming" plain>警告按钮</yu-button>
+    <yu-button type="danger" plain>危险按钮</yu-button>
+    <yu-button type="info" plain>信息按钮</yu-button>
+
+    <div class="sub-title">图标按钮</div>
+    <yu-button icon="icon-edit" type="primary"/>
+    <yu-button icon="icon-accessory" type="primary"/>
+    <yu-button icon="icon-trash" type="primary"/>
+    <yu-button icon="icon-search-o" type="primary">搜索</yu-button>
+    <yu-button icon="icon-upload" type="primary">上传</yu-button>
+
+    <div class="sub-title">按钮组</div>
+    <yu-buttons>
+      <yu-button type="primary">
+        <i class="iconfont icon-angle-left"></i>
+        上一页
+      </yu-button><yu-button type="primary">
+        下一页
+        <i class="iconfont icon-angle-right"></i>
+      </yu-button>
+    </yu-buttons>
+    <yu-buttons>
+      <yu-button icon="icon-edit" type="primary"/>
+      <yu-button icon="icon-accessory" type="primary"/>
+      <yu-button icon="icon-trash" type="primary"/>
+    </yu-buttons>
+
+
+    <div class="sub-title">禁用状态</div>
+
     <yu-button size="small">小按钮</yu-button>
+    <yu-button icon="icon-home" autoFocus>默认</yu-button>
     <yu-button size="small" disabled>小按钮</yu-button>
     <yu-button shape="circle" icon="icon-user"/>
+    <yu-button shape="circle" icon="icon-user" size="small"/>
     <yu-buttons>
       <yu-button>1</yu-button>
       <yu-button type="danger">2</yu-button>
@@ -101,12 +139,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped type="text/scss">
+<style lang="scss" type="text/scss">
   @import "../assets/css/varible";
   .title{
-    color:$light-text;
+    color:$text;
     border-bottom: 1px solid $border;
     padding: 14px 0;
     margin: 20px 0;
+  }
+  .sub-title{
+    color:$text;
+    padding: 0 8px;
+    margin: 20px 0;
+    border-left: 4px solid $primary;
   }
 </style>

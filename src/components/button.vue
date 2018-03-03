@@ -4,7 +4,7 @@
     class="yu-button"
     :autofocus="autofocus"
     :type="nativeType"
-    :class="[type, size, {disabled:disabled},shape]" >
+    :class="[type, size, {disabled:disabled},shape, {plain:plain}]" >
     <i v-if="icon" class="ui iconfont" v-bind:class="[icon]"></i>
     <i v-if="loading" class="ui iconfont icon-loading loading"></i>
     <slot/>
@@ -21,6 +21,7 @@ export default {
     },
     size: {
       type: String,
+      default: 'normal',
     },
     icon: {
       type: String,
@@ -41,6 +42,9 @@ export default {
       type: String,
       default: 'button',
     },
+    plain: {
+      type: Boolean,
+    },
   },
   methods: {
     handleClick(event) {
@@ -57,55 +61,55 @@ export default {
   @import "../assets/css/function";
 
   .yu-button {
-    height: 35px;
-    width: 100px;
+    // 基础属性
+    padding: 0 20px;
     border-radius: 4px;
-    line-height: 30px;
     text-align: center;
     margin-right: 8px;
     margin-bottom: 12px;
     font-family: $font-family;
-    color: $text;
-    border: 1px solid $border;
-    font-size: $normal;
-    background-color: #fff;
     transition: all .3s ease;
-    &.default:hover:not(.disabled) {
+    outline: none;
+    box-sizing: border-box;
+
+    // 默认属性
+    background-color: #fff;
+    border: 1px solid $border;
+    color: $text;
+    font-size: $normal;
+    &.default:hover:not(.disabled),&:focus:not(.disabled) {
       color: $primary;
       border: 1px solid lighten($primary,10);
       background-color: lighten($primary,35);
-    }
-    &.circle{
-      width:35px;
-      height: 35px;
-      border-radius: 50%;
-    }
-    &:focus:not(.disabled){
-      color: $primary;
-      border: 1px solid lighten($primary,10);
-      background-color: lighten($primary,35);
-      outline: none;
     }
     &.disabled{
       color:$lighter-text;
       background: $background;
     }
-    &.disabled:focus{
-      outline: none;
-    }
+
+    @include generalAllSizeButton();
     @include generalAllColorButton();
-    &.big{
-      width: 120px;
-      height: 50px;
-      font-size: $big;
-      line-height: 50px;
+
+    &.circle{
+      // circle 默认
+      padding: 0;
+      width: $normal-height;
+      height: $normal-height;
+      border-radius: 50%;
+      @include generalAllSizeCircleButton();
     }
-    &.small{
-      width: 80px;
-      height: 30px;
-      font-size: $small;
-      line-height: 30px;
+
+    &.plain{
+      // plain 默认
+      &:hover:not(.disabled),&:focus:not(.disabled) {
+        border: 1px solid $primary;
+        color: $primary;
+        background: #fff;
+      }
+      @include generalAllColorPlainButton();
     }
+
+    // loading动画
     i.loading{
       display: inline-block;
       animation: loading 2s linear infinite;

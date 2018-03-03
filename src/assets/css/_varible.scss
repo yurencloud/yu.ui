@@ -29,6 +29,21 @@ $normal:14px;
 $small:13px;
 $tiny:12px;
 
+// 控制元素的大小，主要是由height和padding来控制
+// normal和medium用14px字体，small和mini用12px字体
+$normal-height:40px;
+$medium-height:36px;
+$small-height:32px;
+$mini-height:28px;
+
+$sizes:normal, medium, small, mini;
+$size-map: (
+  normal: $normal-height,
+  medium: $medium-height,
+  small: $small-height,
+  mini: $mini-height,
+);
+
 $types:primary, success, warming, info, danger;
 $colors: (
   primary: $primary,

@@ -11,21 +11,20 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped type="text/scss">
+<style lang="scss" type="text/scss">
   @import "../assets/css/varible";
 
   .yu-buttons {
-    .button{
+    .yu-button{
       border-radius: 0;
-      margin-right: -1px;
+      border-right:1px solid #fff;
     }
-    .button:first-child{
+    .yu-button:first-child{
       border-radius: 4px 0 0 4px;
     }
-    .button:last-child{
+    .yu-button:last-child{
       border-radius: 0 4px 4px 0;
     }
-
   }
 
 </style>
