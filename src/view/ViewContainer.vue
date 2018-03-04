@@ -36,36 +36,75 @@
         <i class="iconfont icon-angle-right"></i>
       </yu-button>
     </yu-buttons>
-    <yu-buttons>
+    <yu-buttons >
       <yu-button icon="icon-edit" type="primary"/>
       <yu-button icon="icon-accessory" type="primary"/>
       <yu-button icon="icon-trash" type="primary"/>
     </yu-buttons>
 
-
     <div class="sub-title">禁用状态</div>
+    <yu-button disabled>默认按钮</yu-button>
+    <yu-button type="primary" disabled>主要按钮</yu-button>
+    <yu-button type="success" disabled>成功按钮</yu-button>
+    <yu-button type="warming" disabled>警告按钮</yu-button>
+    <yu-button type="danger" disabled>危险按钮</yu-button>
+    <yu-button type="info" disabled>信息按钮</yu-button>
+    <br/>
+    <yu-button plain disabled>朴素按钮</yu-button>
+    <yu-button type="primary" plain disabled>主要按钮</yu-button>
+    <yu-button type="success" plain disabled>成功按钮</yu-button>
+    <yu-button type="warming" plain disabled>警告按钮</yu-button>
+    <yu-button type="danger" plain disabled>危险按钮</yu-button>
+    <yu-button type="info" plain disabled>信息按钮</yu-button>
 
-    <yu-button size="small">小按钮</yu-button>
-    <yu-button icon="icon-home" autoFocus>默认</yu-button>
-    <yu-button size="small" disabled>小按钮</yu-button>
-    <yu-button shape="circle" icon="icon-user"/>
-    <yu-button shape="circle" icon="icon-user" size="small"/>
-    <yu-buttons>
-      <yu-button>1</yu-button>
-      <yu-button type="danger">2</yu-button>
-      <yu-button>3</yu-button>
-    </yu-buttons>
+    <div class="sub-title">加载中</div>
     <yu-button loading type="primary">按钮</yu-button>
 
+    <div class="sub-title">不同尺寸</div>
+    <yu-button type="primary">正常按钮</yu-button>
+    <yu-button type="primary" size="medium">中等按钮</yu-button>
+    <yu-button type="primary" size="small">小型按钮</yu-button>
+    <yu-button type="primary" size="mini">超小按钮</yu-button>
+
+    <div class="sub-title">圆形按钮</div>
+    <yu-button shape="circle" icon="icon-user"/>
+    <yu-button shape="circle" icon="icon-user" size="medium"/>
+    <yu-button shape="circle" icon="icon-user" size="small"/>
+    <yu-button shape="circle" icon="icon-user" size="mini"/>
+
     <div class="title">单选框</div>
-    <yu-radios ref="">
-      <yu-radio @change="radioChange" checked label="1">选项1</yu-radio>
-      <yu-radio @change="radioChange" label="2">选项2</yu-radio>
-      <yu-radio @change="radioChange" label="3">选项3</yu-radio>
-      <yu-radio disabled>选项4</yu-radio>
+
+    <div class="sub-title">基础选项</div>
+    <yu-radios>
+      <yu-radio @change="radioChange" checked label="1">苹果</yu-radio>
+      <yu-radio @change="radioChange" label="2">香蕉</yu-radio>
+      <yu-radio @change="radioChange" label="3">桃子</yu-radio>
     </yu-radios>
-    <yu-radio>选项2</yu-radio>
-    <yu-radio>选项3</yu-radio>
+    <div class="sub-title">禁用选项</div>
+    <yu-radio disabled>桔子</yu-radio>
+
+    <div class="sub-title">可以多选</div>
+    <yu-radio>手机</yu-radio>
+    <yu-radio>电脑</yu-radio>
+
+
+    <div class="sub-title">按钮组单选</div>
+    <yu-buttons >
+      <yu-button type="primary">北京</yu-button>
+      <yu-button>上海</yu-button>
+      <yu-button>杭州</yu-button>
+    </yu-buttons>
+    <yu-buttons >
+      <yu-button type="primary" size="small">北京</yu-button>
+      <yu-button size="small">上海</yu-button>
+      <yu-button size="small">杭州</yu-button>
+    </yu-buttons>
+
+    <div class="title">多选框</div>
+
+    <div class="sub-title">基础选项</div>
+    <yu-checkbox @change="radioChange" checked label="1">苹果</yu-checkbox>
+
     <div class="title">输入框</div>
     <yu-input placeholder="请输入用户名" @change="inputChange"/>
     <yu-input placeholder="请输入用户名" disabled/>
@@ -114,6 +153,7 @@ import YuRadio from '../components/radio';
 import YuRadios from '../components/radios';
 import YuSelect from '../components/select';
 import YuCounter from '../components/counter';
+import YuCheckbox from '../components/checkbox';
 
 
 export default {
@@ -135,6 +175,7 @@ export default {
     YuRadios,
     YuSelect,
     YuCounter,
+    YuCheckbox,
   },
 };
 </script>

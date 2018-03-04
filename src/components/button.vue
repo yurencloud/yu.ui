@@ -4,7 +4,7 @@
     class="yu-button"
     :autofocus="autofocus"
     :type="nativeType"
-    :class="[type, size, {disabled:disabled},shape, {plain:plain}]" >
+    :class="[type, size, {disabled:disabled},shape, {plain:plain}, {loading:loading}]" >
     <i v-if="icon" class="ui iconfont" v-bind:class="[icon]"></i>
     <i v-if="loading" class="ui iconfont icon-loading loading"></i>
     <slot/>
@@ -70,7 +70,7 @@ export default {
     font-family: $font-family;
     transition: all .3s ease;
     outline: none;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 
     // 默认属性
     background-color: #fff;

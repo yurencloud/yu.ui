@@ -15,9 +15,10 @@ export default {
   @import "../assets/css/varible";
 
   .yu-buttons {
+    font-size: 0;
     .yu-button{
       border-radius: 0;
-      border-right:1px solid #fff;
+      margin-right: -1px;
     }
     .yu-button:first-child{
       border-radius: 4px 0 0 4px;

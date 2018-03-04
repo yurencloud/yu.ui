@@ -1,7 +1,7 @@
 ## yu.ui
 vue ui 框架
 
-# 引入vuex步骤
+## 1.引入vuex步骤
 ~~~
 1.cnpm install --save vuex
 2.const Vuex = require('vuex/dist/vuex');//选择这个文件是因为这个文件可以使用require,并且没有使用到node的process
@@ -34,7 +34,7 @@ ctrl.install(() => {
 });
 ~~~
 
-## 使用vue element 饿了吗的dispatch实现emitter.js
+## 2.使用vue element 饿了吗的dispatch实现emitter.js
 
 1.引入emitter.js这个文件
 ~~~
@@ -60,7 +60,7 @@ handleClick() {
   this.dispatch('BSelect', 'handleSelect', 4);// 传入步骤3中定义的组件名称componentName，并传入要触发的父组件的事件名称，参数
 },
 ~~~
-# css书写规范
+## 3.css书写规范
 每一个独立的模块、页面、组件都要有一个独立的不重复的命名空间
 比如 
 ~~~
@@ -78,3 +78,5 @@ handleClick() {
 }
 ~~~
 
+## 4.如果两个标签之间回车换行，会产生一个text node并占了一个字符的长度，所以两个元素之间会生成一个无法调整的间隙。
+在其父元素上添加font-size:0可以消除text node的这个间隙
