@@ -140,6 +140,45 @@
     <yu-counter/>
     <yu-counter disabled/>
     <yu-counter :step=5 />
+
+    <!--dialog   start-->
+    <yu-dialog tag='点击我查看弹出框'
+               title="提示222"
+               content="这是一条测试提示信息"
+               type="form"
+               inner-content="这是一条测试信息"
+               :iscontent='false'>
+      <yu-input placeholder="请输入用户名">
+        <template slot="prepend">https://</template>
+      </yu-input>
+      <yu-select text="动物" overflow>
+        <yu-option label="猫" value="1"/>
+        <yu-option label="狗" value="2"/>
+      </yu-select>
+    </yu-dialog>
+    <!--dialog   end-->
+    <div style="margin-bottom: 20px"></div>
+    <!--tootip  start-->
+    <yu-tooltip content="这是提示信息" btn="top"
+                position="top">
+    </yu-tooltip>
+    <yu-tooltip content="这是提示信息" btn="bottom"
+                position="bottom">
+    </yu-tooltip>
+    <yu-tooltip content="这是提示信息" btn="left"
+                position="left">
+    </yu-tooltip>
+    <yu-tooltip content="这是提示信息" btn="right"
+                position="right">
+    </yu-tooltip>
+    <!--tooltip end-->
+    <!--card  start-->
+    <yu-card title="卡片名称" operation="添加">
+      <div v-for="o in 4" :key="o" class="text item">
+        {{'列表内容 ' + o }}
+      </div>
+    </yu-card>
+    <!--card   end-->
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -154,6 +193,9 @@ import YuRadios from '../components/radios';
 import YuSelect from '../components/select';
 import YuCounter from '../components/counter';
 import YuCheckbox from '../components/checkbox';
+import YuDialog from '../components/dialog';
+import YuTooltip from '../components/tooltip';
+import YuCard from '../components/card';
 
 
 export default {
@@ -167,6 +209,8 @@ export default {
     },
   },
   components: {
+    YuTooltip,
+    YuDialog,
     YuButton,
     YuButtons,
     YuInput,
@@ -176,22 +220,23 @@ export default {
     YuSelect,
     YuCounter,
     YuCheckbox,
+    YuCard,
   },
 };
 </script>
 
 <style lang="scss" type="text/scss">
-  @import "../assets/css/varible";
-  .title{
-    color:$text;
-    border-bottom: 1px solid $border;
-    padding: 14px 0;
-    margin: 20px 0;
-  }
-  .sub-title{
-    color:$text;
-    padding: 0 8px;
-    margin: 20px 0;
-    border-left: 4px solid $primary;
-  }
+@import "../assets/css/varible";
+.title {
+  color: $text;
+  border-bottom: 1px solid $border;
+  padding: 14px 0;
+  margin: 20px 0;
+}
+.sub-title {
+  color: $text;
+  padding: 0 8px;
+  margin: 20px 0;
+  border-left: 4px solid $primary;
+}
 </style>
