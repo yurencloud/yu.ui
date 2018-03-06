@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import YuButton from './button.vue';
+import YuButton from './button';
+
 export default {
   name: 'YuTooltip',
   data() {

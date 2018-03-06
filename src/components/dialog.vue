@@ -26,6 +26,7 @@
 
 <script>
 import YuButton from './button';
+
 export default {
   name: 'YuDialog',
   data() {

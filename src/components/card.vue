@@ -12,6 +12,7 @@
 
 <script>
 import YuButton from './button';
+
 export default {
   name: 'YuCard',
   props: {
