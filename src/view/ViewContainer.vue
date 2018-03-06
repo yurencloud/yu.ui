@@ -173,10 +173,15 @@
     </yu-tooltip>
     <!--tooltip end-->
     <!--card  start-->
-    <yu-card title="卡片名称" operation="添加">
+    <yu-card :width="400" :height="250" title="哈哈哈哈哈哈" operation="添加">
       <div v-for="o in 4" :key="o" class="text item">
         {{'列表内容 ' + o }}
       </div>
+    </yu-card>
+
+    <div style="width: 10px;height: 20px"></div>
+    <yu-card title="这是一张图片" :height="300" :width="200" :bottom="true" >
+      <img class="image" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520314698867&di=3f9a1e1fe0b0f5e9c414dee7cf52c01f&imgtype=0&src=http%3A%2F%2Fimgwww.heiguang.net%2Fuploadfile%2F2016%2F0913%2F20160913095134457.jpg" alt="">
     </yu-card>
     <!--card   end-->
     <div style="margin-bottom: 400px"></div>
@@ -229,9 +234,9 @@ export default {
 @import "../assets/css/varible";
 .title {
   color: $text;
-  border-bottom: 1px solid $border;
   padding: 14px 0;
   margin: 20px 0;
+  border-bottom: 1px solid $border;
 }
 .sub-title {
   color: $text;
