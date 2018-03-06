@@ -174,16 +174,42 @@
     <!--tooltip end-->
     <!--card  start-->
     <yu-card :width="400" :height="250" title="哈哈哈哈哈哈" operation="添加">
-      <div v-for="o in 4" :key="o" class="text item">
+      <div v-for="o in 9" :key="o" class="text item">
         {{'列表内容 ' + o }}
       </div>
     </yu-card>
 
     <div style="width: 10px;height: 20px"></div>
-    <yu-card title="这是一张图片" :height="300" :width="200" :bottom="true" >
-      <img class="image" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520314698867&di=3f9a1e1fe0b0f5e9c414dee7cf52c01f&imgtype=0&src=http%3A%2F%2Fimgwww.heiguang.net%2Fuploadfile%2F2016%2F0913%2F20160913095134457.jpg" alt="">
+    <yu-card :width="200" :bottom="true">
+      <!--图片固定高是===>250px-->
+      <img class="image" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=38091454,993565664&fm=200&gp=0.jpg" alt="">
     </yu-card>
     <!--card   end-->
+    <div style="width: 10px;height: 20px"></div>
+    <!--carousel   start-->
+    <yu-carousel :width="1000" :height="500" :autoplay="true">
+
+       <div id="main">
+         <img src="../static/img/1.jpg" />
+         <img src="../static/img/2.jpg" />
+         <img src="../static/img/3.jpg" />
+         <img src="../static/img/4.jpg" />
+         <img src="../static/img/5.jpg" />
+         <img src="../static/img/6.jpg" />
+         <img src="../static/img/7.jpg" />
+         <img src="../static/img/8.jpg" />
+         <img src="../static/img/9.jpg" />
+       </div>
+
+      <div class="navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </yu-carousel>
+    <!--carousel   end-->
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -201,7 +227,7 @@ import YuCheckbox from '../components/checkbox';
 import YuDialog from '../components/dialog';
 import YuTooltip from '../components/tooltip';
 import YuCard from '../components/card';
-
+import YuCarousel from '../components/carousel';
 
 export default {
   name: 'ViewContainer',
@@ -226,6 +252,7 @@ export default {
     YuCounter,
     YuCheckbox,
     YuCard,
+    YuCarousel,
   },
 };
 </script>

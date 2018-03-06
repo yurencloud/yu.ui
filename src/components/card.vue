@@ -1,7 +1,7 @@
 <template>
-<div class="yu-card" :style="{width:width+'px',height:height+'px'}">
-  <div class="title">
-     <span v-if="title != ''"> {{title}}</span>
+<div class="yu-card" :style="{width:width+'px'}">
+  <div class="title"  v-if="title != ''">
+     <span> {{title}}</span>
       <yu-button v-if="operation != ''" size="small">{{operation}}</yu-button>
   </div>
   <div class="content">
@@ -38,10 +38,6 @@ export default {
       type: Number,
       default: 400,
     },
-    height: {
-      type: Number,
-      default: 250,
-    },
     bottom: {
       type: Boolean,
       default: false,
@@ -59,7 +55,7 @@ export default {
   .yu-card{
      width: 30%;
      box-shadow: $box-shadow;
-    overflow: hidden;
+     overflow: hidden;
     .title {
       overflow: hidden;
       border-bottom: 1px solid $border;
@@ -78,12 +74,9 @@ export default {
       }
     }
     .content{
-      /*todo*/
-      height: calc(100% - 80px);
-      /*此处的高度根据不同的类型的卡片高度不同*/
       img{
         width: 100%;
-        height: 100%;
+        height: 250px;
       }
     }
     .text{
@@ -101,7 +94,7 @@ export default {
          float: left;
          color: $light-text;
          i{
-           font-size: $huge;
+           font-size: $large;
            margin-right: 5px;
            &:hover{
              color: $primary;
@@ -113,7 +106,7 @@ export default {
        float: right;
        color: $light-text;
        i{
-         font-size: $huge;
+         font-size: $large;
          margin-right: 5px;
          &:hover{
            color: $danger;
