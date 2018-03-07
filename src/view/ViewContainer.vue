@@ -2,29 +2,29 @@
   <div id="container" style="margin: 30px">
     <h2>YU.UI</h2>
 
-    <div class="title">按钮</div>
+    <!--<div class="title">按钮</div>-->
 
-    <div class="sub-title">基础用法</div>
-    <yu-button>默认按钮</yu-button>
-    <yu-button type="primary">主要按钮</yu-button>
-    <yu-button type="success">成功按钮</yu-button>
-    <yu-button type="warming">警告按钮</yu-button>
-    <yu-button type="danger">危险按钮</yu-button>
-    <yu-button type="info">信息按钮</yu-button>
-    <br/>
-    <yu-button plain>朴素按钮</yu-button>
-    <yu-button type="primary" plain>主要按钮</yu-button>
-    <yu-button type="success" plain>成功按钮</yu-button>
-    <yu-button type="warming" plain>警告按钮</yu-button>
-    <yu-button type="danger" plain>危险按钮</yu-button>
-    <yu-button type="info" plain>信息按钮</yu-button>
+    <!--<div class="sub-title">基础用法</div>-->
+    <!--<yu-button>默认按钮</yu-button>-->
+    <!--<yu-button type="primary">主要按钮</yu-button>-->
+    <!--<yu-button type="success">成功按钮</yu-button>-->
+    <!--<yu-button type="warming">警告按钮</yu-button>-->
+    <!--<yu-button type="danger">危险按钮</yu-button>-->
+    <!--<yu-button type="info">信息按钮</yu-button>-->
+    <!--<br/>-->
+    <!--<yu-button plain>朴素按钮</yu-button>-->
+    <!--<yu-button type="primary" plain>主要按钮</yu-button>-->
+    <!--<yu-button type="success" plain>成功按钮</yu-button>-->
+    <!--<yu-button type="warming" plain>警告按钮</yu-button>-->
+    <!--<yu-button type="danger" plain>危险按钮</yu-button>-->
+    <!--<yu-button type="info" plain>信息按钮</yu-button>-->
 
-    <div class="sub-title">图标按钮</div>
-    <yu-button icon="icon-edit" type="primary"/>
-    <yu-button icon="icon-accessory" type="primary"/>
-    <yu-button icon="icon-trash" type="primary"/>
-    <yu-button icon="icon-search-o" type="primary">搜索</yu-button>
-    <yu-button icon="icon-upload" type="primary">上传</yu-button>
+    <!--<div class="sub-title">图标按钮</div>-->
+    <!--<yu-button icon="icon-edit" type="primary"/>-->
+    <!--<yu-button icon="icon-accessory" type="primary"/>-->
+    <!--<yu-button icon="icon-trash" type="primary"/>-->
+    <!--<yu-button icon="icon-search-o" type="primary">搜索</yu-button>-->
+    <!--<yu-button icon="icon-upload" type="primary">上传</yu-button>-->
 
     <div class="sub-title">按钮组</div>
     <yu-buttons>
@@ -127,14 +127,7 @@
       <yu-option label="猫" value="1"/>
       <yu-option label="狗" value="2"/>
       <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
+
     </yu-select>
     <div class="title">计数器</div>
     <yu-counter/>
@@ -159,22 +152,22 @@
     <!--dialog   end-->
     <div style="margin-bottom: 20px"></div>
     <!--tootip  start-->
-    <yu-tooltip content="这是提示信息" btn="top"
+    <yu-tool-tip content="这是提示信息" btn="top"
                 position="top">
-    </yu-tooltip>
-    <yu-tooltip content="这是提示信息" btn="bottom"
+    </yu-tool-tip>
+    <yu-tool-tip content="这是提示信息" btn="bottom"
                 position="bottom">
-    </yu-tooltip>
-    <yu-tooltip content="这是提示信息" btn="left"
+    </yu-tool-tip>
+    <yu-tool-tip content="这是提示信息" btn="left"
                 position="left">
-    </yu-tooltip>
-    <yu-tooltip content="这是提示信息" btn="right"
+    </yu-tool-tip>
+    <yu-tool-tip content="这是提示信息" btn="right"
                 position="right">
-    </yu-tooltip>
+    </yu-tool-tip>
     <!--tooltip end-->
     <!--card  start-->
     <yu-card :width="400" :height="250" title="哈哈哈哈哈哈" operation="添加">
-      <div v-for="o in 9" :key="o" class="text item">
+      <div v-for="o in 3" :key="o" class="text item">
         {{'列表内容 ' + o }}
       </div>
     </yu-card>
@@ -187,29 +180,33 @@
     <!--card   end-->
     <div style="width: 10px;height: 20px"></div>
     <!--carousel   start-->
-    <yu-carousel :width="1000" :height="500" :autoplay="true">
+    <!--<yu-carousel :width="1000" :height="500" :autoplay="true">-->
 
-       <div id="main">
-         <img src="../static/img/1.jpg" />
-         <img src="../static/img/2.jpg" />
-         <img src="../static/img/3.jpg" />
-         <img src="../static/img/4.jpg" />
-         <img src="../static/img/5.jpg" />
-         <img src="../static/img/6.jpg" />
-         <img src="../static/img/7.jpg" />
-         <img src="../static/img/8.jpg" />
-         <img src="../static/img/9.jpg" />
-       </div>
+       <!--<div id="main">-->
+         <!--<img src="../static/img/1.jpg" />-->
+         <!--<img src="../static/img/2.jpg" />-->
+         <!--<img src="../static/img/3.jpg" />-->
+         <!--<img src="../static/img/4.jpg" />-->
+         <!--<img src="../static/img/5.jpg" />-->
+         <!--<img src="../static/img/6.jpg" />-->
+         <!--<img src="../static/img/7.jpg" />-->
+         <!--<img src="../static/img/8.jpg" />-->
+         <!--<img src="../static/img/9.jpg" />-->
+       <!--</div>-->
 
-      <div class="navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </yu-carousel>
+      <!--<div class="navigation">-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+      <!--</div>-->
+    <!--</yu-carousel>-->
     <!--carousel   end-->
+    <div style="width: 10px;height: 20px"></div>
+    <div class="sub-title">collapse-item</div>
+    <yu-collapse-item title="蜀山行" name="1">
+    </yu-collapse-item>
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -225,9 +222,10 @@ import YuSelect from '../components/select';
 import YuCounter from '../components/counter';
 import YuCheckbox from '../components/checkbox';
 import YuDialog from '../components/dialog';
-import YuTooltip from '../components/tooltip';
+import YuToolTip from '../components/tooltip';
 import YuCard from '../components/card';
 import YuCarousel from '../components/carousel';
+import YuCollapseItem from '../components/collapse-item';
 
 export default {
   name: 'ViewContainer',
@@ -240,7 +238,7 @@ export default {
     },
   },
   components: {
-    YuTooltip,
+    YuToolTip,
     YuDialog,
     YuButton,
     YuButtons,
@@ -253,6 +251,7 @@ export default {
     YuCheckbox,
     YuCard,
     YuCarousel,
+    YuCollapseItem,
   },
 };
 </script>

@@ -12,7 +12,7 @@
 import YuButton from './button';
 
 export default {
-  name: 'YuTooltip',
+  name: 'YuToolTip',
   data() {
     return {
       display: false,
