@@ -103,7 +103,15 @@
     <div class="title">多选框</div>
 
     <div class="sub-title">基础选项</div>
-    <yu-checkbox @change="radioChange" checked label="1">苹果</yu-checkbox>
+    <YuCheckboxs>
+      <yu-checkbox @change="checkboxChange" checked label="1">苹果</yu-checkbox>
+      <yu-checkbox @change="checkboxChange" label="2">西瓜</yu-checkbox>
+      <yu-checkbox @change="checkboxChange" label="3">桃子</yu-checkbox>
+    </YuCheckboxs>
+
+    <div class="sub-title">禁用状态</div>
+    <yu-checkbox @change="checkboxChange" checked label="1" disabled>苹果</yu-checkbox>
+    <yu-checkbox @change="checkboxChange" checked label="2" disabled>香蕉</yu-checkbox>
 
     <div class="title">输入框</div>
     <yu-input placeholder="请输入用户名" @change="inputChange"/>
@@ -154,6 +162,7 @@ import YuRadios from '../components/radios';
 import YuSelect from '../components/select';
 import YuCounter from '../components/counter';
 import YuCheckbox from '../components/checkbox';
+import YuCheckboxs from '../components/checkboxs';
 
 
 export default {
@@ -163,6 +172,9 @@ export default {
       console.log(value);
     },
     inputChange(value) {
+      console.log(value);
+    },
+    checkboxChange(value) {
       console.log(value);
     },
   },
@@ -176,6 +188,7 @@ export default {
     YuSelect,
     YuCounter,
     YuCheckbox,
+    YuCheckboxs,
   },
 };
 </script>

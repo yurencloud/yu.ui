@@ -1,11 +1,10 @@
 <template>
   <label class="yu-checkbox" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled}]">
     <span class="checkbox">
-      <input type="checkbox" :value="label">
+      <input type="checkbox" :name="name" :value="isChecked?label:''">
     </span>
     <span><slot/></span>
   </label>
-
 </template>
 
 <script>
@@ -17,6 +16,9 @@ export default {
     };
   },
   props: {
+    name: {
+      type: String,
+    },
     type: {
       type: String,
       default: 'default',
@@ -33,21 +35,21 @@ export default {
   },
   methods: {
     handleClick() {
+      const label = this.label;
       // 如果禁用，直接返回
       if (this.disabled) return;
-      // 如果是单选组，则重置全部
-      if (this.$parent.$options._componentTag === 'yu-radios') {
-        this.$parent.$children.forEach((item) => {
-          item.isChecked = false;
-        });
-        if (!this.isChecked) {
-          this.$emit('change', this.label);
+      this.isChecked = !this.isChecked;
+      console.log(this.$parent.$options._componentTag);
+      if (this.$parent.$options._componentTag === 'YuCheckboxs') {
+        if (this.isChecked) {
+          this.$parent.value.push(label)
         } else {
-          this.$emit('change', '');
+          this.$parent.value.splice(this.$parent.value.indexOf(label), 1)
         }
       }
+
+      this.$emit('change', this.isChecked ? label : '');
       // 开关当前单选
-      this.isChecked = !this.isChecked;
     },
   },
 };
@@ -56,16 +58,16 @@ export default {
 <style lang="scss" scoped type="text/scss">
   @import "../assets/css/varible";
 
-  .yu-checkbox{
+  .yu-checkbox {
     font-size: $normal;
-    color:$text;
+    color: $text;
     cursor: pointer;
     margin-right: 30px;
     margin-bottom: 12px;
-    input{
+    input {
       display: none;
     }
-    .checkbox{
+    .checkbox {
       margin-right: 6px;
       margin-bottom: -1px;
       display: inline-block;
@@ -74,20 +76,20 @@ export default {
       border: 1px solid $dark-border;
       border-radius: 2px;
       background-color: #fff;
-      &:hover{
+      &:hover {
         border: 1px solid $primary;
       }
     }
-    &.checked{
-      .checkbox{
+    &.checked {
+      .checkbox {
         position: relative;
-        border: 1px solid  $primary;
+        border: 1px solid $primary;
         border-radius: 2px;
         background-color: $primary;
-        &+span{
-          color:$primary;
+        & + span {
+          color: $primary;
         }
-        &:after{
+        &:after {
           content: '\00a0';
           display: inline-block;
           border: 2px solid #fff;
@@ -97,16 +99,16 @@ export default {
           height: 4px;
           -webkit-transform: rotate(-50deg);
           position: absolute;
-          top:3px;
-          left:1px;
+          top: 3px;
+          left: 1px;
         }
       }
 
     }
 
-    &.disabled{
-      color:$lighter-text;
-      .checkbox:hover{
+    &.disabled {
+      color: $lighter-text;
+      .checkbox:hover {
         border: 1px solid $dark-border;
       }
     }
