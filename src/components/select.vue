@@ -14,7 +14,6 @@
 
 <script>
 import YuInput from './input';
-import emitter from '../utils/emitter';
 
 export default {
   name: 'YuSelect',
@@ -25,8 +24,6 @@ export default {
       label: '',
     };
   },
-  componentName: 'YuSelect',
-  mixins: [emitter],
   props: {
     overflow: {
       type: Boolean,
@@ -43,7 +40,6 @@ export default {
     },
 
     handleSelect(option) {
-      console.log(1);
       this.$refs.input.value = option.label;
       this.$refs.input.$el.children[0].blur();
       this.value = option.value;
@@ -69,23 +65,22 @@ export default {
       position: absolute;
       top: 35px;
       z-index: 1000;
-      width: 214px;
+      min-width: 175px;
       border: 1px solid $border;
       padding: 8px 0;
       margin-top: 8px;
       border-radius: 4px;
       color: $text;
       box-shadow: $box-shadow;
-      &.overflow{
+      &.overflow {
         overflow: auto;
         max-height: 150px;
-        &::-webkit-scrollbar
-        {
+        &::-webkit-scrollbar {
           width: 4px
         }
         &::-webkit-scrollbar-thumb {
           border-radius: 2px;
-          background-color:$border;
+          background-color: $border;
         }
       }
     }
@@ -103,6 +98,31 @@ export default {
         }
       }
       transition: all ease .4s;
+    }
+
+    &.prepend {
+      display: inline-block;
+      vertical-align: top;
+      margin: 0;
+      input {
+        border-radius: 4px 0 0 4px;
+        margin-right: -1px;
+      }
+      &>.yu-input{
+        margin: 0;
+      }
+    }
+
+    &.append {
+      display: inline-block;
+      vertical-align: top;
+      input {
+        border-radius: 0 4px 4px 0;
+        margin-left: -1px;
+      }
+      &>.yu-input{
+        margin: 0;
+      }
     }
 
   }

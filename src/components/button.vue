@@ -122,5 +122,20 @@ export default {
         }
       }
     }
+
+    &.append{
+      display: inline-block;
+      vertical-align: top;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin: 0;
+    }
+
+    &.prepend{
+      vertical-align: top;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      margin: 0;
+    }
   }
 </style>

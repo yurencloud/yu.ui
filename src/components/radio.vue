@@ -1,7 +1,7 @@
 <template>
-  <label class="yu-radio" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled}]">
+  <label class="yu-radio" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
   <span class="radio">
-    <input type="radio" :name="name" :value="isChecked?label:''">
+    <input type="radio" :name="name" :value="isChecked?label:''" >
   </span>
     <span><slot/></span>
   </label>
@@ -33,13 +33,15 @@ export default {
     label: {
       type: String,
     },
+    vertical: {
+      type: Boolean,
+    },
   },
   methods: {
     handleClick() {
       // 如果禁用，直接返回
       if (this.disabled) return;
       // 如果是单选组，则重置全部
-      console.log(this.$parent.$options._componentTag);
       if (this.$parent.$options._componentTag === 'yu-radios') {
         this.$parent.$children.forEach((item) => {
           if (item.label !== this.label) {
@@ -53,7 +55,6 @@ export default {
       this.isChecked = !this.isChecked;
     },
   },
-  /* TODO::做默认值的checkboxs */
 };
 </script>
 
@@ -82,6 +83,9 @@ export default {
         border: 1px solid $primary;
       }
     }
+    &.vertical{
+      display: block!important;
+    }
     &.checked {
       .radio {
         width: 6px;
@@ -89,6 +93,17 @@ export default {
         border: 5px solid $primary;
         & + span {
           color: $primary;
+        }
+      }
+    }
+
+    &.checked.disabled {
+      .radio {
+        width: 6px;
+        height: 6px;
+        border: 5px solid $lighter-text;
+        & + span {
+          color: $lighter-text;
         }
       }
     }

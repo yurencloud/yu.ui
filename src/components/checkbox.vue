@@ -1,5 +1,5 @@
 <template>
-  <label class="yu-checkbox" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled}]">
+  <label class="yu-checkbox" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
     <span class="checkbox">
       <input type="checkbox" :name="name" :value="isChecked?label:''">
     </span>
@@ -32,24 +32,25 @@ export default {
     label: {
       type: String,
     },
+    vertical: {
+      type: Boolean,
+    },
+  },
+  created() {
+    this.$on('toggleAll', (value) => {
+      console.log(1);
+      this.$parent.$children.forEach((item) => {
+        item.isChecked = value
+      });
+    });
   },
   methods: {
     handleClick() {
-      const label = this.label;
       // 如果禁用，直接返回
       if (this.disabled) return;
       this.isChecked = !this.isChecked;
-      console.log(this.$parent.$options._componentTag);
-      if (this.$parent.$options._componentTag === 'YuCheckboxs') {
-        if (this.isChecked) {
-          this.$parent.value.push(label)
-        } else {
-          this.$parent.value.splice(this.$parent.value.indexOf(label), 1)
-        }
-      }
-
-      this.$emit('change', this.isChecked ? label : '');
-      // 开关当前单选
+      this.$emit('change', this.isChecked ? this.label : '');
+      this.$emit('click');
     },
   },
 };
@@ -80,7 +81,10 @@ export default {
         border: 1px solid $primary;
       }
     }
-    &.checked {
+    &.vertical{
+      display: block!important;
+    }
+    &.checked{
       .checkbox {
         position: relative;
         border: 1px solid $primary;
@@ -103,7 +107,31 @@ export default {
           left: 1px;
         }
       }
+    }
 
+    &.checked.disabled{
+      .checkbox {
+        position: relative;
+        border: 1px solid $lighter-text;
+        border-radius: 2px;
+        background-color: $lighter-text;
+        & + span {
+          color: $lighter-text;
+        }
+        &:after {
+          content: '\00a0';
+          display: inline-block;
+          border: 2px solid #fff;
+          border-top-width: 0;
+          border-right-width: 0;
+          width: 10px;
+          height: 4px;
+          -webkit-transform: rotate(-50deg);
+          position: absolute;
+          top: 3px;
+          left: 1px;
+        }
+      }
     }
 
     &.disabled {

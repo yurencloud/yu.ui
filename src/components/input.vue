@@ -1,11 +1,9 @@
 <template>
-  <div class="yu-input" :class="[{disabled:disabled},{append:$slots.append},{prepend:$slots.prepend}]">
+  <div class="yu-input" :class="[{disabled:disabled},size]">
   <span class="prefix icon" v-if="prefix">
     <i class="iconfont" :class="[prefix]"></i>
   </span>
-    <button v-if="$slots.prepend" class="prepend">
-      <slot name="prepend"/>
-    </button>
+    <slot v-if="$slots.prepend" class="prepend" name="prepend"/>
     <input
       v-if="type==='input'"
       type="text"
@@ -18,7 +16,9 @@
       @blur="handleBlur"
       @focus="handleFocus"
       @change="handleChange"
-      :class="[{prefix:prefix},{suffix:suffix}]">
+      @keyup="handleKeyup"
+      :class="[{prefix:prefix},{suffix:suffix},{append:$slots.append},{prepend:$slots.prepend}]"
+      :style="{width:width}">
 
     <span class="suffix icon" v-if="suffix">
     <i class="iconfont" :class="[suffix]"></i>
@@ -27,8 +27,6 @@
     <span class="clearable" v-if="clearable && value" @click="clear">
     <i class="iconfont icon-close-circle "></i>
   </span>
-
-
     <textarea
       v-if="type==='textarea'"
       name=""
@@ -37,18 +35,23 @@
       :rows="rows"
       :placeholder="placeholder"
     ></textarea>
-    <button v-if="$slots.append" class="append">
-      <slot name="append"/>
-    </button>
+    <slot v-if="$slots.append" class="append" name="append"/>
+    <yu-options v-if="options" v-show="search" :options="optionsFilter.length?optionsFilter:options"/>
   </div>
 </template>
 
 <script>
+import YuButton from './button';
+import YuOptions from './options';
+
 export default {
   name: 'YuInput',
   data() {
     return {
       value: this.defaultValue ? this.defaultValue : '',
+      search: false,
+      optionsFilter: [],
+      activeNumber: 0,
     };
   },
   props: {
@@ -88,6 +91,15 @@ export default {
       type: Number,
       default: 4,
     },
+    size: {
+      type: String,
+    },
+    width: {
+      type: String,
+    },
+    options: {
+      type: Array,
+    },
   },
   methods: {
     clear() {
@@ -97,9 +109,15 @@ export default {
       this.$emit('click', event);
     },
     handleBlur(event) {
+      if (this.options) {
+        this.search = false;
+      }
       this.$emit('blur', event);
     },
     handleFocus(event) {
+      if (this.options) {
+        this.search = true;
+      }
       this.$emit('focus', event);
     },
     handleChange() {
@@ -108,22 +126,74 @@ export default {
     changeValue(value) {
       this.value = value;
     },
+    // TODO::下次再做
+    handleKeyup(event) {
+      const len = this.options.length;
+      // Down键事件
+      if (event.keyCode === 40) {
+        // 划到最后一项的时候
+        if (this.activeNumber >= len - 1) {
+          console.log('到底了');
+          return;
+        }
+
+        this.activeNumber += 1;
+      }
+
+      // Up键事件
+      if (event.keyCode === 38) {
+        if (this.activeNo <= 0) {
+          console.log('到顶了');
+          return;
+        }
+
+        this.activeNumber -= 1;
+      }
+
+      // 按Enter键
+      // if (event.keyCode === 13) {
+      //
+      // }
+
+      if (!this.value) {
+        this.search = false;
+        return;
+      }
+
+      if (event.keyCode !== 38 && event.keyCode !== 40 && event.keyCode !== 13) {
+        this.search = true;
+        this.getHintsList();
+      }
+    },
+  },
+  components: {
+    YuButton,
+    YuOptions,
   },
 };
 </script>
 
 <style lang="scss" scoped type="text/scss">
   @import "../assets/css/varible";
+  @import "../assets/css/function";
 
   .yu-input {
-    margin: auto 8px 12px auto;
+    position:relative;
+    display: block;
+    margin-right: 8px;
+    margin-bottom: 12px;
+    font-size: 0;
+    @include generalAllSizeInput();
     input {
       width: 175px;
-      padding: 8px 12px;
+      height: $normal-height;
+      padding: 0 14px;
       outline: none;
       font-size: $normal;
-      color:$text;
+      color: $text;
       font-family: $font-family;
+      box-sizing: border-box;
+
       &::placeholder {
         color: $dark-border;
         font-weight: lighter;
@@ -170,27 +240,25 @@ export default {
 
     span.prefix {
       position: relative;
+      color: $lighter-text;
+      line-height: $normal-height;
       i {
-        font-size: $small;
-        color: $lighter-text;
         position: absolute;
         left: 10px;
-        top: 4px;
       }
     }
 
     span.suffix {
       position: relative;
+      color: $lighter-text;
+      line-height: $normal-height;
       i {
-        font-size: $small;
-        color: $lighter-text;
         position: absolute;
-        left: -25px;
-        top: 4px;
+        left: -26px;
       }
     }
 
-    textarea{
+    textarea {
       padding: 8px 12px;
       border-color: $border;
       border-radius: 4px;
@@ -209,44 +277,14 @@ export default {
       }
     }
 
-    &.append{
-      input{
-        border-radius: 4px 0 0 4px;
-        margin-right: 0;
-      }
-      .append{
-        font-size: $normal;
-        padding: 0 8px;
-        margin-left: -5px;
-        color:$light-text;
-        background-color: $background;
-        line-height: 33px;
-        display: inline-block;
-        border:1px solid $border;
-        border-left: none;
-        border-radius: 0 4px 4px 0;
-        outline: none;
-      }
+    input.append {
+      border-radius: 4px 0 0 4px;
+      margin-right: -1px;
     }
 
-    &.prepend{
-      input{
-        border-radius: 0 4px 4px 0;
-        margin-right: 0;
-      }
-      .prepend{
-        font-size: $normal;
-        padding: 0 8px;
-        color:$light-text;
-        margin-right: -5px;
-        background-color: $background;
-        line-height: 33px;
-        display: inline-block;
-        border:1px solid $border;
-        border-right: none;
-        border-radius: 4px 0 0 4px;
-        outline: none;
-      }
+    input.prepend {
+      border-radius: 0 4px 4px 0;
+      margin-left: -1px;
     }
 
   }

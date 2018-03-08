@@ -67,3 +67,32 @@
     }
   }
 }
+
+@mixin generalAllSizeInput() {
+  @each $size in $sizes{
+    &.#{$size} {
+        $height: map-get($size-map,$size);
+      input{
+        height: $height;
+        line-height: $height;
+        @if $height > $small-height  { font-size: $normal }
+        @else { font-size: $tiny }
+      }
+      span.prefix{
+        line-height: $height;
+        i{
+          @if $height > $small-height  { font-size: $normal }
+          @else { font-size: $tiny }
+        }
+      }
+      span.suffix{
+        line-height: $height;
+        i{
+          @if $height > $small-height  { font-size: $normal }
+          @else { font-size: $tiny }
+        }
+      }
+    }
+  }
+}
+

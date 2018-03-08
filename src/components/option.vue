@@ -3,8 +3,6 @@
 </template>
 
 <script>
-import emitter from '../utils/emitter';
-
 export default {
   name: 'YuOption',
   data() {
@@ -12,19 +10,17 @@ export default {
       active: false,
     };
   },
-  mixins: [emitter],
   props: {
     label: {
       type: String,
     },
     value: {
-      type: String,
+      type: [Number, String],
     },
   },
   methods: {
     handleClick() {
-      this.dispatch('YuSelect', 'handleSelect', { label: this.label, value: this.value });
-      //
+      this.$parent.$emit('handleSelect', { label: this.label, value: this.value });
       this.$parent.$children.forEach((item) => {
         item.active = false;
       })

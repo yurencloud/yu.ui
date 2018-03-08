@@ -81,7 +81,14 @@
       <yu-radio @change="radioChange" label="3">桃子</yu-radio>
     </yu-radios>
     <div class="sub-title">禁用选项</div>
+    <yu-radio checked disabled>桔子</yu-radio>
     <yu-radio disabled>桔子</yu-radio>
+    <div class="sub-title">垂直方向</div>
+    <yu-radios>
+      <yu-radio @change="radioChange" vertical checked label="1">苹果</yu-radio>
+      <yu-radio @change="radioChange" vertical label="2">香蕉</yu-radio>
+      <yu-radio @change="radioChange" vertical label="3">桃子</yu-radio>
+    </yu-radios>
 
     <div class="sub-title">可以多选</div>
     <yu-radio>手机</yu-radio>
@@ -103,29 +110,77 @@
     <div class="title">多选框</div>
 
     <div class="sub-title">基础选项</div>
-    <YuCheckboxs>
+    <yu-checkboxs>
       <yu-checkbox @change="checkboxChange" checked label="1">苹果</yu-checkbox>
       <yu-checkbox @change="checkboxChange" label="2">西瓜</yu-checkbox>
       <yu-checkbox @change="checkboxChange" label="3">桃子</yu-checkbox>
-    </YuCheckboxs>
+    </yu-checkboxs>
 
     <div class="sub-title">禁用状态</div>
     <yu-checkbox @change="checkboxChange" checked label="1" disabled>苹果</yu-checkbox>
-    <yu-checkbox @change="checkboxChange" checked label="2" disabled>香蕉</yu-checkbox>
+    <yu-checkbox @change="checkboxChange" label="2" disabled>香蕉</yu-checkbox>
+
+    <div class="sub-title">垂直方向</div>
+    <yu-checkboxs>
+      <yu-checkbox @change="checkboxChange" vertical checked label="1">苹果</yu-checkbox>
+      <yu-checkbox @change="checkboxChange" vertical label="2">西瓜</yu-checkbox>
+      <yu-checkbox @change="checkboxChange" vertical label="3">桃子</yu-checkbox>
+    </yu-checkboxs>
 
     <div class="title">输入框</div>
+    <div class="sub-title">基础用法</div>
     <yu-input placeholder="请输入用户名" @change="inputChange"/>
+    <div class="sub-title">禁用状态</div>
     <yu-input placeholder="请输入用户名" disabled/>
+    <div class="sub-title">可清空</div>
     <yu-input placeholder="请输入用户名" clearable/>
+    <div class="sub-title">图标</div>
     <yu-input placeholder="请输入用户名" prefix="icon-user"/>
+    <yu-input placeholder="请输入用户名" prefix="icon-user" size="small"/>
     <yu-input placeholder="请输入用户名" suffix="icon-user"/>
+    <yu-input placeholder="请输入用户名" suffix="icon-user" size="small"/>
+    <div class="sub-title">长文本输入</div>
     <yu-input placeholder="请输入用户名" type="textarea"/>
+    <div class="sub-title">组合</div>
     <yu-input placeholder="请输入用户名">
-      <template slot="append">.com</template>
+      <yu-button class="append" slot="append">.com</yu-button>
+    </yu-input>
+    <yu-input placeholder="请输入用户名" size="small">
+      <yu-button class="append" slot="append" size="small">.com</yu-button>
     </yu-input>
     <yu-input placeholder="请输入用户名">
-      <template slot="prepend">https://</template>
+      <yu-button class="prepend" slot="prepend">https://</yu-button>
     </yu-input>
+    <yu-input placeholder="请输入用户名" size="small">
+      <yu-button class="prepend" slot="prepend" size="small">https://</yu-button>
+    </yu-input>
+    <yu-input placeholder="请输入用户名">
+      <yu-select class="append" slot="append">
+        <yu-option label="猫" value="1"/>
+        <yu-option label="狗" value="2"/>
+      </yu-select>
+    </yu-input>
+    <yu-input placeholder="请输入用户名">
+      <yu-select class="prepend" slot="prepend">
+        <yu-option label="猫" value="1"/>
+        <yu-option label="狗" value="2"/>
+      </yu-select>
+    </yu-input>
+
+    <div class="sub-title">不同尺寸</div>
+    <yu-input placeholder="请输入用户名" @change="inputChange"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" size="medium"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" size="small"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" size="mini"/>
+    <div class="sub-title">控制长度</div>
+    <yu-input placeholder="请输入用户名" @change="inputChange" width="50%"/>
+    <div class="sub-title">输入提示</div>
+    <yu-input
+      placeholder="请输入用户名"
+      :options="options"
+    >
+    </yu-input>
+
     <div class="title">下拉选择</div>
     <yu-select text="动物">
       <yu-option label="猫" value="1"/>
@@ -163,10 +218,21 @@ import YuSelect from '../components/select';
 import YuCounter from '../components/counter';
 import YuCheckbox from '../components/checkbox';
 import YuCheckboxs from '../components/checkboxs';
+import YuOptions from '../components/options';
 
 
 export default {
   name: 'ViewContainer',
+  data() {
+    return {
+      options: [
+        { value: 1, label: '电视' },
+        { value: 2, label: '电脑' },
+        { value: 3, label: '手机' },
+        { value: 4, label: '苹果' },
+      ],
+    }
+  },
   methods: {
     radioChange(value) {
       console.log(value);
@@ -189,6 +255,7 @@ export default {
     YuCounter,
     YuCheckbox,
     YuCheckboxs,
+    YuOptions,
   },
 };
 </script>
