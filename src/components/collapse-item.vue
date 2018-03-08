@@ -6,7 +6,7 @@
             <i class="iconfont"
                :class="{'icon-angle-down':!isActive,'icon-angle-up':isActive}" @click="toggle"></i>
           </div>
-        <div class="bottom" :class="{'show':!isActive,'trans':}" >
+        <div class="bottom" :class="{'show':!isActive,'trans':accordion}" >
           <slot></slot>
         </div>
       </div>
@@ -17,13 +17,6 @@ export default {
   name: 'YuCollapseItem',
   data() {
     return {
-      contentWrapStyle: {
-        height: 'auto',
-        display: 'block',
-      },
-      contentHeight: 0,
-      focusing: false,
-      isClick: false,
       isActive: true,
     }
   },
@@ -34,6 +27,10 @@ export default {
       default() {
         return this._uid;
       },
+    },
+    accordion: {
+      type: Boolean,
+      default: true,
     },
   },
   methods: {
@@ -72,7 +69,7 @@ export default {
       .bottom.show{
         height: 80px;
       }
-      .trans{
+      .bottom.trans{
         -webkit-transition: all 0.5s linear;
         -moz-transition: all 0.5s linear;
         -ms-transition: all 0.5s linear;

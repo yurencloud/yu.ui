@@ -1,5 +1,5 @@
 <template>
-  <div class="yu-collapse">
+  <div class="yu-collapse" :style="{width:width+'px'}">
     <slot></slot>
   </div>
 </template>
@@ -8,6 +8,10 @@
 export default {
   name: 'YuCollapse',
   props: {
+    width: {
+      type: Number,
+      default: 0,
+    },
   },
 }
 </script>
@@ -16,6 +20,5 @@ export default {
   @import "../assets/css/varible";
   @import "../assets/css/varible";
   .yu-collapse{
-
   }
 </style>

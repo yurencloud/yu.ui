@@ -210,11 +210,27 @@
       <div>空山新雨后,天气晚来秋</div>
       <div>欲把西湖比西子,淡妆浓抹总相宜</div>
     </yu-collapse-item>
-    <yu-collapse-item title="蜀山行" name="1">
+    <yu-collapse-item title="蜀山行" name="1" :accordion="false">
       <div>劝君更尽一杯酒,西出阳关无故人</div>
       <div>空山新雨后,天气晚来秋</div>
       <div>欲把西湖比西子,淡妆浓抹总相宜</div>
-    </yu-collapse-item>
+    </yu-collapse-item >
+    <div style="width: 10px;height: 20px"></div>
+    <!--yu-collaapse  -->
+    <yu-collapse :width="500">
+      <div style="width: 10px;height: 20px"></div>
+      <div class="sub-title">collapse-item</div>
+      <yu-collapse-item title="蜀山行" name="1">
+        <div>人生几何春已夏</div>
+        <div>空山新雨后,天气晚来秋</div>
+        <div>欲把西湖比西子,淡妆浓抹总相宜</div>
+      </yu-collapse-item>
+      <yu-collapse-item title="蜀山行" name="2">
+        <div>劝君更尽一杯酒,西出阳关无故人</div>
+        <div>空山新雨后,天气晚来秋</div>
+        <div>欲把西湖比西子,淡妆浓抹总相宜</div>
+      </yu-collapse-item>
+    </yu-collapse>
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -234,6 +250,7 @@ import YuToolTip from '../components/tooltip';
 import YuCard from '../components/card';
 import YuCarousel from '../components/carousel';
 import YuCollapseItem from '../components/collapse-item';
+import YuCollapse from '../components/collapse';
 
 export default {
   name: 'ViewContainer',
@@ -260,6 +277,7 @@ export default {
     YuCard,
     YuCarousel,
     YuCollapseItem,
+    YuCollapse,
   },
 };
 </script>
