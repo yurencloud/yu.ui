@@ -10,7 +10,7 @@ export default {
   props: {
     width: {
       type: Number,
-      default: 0,
+      default: 500,
     },
   },
 }
@@ -20,5 +20,10 @@ export default {
   @import "../assets/css/varible";
   @import "../assets/css/varible";
   .yu-collapse{
+    div{
+      &:first-child{
+        border-top: 1px solid $border;
+      }
+    }
   }
 </style>

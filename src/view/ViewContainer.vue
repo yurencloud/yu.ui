@@ -205,7 +205,7 @@
     <!--carousel   end-->
     <div style="width: 10px;height: 20px"></div>
     <div class="sub-title">collapse-item</div>
-    <yu-collapse-item title="蜀山行" name="1">
+    <yu-collapse-item index="1" title="蜀山行" name="1">
       <div>人生几何春已夏</div>
       <div>空山新雨后,天气晚来秋</div>
       <div>欲把西湖比西子,淡妆浓抹总相宜</div>
@@ -217,20 +217,38 @@
     </yu-collapse-item >
     <div style="width: 10px;height: 20px"></div>
     <!--yu-collaapse  -->
+    <div style="width: 10px;height: 20px"></div>
+    <div class="sub-title">collapse</div>
     <yu-collapse :width="500">
-      <div style="width: 10px;height: 20px"></div>
-      <div class="sub-title">collapse-item</div>
       <yu-collapse-item title="蜀山行" name="1">
         <div>人生几何春已夏</div>
         <div>空山新雨后,天气晚来秋</div>
         <div>欲把西湖比西子,淡妆浓抹总相宜</div>
+        <div>不见高堂明镜悲白发，朝如青丝暮成雪</div>
       </yu-collapse-item>
       <yu-collapse-item title="蜀山行" name="2">
         <div>劝君更尽一杯酒,西出阳关无故人</div>
-        <div>空山新雨后,天气晚来秋</div>
-        <div>欲把西湖比西子,淡妆浓抹总相宜</div>
       </yu-collapse-item>
     </yu-collapse>
+    <!--NavMenu    start-->
+    <div class="sub-title">NavMenu</div>
+    <yu-nav-menu :horizontal="true" :default-active="activeIndex" text-color="#00" background-color="#666">
+      <yu-menu-item index="1">管理中心</yu-menu-item>
+      <yu-menu-item index="2">
+        我的控制台
+        <yu-nav-menu index="2-1">
+          <yu-menu-item index="2-1-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-2-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-3-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-4-1">
+            项目一
+          </yu-menu-item>
+        </yu-nav-menu>
+      </yu-menu-item>
+      <yu-menu-item index="3">消息中心</yu-menu-item>
+      <yu-menu-item index="4">订单管理</yu-menu-item>
+    </yu-nav-menu>
+    <!--NavMenu  end-->
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -251,9 +269,16 @@ import YuCard from '../components/card';
 import YuCarousel from '../components/carousel';
 import YuCollapseItem from '../components/collapse-item';
 import YuCollapse from '../components/collapse';
+import YuMenuItem from '../components/menu-item';
+import YuNavMenu from '../components/navmenu';
 
 export default {
   name: 'ViewContainer',
+  data() {
+    return {
+      activeIndex: '1',
+    }
+  },
   methods: {
     radioChange(value) {
       console.log(value);
@@ -278,6 +303,8 @@ export default {
     YuCarousel,
     YuCollapseItem,
     YuCollapse,
+    YuMenuItem,
+    YuNavMenu,
   },
 };
 </script>
