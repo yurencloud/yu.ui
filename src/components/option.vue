@@ -1,5 +1,5 @@
 <template>
-  <div class="option" :class="[{active:active}]" @mousedown.prevent="handleClick" :value="value">{{label}}</div>
+  <div class="option" :class="[{active:active},{hide:hide}]" @mousedown.prevent="handleClick" :value="value">{{label}}</div>
 </template>
 
 <script>
@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       active: false,
+      hide: false,
     };
   },
   props: {
@@ -40,8 +41,12 @@ export default {
       background-color: $background;
     }
     &.active{
+      background-color: $background;
       font-weight: bold;
       color: $primary;
+    }
+    &.hide{
+      display: none;
     }
   }
 

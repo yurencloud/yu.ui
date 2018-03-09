@@ -1,8 +1,10 @@
 <template>
   <div class="yu-input" :class="[{disabled:disabled},size]">
-  <span class="prefix icon" v-if="prefix">
-    <i class="iconfont" :class="[prefix]"></i>
-  </span>
+    <!--前置图标-->
+    <span class="prefix icon" v-if="prefix">
+      <i class="iconfont" :class="[prefix]"></i>
+    </span>
+    <!--前置组件-->
     <slot v-if="$slots.prepend" class="prepend" name="prepend"/>
     <input
       v-if="type==='input'"
@@ -20,13 +22,14 @@
       :class="[{prefix:prefix},{suffix:suffix},{append:$slots.append},{prepend:$slots.prepend}]"
       :style="{width:width}">
 
+    <!--后置图标-->
     <span class="suffix icon" v-if="suffix">
-    <i class="iconfont" :class="[suffix]"></i>
-  </span>
-
+      <i class="iconfont" :class="[suffix]"></i>
+    </span>
+    <!--清除图标-->
     <span class="clearable" v-if="clearable && value" @click="clear">
     <i class="iconfont icon-close-circle "></i>
-  </span>
+    </span>
     <textarea
       v-if="type==='textarea'"
       name=""
@@ -35,14 +38,24 @@
       :rows="rows"
       :placeholder="placeholder"
     ></textarea>
+    <!--后置组件-->
     <slot v-if="$slots.append" class="append" name="append"/>
-    <yu-options v-if="options" v-show="search" :options="optionsFilter.length?optionsFilter:options"/>
+
+    <!--输入提示-->
+    <div v-if="options" v-show="search" class="options" :class="[{overflow:overflow}]">
+      <yu-option ref="option"
+                 v-for="option in options"
+                 :key="option.value"
+                 :label="option.label"
+                 :value="option.value"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import YuButton from './button';
-import YuOptions from './options';
+import YuOption from './option';
 
 export default {
   name: 'YuInput',
@@ -51,7 +64,9 @@ export default {
       value: this.defaultValue ? this.defaultValue : '',
       search: false,
       optionsFilter: [],
-      activeNumber: 0,
+      activeNumber: -1,
+      hover: false,
+      select: '',
     };
   },
   props: {
@@ -100,6 +115,12 @@ export default {
     options: {
       type: Array,
     },
+    overflow: Boolean,
+    remote: Boolean,
+  },
+  created() {
+    this.$on('handleSelect', this.handleSelect)
+    this.$emit('fetch', '')
   },
   methods: {
     clear() {
@@ -126,49 +147,62 @@ export default {
     changeValue(value) {
       this.value = value;
     },
-    // TODO::下次再做
+
     handleKeyup(event) {
       const len = this.options.length;
       // Down键事件
-      if (event.keyCode === 40) {
-        // 划到最后一项的时候
-        if (this.activeNumber >= len - 1) {
-          console.log('到底了');
-          return;
-        }
-
+      if (event.keyCode === 40 && this.activeNumber < len - 1) {
         this.activeNumber += 1;
       }
 
       // Up键事件
-      if (event.keyCode === 38) {
-        if (this.activeNo <= 0) {
-          console.log('到顶了');
-          return;
-        }
-
+      if (event.keyCode === 38 && this.activeNumber > 0) {
         this.activeNumber -= 1;
       }
 
       // 按Enter键
-      // if (event.keyCode === 13) {
-      //
-      // }
-
-      if (!this.value) {
-        this.search = false;
-        return;
+      if (event.keyCode === 13) {
+        if (this.activeNumber >= 0 && this.activeNumber < len) {
+          const select = this.$refs.option[this.activeNumber];
+          this.value = select.label;
+          this.select = select.value;
+          this.search = false;
+        }
       }
 
       if (event.keyCode !== 38 && event.keyCode !== 40 && event.keyCode !== 13) {
-        this.search = true;
-        this.getHintsList();
+        // 判断是不是远程获取输入提示选项
+        if (this.remote) {
+          this.$emit('fetch', this.value);
+        } else if (this.value.trim().length !== 0) {
+          this.$refs.option.forEach((item) => {
+            item.hide = item.label.indexOf(this.value) <= -1;
+          })
+        } else {
+          this.value = '';
+          this.select = '';
+          this.$refs.option.forEach((item) => {
+            item.hide = false;
+            item.active = false;
+          })
+        }
       }
+      if (this.activeNumber >= 0) {
+        this.$refs.option.forEach((item) => {
+          item.active = false
+        });
+        this.$refs.option[this.activeNumber].active = true;
+      }
+    },
+    handleSelect({ label, value }) {
+      this.value = label;
+      this.select = value;
+      this.search = false;
     },
   },
   components: {
     YuButton,
-    YuOptions,
+    YuOption,
   },
 };
 </script>
@@ -178,7 +212,7 @@ export default {
   @import "../assets/css/function";
 
   .yu-input {
-    position:relative;
+    position: relative;
     display: block;
     margin-right: 8px;
     margin-bottom: 12px;
@@ -285,6 +319,46 @@ export default {
     input.prepend {
       border-radius: 0 4px 4px 0;
       margin-left: -1px;
+    }
+
+    .options {
+      background-color: #fff;
+      position: absolute;
+      top: 35px;
+      z-index: 1000;
+      min-width: 175px;
+      border: 1px solid $border;
+      padding: 8px 0;
+      margin-top: 8px;
+      border-radius: 4px;
+      color: $text;
+      box-shadow: $box-shadow;
+      &.overflow {
+        overflow: auto;
+        max-height: 150px;
+        &::-webkit-scrollbar {
+          width: 4px
+        }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 2px;
+          background-color: $border;
+        }
+      }
+      .option {
+        font-size: $normal;
+        padding: 4px 8px;
+        &:hover {
+          background-color: $background;
+        }
+        &.active {
+          background-color: $background;
+          font-weight: bold;
+          color: $primary;
+        }
+        &.hide{
+          display: none;
+        }
+      }
     }
 
   }

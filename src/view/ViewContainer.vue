@@ -176,7 +176,7 @@
     <yu-input placeholder="请输入用户名" @change="inputChange" width="50%"/>
     <div class="sub-title">输入提示</div>
     <yu-input
-      placeholder="请输入用户名"
+      placeholder="请输入搜索内容"
       :options="options"
     >
     </yu-input>
@@ -218,7 +218,6 @@ import YuSelect from '../components/select';
 import YuCounter from '../components/counter';
 import YuCheckbox from '../components/checkbox';
 import YuCheckboxs from '../components/checkboxs';
-import YuOptions from '../components/options';
 
 
 export default {
@@ -235,14 +234,17 @@ export default {
   },
   methods: {
     radioChange(value) {
-      console.log(value);
+      console.log(value)
     },
     inputChange(value) {
-      console.log(value);
+      console.log(value)
     },
     checkboxChange(value) {
-      console.log(value);
+      console.log(value)
     },
+    // handleFetch(value){
+    //   // this.options =
+    // },
   },
   components: {
     YuButton,
@@ -255,7 +257,6 @@ export default {
     YuCounter,
     YuCheckbox,
     YuCheckboxs,
-    YuOptions,
   },
 };
 </script>
