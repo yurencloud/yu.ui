@@ -176,6 +176,8 @@
     <yu-input placeholder="请输入用户名" @change="inputChange" width="50%"/>
     <div class="sub-title">输入提示</div>
     <yu-input
+      remote
+      @fetch="handleFetch"
       placeholder="请输入搜索内容"
       :options="options"
     >
@@ -218,18 +220,13 @@ import YuSelect from '../components/select';
 import YuCounter from '../components/counter';
 import YuCheckbox from '../components/checkbox';
 import YuCheckboxs from '../components/checkboxs';
-
+import 'whatwg-fetch';
 
 export default {
   name: 'ViewContainer',
   data() {
     return {
-      options: [
-        { value: 1, label: '电视' },
-        { value: 2, label: '电脑' },
-        { value: 3, label: '手机' },
-        { value: 4, label: '苹果' },
-      ],
+      options: [],
     }
   },
   methods: {
@@ -242,9 +239,16 @@ export default {
     checkboxChange(value) {
       console.log(value)
     },
-    // handleFetch(value){
-    //   // this.options =
-    // },
+    handleFetch(value) {
+      fetch('http://localhost:8080/#/api', {
+        method: 'GET',
+      },
+      ).then((response) => {
+        response.text().then(data => console.log(data));
+      }, (error) => {
+        console.log(error.message);
+      })
+    },
   },
   components: {
     YuButton,

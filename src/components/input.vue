@@ -120,7 +120,9 @@ export default {
   },
   created() {
     this.$on('handleSelect', this.handleSelect)
-    this.$emit('fetch', '')
+    if (this.remote) {
+      this.$emit('fetch', '')
+    }
   },
   methods: {
     clear() {
@@ -355,7 +357,7 @@ export default {
           font-weight: bold;
           color: $primary;
         }
-        &.hide{
+        &.hide {
           display: none;
         }
       }
