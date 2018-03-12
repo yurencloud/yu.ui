@@ -1,98 +1,114 @@
 @import "./varible";
 // 动态变量只能通过 map-get这样来实现
 @mixin generalAllColorButton() {
-  @each $type in $types{
-    $color: map-get($colors,$type);
+  @each $type in $types {
+    $color: map-get($colors, $type);
     &.#{$type} {
       color: #fff;
       border: 1px solid $color;
       background-color: $color;
       transition: all .3s ease;
-      &.disabled{
-        border: 1px solid lighten($color,25);
-        background-color: lighten($color,25);
+      &.disabled {
+        border: 1px solid lighten($color, 25);
+        background-color: lighten($color, 25);
       }
-      &:hover:not(.disabled),&:focus:not(.disabled) {
-        color:#fff;
-        border: 1px solid lighten($color,10);
-        background-color: lighten($color,10);
+      &:hover:not(.disabled), &:focus:not(.disabled) {
+        color: #fff;
+        border: 1px solid lighten($color, 10);
+        background-color: lighten($color, 10);
       }
     }
   }
 }
 
 @mixin generalAllColorPlainButton() {
-  @each $type in $types{
-    $color: map-get($colors,$type);
+  @each $type in $types {
+    $color: map-get($colors, $type);
     &.#{$type} {
       color: $color;
       border: 1px solid $color;
-      background-color: lighten($color,25);
+      background-color: lighten($color, 25);
       transition: all .3s ease;
-      &.disabled{
-        color: lighten($color,25);
-        border: 1px solid lighten($color,25);
-        background-color: lighten($color,50);
+      &.disabled {
+        color: lighten($color, 25);
+        border: 1px solid lighten($color, 25);
+        background-color: lighten($color, 50);
       }
-      &:hover:not(.disabled),&:focus:not(.disabled) {
+      &:hover:not(.disabled), &:focus:not(.disabled) {
         border: 1px solid $color;
         background-color: $color;
-        color:#fff;
+        color: #fff;
       }
     }
   }
 }
 
 @mixin generalAllSizeCircleButton() {
-  @each $size in $sizes{
+  @each $size in $sizes {
     &.#{$size} {
-      $height: map-get($size-map,$size);
+      $height: map-get($size-map, $size);
       height: $height;
       width: $height;
       line-height: $height;
-      @if $height > $small-height  { font-size: $normal }
-      @else { font-size: $tiny }
+      @if $height > $small-height {
+        font-size: $normal
+      } @else {
+        font-size: $tiny
+      }
     }
   }
 }
 
 @mixin generalAllSizeButton() {
-  @each $size in $sizes{
+  @each $size in $sizes {
     &.#{$size} {
-      $height: map-get($size-map,$size);
+      $height: map-get($size-map, $size);
       height: $height;
       line-height: $height;
-      @if $height > $small-height  { font-size: $normal }
-      @else { font-size: $tiny }
+      @if $height > $small-height {
+        font-size: $normal
+      } @else {
+        font-size: $tiny
+      }
     }
   }
 }
 
 @mixin generalAllSizeInput() {
-  @each $size in $sizes{
+  @each $size in $sizes {
     &.#{$size} {
-        $height: map-get($size-map,$size);
-      input{
+      $height: map-get($size-map, $size);
+      input {
         height: $height;
         line-height: $height;
-        @if $height > $small-height  { font-size: $normal }
-        @else { font-size: $tiny }
-      }
-      span.prefix{
-        line-height: $height;
-        i{
-          @if $height > $small-height  { font-size: $normal }
-          @else { font-size: $tiny }
+        @if $height > $small-height {
+          font-size: $normal
+        } @else {
+          font-size: $tiny
         }
       }
-      span.suffix{
+      span.prefix {
         line-height: $height;
-        i{
-          @if $height > $small-height  { font-size: $normal }
-          @else { font-size: $tiny }
+        i {
+          @if $height > $small-height {
+            font-size: $normal
+          } @else {
+            font-size: $tiny
+          }
+        }
+      }
+      span.suffix {
+        line-height: $height;
+        i {
+          @if $height > $small-height {
+            font-size: $normal
+          } @else {
+            font-size: $tiny
+          }
         }
       }
     }
   }
 }
+
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="option" :class="[{active:active},{hide:hide}]" @mousedown.prevent="handleClick" :value="value">{{label}}</div>
+  <div class="option" :class="[{active:active},{hide:hide},{disabled:disabled}]" @mousedown.prevent="handleClick" :value="value">{{label}}</div>
 </template>
 
 <script>
@@ -18,9 +18,16 @@ export default {
     value: {
       type: [Number, String],
     },
+    disabled: Boolean,
   },
   methods: {
     handleClick() {
+      if (this.disabled) {
+        return;
+      }
+      if (this.$parent.multi) {
+        this.hide = true;
+      }
       this.$parent.$emit('handleSelect', { label: this.label, value: this.value });
       this.$parent.$children.forEach((item) => {
         item.active = false;
@@ -37,7 +44,7 @@ export default {
   .yu-select>.options>.option{
     font-size: $normal;
     padding:4px 8px;
-    &:hover{
+    &:hover:not(.disabled){
       background-color: $background;
     }
     &.active{
@@ -47,6 +54,9 @@ export default {
     }
     &.hide{
       display: none;
+    }
+    &.disabled{
+      color:$lighter-text
     }
   }
 

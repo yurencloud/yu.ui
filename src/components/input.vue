@@ -43,6 +43,7 @@
 
     <!--输入提示-->
     <div v-if="options" v-show="search" class="options" :class="[{overflow:overflow}]">
+      <yu-loading :loading="loading && remote"/>
       <yu-option ref="option"
                  v-for="option in options"
                  :key="option.value"
@@ -50,12 +51,15 @@
                  :value="option.value"
       />
     </div>
+
+
   </div>
 </template>
 
 <script>
 import YuButton from './button';
 import YuOption from './option';
+import YuLoading from './loading';
 
 export default {
   name: 'YuInput',
@@ -67,6 +71,7 @@ export default {
       activeNumber: -1,
       hover: false,
       select: '',
+      loading: false,
     };
   },
   props: {
@@ -120,9 +125,6 @@ export default {
   },
   created() {
     this.$on('handleSelect', this.handleSelect)
-    if (this.remote) {
-      this.$emit('fetch', '')
-    }
   },
   methods: {
     clear() {
@@ -141,6 +143,10 @@ export default {
       if (this.options) {
         this.search = true;
       }
+      if (this.remote) {
+        this.loading = true;
+        this.$emit('fetch', this.value);
+      }
       this.$emit('focus', event);
     },
     handleChange() {
@@ -151,6 +157,9 @@ export default {
     },
 
     handleKeyup(event) {
+      if (!this.options) {
+        return;
+      }
       const len = this.options.length;
       // Down键事件
       if (event.keyCode === 40 && this.activeNumber < len - 1) {
@@ -172,11 +181,9 @@ export default {
         }
       }
 
-      if (event.keyCode !== 38 && event.keyCode !== 40 && event.keyCode !== 13) {
+      if (!this.remote && event.keyCode !== 38 && event.keyCode !== 40 && event.keyCode !== 13) {
         // 判断是不是远程获取输入提示选项
-        if (this.remote) {
-          this.$emit('fetch', this.value);
-        } else if (this.value.trim().length !== 0) {
+        if (this.value.trim().length !== 0) {
           this.$refs.option.forEach((item) => {
             item.hide = item.label.indexOf(this.value) <= -1;
           })
@@ -188,6 +195,7 @@ export default {
             item.active = false;
           })
         }
+        this.loading = false;
       }
       if (this.activeNumber >= 0) {
         this.$refs.option.forEach((item) => {
@@ -202,9 +210,22 @@ export default {
       this.search = false;
     },
   },
+  watch: {
+    options(value) {
+      this.loading = false
+    },
+    value(value) {
+      console.log(1);
+      this.loading = true;
+      if (this.remote) {
+        this.$emit('fetch', value);
+      }
+    },
+  },
   components: {
     YuButton,
     YuOption,
+    YuLoading,
   },
 };
 </script>
@@ -315,12 +336,10 @@ export default {
 
     input.append {
       border-radius: 4px 0 0 4px;
-      margin-right: -1px;
     }
 
     input.prepend {
       border-radius: 0 4px 4px 0;
-      margin-left: -1px;
     }
 
     .options {

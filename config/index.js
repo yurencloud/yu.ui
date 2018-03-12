@@ -13,10 +13,10 @@ module.exports = {
     proxyTable: {
       '/api': {
         // 测试环境
-        target: 'https://localhost:3000',  // 接口域名
+        target: 'http://www.yurencloud.top:3005',  // 接口域名
         changeOrigin: true,  //是否跨域
         pathRewrite: {
-          '^/': ''   //需要rewrite重写的,
+          '^/api': '/'   //需要rewrite重写的,
         }
       }
     },
