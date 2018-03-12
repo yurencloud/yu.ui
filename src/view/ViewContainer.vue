@@ -236,6 +236,23 @@
       <yu-menu-item index="1">管理中心</yu-menu-item>
       <yu-menu-item index="2" :icon="true">
         我的控制台
+        <yu-nav-menu index="2-1" background-color="#666">
+          <yu-menu-item index="2-1-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-2-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-3-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-4-1">
+            项目一
+          </yu-menu-item>
+        </yu-nav-menu>
+      </yu-menu-item>
+      <yu-menu-item index="3">消息中心</yu-menu-item>
+      <yu-menu-item index="4">订单管理</yu-menu-item>
+    </yu-nav-menu>
+    <div class="sub-title">NavMenu2222</div>
+    <yu-nav-menu :horizontal="true" :default-active="activeIndex" :width="600">
+      <yu-menu-item index="1">管理中心</yu-menu-item>
+      <yu-menu-item index="2" :icon="true">
+        我的控制台
         <yu-nav-menu index="2-1">
           <yu-menu-item index="2-1-1">项目一</yu-menu-item>
           <yu-menu-item index="2-2-1">项目一</yu-menu-item>
@@ -247,6 +264,42 @@
       </yu-menu-item>
       <yu-menu-item index="3">消息中心</yu-menu-item>
       <yu-menu-item index="4">订单管理</yu-menu-item>
+    </yu-nav-menu>
+    <div class="sub-title">垂直分布</div>
+    <yu-nav-menu :vertical="true" :default-active="activeIndex" :width="200" text-color="white" active-color="yellow" background-color="#666">
+      <yu-menu-item index="1"><i class="iconfont icon-location"></i><span style=" margin-left: 10px">导航一</span></yu-menu-item>
+      <yu-menu-item index="2" :icon="true">
+        <i class="iconfont icon-application"></i>
+        <span style=" margin-left: 10px">导航二</span>
+        <yu-nav-menu index="2-1" background-color="#666">
+          <yu-menu-item index="2-1-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-2-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-3-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-4-1">
+            项目一
+          </yu-menu-item>
+        </yu-nav-menu>
+      </yu-menu-item>
+      <yu-menu-item index="3"><i class="iconfont icon-file-check"></i><span style=" margin-left: 10px">导航三</span></yu-menu-item>
+      <yu-menu-item index="4"><i class="iconfont icon-cog2-o"></i><span style=" margin-left: 10px">导航四</span></yu-menu-item>
+    </yu-nav-menu>
+    <div class="sub-title">垂直分布22222</div>
+    <yu-nav-menu :vertical="true" :default-active="activeIndex" :width="200">
+      <yu-menu-item index="1"><i class="iconfont icon-location"></i><span style=" margin-left: 10px">导航一</span></yu-menu-item>
+      <yu-menu-item index="2" :icon="true">
+        <i class="iconfont icon-application"></i>
+        <span style=" margin-left: 10px">导航二</span>
+        <yu-nav-menu index="2-1" >
+          <yu-menu-item index="2-1-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-2-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-3-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-4-1">
+            项目一
+          </yu-menu-item>
+        </yu-nav-menu>
+      </yu-menu-item>
+      <yu-menu-item index="3"><i class="iconfont icon-file-check"></i><span style=" margin-left: 10px">导航三</span></yu-menu-item>
+      <yu-menu-item index="4"><i class="iconfont icon-cog2-o"></i><span style=" margin-left: 10px">导航四</span></yu-menu-item>
     </yu-nav-menu>
     <!--NavMenu  end-->
     <div style="margin-bottom: 400px"></div>

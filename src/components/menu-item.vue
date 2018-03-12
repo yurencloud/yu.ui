@@ -2,8 +2,6 @@
 <li class="yu-menu-item"
     @click="active"
     role="menuitem"
-    :style="[paddingStyle]"
-    :class="{'active':isactive}"
     @mouseover="over"
     @mouseleave="leave">
     <slot></slot>
@@ -37,87 +35,68 @@ export default {
   methods: {
     active() {
       this.$parent.$children.forEach((item) => {
-        item.isactive = false;
+        item.$el.style.color = this.rootMenu.textColor;
+        item.$el.style.borderBottom = 'none';
       });
-      this.isactive = true;
-      if (this.$children.length !== 0) {
-        this.isactive = false;
+      if (!this.rootMenu.$el.classList.contains('vertical')) {
+        this.$el.style.color = this.rootMenu.activeColor;
+        this.$el.style.borderBottom = `2px solid ${this.rootMenu.activeColor}`;
+        if (this.$children.length !== 0) {
+          this.$children[0].$children.forEach((item) => {
+            item.$el.style.color = this.rootMenu.textColor;
+          })
+        }
+      } else {
+        this.$el.style.color = this.rootMenu.activeColor;
+        this.$el.style.borderBottom = 'none';
+      }
+      // todo
+      if (this.index.length > 3) {
+        this.$el.style.borderBottom = 'none';
+        this.$el.style.color = this.rootMenu.textColor;
       }
     },
     over() {
       if (this.$children.length !== 0) {
         this.$children[0].$el.style.height = 'auto';
         this.$el.classList.add('switch');
+        if (this.rootMenu.$el.classList.contains('vertical')) {
+          this.$parent.$el.style.padding = 0;
+        }
       }
     },
     leave() {
       if (this.$children.length !== 0) {
         this.$children[0].$el.style.height = '0';
         this.$el.classList.remove('switch');
-      }
-    },
-  },
-  beforeMount() {
-
-  },
-  created() {
-
-  },
-  computed: {
-    indexPath() {
-      const path = [this.index];
-      let parent = this.$parent;
-      while (parent.$options.componentName !== 'YuNavMenu') {
-        if (parent.index) {
-          path.unshift(parent.index);
+        if (this.rootMenu.$el.classList.contains('vertical')) {
+          this.$parent.$el.style.paddingBottom = '250px';
         }
-        parent = parent.$parent;
-      }
-      return path;
-    },
-    parentMenu() {
-      let parent = this.$parent;
-      while (
-        parent &&
-        ['YuNavMenu', 'ElSubmenu'].indexOf(parent.$options.componentName) === -1) {
-        parent = parent.$parent;
-      }
-      return parent;
-    },
-    paddingStyle() {
-      if (this.rootMenu.mode !== 'vertical') return {};
-
-      let padding = 20;
-      let parent = this.$parent;
-
-      if (this.rootMenu.collapse) {
-        padding = 20;
-      } else {
-        while (parent && parent.$options.componentName !== 'YuNavMenu') {
-          if (parent.$options.componentName === 'ElSubmenu') {
-            padding += 20;
-          }
-          parent = parent.$parent;
-        }
-      }
-      return { paddingLeft: padding + 'px' };
-    },
-    backgroundColor() {
-      return { backgroundColor: this.rootMenu.backgroundColor }
-    },
-    color() {
-      return{
-        //todo
-        // border-bottom: 2px solid this.rootMenu.activeColor,
-      // color: this.rootMenu.textcolor;
       }
     },
   },
   mounted() {
-    if (this.index === '1') {
-      this.isactive = true;
+    if (this.$children.length !== 0) {
+      this.$children[0].$children.forEach((item) => {
+        item.$el.style.color = this.rootMenu.textColor;
+      })
     }
-    console.log(this.rootMenu);
+    if (!this.rootMenu.$el.classList.contains('vertical')) {
+      this.$el.style.color = this.rootMenu.textColor;
+      if (this.index === '1') {
+        this.isactive = true;
+        this.$el.style.color = this.rootMenu.activeColor;
+        this.$el.style.borderBottom = `2px solid ${this.rootMenu.activeColor}`;
+      }
+    } else {
+      this.$parent.$children.forEach((item) => {
+        if (item.index === '1') {
+          this.$el.style.color = this.rootMenu.activeColor;
+        } else {
+          item.$el.style.color = this.rootMenu.textColor;
+        }
+      });
+    }
   },
 }
 </script>
@@ -128,18 +107,20 @@ export default {
 .yu-menu-item{
   list-style: none;
   display: inline-block;
-  width: 10%;
   box-sizing: border-box;
-  padding: 10px 10px;
+  padding: 20px 10px;
   text-align: center;
   cursor: pointer;
-  min-width: 120px;
-  color:$light-text;
+  min-width: 130px;
+  color: $light-text;
+  position: relative;
   &:hover{
     color:$dark-text;
   }
-  i{
-    float: right;
+  .icon-angle-up{
+    position: absolute;
+    right: 5px;
+    top: 23px;
     transition: all .2s linear;
   }
 }
@@ -148,8 +129,5 @@ export default {
     transform: rotate(-180deg);
   }
 }
-.active{
-  border-bottom: 2px solid #409EFF;
-  color: $dark-text;
-}
+
 </style>
