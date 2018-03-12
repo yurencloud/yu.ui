@@ -2,13 +2,12 @@
 <li class="yu-menu-item"
     @click="active"
     role="menuitem"
-    :style="[paddingStyle,backgroundClolr,textColor]"
+    :style="[paddingStyle]"
     :class="{'active':isactive}"
     @mouseover="over"
     @mouseleave="leave">
     <slot></slot>
   <i class="iconfont" :class="{'icon-angle-up':icon}"></i>
-  <span></span>
 </li>
 </template>
 
@@ -24,6 +23,10 @@ export default {
       type: String,
       default: '1',
       required: true,
+    },
+    icon: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -43,13 +46,14 @@ export default {
     },
     over() {
       if (this.$children.length !== 0) {
-        console.log(this.$children[0].$el.style.height = 'auto');
+        this.$children[0].$el.style.height = 'auto';
+        this.$el.classList.add('switch');
       }
     },
     leave() {
-      this.isactive = false;
       if (this.$children.length !== 0) {
-        console.log(this.$children[0].$el.style.height = '0');
+        this.$children[0].$el.style.height = '0';
+        this.$el.classList.remove('switch');
       }
     },
   },
@@ -57,7 +61,7 @@ export default {
 
   },
   created() {
-    // console.log(this.rootMenu);
+
   },
   computed: {
     indexPath() {
@@ -98,22 +102,22 @@ export default {
       }
       return { paddingLeft: padding + 'px' };
     },
-    backgroundClolr() {
-      return { backgroundColor: this.rootMenu.backgroundClolr }
+    backgroundColor() {
+      return { backgroundColor: this.rootMenu.backgroundColor }
     },
-    textColor() {
-      return { color: this.rootMenu.textColor };
-    },
-    icon() {
-      // todo
-      console.log(this);
-      return this.$children.length === 1;
+    color() {
+      return{
+        //todo
+        // border-bottom: 2px solid this.rootMenu.activeColor,
+      // color: this.rootMenu.textcolor;
+      }
     },
   },
   mounted() {
     if (this.index === '1') {
       this.isactive = true;
     }
+    console.log(this.rootMenu);
   },
 }
 </script>
@@ -129,17 +133,23 @@ export default {
   padding: 10px 10px;
   text-align: center;
   cursor: pointer;
-  min-width: 100px;
+  min-width: 120px;
+  color:$light-text;
+  &:hover{
+    color:$dark-text;
+  }
+  i{
+    float: right;
+    transition: all .2s linear;
+  }
+}
+.switch{
+  i{
+    transform: rotate(-180deg);
+  }
 }
 .active{
- span{
-   display: inline-block;
-   position: absolute;
-   width: 100%;
-   height: 3px;
-   bottom: -2px;
-   left: 0;
-   background-color: #409EFF;
- }
+  border-bottom: 2px solid #409EFF;
+  color: $dark-text;
 }
 </style>

@@ -232,9 +232,9 @@
     </yu-collapse>
     <!--NavMenu    start-->
     <div class="sub-title">NavMenu</div>
-    <yu-nav-menu :horizontal="true" :default-active="activeIndex" text-color="#00" background-color="#666">
+    <yu-nav-menu :horizontal="true" :default-active="activeIndex" text-color="white" active-color="yellow" background-color="#666" :width="600">
       <yu-menu-item index="1">管理中心</yu-menu-item>
-      <yu-menu-item index="2">
+      <yu-menu-item index="2" :icon="true">
         我的控制台
         <yu-nav-menu index="2-1">
           <yu-menu-item index="2-1-1">项目一</yu-menu-item>

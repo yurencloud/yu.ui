@@ -1,5 +1,5 @@
 <template>
-      <ul class="yu-navmenu" :class="{'horizontal':horizontal,'vertical':isVertical}">
+      <ul class="yu-navmenu" :class="{'horizontal':horizontal,'vertical':isVertical}" :style="{backgroundColor: backgroundColor,width:width+'px'}">
         <slot></slot>
       </ul>
 </template>
@@ -12,6 +12,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    width: {
+      type: Number,
+      default: 120,
+    },
     defaultActive: {
       type: String,
       default: '',
@@ -21,6 +25,10 @@ export default {
     },
     textColor: {
       type: String,
+    },
+    activeColor: {
+      type: String,
+      default: '#000',
     },
   },
   data() {
@@ -38,9 +46,6 @@ export default {
   components: {
   },
   methods: {
-    updateDefaultIndex() {
-
-    },
   },
   beforeMount() {
   },
@@ -64,9 +69,12 @@ export default {
      border-bottom: none;
      max-width: 100px;
      width: 100%;
+     background-color: #666;
      li{
        width: 100%;
        max-width: 100px;
+       border-bottom: none;
+       text-align: left;
      }
    }
   }
