@@ -24,11 +24,9 @@ export default {
   },
 
   methods: {
-    // TODO::保证取消选择后，选项回去
-    handleClick(event) {
-      this.visible = !this.visible;
-      this.$parent.$emit('cancelSelect', { label: this.label, value: this.value });
-      if (!this.visible) event.target.blur();
+    handleClick() {
+      console.log(this);
+      this.$parent.$emit('cancelSelect', { value: this.value });
     },
   },
 };

@@ -48,7 +48,7 @@ export default {
   },
   created() {
     this.$on('handleSelect', this.handleSelect);
-    this.$on('cancelSelected', this.cancelSelected);
+    this.$on('cancelSelect', this.cancelSelect)
   },
 
   methods: {
@@ -70,9 +70,13 @@ export default {
     handleBlur() {
       this.visible = false;
     },
-    cancelSelected(option) {
-      console.log(this.selects);
-      this.selects = this.selects.filter(item => item.value !== option.value);
+    cancelSelect(option) {
+      this.selects.splice(this.selects.findIndex(item => item.value === option.value), 1)
+      this.$children.forEach((item) => {
+        if (item.value === option.value) {
+          item.hide = false;
+        }
+      })
     },
   },
 
