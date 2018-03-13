@@ -1,10 +1,12 @@
 <template>
   <div class="yu-counter">
     <yu-button
+      :size="size"
       @click="handleSubtract"
       :disabled="disabled"
     >-</yu-button>
     <yu-input
+      :size="size"
       ref='input'
       :name="name"
       :defaultValue='number'
@@ -12,6 +14,7 @@
       @change="handleChange"
     />
     <yu-button
+      :size="size"
       @click="handleAdd"
       :disabled="disabled"
     >+</yu-button>
@@ -41,6 +44,9 @@ export default {
     name: {
       type: String,
     },
+    size: {
+      type: String,
+    },
   },
   methods: {
     handleSubtract() {
@@ -64,10 +70,12 @@ export default {
   @import "../assets/css/varible";
 
   .yu-counter {
+    display: inline-block;
+    font-size: 0;
     .yu-input {
       display: inline-block;
+      box-sizing: border-box;
       margin-right: 0;
-      margin: 0 -5px;
       input {
         width: 80px;
         border-radius: 0;
@@ -75,17 +83,16 @@ export default {
       }
     }
     .yu-button {
+      vertical-align: top;
       background: $background;
       margin-right: 0;
       width: 50px;
     }
     .yu-button:nth-child(1) {
       border-radius: 4px 0 0 4px;
-      margin-right: .5px;
     }
     .yu-button:nth-child(3) {
       border-radius: 0 4px 4px 0;
-      margin-left: .5px;
     }
   }
 

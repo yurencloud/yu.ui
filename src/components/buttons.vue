@@ -7,7 +7,6 @@
 <script>
 export default {
   name: 'YuButtons',
-  props: ['type', 'size', 'icon', 'disabled', 'shape'],
 };
 </script>
 

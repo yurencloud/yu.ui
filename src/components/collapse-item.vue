@@ -1,12 +1,12 @@
 <template>
-  <div class="yu-collapse-item" @click="toggle()">
+  <div class="yu-collapse-item" @click="toggle">
     <div class="content">
           <div class="top">
             <span>{{title}}</span>
-            <i class="iconfont icon-angle-down" :class="{'rotate':isActive}"></i>
+            <i class="iconfont icon-angle-down" :class="{rotate:isActive}"></i>
           </div>
-        <div class="bottom" :class="{'show':!isActive,'trans':accordion}">
-          <slot></slot>
+        <div class="bottom" :class="{show:!isActive,trans:accordion}">
+          <slot/>
         </div>
       </div>
     </div>
@@ -46,11 +46,8 @@ export default {
       width: 100%;
       border-bottom: 1px solid $border;
       overflow: hidden;
-      -webkit-animation: all 2s linear;
-      -o-animation: all 2s linear;
       animation: all 2s linear;
       box-sizing: border-box;
-      height: auto;
       display: inline-block;
       .top{
         cursor: pointer;
@@ -67,10 +64,6 @@ export default {
         max-height:80px;
       }
       .bottom.trans{
-        -webkit-transition: all 0.2s linear;
-        -moz-transition: all 0.2s linear;
-        -ms-transition: all 0.2s linear;
-        -o-transition: all 0.2s linear;
         transition: all 0.2s linear;
       }
       i{

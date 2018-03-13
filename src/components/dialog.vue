@@ -9,7 +9,7 @@
          <div class="close" @click="toggle" ><i class="iconfont icon-close"></i></div>
          <div class="content" v-if="iscontent">{{content}}</div>
          <div class="content" v-else>
-           <slot></slot>
+           <slot/>
          </div>
          <div class="btn">
            <yu-button disabled size="small" @click.native="toggle">取消</yu-button>

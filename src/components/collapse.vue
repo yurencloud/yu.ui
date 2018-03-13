@@ -1,6 +1,6 @@
 <template>
-  <div class="yu-collapse" :style="{width:width+'px'}">
-    <slot></slot>
+  <div class="yu-collapse" :style="{width:width}">
+    <slot/>
   </div>
 </template>
 
@@ -9,8 +9,8 @@ export default {
   name: 'YuCollapse',
   props: {
     width: {
-      type: Number,
-      default: 500,
+      type: String,
+      default: '500px',
     },
   },
 }

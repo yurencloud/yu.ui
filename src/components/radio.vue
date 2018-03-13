@@ -1,7 +1,7 @@
 <template>
-  <label class="yu-radio" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled}]">
+  <label class="yu-radio" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
   <span class="radio">
-    <input type="radio" :value="label">
+    <input type="radio" :name="name" :value="isChecked?label:''" >
   </span>
     <span><slot/></span>
   </label>
@@ -17,6 +17,9 @@ export default {
     };
   },
   props: {
+    name: {
+      type: String,
+    },
     type: {
       type: String,
       default: 'default',
@@ -30,6 +33,9 @@ export default {
     label: {
       type: String,
     },
+    vertical: {
+      type: Boolean,
+    },
   },
   methods: {
     handleClick() {
@@ -38,14 +44,13 @@ export default {
       // 如果是单选组，则重置全部
       if (this.$parent.$options._componentTag === 'yu-radios') {
         this.$parent.$children.forEach((item) => {
-          item.isChecked = false;
+          if (item.label !== this.label) {
+            item.isChecked = false
+          }
         });
-        if (!this.isChecked) {
-          this.$emit('change', this.label);
-        } else {
-          this.$emit('change', '');
-        }
       }
+
+      this.$emit('change', !this.isChecked ? this.label : '');
       // 开关当前单选
       this.isChecked = !this.isChecked;
     },
@@ -56,16 +61,16 @@ export default {
 <style lang="scss" scoped type="text/scss">
   @import "../assets/css/varible";
 
-  .yu-radio{
+  .yu-radio {
     font-size: $normal;
-    color:$text;
+    color: $text;
     cursor: pointer;
     margin-right: 30px;
     margin-bottom: 12px;
-    input{
+    input {
       display: none;
     }
-    .radio{
+    .radio {
       margin-right: 6px;
       margin-bottom: -1px;
       display: inline-block;
@@ -74,24 +79,38 @@ export default {
       border: 1px solid $dark-border;
       border-radius: 50%;
       background-color: #fff;
-      &:hover{
+      &:hover {
         border: 1px solid $primary;
       }
     }
-    &.checked{
-      .radio{
+    &.vertical{
+      display: block!important;
+    }
+    &.checked {
+      .radio {
         width: 6px;
         height: 6px;
         border: 5px solid $primary;
-        &+span{
-          color:$primary;
+        & + span {
+          color: $primary;
         }
       }
     }
 
-    &.disabled{
-      color:$lighter-text;
-      .radio:hover{
+    &.checked.disabled {
+      .radio {
+        width: 6px;
+        height: 6px;
+        border: 5px solid $lighter-text;
+        & + span {
+          color: $lighter-text;
+        }
+      }
+    }
+
+    &.disabled {
+      color: $lighter-text;
+      .radio:hover {
         border: 1px solid $dark-border;
       }
     }

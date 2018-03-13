@@ -80,3 +80,8 @@ handleClick() {
 
 ## 4.如果两个标签之间回车换行，会产生一个text node并占了一个字符的长度，所以两个元素之间会生成一个无法调整的间隙。
 在其父元素上添加font-size:0可以消除text node的这个间隙
+
+## 5.slot
+如果想直接触发slot中的组件，是不可以的
+但slot实际就是真实组件的替换，在其$children中不会出现slot，而是由真实的slot中的组件组成，
+所以直接通过$children就可以操作slot中的组件

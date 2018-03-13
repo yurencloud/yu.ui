@@ -1,6 +1,8 @@
 'use strict'
-const chalk = require('chalk')
-const semver = require('semver')
+import semver from "semver";
+
+import chalk from "chalk";
+
 const packageConfig = require('../package.json')
 const shell = require('shelljs')
 
@@ -44,7 +46,7 @@ module.exports = function () {
     console.log()
 
     for (let i = 0; i < warnings.length; i++) {
-      const warning = warnings[i]
+      const warning = warnings[i];
       console.log('  ' + warning)
     }
 

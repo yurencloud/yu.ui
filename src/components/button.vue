@@ -5,8 +5,8 @@
     :autofocus="autofocus"
     :type="nativeType"
     :class="[type, size, {disabled:disabled},shape, {plain:plain}, {loading:loading}]" >
-    <i v-if="icon" class="ui iconfont" v-bind:class="[icon]"></i>
-    <i v-if="loading" class="ui iconfont icon-loading loading"></i>
+    <i v-if="icon" class="iconfont" v-bind:class="[icon]"></i>
+    <i v-if="loading" class="iconfont icon-loading loading"></i>
     <slot/>
   </button>
 </template>
@@ -121,6 +121,21 @@ export default {
           transform: rotate(360deg);
         }
       }
+    }
+
+    &.append{
+      display: inline-block;
+      vertical-align: top;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin: 0;
+    }
+
+    &.prepend{
+      vertical-align: top;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      margin: 0;
     }
   }
 </style>

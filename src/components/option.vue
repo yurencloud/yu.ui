@@ -1,30 +1,34 @@
 <template>
-  <div class="option" :class="[{active:active}]" @mousedown.prevent="handleClick" :value="value">{{label}}</div>
+  <div class="option" :class="[{active:active},{hide:hide},{disabled:disabled}]" @mousedown.prevent="handleClick" :value="value">{{label}}</div>
 </template>
 
 <script>
-import emitter from '../utils/emitter';
-
 export default {
   name: 'YuOption',
   data() {
     return {
       active: false,
+      hide: false,
     };
   },
-  mixins: [emitter],
   props: {
     label: {
       type: String,
     },
     value: {
-      type: String,
+      type: [Number, String],
     },
+    disabled: Boolean,
   },
   methods: {
     handleClick() {
-      this.dispatch('YuSelect', 'handleSelect', { label: this.label, value: this.value });
-      //
+      if (this.disabled) {
+        return;
+      }
+      if (this.$parent.multi) {
+        this.hide = true;
+      }
+      this.$parent.$emit('handleSelect', { label: this.label, value: this.value });
       this.$parent.$children.forEach((item) => {
         item.active = false;
       })
@@ -40,12 +44,19 @@ export default {
   .yu-select>.options>.option{
     font-size: $normal;
     padding:4px 8px;
-    &:hover{
+    &:hover:not(.disabled){
       background-color: $background;
     }
     &.active{
+      background-color: $background;
       font-weight: bold;
       color: $primary;
+    }
+    &.hide{
+      display: none;
+    }
+    &.disabled{
+      color:$lighter-text
     }
   }
 

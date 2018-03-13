@@ -26,7 +26,7 @@ export default {
     },
     textColor: {
       type: String,
-      default: '#000',
+      default: '#909399',
     },
     activeColor: {
       type: String,
@@ -66,8 +66,13 @@ export default {
     color:$light-text;
     font-size:$large ;
     width: 10%;
+    &:hover ul{
+      height: auto;
+      max-height: 250px;
+    }
    ul{
      height: 0;
+     max-height: 0;
      overflow: hidden;
      position: absolute;
      padding: 0;
@@ -76,6 +81,7 @@ export default {
      display: inline-block;
      left: 0;
      border-bottom: none;
+     transition: all .5s linear;
      li{
        border-bottom: none;
        text-align: left;
@@ -83,38 +89,52 @@ export default {
        width: 200px;
        padding: 10px;
        color: $light-text;
-       font-size: $large;
-       &:hover{
-         color: #409EFF;
-       }
+       font-size: $small;
      }
    }
   }
-
 }
+
   /*垂直方向*/
 .yu-navmenu.vertical{
   border-right: 1px solid $dark-border;
   box-sizing: border-box;
-  padding-bottom: 250px;
+  padding-bottom: 100px;
+  padding-left: 0;
  li{
    width: 100%;
    text-align: left;
    position: relative;
-   overflow: hidden;
+   margin-left: 0;
    span{
-     margin-left: 10px;
+     margin-left: 5px;
+   }
+   i{
+     font-size: $huge;
+   }
+   &:hover ul{
+     height: auto;
+     max-height: 300px;
    }
    ul{
      height: 0;
      width: 100%;
      overflow: hidden;
      border-right: 1px solid $dark-border;
-     -webkit-transition: all 0.2s linear;
-     -moz-transition: all 0.2s linear;
-     -ms-transition: all 0.2s linear;
-     -o-transition: all 0.2s linear;
-     transition: all 0.2s linear;
+     transition: all .5s linear;
+     max-height: 0;
+     margin-left: -10px;
+     margin-top: 20px;
+     margin-bottom: -20px;
+     padding-left: 0;
+     box-sizing: border-box;
+     li{
+       text-align: left;
+       color: $light-text;
+       padding: 10px 30px;
+       font-size: $small;
+       box-sizing: border-box;
+     }
    }
  }
 }

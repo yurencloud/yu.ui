@@ -1,5 +1,5 @@
 <template>
-    <div class="yu-carousel" :style="{width:width+'px',height:height+'px'}">
+    <div class="yu-carousel" :style="{width:width,height:height}">
       <slot></slot>
     </div>
 </template>
@@ -8,12 +8,12 @@ export default {
   name: 'YuCarousel',
   props: {
     width: {
-      type: Number,
-      default: 500,
+      type: String,
+      default: '500px',
     },
     height: {
-      type: Number,
-      default: 300,
+      type: String,
+      default: '300px',
     },
     autoplay: {
       type: Boolean,

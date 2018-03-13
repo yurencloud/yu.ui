@@ -4,17 +4,24 @@
       readonly
       ref='input'
       @click="handleClick"
+      @blur="handleBlur"
       suffix="icon-angle-down"
+      :placeholder="text"
+      :disabled="disabled"
     />
     <div class="options" :class="[{overflow:overflow}]" v-show="visible">
       <slot/>
+    </div>
+    <!--选中选项显示-->
+    <div class="selected" v-if="selects.length>0">
+      <yu-selected v-for="item in selects" v-bind:key="item.value" :value="item.value">{{item.label}}</yu-selected>
     </div>
   </div>
 </template>
 
 <script>
 import YuInput from './input';
-import emitter from '../utils/emitter';
+import YuSelected from './selected';
 
 export default {
   name: 'YuSelect',
@@ -23,17 +30,25 @@ export default {
       visible: false,
       value: '',
       label: '',
+      selects: [],
     };
   },
-  componentName: 'YuSelect',
-  mixins: [emitter],
   props: {
     overflow: {
       type: Boolean,
     },
+    text: {
+      type: String,
+    },
+    disabled: Boolean,
+    multi: Boolean,
+    options: {
+      type: Array,
+    },
   },
   created() {
     this.$on('handleSelect', this.handleSelect);
+    this.$on('cancelSelected', this.cancelSelected);
   },
 
   methods: {
@@ -43,17 +58,27 @@ export default {
     },
 
     handleSelect(option) {
-      console.log(1);
+      if (this.multi) {
+        this.selects.push(option);
+      }
       this.$refs.input.value = option.label;
       this.$refs.input.$el.children[0].blur();
       this.value = option.value;
       this.label = option.label;
       this.visible = false;
     },
+    handleBlur() {
+      this.visible = false;
+    },
+    cancelSelected(option) {
+      console.log(this.selects);
+      this.selects = this.selects.filter(item => item.value !== option.value);
+    },
   },
 
   components: {
     YuInput,
+    YuSelected,
   },
 };
 </script>
@@ -69,23 +94,22 @@ export default {
       position: absolute;
       top: 35px;
       z-index: 1000;
-      width: 214px;
+      min-width: 175px;
       border: 1px solid $border;
       padding: 8px 0;
       margin-top: 8px;
       border-radius: 4px;
       color: $text;
       box-shadow: $box-shadow;
-      &.overflow{
+      &.overflow {
         overflow: auto;
         max-height: 150px;
-        &::-webkit-scrollbar
-        {
+        &::-webkit-scrollbar {
           width: 4px
         }
         &::-webkit-scrollbar-thumb {
           border-radius: 2px;
-          background-color:$border;
+          background-color: $border;
         }
       }
     }
@@ -103,6 +127,33 @@ export default {
         }
       }
       transition: all ease .4s;
+    }
+
+    &.prepend {
+      display: inline-block;
+      vertical-align: top;
+      margin: 0;
+      input {
+        border-radius: 4px 0 0 4px;
+      }
+      &>.yu-input{
+        margin: 0;
+      }
+    }
+
+    &.append {
+      display: inline-block;
+      vertical-align: top;
+      input {
+        border-radius: 0 4px 4px 0;
+      }
+      &>.yu-input{
+        margin: 0;
+      }
+    }
+
+    .selected{
+      margin-top: 12px;
     }
 
   }
