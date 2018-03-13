@@ -266,12 +266,12 @@
       <yu-menu-item index="4">订单管理</yu-menu-item>
     </yu-nav-menu>
     <div class="sub-title">垂直分布</div>
-    <yu-nav-menu :vertical="true" :default-active="activeIndex" :width="200" text-color="white" active-color="yellow" background-color="#666">
+    <yu-nav-menu :vertical="true" :default-active="activeIndex" :width="200" text-color="#fff" active-color="yellow" background-color="#666">
       <yu-menu-item index="1"><i class="iconfont icon-location"></i><span style=" margin-left: 10px">导航一</span></yu-menu-item>
       <yu-menu-item index="2" :icon="true">
         <i class="iconfont icon-application"></i>
         <span style=" margin-left: 10px">导航二</span>
-        <yu-nav-menu index="2-1" background-color="#666">
+        <yu-nav-menu index="2-1" background-color="#666" text-color="#fff">
           <yu-menu-item index="2-1-1">项目一</yu-menu-item>
           <yu-menu-item index="2-2-1">项目一</yu-menu-item>
           <yu-menu-item index="2-3-1">项目一</yu-menu-item>

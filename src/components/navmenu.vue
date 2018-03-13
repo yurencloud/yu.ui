@@ -20,10 +20,6 @@ export default {
       type: Number,
       default: 200,
     },
-    defaultActive: {
-      type: String,
-      default: '',
-    },
     backgroundColor: {
       type: String,
       default: 'white',
@@ -75,7 +71,7 @@ export default {
      overflow: hidden;
      position: absolute;
      padding: 0;
-     margin-top: 22px;
+     margin-top: 45px;
      box-shadow: $box-shadow;
      display: inline-block;
      left: 0;
@@ -85,9 +81,9 @@ export default {
        text-align: left;
        display: inline-block;
        width: 200px;
-       padding: 5px 10px;
+       padding: 10px;
        color: $light-text;
-       font-size: $small;
+       font-size: $large;
        &:hover{
          color: #409EFF;
        }

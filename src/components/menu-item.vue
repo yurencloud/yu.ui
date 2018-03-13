@@ -27,13 +27,9 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      isactive: false,
-    }
-  },
   methods: {
-    active() {
+    active(e) {
+      e.stopPropagation();
       this.$parent.$children.forEach((item) => {
         item.$el.style.color = this.rootMenu.textColor;
         item.$el.style.borderBottom = 'none';
@@ -50,7 +46,6 @@ export default {
         this.$el.style.color = this.rootMenu.activeColor;
         this.$el.style.borderBottom = 'none';
       }
-      // todo
       if (this.index.length > 3) {
         this.$el.style.borderBottom = 'none';
         this.$el.style.color = this.rootMenu.textColor;
@@ -61,7 +56,7 @@ export default {
         this.$children[0].$el.style.height = 'auto';
         this.$el.classList.add('switch');
         if (this.rootMenu.$el.classList.contains('vertical')) {
-          this.$parent.$el.style.padding = 0;
+          this.$parent.$el.style.paddingBottom = 0;
         }
       }
     },
@@ -84,7 +79,6 @@ export default {
     if (!this.rootMenu.$el.classList.contains('vertical')) {
       this.$el.style.color = this.rootMenu.textColor;
       if (this.index === '1') {
-        this.isactive = true;
         this.$el.style.color = this.rootMenu.activeColor;
         this.$el.style.borderBottom = `2px solid ${this.rootMenu.activeColor}`;
       }
