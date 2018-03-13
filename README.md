@@ -85,3 +85,10 @@ handleClick() {
 如果想直接触发slot中的组件，是不可以的
 但slot实际就是真实组件的替换，在其$children中不会出现slot，而是由真实的slot中的组件组成，
 所以直接通过$children就可以操作slot中的组件
+
+## 6.在created调用methods，在mounted中调用methods
+因为created时还没有挂好methods，所以不能调用methods
+因为mounted时已经挂好methods，所以可以通过以下方式来调用
+~~~
+this.$options.methods.changeValue.bind(this)()
+~~~

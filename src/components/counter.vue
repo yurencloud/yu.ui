@@ -33,6 +33,8 @@ export default {
     };
   },
   props: {
+    name: String,
+    size: String,
     disabled: {
       type: Boolean,
       default: false,
@@ -40,12 +42,6 @@ export default {
     step: {
       type: Number,
       default: 1,
-    },
-    name: {
-      type: String,
-    },
-    size: {
-      type: String,
     },
   },
   methods: {

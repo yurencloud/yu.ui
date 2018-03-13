@@ -34,17 +34,11 @@ export default {
     };
   },
   props: {
-    overflow: {
-      type: Boolean,
-    },
-    text: {
-      type: String,
-    },
+    overflow: Boolean,
+    text: String,
     disabled: Boolean,
     multi: Boolean,
-    options: {
-      type: Array,
-    },
+    options: Array,
   },
   created() {
     this.$on('handleSelect', this.handleSelect);
@@ -56,7 +50,6 @@ export default {
       this.visible = !this.visible;
       if (!this.visible) event.target.blur();
     },
-
     handleSelect(option) {
       if (this.multi) {
         this.selects.push(option);
@@ -89,6 +82,7 @@ export default {
 
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";
+  @import "../assets/css/animation";
 
   .yu-select {
     position: relative;
@@ -96,7 +90,7 @@ export default {
     .options {
       background-color: #fff;
       position: absolute;
-      top: 35px;
+      top: 40px;
       z-index: 1000;
       min-width: 175px;
       border: 1px solid $border;
@@ -117,21 +111,7 @@ export default {
         }
       }
     }
-    input {
-      & + span.suffix > i {
-        transition: all ease .4s;
-      }
-      &:hover {
-        cursor: pointer;
-      }
-      &:focus {
-        border: 1px solid $primary;
-        & + span.suffix > i.icon-angle-down {
-          transform: rotate(-180deg);
-        }
-      }
-      transition: all ease .4s;
-    }
+    @include angleAnimation();
 
     &.prepend {
       display: inline-block;
@@ -140,7 +120,7 @@ export default {
       input {
         border-radius: 4px 0 0 4px;
       }
-      &>.yu-input{
+      & > .yu-input {
         margin: 0;
       }
     }
@@ -151,12 +131,12 @@ export default {
       input {
         border-radius: 0 4px 4px 0;
       }
-      &>.yu-input{
+      & > .yu-input {
         margin: 0;
       }
     }
 
-    .selected{
+    .selected {
       margin-top: 12px;
     }
 

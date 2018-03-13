@@ -16,24 +16,16 @@ export default {
     };
   },
   props: {
+    checked: Boolean,
+    disabled: Boolean,
+    label: String,
+    vertical: Boolean,
     name: {
       type: String,
     },
     type: {
       type: String,
       default: 'default',
-    },
-    checked: {
-      type: Boolean,
-    },
-    disabled: {
-      type: Boolean,
-    },
-    label: {
-      type: String,
-    },
-    vertical: {
-      type: Boolean,
     },
   },
   created() {

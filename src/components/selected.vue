@@ -15,12 +15,8 @@ export default {
     };
   },
   props: {
-    label: {
-      type: String,
-    },
-    value: {
-      type: [Number, String],
-    },
+    label: String,
+    value: [Number, String],
   },
 
   methods: {
@@ -54,6 +50,5 @@ export default {
       color:$text;
     }
   }
-
 
 </style>

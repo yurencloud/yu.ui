@@ -10,3 +10,23 @@
     }
   }
 }
+
+
+@mixin angleAnimation() {
+  input {
+    & + span.suffix > i {
+      transition: all ease .4s;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &:focus {
+      border: 1px solid $primary;
+      & + span.suffix > i.icon-angle-down {
+        transform: rotate(-180deg);
+      }
+    }
+    transition: all ease .4s;
+  }
+}
+

@@ -5,8 +5,8 @@
     :autofocus="autofocus"
     :type="nativeType"
     :class="[type, size, {disabled:disabled},shape, {plain:plain}, {loading:loading}]" >
-    <i v-if="icon" class="ui iconfont" v-bind:class="[icon]"></i>
-    <i v-if="loading" class="ui iconfont icon-loading loading"></i>
+    <i v-if="icon" class="iconfont" v-bind:class="[icon]"></i>
+    <i v-if="loading" class="iconfont icon-loading loading"></i>
     <slot/>
   </button>
 </template>
@@ -15,6 +15,12 @@
 export default {
   name: 'YuButton',
   props: {
+    icon: String,
+    disabled: Boolean,
+    shape: String,
+    loading: Boolean,
+    autofocus: Boolean,
+    plain: Boolean,
     type: {
       type: String,
       default: 'default',
@@ -23,27 +29,9 @@ export default {
       type: String,
       default: 'normal',
     },
-    icon: {
-      type: String,
-    },
-    disabled: {
-      type: Boolean,
-    },
-    shape: {
-      type: String,
-    },
-    loading: {
-      type: Boolean,
-    },
-    autofocus: {
-      type: Boolean,
-    },
     nativeType: {
       type: String,
       default: 'button',
-    },
-    plain: {
-      type: Boolean,
     },
   },
   methods: {

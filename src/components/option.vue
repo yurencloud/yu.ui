@@ -1,5 +1,8 @@
 <template>
-  <div class="option" :class="[{active:active},{hide:hide},{disabled:disabled}]" @mousedown.prevent="handleClick" :value="value">{{label}}</div>
+  <div class="option" :class="[{active:active},{hide:hide},{disabled:disabled}]" @mousedown.prevent="handleClick" :value="value">
+    {{$slots.default?'':label}}
+    <slot/>
+  </div>
 </template>
 
 <script>
@@ -12,13 +15,11 @@ export default {
     };
   },
   props: {
-    label: {
-      type: String,
-    },
+    label: String,
+    disabled: Boolean,
     value: {
       type: [Number, String],
     },
-    disabled: Boolean,
   },
   methods: {
     handleClick() {

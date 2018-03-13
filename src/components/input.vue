@@ -65,7 +65,7 @@ export default {
   name: 'YuInput',
   data() {
     return {
-      value: this.defaultValue ? this.defaultValue : '',
+      value: this.defaultValue || '',
       search: false,
       optionsFilter: [],
       activeNumber: -1,
@@ -75,29 +75,20 @@ export default {
     };
   },
   props: {
+    placeholder: String,
+    disabled: Boolean,
+    clearable: Boolean,
+    readonly: Boolean,
+    prefix: String,
+    suffix: String,
+    name: String,
+    size: String,
+    width: String,
+    options: Array,
+    overflow: Boolean,
+    remote: Boolean,
     defaultValue: {
       type: [String, Number],
-    },
-    placeholder: {
-      type: String,
-    },
-    disabled: {
-      type: Boolean,
-    },
-    clearable: {
-      type: Boolean,
-    },
-    readonly: {
-      type: Boolean,
-    },
-    prefix: {
-      type: String,
-    },
-    suffix: {
-      type: String,
-    },
-    name: {
-      type: String,
     },
     type: {
       type: String,
@@ -111,17 +102,6 @@ export default {
       type: Number,
       default: 4,
     },
-    size: {
-      type: String,
-    },
-    width: {
-      type: String,
-    },
-    options: {
-      type: Array,
-    },
-    overflow: Boolean,
-    remote: Boolean,
   },
   created() {
     this.$on('handleSelect', this.handleSelect)
