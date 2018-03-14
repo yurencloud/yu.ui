@@ -111,6 +111,19 @@
   }
 }
 
+@mixin generalAllColorSwitch() {
+  @each $type in $types {
+    $color: map-get($colors, $type);
+    &.#{$type} {
+      background-color: $color;
+      transition: all .3s ease;
+      &.disabled {
+        background-color: lighten($color, 25);
+      }
+    }
+  }
+}
+
 
 
 

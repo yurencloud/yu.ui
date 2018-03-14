@@ -30,7 +30,6 @@ export default {
   },
   created() {
     this.$on('toggleAll', (value) => {
-      console.log(1);
       this.$parent.$children.forEach((item) => {
         item.isChecked = value
       });

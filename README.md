@@ -95,6 +95,10 @@ this.$options.methods.changeValue.bind(this)()
 
 
 ## 7.fetch的使用
+注意,当用post发送参数时，一定要加这个，不然参数无法传送
+  headers: {
+    'Content-Type': 'application/json'
+  },
 ~~~
  method: 'POST',
   headers: {

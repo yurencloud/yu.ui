@@ -195,7 +195,6 @@ export default {
       this.loading = false
     },
     value(value) {
-      console.log(1);
       this.loading = true;
       if (this.remote) {
         this.$emit('fetch', value);

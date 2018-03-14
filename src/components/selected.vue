@@ -21,7 +21,6 @@ export default {
 
   methods: {
     handleClick() {
-      console.log(this);
       this.$parent.$emit('cancelSelect', { value: this.value });
     },
   },

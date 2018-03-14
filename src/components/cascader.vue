@@ -22,6 +22,7 @@
         </div>
       </div>
       <div class="cascader second" v-if="secondActive">
+        <yu-loading :loading="secondCascader.length===0 && remote">加载中...</yu-loading>
         <div class="option"
              :key="item.value"
              :value="item.value"
@@ -35,6 +36,7 @@
         </div>
       </div>
       <div class="cascader third" v-if="thirdActive">
+        <yu-loading :loading="thirdCascader.length===0 && remote">加载中...</yu-loading>
         <div class="option"
              :key="item.value"
              :value="item.value"
@@ -51,6 +53,7 @@
 
 <script>
 import YuInput from './input';
+import YuLoading from './loading';
 
 export default {
   name: 'YuCascader',
@@ -74,6 +77,7 @@ export default {
   },
   components: {
     YuInput,
+    YuLoading,
   },
   methods: {
     handleClick() {
@@ -86,6 +90,7 @@ export default {
       this.value.first = item;
       if (item.children) {
         if (this.remote) {
+          this.secondCascader = []
           this.$emit('fetch', item);
         } else {
           this.secondCascader = item.children;
@@ -106,6 +111,7 @@ export default {
       this.value.second = item;
       if (item.children) {
         if (this.remote) {
+          this.thirdCascader = []
           this.$emit('fetch', item);
         } else {
           this.thirdCascader = item.children;
@@ -154,9 +160,6 @@ export default {
   created() {
     const body = document.body;
     const the = this;
-    if (this.remote) {
-      this.$emit('fetch');
-    }
     body.addEventListener('click', (e) => {
       if (e.currentTarget.tagName === 'BODY'
         && e.target.tagName !== 'INPUT'
@@ -226,6 +229,9 @@ export default {
           float: right;
           color:$lighter-text;
         }
+      }
+      .yu-loading{
+        padding-top: 8px;
       }
     }
   }
