@@ -467,14 +467,128 @@
     <yu-loading align="left" >加载中...</yu-loading>
     <yu-loading align="center" >加载中...</yu-loading>
     <yu-loading align="right" >加载中...</yu-loading>
-    <!--tabs start-->
-    <div class="sub-title">Tabs</div>
-    <yu-tabs>
-      <yu-tab-pane label="文件管理" name="first">文件管理页面</yu-tab-pane>
-      <yu-tab-pane label="用户管理" name=second>用户管理页面</yu-tab-pane>
-      <yu-tab-pane label="我的资料" name="third">我的资料页面</yu-tab-pane>
-    </yu-tabs>
-    <!--tabs  end-->
+   <div class="dropdown-list">
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---click触发</div>
+       <yu-drop-down trigger="click">
+      <span slot="title">
+        下拉菜单  <i class="iconfont icon-angle-up"></i>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item>黄金糕</yu-dropdown-item>
+           <yu-dropdown-item>牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item>宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item>狮子头</yu-dropdown-item>
+           <yu-dropdown-item>蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---hover触发</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+        下拉菜单  <i class="iconfont icon-angle-up"></i>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item @click="abc">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item>牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item>宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item>狮子头</yu-dropdown-item>
+           <yu-dropdown-item>蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---指令事件</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+        下拉菜单  <i class="iconfont icon-angle-up"></i>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
+           <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---button</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+        <yu-button type="primary">
+          下拉列表<i class="iconfont icon-angle-up"></i>
+        </yu-button>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
+           <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---双按钮</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+         <yu-buttons >
+      <yu-button type="primary" size="small" disabled="">下拉列表</yu-button>
+      <yu-button size="small">点击</yu-button>
+    </yu-buttons>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
+           <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---小尺寸</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+        <yu-button type="primary" size="small">
+          下拉列表<i class="iconfont icon-angle-up"></i>
+        </yu-button>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
+           <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+   </div>
+    <div style="width: 200px;height: 400px"></div>
+    <div class="sub-title">面包屑-------/</div>
+    <yu-breadcrumb separator="/">
+      <yu-breadcrumb-item :to="{ path: '/' }">首页</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">活动管理</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">活动项目</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">项目任务</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">任务详情</yu-breadcrumb-item>
+    </yu-breadcrumb>
+    <div class="sub-title">面包屑-------></div>
+    <yu-breadcrumb separator="icon-angle-right">
+      <yu-breadcrumb-item :to="{ path: '/' }">首页</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">管理页面</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">详情页面</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">资讯页面</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">资讯详情</yu-breadcrumb-item>
+    </yu-breadcrumb>
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -502,8 +616,11 @@ import YuCheckboxs from '../components/checkboxs';
 import YuLoading from '../components/loading';
 import YuCounterSide from '../components/counter-side';
 import YuSelected from '../components/selected';
-import YuTabs from '../components/tabs';
-import YuTabPane from '../components/tab-pane';
+import YuDropDown from '../components/dropdown';
+import YuDropdownMenu from '../components/dropdown-menu';
+import YuDropdownItem from '../components/dropdown-item';
+import YuBreadcrumb from '../components/breadcrumb';
+import YuBreadcrumbItem from '../components/breadcrumb-item';
 
 
 export default {
@@ -549,6 +666,9 @@ export default {
           console.log(error.message);
         })
     },
+    abc(command) {
+      console.log(command);
+    },
   },
   components: {
     YuToolTip,
@@ -572,8 +692,11 @@ export default {
     YuLoading,
     YuCounterSide,
     YuSelected,
-    YuTabs,
-    YuTabPane,
+    YuDropDown,
+    YuDropdownMenu,
+    YuDropdownItem,
+    YuBreadcrumb,
+    YuBreadcrumbItem,
   },
 };
 </script>
@@ -592,4 +715,11 @@ export default {
   margin: 20px 0;
   border-left: 4px solid $primary;
 }
+  .dropdown-list{
+    .list-content{
+      display: inline-block;
+      float: left;
+      margin-right: 50px;
+    }
+  }
 </style>
