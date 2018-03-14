@@ -312,6 +312,9 @@
     <div class="sub-title">选择即改变</div>
     <yu-cascader :cascader="cascader" changeOnSelect/>
 
+    <div class="sub-title">动态加载</div>
+    <yu-cascader ref="cascader" :cascader="fetchCascader" @fetch="cascaderFetch" remote/>
+
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
     <!--<yu-loading />-->
@@ -355,6 +358,7 @@ export default {
   name: 'ViewContainer',
   data() {
     return {
+      fetchCascader: [],
       defaultValue: {
         first: { value: 'zhinan', label: '指南', children: [{ value: 'shejiyuanze', label: '设计原则', children: [{ value: 'yizhi', label: '一致' }, { value: 'fankui', label: '反馈' }, { value: 'xiaolv', label: '效率' }, { value: 'kekong', label: '可控' }] }, { value: 'daohang', label: '导航', children: [{ value: 'cexiangdaohang', label: '侧向导航' }, { value: 'dingbudaohang', label: '顶部导航' }] }] },
         second: { value: 'daohang', label: '导航', children: [{ value: 'cexiangdaohang', label: '侧向导航' }, { value: 'dingbudaohang', label: '顶部导航' }] },
@@ -577,7 +581,6 @@ export default {
     },
     handleFetch(value) {
       const the = this;
-      // the.options = [];
       fetch(`/api/restaurants/${value}`)
         .then((response) => {
           response.text().then((data) => {
@@ -592,6 +595,73 @@ export default {
         }, (error) => {
           console.log(error.message);
         })
+    },
+    cascaderFetch(item) {
+      const the = this;
+      if (item) {
+        console.log(item);
+        const query = {};
+        if (item.pid === 0) {
+          query.pid = item.id
+          fetch('/api/fetch/cascader', {
+            method: 'POST',
+            body: JSON.stringify(query),
+          })
+            .then((response) => {
+              response.text().then((data) => {
+                data = JSON.parse(data);
+                the.fetchCascader = [];
+                const temp = [];
+                data.forEach((i) => {
+                  temp.push({ value: i.id, label: i.name, ...i })
+                })
+                console.log(temp);
+                console.log(the.$refs.cascader.secondCascader);
+                the.$refs.cascader.secondCascader = temp;
+                console.log(the.$refs.cascader.secondCascader);
+              });
+            }, (error) => {
+              console.log(error.message);
+            })
+        } else {
+          query.pid = item.id
+          query.gid = item.pid
+          fetch('/api/fetch/cascader', {
+            method: 'POST',
+            body: JSON.stringify(query),
+          })
+            .then((response) => {
+              response.text().then((data) => {
+                data = JSON.parse(data);
+                the.fetchCascader = [];
+                const temp = [];
+                data.forEach((i) => {
+                  temp.push({ value: i.id, label: i.name, ...i })
+                })
+                the.$refs.cascader.thirdCascader = temp;
+              });
+            }, (error) => {
+              console.log(error.message);
+            })
+        }
+      } else {
+        fetch('/api/fetch/cascader', {
+          method: 'POST',
+        })
+          .then((response) => {
+            response.text().then((data) => {
+              data = JSON.parse(data);
+              the.fetchCascader = [];
+              const temp = [];
+              data.forEach((item) => {
+                temp.push({ value: item.id, label: item.name, ...item })
+              })
+              the.fetchCascader = temp;
+            });
+          }, (error) => {
+            console.log(error.message);
+          })
+      }
     },
   },
   components: {

@@ -85,7 +85,11 @@ export default {
       this.activeOption($event);
       this.value.first = item;
       if (item.children) {
-        this.secondCascader = item.children;
+        if (this.remote) {
+          this.$emit('fetch', item);
+        } else {
+          this.secondCascader = item.children;
+        }
         this.secondActive = true;
       } else {
         delete this.value.second;
@@ -101,7 +105,11 @@ export default {
       this.activeOption($event);
       this.value.second = item;
       if (item.children) {
-        this.thirdCascader = item.children;
+        if (this.remote) {
+          this.$emit('fetch', item);
+        } else {
+          this.thirdCascader = item.children;
+        }
         this.thirdActive = true;
       } else {
         delete this.value.third;
@@ -146,6 +154,9 @@ export default {
   created() {
     const body = document.body;
     const the = this;
+    if (this.remote) {
+      this.$emit('fetch');
+    }
     body.addEventListener('click', (e) => {
       if (e.currentTarget.tagName === 'BODY'
         && e.target.tagName !== 'INPUT'
