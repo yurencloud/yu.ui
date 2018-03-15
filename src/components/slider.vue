@@ -2,6 +2,7 @@
   <div class="yu-slider"
        :class="[{disabled:disabled}]"
   >
+    <div></div>
     <div class="bottom-bar" :style="{width:width+(percent?'%':'px')}">
       <div class="top-bar" :style="{width: move+'px'}">
         <span
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-import YuTooltip from './tooltip';
+import YuToolTip from './tooltip';
 
 export default {
   name: 'YuSlider',
@@ -40,6 +41,10 @@ export default {
     max: {
       type: Number,
       default: 100,
+    },
+    step: {
+      type: Number,
+      default: 1,
     },
     width: {
       type: Number,
@@ -77,7 +82,7 @@ export default {
     this.maxWidth = (this.max / 100) * this.width;
   },
   components: {
-    YuTooltip,
+    YuToolTip,
   },
 };
 </script>

@@ -34,34 +34,35 @@
 </template>
 
 <script>
-  import 'whatwg-fetch';
-  import YuButton from '../components/button';
-  import YuSteps from '../components/steps';
-  import YuStep from '../components/step';
-  export default {
-    name: 'ViewContainer',
-    data() {
-      return {
-        active1: 0,
-        active2: 0,
-      }
+import 'whatwg-fetch';
+import YuButton from '../components/button';
+import YuSteps from '../components/steps';
+import YuStep from '../components/step';
+
+export default {
+  name: 'ViewContainer',
+  data() {
+    return {
+      active1: 0,
+      active2: 0,
+    }
+  },
+  methods: {
+    next() {
+      this.active1 += 1;
+      if (this.active1 >= 5) this.active1 = 0;
     },
-    methods: {
-      next() {
-        this.active1 += 1;
-        if (this.active1 >= 5) this.active1 = 0;
-      },
-      base() {
-        this.active2 += 1;
-        if (this.active2 >= 3) this.active2 = 0;
-      },
+    base() {
+      this.active2 += 1;
+      if (this.active2 >= 3) this.active2 = 0;
     },
-    components: {
-      YuButton,
-      YuSteps,
-      YuStep,
-    },
-  };
+  },
+  components: {
+    YuButton,
+    YuSteps,
+    YuStep,
+  },
+};
 </script>
 
 <style lang="scss" type="text/scss">
