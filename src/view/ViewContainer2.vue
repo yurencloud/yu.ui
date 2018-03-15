@@ -2,7 +2,7 @@
   <div id="container" style="margin: 30px">
     <h2>YU.UI</h2>
 
-    <div class="title">按钮</div>
+    <div class="title">按钮2</div>
 
     <div class="sub-title">基础用法</div>
     <yu-button>默认按钮</yu-button>

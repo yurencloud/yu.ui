@@ -1,8 +1,8 @@
 <template>
-  <div class="yu-switch" @click="handleClick">
-     <input type="checkbox" :name="name" v-model="checked" :value="value">
+  <div class="yu-switch" @click="handleClick" :class="[{disabled:disabled}]">
+     <input type="checkbox" :disabled="disabled" :name="name" v-model="checked" :value="value">
      <span v-if="!after">{{checked?activeLabel||label:inactiveLabel||label}}</span>
-     <span class="switch" v-if="visible" :class="[{on:checked},type]">
+     <span class="switch" v-if="visible" :class="[{on:checked},type,{disabled:disabled}]">
       <span class="circle"></span>
     </span>
     <span v-if="after">{{checked?activeLabel||label:inactiveLabel||label}}</span>
@@ -42,9 +42,11 @@ export default {
     },
     after: Boolean,
     name: String,
+    disabled: Boolean,
   },
   methods: {
     handleClick() {
+      if (this.disabled) return;
       this.checked = !this.checked;
       this.$emit('click', this.value)
     },
@@ -58,6 +60,7 @@ export default {
 
   .yu-switch {
     font-size: 0;
+    color:$text;
     input{
       display: none;
     }
@@ -102,6 +105,9 @@ export default {
         }
         @include generalAllColorSwitch();
       }
+    }
+    &.disabled{
+      color:lighten($text,25);
     }
   }
 </style>
