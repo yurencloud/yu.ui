@@ -573,7 +573,7 @@
      </div>
    </div>
     <div style="width: 200px;height: 400px"></div>
-    <div class="sub-title">面包屑-------/</div>
+    <div class="sub-title">面包屑-------   /</div>
     <yu-breadcrumb separator="/">
       <yu-breadcrumb-item :to="{ path: '/' }">首页</yu-breadcrumb-item>
       <yu-breadcrumb-item :to="{ path: '/test' }">活动管理</yu-breadcrumb-item>
@@ -581,7 +581,7 @@
       <yu-breadcrumb-item :to="{ path: '/test' }">项目任务</yu-breadcrumb-item>
       <yu-breadcrumb-item :to="{ path: '/test' }">任务详情</yu-breadcrumb-item>
     </yu-breadcrumb>
-    <div class="sub-title">面包屑-------></div>
+    <div class="sub-title">面包屑-------   ></div>
     <yu-breadcrumb separator="icon-angle-right">
       <yu-breadcrumb-item :to="{ path: '/' }">首页</yu-breadcrumb-item>
       <yu-breadcrumb-item :to="{ path: '/test' }">管理页面</yu-breadcrumb-item>
@@ -589,6 +589,10 @@
       <yu-breadcrumb-item :to="{ path: '/test' }">资讯页面</yu-breadcrumb-item>
       <yu-breadcrumb-item :to="{ path: '/test' }">资讯详情</yu-breadcrumb-item>
     </yu-breadcrumb>
+    <div class="sub-title">步骤条---基本用法</div>
+   <yu-steps>
+     <yu-step></yu-step>
+   </yu-steps>
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -621,6 +625,8 @@ import YuDropdownMenu from '../components/dropdown-menu';
 import YuDropdownItem from '../components/dropdown-item';
 import YuBreadcrumb from '../components/breadcrumb';
 import YuBreadcrumbItem from '../components/breadcrumb-item';
+import YuSteps from '../components/steps';
+import YuStep from '../components/step';
 
 
 export default {
@@ -697,6 +703,8 @@ export default {
     YuDropdownItem,
     YuBreadcrumb,
     YuBreadcrumbItem,
+    YuSteps,
+    YuStep,
   },
 };
 </script>
