@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import YuCheckbox from './checkbox';
+import YuCheckbox from './checkbox'
 
 export default {
   name: 'YuCheckboxs',

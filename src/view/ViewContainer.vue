@@ -226,15 +226,195 @@
       <yu-option label="猫" value="1"/>
       <yu-option label="狗" value="2"/>
       <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
-      <yu-option label="狗" value="2"/>
+
     </yu-select>
+
+    <div class="title">计数器</div>
+    <yu-counter/>
+    <yu-counter disabled/>
+    <yu-counter :step=5 />
+
+    <!--dialog   start-->
+    <yu-dialog tag='点击我查看弹出框'
+               title="提示222"
+               content="这是一条测试提示信息"
+               type="form"
+               inner-content="这是一条测试信息"
+               :iscontent='false'>
+      <yu-input placeholder="请输入用户名">
+        <template slot="prepend">https://</template>
+      </yu-input>
+      <yu-select text="动物" overflow>
+        <yu-option label="猫" value="1"/>
+        <yu-option label="狗" value="2"/>
+      </yu-select>
+    </yu-dialog>
+    <!--dialog   end-->
+    <div style="margin-bottom: 20px"></div>
+    <!--tootip  start-->
+    <yu-tool-tip content="这是提示信息" btn="top"
+                position="top">
+    </yu-tool-tip>
+    <yu-tool-tip content="这是提示信息" btn="bottom"
+                position="bottom">
+    </yu-tool-tip>
+    <yu-tool-tip content="这是提示信息" btn="left"
+                position="left">
+    </yu-tool-tip>
+    <yu-tool-tip content="这是提示信息" btn="right"
+                position="right">
+    </yu-tool-tip>
+    <!--tooltip end-->
+    <!--card  start-->
+    <yu-card width="400px" :height="250" title="哈哈哈哈哈哈" operation="添加">
+      <div v-for="o in 3" :key="o" class="text item">
+        {{'列表内容 ' + o }}
+      </div>
+    </yu-card>
+
+    <div style="width: 10px;height: 20px"></div>
+    <yu-card width="250px" :bottom="true" left-message="message" right-message="Love" bottom-title="中国画">
+      <img class="image" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=38091454,993565664&fm=200&gp=0.jpg" alt="">
+    </yu-card>
+    <!--card   end-->
+    <div style="width: 10px;height: 20px"></div>
+    <!--carousel   start-->
+    <!--<yu-carousel :width="1000" :height="500" :autoplay="true">-->
+
+       <!--<div id="main">-->
+         <!--<img src="../static/img/1.jpg" />-->
+         <!--<img src="../static/img/2.jpg" />-->
+         <!--<img src="../static/img/3.jpg" />-->
+         <!--<img src="../static/img/4.jpg" />-->
+         <!--<img src="../static/img/5.jpg" />-->
+         <!--<img src="../static/img/6.jpg" />-->
+         <!--<img src="../static/img/7.jpg" />-->
+         <!--<img src="../static/img/8.jpg" />-->
+         <!--<img src="../static/img/9.jpg" />-->
+       <!--</div>-->
+
+      <!--<div class="navigation">-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+        <!--<span></span>-->
+      <!--</div>-->
+    <!--</yu-carousel>-->
+    <!--carousel   end-->
+    <div style="width: 10px;height: 20px"></div>
+    <div class="sub-title">collapse-item</div>
+    <yu-collapse-item index="1" title="蜀山行" name="1">
+      <div>人生几何春已夏</div>
+      <div>空山新雨后,天气晚来秋</div>
+      <div>欲把西湖比西子,淡妆浓抹总相宜</div>
+    </yu-collapse-item>
+    <yu-collapse-item title="蜀山行" name="1" :accordion="false">
+      <div>劝君更尽一杯酒,西出阳关无故人</div>
+      <div>空山新雨后,天气晚来秋</div>
+      <div>欲把西湖比西子,淡妆浓抹总相宜</div>
+    </yu-collapse-item >
+    <div style="width: 10px;height: 20px"></div>
+    <!--yu-collaapse  -->
+    <div style="width: 10px;height: 20px"></div>
+    <div class="sub-title">collapse</div>
+    <yu-collapse width="500px">
+      <yu-collapse-item title="蜀山行" name="1">
+        <div>人生几何春已夏</div>
+        <div>空山新雨后,天气晚来秋</div>
+        <div>欲把西湖比西子,淡妆浓抹总相宜</div>
+        <div>不见高堂明镜悲白发，朝如青丝暮成雪</div>
+      </yu-collapse-item>
+      <yu-collapse-item title="蜀山行" name="2">
+        <div>劝君更尽一杯酒,西出阳关无故人</div>
+      </yu-collapse-item>
+    </yu-collapse>
+    <div class="sub-title">collapse</div>
+    <yu-collapse width="50%">
+      <yu-collapse-item title="蜀山行" name="1">
+        <div>人生几何春已夏</div>
+        <div>空山新雨后,天气晚来秋</div>
+        <div>欲把西湖比西子,淡妆浓抹总相宜</div>
+        <div>不见高堂明镜悲白发，朝如青丝暮成雪</div>
+      </yu-collapse-item>
+      <yu-collapse-item title="蜀山行" name="2">
+        <div>劝君更尽一杯酒,西出阳关无故人</div>
+      </yu-collapse-item>
+    </yu-collapse>
+    <!--NavMenu    start-->
+    <div class="sub-title">NavMenu</div>
+    <yu-nav-menu :horizontal="true" :default-active="activeIndex" text-color="white" active-color="yellow" background-color="#666" :width="600">
+      <yu-menu-item index="1">管理中心</yu-menu-item>
+      <yu-menu-item index="2" :icon="true">
+        我的控制台
+        <yu-nav-menu index="2-1" background-color="#666">
+          <yu-menu-item index="2-1-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-2-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-3-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-4-1">
+            项目一
+          </yu-menu-item>
+        </yu-nav-menu>
+      </yu-menu-item>
+      <yu-menu-item index="3">消息中心</yu-menu-item>
+      <yu-menu-item index="4">订单管理</yu-menu-item>
+    </yu-nav-menu>
+    <div style="margin-bottom: 400px"></div>
+    <div class="sub-title">NavMenu2222</div>
+    <yu-nav-menu :horizontal="true" :default-active="activeIndex" :width="600">
+      <yu-menu-item index="1">管理中心</yu-menu-item>
+      <yu-menu-item index="2" :icon="true">
+        我的控制台
+        <yu-nav-menu index="2-1">
+          <yu-menu-item index="2-1-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-2-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-3-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-4-1">
+            项目一
+          </yu-menu-item>
+        </yu-nav-menu>
+      </yu-menu-item>
+      <yu-menu-item index="3">消息中心</yu-menu-item>
+      <yu-menu-item index="4">订单管理</yu-menu-item>
+    </yu-nav-menu>
+    <div class="sub-title">垂直分布</div>
+    <yu-nav-menu :vertical="true" :default-active="activeIndex" :width="200" text-color="#fff" active-color="yellow" background-color="#666">
+      <yu-menu-item index="1"><i class="iconfont icon-location"></i><span style=" margin-left: 10px">导航一</span></yu-menu-item>
+      <yu-menu-item index="2" :icon="true">
+        <i class="iconfont icon-application"></i>
+        <span style=" margin-left: 10px">导航二</span>
+        <yu-nav-menu index="2-1" background-color="#666" text-color="#fff">
+          <yu-menu-item index="2-1-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-2-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-3-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-4-1">
+            项目一
+          </yu-menu-item>
+        </yu-nav-menu>
+      </yu-menu-item>
+      <yu-menu-item index="3"><i class="iconfont icon-file-check"></i><span style=" margin-left: 10px">导航三</span></yu-menu-item>
+      <yu-menu-item index="4"><i class="iconfont icon-cog2-o"></i><span style=" margin-left: 10px">导航四</span></yu-menu-item>
+    </yu-nav-menu>
+    <div class="sub-title">垂直分布22222</div>
+    <yu-nav-menu :vertical="true" :default-active="activeIndex" :width="200">
+      <yu-menu-item index="1"><i class="iconfont icon-location"></i><span style=" margin-left: 10px">导航一</span></yu-menu-item>
+      <yu-menu-item index="2" :icon="true">
+        <i class="iconfont icon-application"></i>
+        <span style=" margin-left: 10px">导航二</span>
+        <yu-nav-menu index="2-1" >
+          <yu-menu-item index="2-1-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-2-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-3-1">项目一</yu-menu-item>
+          <yu-menu-item index="2-4-1">
+            项目一
+          </yu-menu-item>
+        </yu-nav-menu>
+      </yu-menu-item>
+      <yu-menu-item index="3"><i class="iconfont icon-file-check"></i><span style=" margin-left: 10px">导航三</span></yu-menu-item>
+      <yu-menu-item index="4"><i class="iconfont icon-cog2-o"></i><span style=" margin-left: 10px">导航四</span></yu-menu-item>
+    </yu-nav-menu>
+    <!--NavMenu  end-->
+
 
     <div class="sub-title">有禁用选项</div>
     <yu-select text="请选择动物" overflow>
@@ -351,13 +531,136 @@
     <!--<yu-loading align="left" >加载中...</yu-loading>-->
     <!--<yu-loading align="center" >加载中...</yu-loading>-->
     <!--<yu-loading align="right" >加载中...</yu-loading>-->
+
+   <div class="dropdown-list">
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---click触发</div>
+       <yu-drop-down trigger="click">
+      <span slot="title">
+        下拉菜单  <i class="iconfont icon-angle-up"></i>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item>黄金糕</yu-dropdown-item>
+           <yu-dropdown-item>牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item>宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item>狮子头</yu-dropdown-item>
+           <yu-dropdown-item>蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---hover触发</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+        下拉菜单  <i class="iconfont icon-angle-up"></i>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item @click="abc">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item>牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item>宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item>狮子头</yu-dropdown-item>
+           <yu-dropdown-item>蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---指令事件</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+        下拉菜单  <i class="iconfont icon-angle-up"></i>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
+           <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---button</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+        <yu-button type="primary">
+          下拉列表<i class="iconfont icon-angle-up"></i>
+        </yu-button>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
+           <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---双按钮</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+         <yu-buttons >
+      <yu-button type="primary" size="small" disabled="">下拉列表</yu-button>
+      <yu-button size="small">点击</yu-button>
+    </yu-buttons>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
+           <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+     <div  class="list-content">
+       <div class="sub-title">下拉列表---小尺寸</div>
+       <yu-drop-down trigger="hover">
+      <span slot="title">
+        <yu-button type="primary" size="small">
+          下拉列表<i class="iconfont icon-angle-up"></i>
+        </yu-button>
+      </span>
+         <yu-dropdown-menu slot="menu">
+           <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
+           <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
+           <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
+           <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
+           <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
+           <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
+         </yu-dropdown-menu>
+       </yu-drop-down>
+     </div>
+   </div>
+    <div style="width: 200px;height: 400px"></div>
+    <div class="sub-title">面包屑-------/</div>
+    <yu-breadcrumb separator="/">
+      <yu-breadcrumb-item :to="{ path: '/' }">首页</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">活动管理</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">活动项目</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">项目任务</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">任务详情</yu-breadcrumb-item>
+    </yu-breadcrumb>
+    <div class="sub-title">面包屑-------></div>
+    <yu-breadcrumb separator="icon-angle-right">
+      <yu-breadcrumb-item :to="{ path: '/' }">首页</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">管理页面</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">详情页面</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">资讯页面</yu-breadcrumb-item>
+      <yu-breadcrumb-item :to="{ path: '/test' }">资讯详情</yu-breadcrumb-item>
+    </yu-breadcrumb>
+
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
 
 <script>
 import 'whatwg-fetch';
-
 import YuButton from '../components/button';
 import YuButtons from '../components/buttons';
 import YuInput from '../components/input';
@@ -367,12 +670,25 @@ import YuRadios from '../components/radios';
 import YuSelect from '../components/select';
 import YuCounter from '../components/counter';
 import YuCheckbox from '../components/checkbox';
+import YuDialog from '../components/dialog';
+import YuToolTip from '../components/tooltip';
+import YuCard from '../components/card';
+import YuCarousel from '../components/carousel';
+import YuCollapseItem from '../components/collapse-item';
+import YuCollapse from '../components/collapse';
+import YuMenuItem from '../components/menu-item';
+import YuNavMenu from '../components/navmenu';
 import YuCheckboxs from '../components/checkboxs';
 import YuLoading from '../components/loading';
 import YuCounterSide from '../components/counter-side';
 import YuSelected from '../components/selected';
 import YuCascader from '../components/cascader';
 import YuSwitch from '../components/switch';
+import YuDropDown from '../components/dropdown';
+import YuDropdownMenu from '../components/dropdown-menu';
+import YuDropdownItem from '../components/dropdown-item';
+import YuBreadcrumb from '../components/breadcrumb';
+import YuBreadcrumbItem from '../components/breadcrumb-item';
 
 
 export default {
@@ -384,6 +700,7 @@ export default {
         first: { value: 'zhinan', label: '指南', children: [{ value: 'shejiyuanze', label: '设计原则', children: [{ value: 'yizhi', label: '一致' }, { value: 'fankui', label: '反馈' }, { value: 'xiaolv', label: '效率' }, { value: 'kekong', label: '可控' }] }, { value: 'daohang', label: '导航', children: [{ value: 'cexiangdaohang', label: '侧向导航' }, { value: 'dingbudaohang', label: '顶部导航' }] }] },
         second: { value: 'daohang', label: '导航', children: [{ value: 'cexiangdaohang', label: '侧向导航' }, { value: 'dingbudaohang', label: '顶部导航' }] },
         third: { value: 'dingbudaohang', label: '顶部导航' } },
+      activeIndex: '1',
       options: [],
       locals: [
         { value: 1, label: '电视' },
@@ -610,7 +927,7 @@ export default {
             const temp = [];
             data.forEach((item) => {
               temp.push({ value: item.id, label: item.value })
-            })
+            });
             the.options = temp;
           });
         }, (error) => {
@@ -665,8 +982,13 @@ export default {
           })
       }
     },
+    abc(command) {
+      console.log(command);
+    },
   },
   components: {
+    YuToolTip,
+    YuDialog,
     YuButton,
     YuButtons,
     YuInput,
@@ -676,12 +998,23 @@ export default {
     YuSelect,
     YuCounter,
     YuCheckbox,
+    YuCard,
+    YuCarousel,
+    YuCollapseItem,
+    YuCollapse,
+    YuMenuItem,
+    YuNavMenu,
     YuCheckboxs,
     YuLoading,
     YuCounterSide,
     YuSelected,
     YuCascader,
     YuSwitch,
+    YuDropDown,
+    YuDropdownMenu,
+    YuDropdownItem,
+    YuBreadcrumb,
+    YuBreadcrumbItem,
   },
   mounted() {
     const the = this;
@@ -706,18 +1039,25 @@ export default {
 </script>
 
 <style lang="scss" type="text/scss">
-  @import "../assets/css/varible";
-  .title{
-    color:$text;
-    border-bottom: 1px solid $border;
-    padding: 14px 0;
-    margin: 20px 0;
-  }
-  .sub-title{
-    color:$text;
-    padding: 0 8px;
-    margin: 20px 0;
-    border-left: 4px solid $primary;
+@import "../assets/css/varible";
+.title {
+  color: $text;
+  padding: 14px 0;
+  margin: 20px 0;
+  border-bottom: 1px solid $border;
+}
+.sub-title {
+  color: $text;
+  padding: 0 8px;
+  margin: 20px 0;
+  border-left: 4px solid $primary;
+}
+  .dropdown-list{
+    .list-content{
+      display: inline-block;
+      float: left;
+      margin-right: 50px;
+    }
   }
   .my-description{
     float: right;
