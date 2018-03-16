@@ -13,7 +13,8 @@
   "dependencies": {
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "yu.event": "^1.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
