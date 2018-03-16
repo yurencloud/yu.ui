@@ -25,7 +25,7 @@
       <yu-step title="步骤三"/>
     </yu-steps>
     <!--<div class="sub-title">步骤条-&#45;&#45;有图标</div>-->
-    <yu-steps :active="1" is-column="column">
+    <yu-steps :active="1" simple>
       <yu-step icon="icon-edit" title="编辑"/>
       <yu-step icon="icon-upload" title="上传"/>
       <yu-step icon="icon-check-" title="完成" status="success"/>
@@ -98,7 +98,12 @@
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" placement="bottom-right">
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈"  :show-arrow="true" placement="bottom-right">
+        <yu-button type="warming" >da下边</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" effect="light" placement="bottom-right">
         <yu-button type="warming" >da下边</yu-button>
       </yu-tool-tip>
     </div>
