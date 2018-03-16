@@ -39,6 +39,7 @@ export default {
       conduct: false,
     }
   },
+  inject: ['rootSteps'],
   props: {
     title: String,
     description: String,
@@ -48,6 +49,9 @@ export default {
   mounted() {
     this.lastLine = this.$el.nextElementSibling;
     this.conduct = !this.$el.previousElementSibling;
+    if (this.rootSteps.simple) {
+      this.lastLine = false;
+    }
   },
 }
 </script>

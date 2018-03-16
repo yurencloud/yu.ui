@@ -1,6 +1,7 @@
 <template>
   <div class="yu-steps"
-       :class="{column:isColumn}">
+       :class="[{simple: simple}]"
+       :style="{width:width,height:height}">
     <slot/>
   </div>
 </template>
@@ -10,7 +11,15 @@ export default {
   name: 'YuSteps',
   props: {
     active: Number,
-    isColumn: String,
+    type: String,
+    width: String,
+    height: String,
+    simple: Boolean,
+  },
+  provide() {
+    return {
+      rootSteps: this,
+    }
   },
   methods: {
   },
@@ -55,6 +64,14 @@ export default {
     justify-content: space-between;
     margin-bottom: 20px;
   }
-  .yu-steps.column{
+  /*TODO-----简洁风格*/
+.yu-steps.simple{
+  .yu-step{
+    background-color: pink;
+    display: inline-block;
+   .head{
+     margin-bottom: 5px;
+   }
   }
+}
 </style>

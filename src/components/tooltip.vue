@@ -1,11 +1,16 @@
 <template>
 <div class="yu-tooltip" :class="[placement]">
     <!--提示框-->
-    <div class="tooltip" v-show="isShow">{{content}}</div>
+    <div class="tooltip"
+         v-show="isShow"
+         :class="[effect,]">{{content}}</div>
   <!--文字-->
     <div class="text" @mouseover="over"
                       @mouseout="over">
-      <i class="iconfont" :class="[{'icon-caret-down':top,}]" v-show="isShow"></i>
+      <i class="iconfont"
+         v-if="showArrow"
+         :class="[{'icon-caret-down':top,'icon-angle-down':isLight}]"
+         v-show="isShow"></i>
       <slot/>
     </div>
 </div>
@@ -21,11 +26,17 @@ export default {
       display: false,
       top: true,
       isShow: false,
+      isLight: false,
     };
   },
   props: {
     content: String,
     placement: String,
+    showArrow: false,
+    effect: {
+      type: String,
+      default: 'dark',
+    },
   },
   components: {
     YuButton,
@@ -36,7 +47,10 @@ export default {
     },
   },
   beforeMount() {
-    console.log(this.placement);
+    if (this.effect === 'light') {
+      this.isLight = true;
+      this.top = false;
+    }
   },
 }
 </script>
@@ -60,6 +74,11 @@ export default {
      position: absolute;
      white-space:nowrap;
    }
+    .light{
+      color: #000;
+      background-color: white;
+      border: 1px solid #000;
+    }
     .text{
       margin-top: 10px;
       position: relative;
@@ -70,6 +89,9 @@ export default {
         font-size: $huge;
         transform: translateX(-50%);
         top: -18px;
+      }
+      .icon-angle-down{
+        background-color: #fff;
       }
     }
   }
