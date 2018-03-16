@@ -359,6 +359,13 @@
     <div class="sub-title">普通用法</div>
     <yu-time-picker/>
 
+    <div class="sub-title">设置时间段和步长</div>
+    <yu-time-picker :optionParam="time"/>
+
+    <div class="title">滚动列表选择</div>
+    <div class="sub-title">普通用法</div>
+    <yu-scroll-select/>
+
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
     <!--<yu-loading />-->
@@ -412,12 +419,18 @@ import YuBreadcrumb from '../components/breadcrumb';
 import YuBreadcrumbItem from '../components/breadcrumb-item';
 import YuSlider from '../components/slider';
 import YuTimePicker from '../components/time-picker';
+import YuScrollSelect from '../components/scroll-select';
 
 
 export default {
   name: 'ViewContainer',
   data() {
     return {
+      time: {
+        start: '09:00',
+        step: '00:15',
+        end: '18:00',
+      },
       fetchCascader: [],
       defaultValue: {
         first: {
@@ -756,6 +769,7 @@ export default {
     YuBreadcrumbItem,
     YuSlider,
     YuTimePicker,
+    YuScrollSelect,
   },
   mounted() {
     const the = this;

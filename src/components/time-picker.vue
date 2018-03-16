@@ -1,23 +1,38 @@
 <template>
   <div class="yu-time-picker">
-    <yu-input prefix="icon-clock" :options="options" overflow clearable/>
+    <yu-input v-if="type==='simple'" prefix="icon-clock" :options="options" overflow clearable/>
+    <yu-cascader v-if="type==='full'" :cascader="cascader" changeOnSelect />
   </div>
 </template>
 
 <script>
 import YuInput from './input';
+import YuCascader from './cascader';
 
 export default {
   name: 'YuTimePicker',
   props: {
     disabled: Boolean,
-    param: {
+    type: {
+      type: String,
+      default: 'simple',
+    },
+    optionParam: {
       type: Object,
       default() {
         return {
           start: '00:00',
           step: '00:30',
           end: '24:00',
+        }
+      },
+    },
+    selectParam: {
+      type: Object,
+      default() {
+        return {
+          start: '00:00:00',
+          end: '24:00:00',
         }
       },
     },
@@ -29,19 +44,15 @@ export default {
     },
   },
   created() {
-    console.log(this.getMinute(this.param.end));
-    console.log(this.getMinute(this.param.step));
-    console.log(this.getMinute(this.param.start));
   },
   computed: {
     options() {
       // 全部以分钟计算
-      const startMinute = this.getMinute(this.param.start)
-      const stepMinute = this.getMinute(this.param.step)
-      const endMinute = this.getMinute(this.param.end)
+      const startMinute = this.getMinute(this.optionParam.start)
+      const stepMinute = this.getMinute(this.optionParam.step)
+      const endMinute = this.getMinute(this.optionParam.end)
       const options = [];
       let i = startMinute;
-      console.log(endMinute);
       while (i < endMinute) {
         let hours = Math.floor(i / 60);
         hours < 10 ? hours = `0${hours}` : hours = hours.toString();
@@ -53,9 +64,13 @@ export default {
       }
       return options;
     },
+    cascader() {
+
+    }
   },
   components: {
     YuInput,
+    YuCascader,
   },
 };
 </script>
