@@ -17,7 +17,7 @@
       <yu-step title="步骤五" description="这是步骤条中的第三步,哈哈哈哈"/>
     </yu-steps>
     <yu-button @click="next">下一步</yu-button>
-<div style="height: 20px;width: 100%"></div>
+    <div style="height: 20px;width: 100%"></div>
     <div class="sub-title">步骤条---无描述,带有状态</div>
     <yu-steps :active="1">
       <yu-step title="完成"/>

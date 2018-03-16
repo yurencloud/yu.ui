@@ -10,8 +10,7 @@ import YuButton from '../components/button';
 
 export default {
   name: 'ViewContainer',
-  methods: {
-  },
+  methods: {},
   components: {
     YuButton,
   },
@@ -20,20 +19,23 @@ export default {
 
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";
+
   .title {
     color: $text;
     padding: 14px 0;
     margin: 20px 0;
     border-bottom: 1px solid $border;
   }
+
   .sub-title {
     color: $text;
     padding: 0 8px;
     margin: 20px 0;
     border-left: 4px solid $primary;
   }
-  .dropdown-list{
-    .list-content{
+
+  .dropdown-list {
+    .list-content {
       display: inline-block;
       float: left;
       margin-right: 50px;
