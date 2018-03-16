@@ -30,6 +30,79 @@
       <yu-step icon="icon-upload" title="上传"/>
       <yu-step icon="icon-check-" title="完成" status="success"/>
     </yu-steps>
+    <div class="sub-title" style="margin-top: 50px">文字提示框---按钮大小变化</div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="TOP 这是位于顶部的" placement="top">
+       <yu-button size="small" type="primary">上边</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="TOP 这是位于顶部的" placement="top">
+        <yu-button size="mini" type="success">上边</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="TOP 这是位于顶部的" placement="top">
+        <yu-button type="warming">上边</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="sub-title" style="margin-top: 100px">文字提示框---方位变化</div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="TOP 这是位于顶部的" placement="top-left">
+        <yu-button type="warming">上左</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="TOP 这是位于顶部的" placement="top-right">
+        <yu-button type="warming">上右</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="35" placement="top">
+        <span style="width: 20px;height:20px;display: inline-block;background-color:pink;box-sizing: border-box;border-radius: 50%"></span>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="哈哈哈哈哈哈" placement="left">
+        <yu-button type="warming">左侧</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="哈哈哈哈哈哈" placement="left">
+        <yu-button type="warming" size="mini">左侧</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="哈哈哈哈哈哈" placement="right">
+        <yu-button type="warming">右侧</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="哈哈哈哈哈哈" placement="right">
+        <yu-button type="warming" size="small">右侧</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="哈哈哈哈哈哈" placement="bottom">
+        <yu-button type="warming" size="small">下边</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="哈哈哈哈哈哈" placement="bottom">
+        <yu-button type="warming" >da下边</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" placement="bottom-left">
+        <yu-button type="warming" >da下边</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div class="box" style="margin-left: 100px">
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" placement="bottom-right">
+        <yu-button type="warming" >da下边</yu-button>
+      </yu-tool-tip>
+    </div>
+    <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
 
@@ -38,6 +111,7 @@ import 'whatwg-fetch';
 import YuButton from '../components/button';
 import YuSteps from '../components/steps';
 import YuStep from '../components/step';
+import YuToolTip from '../components/tooltip';
 
 export default {
   name: 'ViewContainer',
@@ -61,6 +135,7 @@ export default {
     YuButton,
     YuSteps,
     YuStep,
+    YuToolTip,
   },
 };
 </script>
@@ -85,5 +160,8 @@ export default {
       float: left;
       margin-right: 50px;
     }
+  }
+  .box{
+    float: left;
   }
 </style>

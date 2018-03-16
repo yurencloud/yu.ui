@@ -30,7 +30,7 @@ export default {
       color = color.replace('#', '');
       if (/^[0-9a-fA-F]{3}$/.test(color)) {
         color = color.split('');
-        for (let i = 2; i >= 0; i--) {
+        for (let i = 2; i >= 0; i -= 1) {
           color.splice(i, 0, color[i]);
         }
         color = color.join('');
@@ -41,13 +41,12 @@ export default {
           green: parseInt(color.slice(2, 4), 16),
           blue: parseInt(color.slice(4, 6), 16),
         };
-      } else {
-        return {
-          red: 255,
-          green: 255,
-          blue: 255,
-        };
       }
+      return {
+        red: 255,
+        green: 255,
+        blue: 255,
+      };
     },
     mixColor(color, percent) {
       let { red, green, blue } = this.getColorChannels(color);
