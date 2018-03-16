@@ -270,7 +270,7 @@ export default {
         color: $light-text;
         position: absolute;
         left: -25px;
-        top: 4px;
+        line-height: 40px;
       }
     }
 

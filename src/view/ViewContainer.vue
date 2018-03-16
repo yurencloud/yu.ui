@@ -332,6 +332,33 @@
     <div class="sub-title">普通用法</div>
     <yu-slider/>
 
+    <div class="sub-title">定义初始值</div>
+    <yu-slider defaultValue=50 />
+
+    <div class="sub-title">禁用</div>
+    <yu-slider defaultValue=50 disabled/>
+
+    <div class="sub-title">步长</div>
+    <yu-slider defaultValue=50 step=10 />
+
+    <div class="sub-title">步长显示锚点</div>
+    <yu-slider defaultValue=50 step=10 point />
+
+    <div class="sub-title">修改总量(可为任意整数)</div>
+    <yu-slider defaultValue=500  total=1000 />
+
+    <div class="sub-title">修改长度</div>
+    <yu-slider width="800" />
+    <yu-slider width="80" />
+
+    <div class="sub-title">最大值最小值</div>
+    <yu-slider min=50 max=80 default-value="50"/>
+
+
+    <div class="title">时间选择器</div>
+    <div class="sub-title">普通用法</div>
+    <yu-time-picker/>
+
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
     <!--<yu-loading />-->
@@ -384,6 +411,7 @@ import YuDropdownItem from '../components/dropdown-item';
 import YuBreadcrumb from '../components/breadcrumb';
 import YuBreadcrumbItem from '../components/breadcrumb-item';
 import YuSlider from '../components/slider';
+import YuTimePicker from '../components/time-picker';
 
 
 export default {
@@ -727,6 +755,7 @@ export default {
     YuBreadcrumb,
     YuBreadcrumbItem,
     YuSlider,
+    YuTimePicker,
   },
   mounted() {
     const the = this;
