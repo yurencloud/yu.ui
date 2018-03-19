@@ -1,11 +1,14 @@
 <template>
-  <div class="yu-step">
+  <div class="yu-step"
+       :class="[{simple: rootSteps.simple}]">
     <!--icon && line-->
     <div class="head">
       <div class="icon status"
            v-if="!icon"
            :class="[{'success-icon':iconSuccess},{conduct:conduct},status]">
-        <i   class="iconfont icon-angle-right"  :class="{'icon-check':iconSuccess,}"></i>
+        <i   class="iconfont"  :class="{'icon-check':iconSuccess,}"
+             v-if="iconSuccess"></i>
+        <span v-else class="step"></span>
       </div>
       <div class="have-icon"
            :class="[{'have-icon-success':iconSuccess,},{'have-icon-conduct':conduct},`have-${status}`]"
@@ -19,10 +22,12 @@
     </div>
     <!--title   &&  description-->
     <div class="main">
-      <!-- todo 标题的粗细没有改变-->
       <div class="main-title"
            :class="[{'conduct-text':conduct,'success-text':iconSuccess},status]">{{title}}</div>
       <div class="description" v-if="description">{{description}}</div>
+    </div>
+    <div class="arrow" v-if="rootSteps.simple">
+      <i class="iconfont icon-angle-right"></i>
     </div>
   </div>
 </template>
@@ -74,6 +79,9 @@ export default {
         color: $light-text;
         border-radius: 50%;
         border: 2px solid $light-text;
+      }
+      .step{
+        margin-left: 3px;
       }
       .have-icon{
        i{
@@ -162,6 +170,77 @@ export default {
         color: $success;
         font-weight: 600;
       }
+      .success{
+        font-weight: 800;
+        color: $success;
+        i{
+          color: $success;
+        }
+      }
+      .error{
+        color: $danger;
+        i{
+          color: $danger;
+        }
+      }
+      .wait{
+        i{
+          color: $warming;
+        }
+      }
+      .finish{
+        i{
+          color: $primary;
+        }
+      }
+      .have-success{
+        i{
+          color: $success;
+        }
+      }
+      .have-error{
+        i{
+          color: $danger;
+        }
+      }
+      .have-wait{
+        i{
+          color: $warming;
+        }
+      }
+      .have-finish{
+        i{
+          color: $primary;
+        }
+      }
     }
     }
+  /*简洁风格*/
+  .yu-step.simple{
+    background-color: lighten($info, 35);
+    text-align: center;
+    padding: 10px 0;
+    .head{
+      margin-bottom: 5px;
+      display: inline-block;
+      .have-icon{
+        .iconfont{
+          font-size: $huge;
+        }
+      }
+    }
+    .main{
+      display: inline-block;
+    }
+    .arrow{
+      float: right;
+      i{
+        font-size: $huge;
+        color: $light-text;
+      }
+    }
+    &:last-child .arrow{
+      display: none;
+    }
+  }
 </style>
