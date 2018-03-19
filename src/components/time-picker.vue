@@ -40,7 +40,7 @@ export default {
   methods: {
     getMinute(time) {
       const arr = time.split(':');
-      return parseInt(arr[0], 0) * 60 + parseInt(arr[1], 0);
+      return (parseInt(arr[0], 0) * 60) + parseInt(arr[1], 0);
     },
   },
   created() {
