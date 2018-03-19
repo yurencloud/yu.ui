@@ -19,17 +19,24 @@
     <yu-button @click="next">下一步</yu-button>
     <div style="height: 20px;width: 100%"></div>
     <div class="sub-title">步骤条---无描述,带有状态</div>
-    <yu-steps :active="1">
+    <yu-steps :active="2">
       <yu-step title="完成"/>
       <yu-step title="进行中"/>
       <yu-step title="步骤三"/>
     </yu-steps>
-    <!--<div class="sub-title">步骤条-&#45;&#45;有图标</div>-->
-    <yu-steps :active="1" simple>
+    <div class="sub-title">步骤条---关于active</div>
+    <yu-steps :active="2" simple>
       <yu-step icon="icon-edit" title="编辑"/>
       <yu-step icon="icon-upload" title="上传"/>
-      <yu-step icon="icon-check-" title="完成" status="success"/>
+      <yu-step icon="icon-check-" title="完成"/>
     </yu-steps>
+    <div style="width: 500px">
+      <yu-steps simple>
+        <yu-step icon="icon-edit" title="编辑" status="success"/>
+        <yu-step icon="icon-upload" title="上传" status="success"/>
+        <yu-step icon="icon-check-" title="完成" status="error"/>
+      </yu-steps>
+    </div>
     <div class="sub-title" style="margin-top: 50px">文字提示框---按钮大小变化</div>
     <div class="box" style="margin-left: 100px">
       <yu-tool-tip content="TOP 这是位于顶部的" placement="top">

@@ -1,6 +1,5 @@
 <template>
   <div class="yu-steps"
-       :class="[{simple: simple}]"
        :style="{width:width,height:height}">
     <slot/>
   </div>
@@ -41,13 +40,18 @@ export default {
   mounted() {
     if (this.active > 0) {
       this.$children[this.active].conduct = true;
-      //  todo  只循环啦一次????????
-      for (let i = 1; i <= this.active; i += 1) {
-        const num = i - 1;
-        this.$children[num].iconSuccess = true;
-        if (this.active > 1) {
-          this.$children[i - 2].lineSuccess = true;
+      for (let i = 0; i < this.active; i ++) {
+        this.$children[i].iconSuccess = true;
+        if (i >= 1 && this.active > 1) {
+          this.$children[i - 1].lineSuccess = true;
         }
+      }
+    }
+    //  赋值
+    for (let i = 0; i < this.$children.length; i++) {
+      const childre = this.$children[i].$el.children[0].children[0];
+      if (!childre.classList.contains('have-icon')) {
+        this.$children[i].$el.children[0].children[0].children[0].innerText = i + 1
       }
     }
   },
@@ -64,14 +68,4 @@ export default {
     justify-content: space-between;
     margin-bottom: 20px;
   }
-  /*TODO-----简洁风格*/
-.yu-steps.simple{
-  .yu-step{
-    background-color: pink;
-    display: inline-block;
-   .head{
-     margin-bottom: 5px;
-   }
-  }
-}
 </style>
