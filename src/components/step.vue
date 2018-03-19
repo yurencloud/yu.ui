@@ -1,6 +1,6 @@
 <template>
   <div class="yu-step"
-       :class="[{simple: rootSteps.simple}]">
+       :class="[{simple: rootSteps.simple},{center:rootSteps.center}]">
     <!--icon && line-->
     <div class="head">
       <div class="icon status"
@@ -76,6 +76,7 @@ export default {
         width: 30px;
         height: 30px;
         box-sizing: border-box;
+        background-color: #fff;
         color: $light-text;
         border-radius: 50%;
         border: 2px solid $light-text;
@@ -166,6 +167,9 @@ export default {
         color: #000;
         font-weight: 800;
       }
+      .description{
+        padding: 5px 10px;
+      }
       .success-text{
         color: $success;
         font-weight: 600;
@@ -243,4 +247,20 @@ export default {
       display: none;
     }
   }
+  /*居中*/
+  .yu-step.center {
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    .head {
+      margin-bottom: 20px;
+      .line {
+        position: absolute;
+        z-index: -2;
+        left: 40%;
+        right: -50%;
+      }
+    }
+  }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="yu-steps"
-       :style="{width:width,height:height}">
+       :style="{width:width}">
     <slot/>
   </div>
 </template>
@@ -10,10 +10,9 @@ export default {
   name: 'YuSteps',
   props: {
     active: Number,
-    type: String,
     width: String,
-    height: String,
     simple: Boolean,
+    center: Boolean,
   },
   provide() {
     return {
@@ -47,11 +46,10 @@ export default {
         }
       }
     }
-    //  赋值
     for (let i = 0; i < this.$children.length; i++) {
       const childre = this.$children[i].$el.children[0].children[0];
       if (!childre.classList.contains('have-icon')) {
-        this.$children[i].$el.children[0].children[0].children[0].innerText = i + 1
+        childre.children[0].innerText = i + 1
       }
     }
   },

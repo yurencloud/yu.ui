@@ -25,16 +25,35 @@
       <yu-step title="步骤三"/>
     </yu-steps>
     <div class="sub-title">步骤条---关于active</div>
-    <yu-steps :active="2" simple>
+    <yu-steps :active="2" >
       <yu-step icon="icon-edit" title="编辑"/>
       <yu-step icon="icon-upload" title="上传"/>
       <yu-step icon="icon-check-" title="完成"/>
     </yu-steps>
+    <div class="sub-title">步骤条---给定宽</div>
     <div style="width: 500px">
       <yu-steps simple>
         <yu-step icon="icon-edit" title="编辑" status="success"/>
         <yu-step icon="icon-upload" title="上传" status="success"/>
         <yu-step icon="icon-check-" title="完成" status="error"/>
+      </yu-steps>
+    </div>
+    <div class="sub-title">步骤条---居中</div>
+    <div>
+      <yu-steps center>
+          <yu-step title="步骤一" description="这是步骤条中的第一步,哈哈哈哈"/>
+          <yu-step title="步骤二" description="这是步骤条中的第二步,哈哈哈哈"/>
+          <yu-step title="步骤三" description="这是步骤条中的第三步,哈哈哈哈"/>
+          <yu-step title="步骤四" description="这是步骤条中的第三步,哈哈哈哈"/>
+          <yu-step title="步骤五" description="这是步骤条中的第三步,哈哈哈哈"/>
+      </yu-steps>
+    </div>
+    <div class="sub-title">步骤条---固定大小居中</div>
+    <div style="width: 500px;">
+      <yu-steps center>
+        <yu-step title="步骤一" description="这是步骤条中的第一步,哈哈哈哈"/>
+        <yu-step title="步骤二" description="这是步骤条中的第二步,哈哈哈哈"/>
+        <yu-step title="步骤三" description="这是步骤条中的第三步,哈哈哈哈"/>
       </yu-steps>
     </div>
     <div class="sub-title" style="margin-top: 50px">文字提示框---按钮大小变化</div>
@@ -114,6 +133,11 @@
         <yu-button type="warming" >da下边</yu-button>
       </yu-tool-tip>
     </div>
+    <div style="height: 50px;"></div>
+    <div class="sub-title" style="margin-top: 100px">tabs------>tablan效果</div>
+    <yu-tabs>
+
+    </yu-tabs>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
@@ -124,6 +148,7 @@ import YuButton from '../components/button';
 import YuSteps from '../components/steps';
 import YuStep from '../components/step';
 import YuToolTip from '../components/tooltip';
+import YuTabs from '../components/tabs';
 
 export default {
   name: 'ViewContainer',
@@ -148,6 +173,7 @@ export default {
     YuSteps,
     YuStep,
     YuToolTip,
+    YuTabs,
   },
 };
 </script>
