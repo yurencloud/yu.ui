@@ -364,7 +364,7 @@
 
     <div class="title">滚动列表选择</div>
     <div class="sub-title">普通用法</div>
-    <yu-scroll-select/>
+    <yu-scroll-select :options="cascader"/>
 
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
