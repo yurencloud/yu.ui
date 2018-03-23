@@ -1,13 +1,13 @@
 <template>
   <div class="yu-time-picker">
     <yu-input v-if="type==='simple'" prefix="icon-clock" :options="options" overflow clearable/>
-    <yu-cascader v-if="type==='full'" :cascader="cascader" changeOnSelect />
+    <yu-scroll-select v-if="type==='scroll'" :options="options" />
   </div>
 </template>
 
 <script>
 import YuInput from './input';
-import YuCascader from './cascader';
+import YuScrollSelect from './scroll-select';
 
 export default {
   name: 'YuTimePicker',
@@ -70,7 +70,7 @@ export default {
   },
   components: {
     YuInput,
-    YuCascader,
+    YuScrollSelect,
   },
 };
 </script>

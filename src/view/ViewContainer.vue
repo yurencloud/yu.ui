@@ -362,9 +362,12 @@
     <div class="sub-title">设置时间段和步长</div>
     <yu-time-picker :optionParam="time"/>
 
+    <div class="sub-title">滚动时间列表选择</div>
+    <yu-time-picker :optionParam="time"/>
+
     <div class="title">滚动列表选择</div>
     <div class="sub-title">普通用法</div>
-    <yu-scroll-select :options="cascader"/>
+    <yu-scroll-select :options="cascader" placeholder="请选择"/>
 
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
@@ -649,7 +652,9 @@ export default {
       }, {
         value: 'ziyuan',
         label: '资源',
+
         children: [{
+          disabled: true,
           value: 'axure',
           label: 'Axure Components',
         }, {

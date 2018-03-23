@@ -4,14 +4,16 @@
       readonly
       ref='input'
       @click="handleClick"
-      @blur="handleBlur"
       suffix="icon-angle-down"
-      :placeholder="text"
       :disabled="disabled"
+      clearable
+      :prefix="prefix"
+      :placeholder="placeholder"
     />
     <div class="container"
          @mouseover="handleMouseover"
          @mouseleave="handleMouseleave"
+         v-show="visible"
     >
       <div class="scrolls" :class="[{overflow:overflow}]">
         <div class="line"></div>
@@ -20,7 +22,7 @@
             <li
               v-for="(item, index) in options"
               v-bind:key="item.value"
-              :class="{active:index === firstActive}"
+              :class="{active:index === firstActive,disabled:item.disabled}"
               @click="firstClick(index, $event)"
             >{{item.label}}</li>
           </ul>
@@ -30,7 +32,7 @@
             <li
               v-for="(item, index) in secondOptions"
               v-bind:key="item.value"
-              :class="{active:index === secondActive}"
+              :class="{active:index === secondActive,disabled:item.disabled}"
               @click="secondClick(index, $event)"
             >{{item.label}}</li>
           </ul>
@@ -40,14 +42,14 @@
               <li
                 v-for="(item, index) in thirdOptions"
                 v-bind:key="item.value"
-                :class="{active:index === thirdActive}"
+                :class="{active:index === thirdActive,disabled:item.disabled}"
                 @click="thirdClick(index, $event)"
               >{{item.label}}</li>
           </ul>
         </div>
         <div class="button">
-          <span>取消</span>
-          <span class="confirm">确认</span>
+          <span @click="handleCancel">取消</span>
+          <span @click="handleConfirm" class="confirm">确认</span>
         </div>
       </div>
 
@@ -78,10 +80,15 @@ export default {
   },
   props: {
     overflow: Boolean,
-    text: String,
     disabled: Boolean,
     multi: Boolean,
     options: Array,
+    prefix: String,
+    placeholder: String,
+    split: {
+      type: String,
+      default: '/',
+    },
   },
 
   methods: {
@@ -97,13 +104,17 @@ export default {
     },
     firstScroll($event) {
       if (this.fix) return;
-      const the = this;
       this.fix = true;
       setTimeout(() => {
         this.firstActive = parseInt($event.target.scrollTop / 40, 0);
         $event.target.scrollTop = this.firstActive * 40;
-        this.secondOptions = this.options[this.firstActive].children;
-        the.fix = false;
+        const second = this.options[this.firstActive];
+        if (second.disabled) {
+          this.fix = false;
+        } else {
+          this.secondOptions = second.children;
+          this.fix = false;
+        }
       }, 400)
     },
     firstClick(index, $event) {
@@ -112,13 +123,17 @@ export default {
     },
     secondScroll($event) {
       if (this.fix) return;
-      const the = this;
       this.fix = true;
       setTimeout(() => {
         this.secondActive = parseInt($event.target.scrollTop / 40, 0);
         $event.target.scrollTop = this.secondActive * 40;
-        this.thirdOptions = this.options[this.firstActive].children[this.secondActive].children;
-        the.fix = false;
+        const third = this.secondOptions[this.secondActive]
+        if (third.disabled) {
+          this.fix = false;
+        } else {
+          this.thirdOptions = third.children;
+          this.fix = false;
+        }
       }, 400)
     },
     secondClick(index, $event) {
@@ -140,6 +155,7 @@ export default {
       $event.target.parentNode.parentNode.scrollTop = index * 40;
     },
     handleClick() {
+      this.visible = !this.visible;
     },
     handleSelect(option) {
       if (this.multi) {
@@ -151,9 +167,6 @@ export default {
       this.label = option.label;
       this.visible = false;
     },
-    handleBlur() {
-      this.visible = false;
-    },
     cancelSelect(option) {
       this.selects.splice(this.selects.findIndex(item => item.value === option.value), 1)
       this.$children.forEach((item) => {
@@ -162,11 +175,38 @@ export default {
         }
       })
     },
+    handleCancel() {
+      this.visible = false;
+    },
+    handleConfirm() {
+      const first = this.options[this.firstActive]
+      const second = this.secondOptions ? this.secondOptions[this.secondActive] : {};
+      const third = this.thirdOptions ? this.thirdOptions[this.thirdActive] : {};
+      if (first.disabled || second.disabled || third.disabled) {
+        alert('不可以选择无效选项')
+        return;
+      }
+      let value = first.label;
+      if (second.label) {
+        value += (this.split + second.label);
+      }
+      if (third.label) {
+        value += (this.split + third.label);
+      }
+      this.value = value
+      this.visible = false;
+    },
+  },
+  watch: {
+    value(value) {
+      this.$refs.input.changeValue(value);
+    },
   },
   components: {
     YuInput,
     YuSelected,
   },
+
 };
 </script>
 
@@ -232,12 +272,16 @@ export default {
               list-style: none;
               height: $normal-height;
               line-height: $normal-height;
-              &:hover {
+              &:hover:not(.disabled) {
                 background-color: $background;
                 line-height: $normal-height;
               }
-              &.active{
+              &.active:not(.disabled){
                 font-weight: bold;
+              }
+              &.disabled{
+                color: $lighter-text;
+                cursor: not-allowed;
               }
             }
           }
