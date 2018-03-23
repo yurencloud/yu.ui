@@ -133,7 +133,7 @@
         <yu-button type="warming" >da下边</yu-button>
       </yu-tool-tip>
     </div>
-    <div style="height: 50px;"></div>
+    <div style="height: 100px;"></div>
     <div class="sub-title" style="margin-top: 100px">tabs------>tablan效果</div>
     <yu-tabs>
 
@@ -149,6 +149,8 @@ import YuSteps from '../components/steps';
 import YuStep from '../components/step';
 import YuToolTip from '../components/tooltip';
 import YuTabs from '../components/tabs';
+import YuTabsItem from '../components/tabs-item';
+import YuTabsNav from '../components/tabs-nav';
 
 export default {
   name: 'ViewContainer',
@@ -174,6 +176,8 @@ export default {
     YuStep,
     YuToolTip,
     YuTabs,
+    YuTabsNav,
+    YuTabsItem,
   },
 };
 </script>
