@@ -1,7 +1,7 @@
 <template>
   <div class="yu-time-picker">
     <yu-input v-if="type==='simple'" prefix="icon-clock" :options="options" overflow clearable/>
-    <yu-scroll-select v-if="type==='scroll'" :options="options" />
+    <yu-scroll-select v-if="type==='scroll'" :options="cascader" />
   </div>
 </template>
 
@@ -65,7 +65,15 @@ export default {
       return options;
     },
     cascader() {
+      const start = this.selectParam.start.split(':')
+      const end = this.selectParam.end.split(':')
+      start.map(item => parseInt(item, 0))
+      end.map(item => parseInt(item, 0))
+      let cascader = [];
+      // 造小时
+      for(let i = 0;i<24;i++){
 
+      }
     },
   },
   components: {

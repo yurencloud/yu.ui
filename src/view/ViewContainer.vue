@@ -363,7 +363,7 @@
     <yu-time-picker :optionParam="time"/>
 
     <div class="sub-title">滚动时间列表选择</div>
-    <yu-time-picker :optionParam="time"/>
+    <yu-time-picker type="scroll" :optionParam="time"/>
 
     <div class="title">滚动列表选择</div>
     <div class="sub-title">普通用法</div>

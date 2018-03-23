@@ -80,6 +80,7 @@ export default {
   },
   props: {
     overflow: Boolean,
+    remote: Boolean,
     disabled: Boolean,
     multi: Boolean,
     options: Array,
@@ -109,11 +110,16 @@ export default {
         this.firstActive = parseInt($event.target.scrollTop / 40, 0);
         $event.target.scrollTop = this.firstActive * 40;
         const second = this.options[this.firstActive];
+
         if (second.disabled) {
           this.fix = false;
         } else {
-          this.secondOptions = second.children;
           this.fix = false;
+          if (this.remote) {
+            this.$emit('firstFetch', this.options[this.firstActive])
+            return
+          }
+          this.secondOptions = second.children;
         }
       }, 400)
     },
@@ -131,8 +137,12 @@ export default {
         if (third.disabled) {
           this.fix = false;
         } else {
-          this.thirdOptions = third.children;
           this.fix = false;
+          if (this.remote) {
+            this.$emit('secondFetch', this.remoteOptions[this.firstActive])
+            return
+          }
+          this.thirdOptions = third.children;
         }
       }, 400)
     },
