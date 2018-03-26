@@ -135,10 +135,44 @@
     </div>
     <div style="height: 100px;"></div>
     <div class="sub-title" style="margin-top: 100px">tabs------>tablan效果</div>
-    <yu-tabs>
-
+    <!--<yu-tabs @click="hanldClick" type="card">-->
+      <!--<yu-tabs-nav slot="nav">用户管理</yu-tabs-nav>-->
+      <!--<yu-tabs-nav slot="nav">配置管理</yu-tabs-nav>-->
+      <!--<yu-tabs-nav slot="nav">角色管理</yu-tabs-nav>-->
+      <!--<yu-tabs-nav slot="nav">定时任补偿</yu-tabs-nav>-->
+      <!--<yu-tabs-item slot="item">第一个辗转一流年，时光穿梭，悄然从指缝间溜走，岁月如水，轻轻地蒸发，光景却是一样的安之若素。站在岁月的渡口，我将四季的光阴，裁剪成五光十色，编织成最美的花环，待你经过我的身边，送与你，最馨香的美好。-->
+        <!--红尘的冷暖，已渐看透，任性的脚步，亦不再游走。择一隅清幽，修篱，种菊，安度一世春秋。一个人的时候，善待自己，两个人的时候，善待对方。最好的幸福，就是选择自己所爱的，爱自己所选择的。喜欢就该去珍惜，珍惜就不要轻易放弃。</yu-tabs-item>-->
+      <!--<yu-tabs-item slot="item">第二个</yu-tabs-item>-->
+      <!--<yu-tabs-item slot="item">第三个</yu-tabs-item>-->
+      <!--<yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>-->
+    <!--</yu-tabs>-->
+    <div style="height: 100px;"></div>
+    <div class="sub-title" style="margin-top: 100px">tabs------>borderCard效果</div>
+    <!--<yu-tabs @click="hanldClick" type="border-card">-->
+      <!--<yu-tabs-nav slot="nav">用户管理</yu-tabs-nav>-->
+      <!--<yu-tabs-nav slot="nav">配置管理</yu-tabs-nav>-->
+      <!--<yu-tabs-nav slot="nav">角色管理</yu-tabs-nav>-->
+      <!--<yu-tabs-nav slot="nav">定时任补偿</yu-tabs-nav>-->
+      <!--<yu-tabs-item slot="item">第一个辗转一流年，时光穿梭，悄然从指缝间溜走，岁月如水，轻轻地蒸发，光景却是一样的安之若素。站在岁月的渡口，我将四季的光阴，裁剪成五光十色，编织成最美的花环，待你经过我的身边，送与你，最馨香的美好。-->
+        <!--红尘的冷暖，已渐看透，任性的脚步，亦不再游走。择一隅清幽，修篱，种菊，安度一世春秋。一个人的时候，善待自己，两个人的时候，善待对方。最好的幸福，就是选择自己所爱的，爱自己所选择的。喜欢就该去珍惜，珍惜就不要轻易放弃。</yu-tabs-item>-->
+      <!--<yu-tabs-item slot="item">第二个</yu-tabs-item>-->
+      <!--<yu-tabs-item slot="item">第三个</yu-tabs-item>-->
+      <!--<yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>-->
+    <!--</yu-tabs>-->
+    <div class="sub-title" style="margin-top: 100px">tabs------>自定义标签效果</div>
+    <yu-tabs @click="hanldClick" type="border-card" :addable="true" :closeable="true">
+    <yu-tabs-nav slot="nav"><i class="iconfont icon-table"></i>用户管理</yu-tabs-nav>
+    <yu-tabs-nav slot="nav"><i class="iconfont icon-stack-overflow"></i>配置管理</yu-tabs-nav>
+    <yu-tabs-nav slot="nav">角色管理</yu-tabs-nav>
+    <yu-tabs-nav slot="nav">定时任补偿</yu-tabs-nav>
+    <yu-tabs-item slot="item">第一个辗转一流年，时光穿梭，悄然从指缝间溜走，岁月如水，轻轻地蒸发，光景却是一样的安之若素。站在岁月的渡口，我将四季的光阴，裁剪成五光十色，编织成最美的花环，待你经过我的身边，送与你，最馨香的美好。
+    红尘的冷暖，已渐看透，任性的脚步，亦不再游走。择一隅清幽，修篱，种菊，安度一世春秋。一个人的时候，善待自己，两个人的时候，善待对方。最好的幸福，就是选择自己所爱的，爱自己所选择的。喜欢就该去珍惜，珍惜就不要轻易放弃。</yu-tabs-item>
+    <yu-tabs-item slot="item">第二个</yu-tabs-item>
+    <yu-tabs-item slot="item">第三个</yu-tabs-item>
+    <yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>
     </yu-tabs>
     <div style="height: 200px;width: 30px"></div>
+
   </div>
 </template>
 
@@ -168,6 +202,9 @@ export default {
     base() {
       this.active2 += 1;
       if (this.active2 >= 3) this.active2 = 0;
+    },
+    hanldClick() {
+      console.log(777)
     },
   },
   components: {
