@@ -1,7 +1,15 @@
 <template>
   <div class="yu-time-picker">
     <yu-input v-if="type==='simple'" prefix="icon-clock" :options="options" overflow clearable/>
-    <yu-scroll-select v-if="type==='scroll'" :options="cascader" />
+    <yu-scroll-select
+      :split="':'"
+      ref="scroll"
+      v-if="type==='scroll'"
+      remote
+      :options="cascader"
+      @firstFetch="firstFetch"
+      @secondFetch="secondFetch"
+    />
   </div>
 </template>
 
@@ -11,6 +19,11 @@ import YuScrollSelect from './scroll-select';
 
 export default {
   name: 'YuTimePicker',
+  data() {
+    return {
+      sixty: [],
+    }
+  },
   props: {
     disabled: Boolean,
     type: {
@@ -42,8 +55,12 @@ export default {
       const arr = time.split(':');
       return (parseInt(arr[0], 0) * 60) + parseInt(arr[1], 0);
     },
-  },
-  created() {
+    firstFetch() {
+      this.$refs.scroll.secondCascader = this.sixty;
+    },
+    secondFetch() {
+      this.$refs.scroll.thirdCascader = this.sixty;
+    },
   },
   computed: {
     options() {
@@ -65,16 +82,27 @@ export default {
       return options;
     },
     cascader() {
-      const start = this.selectParam.start.split(':')
-      const end = this.selectParam.end.split(':')
-      start.map(item => parseInt(item, 0))
-      end.map(item => parseInt(item, 0))
-      let cascader = [];
+      const cascader = [];
       // 造小时
-      for(let i = 0;i<24;i++){
-
+      for (let i = 0; i < 24; i++) {
+        let time = '';
+        i < 10 ? time = `0${i}` : time = i.toString();
+        cascader.push({ value: time, label: time })
       }
+      cascader[0].children = this.sixty;
+      cascader[0].children[0].children = this.sixty;
+      return cascader;
     },
+  },
+  created() {
+    const sixty = [];
+    // 造分钟和秒
+    for (let i = 0; i < 60; i++) {
+      let time = '';
+      i < 10 ? time = `0${i}` : time = i.toString();
+      sixty.push({ value: time, label: time })
+    }
+    this.sixty = sixty;
   },
   components: {
     YuInput,
@@ -85,6 +113,4 @@ export default {
 
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";
-
-
 </style>

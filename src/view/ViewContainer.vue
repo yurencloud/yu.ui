@@ -363,11 +363,24 @@
     <yu-time-picker :optionParam="time"/>
 
     <div class="sub-title">滚动时间列表选择</div>
-    <yu-time-picker type="scroll" :optionParam="time"/>
+    <yu-time-picker type="scroll" :selectParam="selectParam"/>
 
     <div class="title">滚动列表选择</div>
     <div class="sub-title">普通用法</div>
     <yu-scroll-select :options="cascader" placeholder="请选择"/>
+
+    <div class="sub-title">远程加载</div>
+    <div>同滚动时间列表选择</div>
+
+    <div class="title">日期选择器</div>
+    <div class="sub-title">普通用法</div>
+    <yu-date-picker/>
+
+    <div class="sub-title">获取月份</div>
+    <yu-date-picker type="month"/>
+
+    <div class="sub-title">获取年份</div>
+    <yu-date-picker type="year"/>
 
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
@@ -423,16 +436,22 @@ import YuBreadcrumbItem from '../components/breadcrumb-item';
 import YuSlider from '../components/slider';
 import YuTimePicker from '../components/time-picker';
 import YuScrollSelect from '../components/scroll-select';
+import YuDatePicker from '../components/date-picker';
 
 
 export default {
   name: 'ViewContainer',
   data() {
     return {
+      fetchScroll: [],
       time: {
         start: '09:00',
         step: '00:15',
         end: '18:00',
+      },
+      selectParam: {
+        start: '09:00:00',
+        end: '18:00:00',
       },
       fetchCascader: [],
       defaultValue: {
@@ -775,6 +794,7 @@ export default {
     YuSlider,
     YuTimePicker,
     YuScrollSelect,
+    YuDatePicker,
   },
   mounted() {
     const the = this;
@@ -793,7 +813,7 @@ export default {
         });
       }, (error) => {
         console.log(error.message);
-      })
+      });
   },
 };
 </script>

@@ -59,7 +59,6 @@
 
 <script>
 import YuInput from './input';
-import YuSelected from './selected';
 
 export default {
   name: 'YuSelect',
@@ -116,7 +115,7 @@ export default {
         } else {
           this.fix = false;
           if (this.remote) {
-            this.$emit('firstFetch', this.options[this.firstActive])
+            this.$emit('firstFetch', second)
             return
           }
           this.secondOptions = second.children;
@@ -139,7 +138,7 @@ export default {
         } else {
           this.fix = false;
           if (this.remote) {
-            this.$emit('secondFetch', this.remoteOptions[this.firstActive])
+            this.$emit('secondFetch', third)
             return
           }
           this.thirdOptions = third.children;
@@ -214,7 +213,6 @@ export default {
   },
   components: {
     YuInput,
-    YuSelected,
   },
 
 };
@@ -237,6 +235,7 @@ export default {
       left: 4%
     }
     .container {
+      z-index: 10000;
       position: absolute;
       top: 40px;
       width: 200px;
@@ -246,7 +245,6 @@ export default {
       border: 1px solid $border;
       background-color: #fff;
       .scrolls {
-        z-index: 1000;
         color: $text;
         font-size: 0;
         .scrollList {
