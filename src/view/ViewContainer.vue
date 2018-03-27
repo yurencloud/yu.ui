@@ -382,6 +382,13 @@
     <div class="sub-title">获取年份</div>
     <yu-date-picker type="year"/>
 
+    <div class="title">上传文件</div>
+    <div class="sub-title">普通用法 上传单文件</div>
+    <yu-upload url="/api/upload">点击上传单文件</yu-upload>
+
+    <div class="sub-title">普通用法 上传多文件</div>
+    <yu-upload url="/api/uploads" multiple="multiple">点击上传多文件</yu-upload>
+
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
     <!--<yu-loading />-->
@@ -437,6 +444,7 @@ import YuSlider from '../components/slider';
 import YuTimePicker from '../components/time-picker';
 import YuScrollSelect from '../components/scroll-select';
 import YuDatePicker from '../components/date-picker';
+import YuUpload from '../components/upload';
 
 
 export default {
@@ -795,6 +803,7 @@ export default {
     YuTimePicker,
     YuScrollSelect,
     YuDatePicker,
+    YuUpload,
   },
   mounted() {
     const the = this;

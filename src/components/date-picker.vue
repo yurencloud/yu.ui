@@ -2,13 +2,13 @@
   <div class="yu-date-picker">
     <yu-input  ref="input" :name="name" prefix="icon-calender" overflow clearable @click="handleClick" :placeholder="placeholder"/>
     <!--选择日期-->
-    <div v-if="type==='day'" v-show="visible" class="container">
+    <div v-show="visible && active==='day'" class="container">
       <div class="head">
         <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYear"></i></a>
         <a class="left"><i class="iconfont icon-angle-left"  @click="subtractMonth"></i></a>
         <div>
-          <span>{{year}}年</span>
-          <span>{{month}}月</span>
+          <span @click="activeYear">{{year}}年</span>
+          <span @click="activeMonth">{{month}}月</span>
         </div>
         <a class="right"><i class="iconfont icon-angle-double-right" @click="addYear"></i></a>
         <a class="right"><i class="iconfont icon-angle-right" @click="addMonth"></i></a>
@@ -37,11 +37,11 @@
       </div>
     </div>
     <!--选择月份-->
-    <div v-if="type==='month'" v-show="visible" class="container">
+    <div v-show="visible && active==='month'" class="container">
       <div class="head">
         <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYear"></i></a>
         <div>
-          <span>{{year}}年</span>
+          <span @click="activeYear">{{year}}年</span>
         </div>
         <a class="right"><i class="iconfont icon-angle-double-right" @click="addYear"></i></a>
       </div>
@@ -62,13 +62,13 @@
       </div>
     </div>
     <!--选择年份-->
-    <div v-if="type==='year'" v-show="visible" class="container">
+    <div v-show="visible && active==='year'" class="container">
       <div class="head">
-        <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYears"></i></a>
+        <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYear"></i></a>
         <div>
           <span>{{yearStart}}年~{{yearStart+10}}年</span>
         </div>
-        <a class="right"><i class="iconfont icon-angle-double-right" @click="addYears"></i></a>
+        <a class="right"><i class="iconfont icon-angle-double-right" @click="addYear"></i></a>
       </div>
       <div class="content">
         <table class="date month">
@@ -77,7 +77,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-bind:key="index" v-for="(item,index) in years" @click="selectMonth($event)">
+          <tr v-bind:key="index" v-for="(item,index) in years" @click="selectYear($event)">
             <td v-bind:key="year.value" :data-value="year.value" :class="[year.className]" v-for="year in item">
               <div>{{year.label}}</div>
             </td>
@@ -106,6 +106,7 @@ export default {
       visible: false,
       placeholder: '',
       yearStart: 0,
+      active: this.type,
     }
   },
   props: {
@@ -142,16 +143,6 @@ export default {
     handleClick() {
       this.visible = true;
     },
-    getMinute(time) {
-      const arr = time.split(':');
-      return (parseInt(arr[0], 0) * 60) + parseInt(arr[1], 0);
-    },
-    firstFetch() {
-      this.$refs.scroll.secondCascader = this.sixty;
-    },
-    secondFetch() {
-      this.$refs.scroll.thirdCascader = this.sixty;
-    },
     getDateStr(date) {
       const year = date.getFullYear();
       let month = date.getMonth() + 1; // 月从0开始计数
@@ -162,27 +153,23 @@ export default {
     },
     addMonth() {
       this.month++;
-      this.getByType();
+      this.getByActive();
     },
     addYear() {
-      this.year++;
-      this.getByType();
-    },
-    addYears() {
-      this.year = this.year + 10;
-      this.getByType();
+      let num = 1;
+      if (this.active === 'year') num = 10;
+      this.year = parseInt(this.year, 0) + num;
+      this.getByActive();
     },
     subtractMonth() {
       this.month--;
-      this.getByType();
-    },
-    subtractYears() {
-      this.year = this.year - 10;
-      this.getByType();
+      this.getByActive();
     },
     subtractYear() {
-      this.year--;
-      this.getByType();
+      let num = 1;
+      if (this.active === 'year') num = 10;
+      this.year = parseInt(this.year, 0) - num;
+      this.getByActive();
     },
     getDays() {
       const tds = [];
@@ -276,22 +263,59 @@ export default {
       }
       node.classList.add('active');
       this.value = node.getAttribute('data-value');
-      this.visible = false;
-      this.$refs.input.changeValue(this.value);
+      if (this.type !== 'month') {
+        this.month = parseInt(this.value.substr(4, 2), 0);
+        this.active = 'day';
+        this.getByActive();
+      } else {
+        this.visible = false;
+        this.$refs.input.changeValue(this.value);
+      }
     },
-    getByType() {
-      if (this.type === 'day') {
+    selectYear($event) {
+      // 刷新日期
+      if (this.value) {
+        document.querySelector('.date.month tr td.active').classList.remove('active');
+      }
+      // 添加选中日期
+      let node;
+      if ($event.target.parentNode.nodeName === 'TR') {
+        node = $event.target;
+      } else {
+        node = $event.target.parentNode;
+      }
+      node.classList.add('active');
+      this.value = node.getAttribute('data-value');
+      if (this.type !== 'year') {
+        this.year = this.value;
+        this.active = 'month';
+        this.getByActive();
+      } else {
+        this.visible = false;
+        this.$refs.input.changeValue(this.value);
+      }
+    },
+    getByActive() {
+      if (this.active === 'day') {
         this.placeholder = '请选择日期';
         this.getDays();
       }
-      if (this.type === 'month') {
+      if (this.active === 'month') {
         this.placeholder = '请选择月份';
         this.getMonths();
       }
-      if (this.type === 'year') {
+      if (this.active === 'year') {
         this.placeholder = '请选择年份';
         this.getYears();
       }
+    },
+    activeYear() {
+      this.getYears();
+      this.active = 'year';
+    },
+    activeMonth() {
+      this.getMonths();
+      this.active = 'month';
     },
   },
   computed: {
@@ -303,7 +327,7 @@ export default {
     this.date = new Date();
     this.year = this.date.getFullYear();
     this.month = this.date.getMonth() + 1;
-    this.getByType();
+    this.getByActive();
   },
   components: {
     YuInput,
