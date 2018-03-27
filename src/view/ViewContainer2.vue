@@ -160,7 +160,7 @@
       <!--<yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>-->
     <!--</yu-tabs>-->
     <div class="sub-title" style="margin-top: 100px">tabs------>自定义标签效果</div>
-    <yu-tabs @click="hanldClick" type="border-card" :addable="true" :closeable="true">
+    <yu-tabs @click="hanldClick"  tab-position="left">
     <yu-tabs-nav slot="nav"><i class="iconfont icon-table"></i>用户管理</yu-tabs-nav>
     <yu-tabs-nav slot="nav"><i class="iconfont icon-stack-overflow"></i>配置管理</yu-tabs-nav>
     <yu-tabs-nav slot="nav">角色管理</yu-tabs-nav>
@@ -171,6 +171,30 @@
     <yu-tabs-item slot="item">第三个</yu-tabs-item>
     <yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>
     </yu-tabs>
+    <div class="sub-title" style="margin-top: 100px">Carousel----轮播图效果</div>
+    <!--<yu-carousel width="600px" height="300px">-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173912&di=379eb2a8b6f9442fa4cd5105dff9255b&imgtype=0&src=http%3A%2F%2Fpic40.nipic.com%2F20140427%2F12728082_192158112000_2.png"/>-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173910&di=baabab0cc88a73d7f0538b95826c1ed8&imgtype=0&src=http%3A%2F%2Fpic8.nipic.com%2F20100716%2F5372314_005516302742_2.jpg"/>-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173902&di=b59ab8a5ec759a78854d8dd407a5e630&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8718367adab44aedad9a0930b91c8701a08bfb0a.jpg"/>-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126451245&di=c23e9a0ee71c9ea455461b4a4041b27c&imgtype=0&src=http%3A%2F%2Fb.zol-img.com.cn%2Fdesk%2Fbizhi%2Fimage%2F5%2F2560x1600%2F1413270044320.jpg"/>-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126517861&di=4869b08f577db1f3c61eae7fef95180d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8694a4c27d1ed21b4c049c31a76eddc450da3f10.jpg"/>-->
+    <!--</yu-carousel>-->
+    <div class="sub-title" style="margin-top: 100px">Carousel----轮播图效果---自动播放</div>
+    <!--<yu-carousel width="600px" height="300px" :autoplay="true" :interval="1000">-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173912&di=379eb2a8b6f9442fa4cd5105dff9255b&imgtype=0&src=http%3A%2F%2Fpic40.nipic.com%2F20140427%2F12728082_192158112000_2.png"/>-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173910&di=baabab0cc88a73d7f0538b95826c1ed8&imgtype=0&src=http%3A%2F%2Fpic8.nipic.com%2F20100716%2F5372314_005516302742_2.jpg"/>-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173902&di=b59ab8a5ec759a78854d8dd407a5e630&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8718367adab44aedad9a0930b91c8701a08bfb0a.jpg"/>-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126451245&di=c23e9a0ee71c9ea455461b4a4041b27c&imgtype=0&src=http%3A%2F%2Fb.zol-img.com.cn%2Fdesk%2Fbizhi%2Fimage%2F5%2F2560x1600%2F1413270044320.jpg"/>-->
+      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126517861&di=4869b08f577db1f3c61eae7fef95180d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8694a4c27d1ed21b4c049c31a76eddc450da3f10.jpg"/>-->
+    <!--</yu-carousel>-->
+    <div class="sub-title" style="margin-top: 100px">Carousel----轮播图效果--旋转木马播放</div>
+    <yu-carousel width="1200px" height="500px"  :position="arr"  type="card">
+    <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173912&di=379eb2a8b6f9442fa4cd5105dff9255b&imgtype=0&src=http%3A%2F%2Fpic40.nipic.com%2F20140427%2F12728082_192158112000_2.png"/>
+    <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173910&di=baabab0cc88a73d7f0538b95826c1ed8&imgtype=0&src=http%3A%2F%2Fpic8.nipic.com%2F20100716%2F5372314_005516302742_2.jpg"/>
+    <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173902&di=b59ab8a5ec759a78854d8dd407a5e630&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8718367adab44aedad9a0930b91c8701a08bfb0a.jpg"/>
+    <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126451245&di=c23e9a0ee71c9ea455461b4a4041b27c&imgtype=0&src=http%3A%2F%2Fb.zol-img.com.cn%2Fdesk%2Fbizhi%2Fimage%2F5%2F2560x1600%2F1413270044320.jpg"/>
+    <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126517861&di=4869b08f577db1f3c61eae7fef95180d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8694a4c27d1ed21b4c049c31a76eddc450da3f10.jpg"/>
+    </yu-carousel>
     <div style="height: 200px;width: 30px"></div>
 
   </div>
@@ -185,6 +209,8 @@ import YuToolTip from '../components/tooltip';
 import YuTabs from '../components/tabs';
 import YuTabsItem from '../components/tabs-item';
 import YuTabsNav from '../components/tabs-nav';
+import YuCarousel from '../components/carousel';
+import YuCarouselItem from '../components/carousel-item';
 
 export default {
   name: 'ViewContainer',
@@ -192,6 +218,43 @@ export default {
     return {
       active1: 0,
       active2: 0,
+      arr: [
+        {
+          width: 400,
+          top: 20,
+          left: 50,
+          opacity: 0.2,
+          zIndex: 2,
+        },//0
+        {
+          width: 600,
+          top: 70,
+          left: 0,
+          opacity: 0.8,
+          zIndex: 3,
+        },//1
+        {
+          width: 800,
+          top: 100,
+          left: 200,
+          opacity: 1,
+          zIndex: 4,
+        },//2
+        {
+          width: 600,
+          top: 70,
+          left: 600,
+          opacity: 0.8,
+          zIndex: 3,
+        },//3
+        {
+          width: 400,
+          top: 20,
+          left: 750,
+          opacity: 0.2,
+          zIndex: 2,
+        }//4
+      ],
     }
   },
   methods: {
@@ -215,6 +278,8 @@ export default {
     YuTabs,
     YuTabsNav,
     YuTabsItem,
+    YuCarousel,
+    YuCarouselItem,
   },
 };
 </script>

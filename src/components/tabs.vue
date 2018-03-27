@@ -1,7 +1,7 @@
 <template>
   <div class="yu-tabs"
        :style="{width:width,}"
-       :class="[type,]">
+       :class="[type,tabPosition]">
     <ul class="tabs-nav"
         @click="active">
      <slot name="nav"/>
@@ -40,6 +40,8 @@ export default {
     type: String,
     addable: false,
     closeable: false,
+    tabPosition: String,
+    tabItemHeight: String,
   },
   methods: {
     active(e) {
@@ -127,8 +129,8 @@ export default {
     box-shadow: $box-shadow;
     .tabs-nav{
       height: 43px;
-      background-color: $background;
-      border: 1px solid $border;
+      background-color: lighten($background,15);
+      border: 1px solid $dark-border;
       border-left: none;
       border-right: none;
       li{
@@ -136,13 +138,61 @@ export default {
       li.active{
         background-color:#fff;
         border-bottom: 2px solid #fff;
-        border-left: 1px solid $border;
-        border-right: 1px solid $border;
+        border-left: 1px solid $dark-border;
+        border-right: 1px solid $dark-border;
         color: #409EFF;
         &:first-child{
           border-left: none;
         }
       }
+    }
+  }
+  /*不同方位的tab栏*/
+  /*bottom*/
+  .yu-tabs.bottom{
+    display: flex;
+    flex-direction: column-reverse;
+    .tabs-nav{
+      margin: 0;
+    }
+  }
+.yu-tabs.bottom.border-card{
+  .tabs-nav{
+    background-color: lighten($background,15);
+    border: 1px solid $dark-border;
+    border-left: none;
+    border-right: none;
+    li{
+      margin-top: -1px;
+    }
+    li.active{
+      background-color:#fff;
+      border-bottom: 2px solid #fff;
+      border-left: 1px solid $dark-border;
+      border-right: 1px solid $dark-border;
+      color: #409EFF;
+      &:first-child{
+        border-left: none;
+      }
+    }
+  }
+}
+  /*left*/
+  .yu-tabs.left{
+    display: flex;
+    .tabs-nav{
+      display: flex;
+      flex-direction: column;
+      width: 200px;
+      border: none;
+      text-align: center;
+      li{
+        border: none;
+      }
+    }
+    /*todo  位置还需要调整*/
+    .tabs-item{
+      width: calc(100%- 200px);
     }
   }
 </style>

@@ -1,11 +1,12 @@
 <template>
-<div class="yu-tabs-item">
+<div class="yu-tabs-item" :style="{height:rootTabs.tabItemHeight}">
     <slot/>
 </div>
 </template>
 <script>
 export default {
   name: 'YuTabsItem',
+  inject: ['rootTabs'],
   props: {
     label: String,
   },
@@ -18,7 +19,6 @@ export default {
   .yu-tabs-item{
     display: none;
     width: 100%;
-    height: 200px;
     float: left;
   }
   .yu-tabs-item.active{
