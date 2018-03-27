@@ -11,7 +11,7 @@ export default {
   name: 'YuTabsNav',
   inject: ['rootTabs'],
   mounted() {
-    console.log(this.rootTabs)
+    // console.log(this.rootTabs)
   },
 }
 </script>
