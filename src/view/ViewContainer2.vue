@@ -216,27 +216,50 @@
     </yu-notification>
     <div class="sub-title" style="margin-top: 100px">警告</div>
     <yu-alert title="成功提示的文案" type="success"/>
+    <yu-alert title="信息提示的文本" type="info"/>
+    <yu-alert title='警告提示的文本' type='warming'/>
+    <yu-alert title="错误提示的文本" type='error' />
+      <div class="sub-title" style="margin-top: 100px">警告---带有icon</div>
+       <yu-alert title="成功提示的文案" type="success" show-icon/>
+       <yu-alert title="成功提示的文案" type="error" show-icon/>
+       <yu-alert title="成功提示的文案" type="info" show-icon/>
+       <yu-alert title="成功提示的文案" type="warming" show-icon/>
+     <div class="sub-title" style="margin-top: 100px">警告---居中</div>
+       <yu-alert title="成功提示的文案" type="success" show-icon center/>
+       <yu-alert title="成功提示的文案" type="error" show-icon center/>
+       <yu-alert title="成功提示的文案" type="info" show-icon center/>
+       <yu-alert title="成功提示的文案" type="warming" show-icon center/>
+      <div class="sub-title" style="margin-top: 100px">警告---带有辅助性文字</div>
+       <yu-alert title="成功提示的文案" type="success" description='这是一段辅助性的文字啊,哈哈哈哈哈哈哈' />
+       <yu-alert title="成功提示的文案" type="error" description='哈哈哈哈哈哈哈啊,这是辅助性文字'/>
+       <yu-alert title="成功提示的文案" type="info" description='啦啦啦啦啦啦啦,这是辅助性文字'/>
+       <yu-alert title="成功提示的文案" type="warming" description='尕尕尜尜过过,这是辅助性文字'/>
+         <div class="sub-title" style="margin-top: 100px">警告---带有辅助性文字和icon</div>
+       <yu-alert title="成功提示的文案" type="success" show-icon description='这是一段辅助性的文字啊,哈哈哈哈哈哈哈' />
+       <yu-alert title="成功提示的文案" type="error" show-icon description='哈哈哈哈哈哈哈啊,这是辅助性文字'/>
+       <yu-alert title="成功提示的文案" type="info" show-icon description='啦啦啦啦啦啦啦,这是辅助性文字'/>
+       <yu-alert title="成功提示的文案" type="warming" show-icon description='尕尕尜尜过过,这是辅助性文字'/>
     <div style="height: 200px;width: 30px"></div>
 
   </div>
 </template>
 
 <script>
-import 'whatwg-fetch';
-import YuButton from '../components/button';
-import YuSteps from '../components/steps';
-import YuStep from '../components/step';
-import YuToolTip from '../components/tooltip';
-import YuTabs from '../components/tabs';
-import YuTabsItem from '../components/tabs-item';
-import YuTabsNav from '../components/tabs-nav';
-import YuCarousel from '../components/carousel';
-import YuCarouselItem from '../components/carousel-item';
-import YuNotification from '../components/notification';
-import YuAlert from '../components/alert';
+import "whatwg-fetch";
+import YuButton from "../components/button";
+import YuSteps from "../components/steps";
+import YuStep from "../components/step";
+import YuToolTip from "../components/tooltip";
+import YuTabs from "../components/tabs";
+import YuTabsItem from "../components/tabs-item";
+import YuTabsNav from "../components/tabs-nav";
+import YuCarousel from "../components/carousel";
+import YuCarouselItem from "../components/carousel-item";
+import YuNotification from "../components/notification";
+import YuAlert from "../components/alert";
 
 export default {
-  name: 'ViewContainer',
+  name: "ViewContainer",
   data() {
     return {
       active1: 0,
@@ -247,38 +270,38 @@ export default {
           top: 20,
           left: 50,
           opacity: 0.2,
-          zIndex: 2,
-        },//0
+          zIndex: 2
+        }, //0
         {
           width: 600,
           top: 70,
           left: 0,
           opacity: 0.8,
-          zIndex: 3,
-        },//1
+          zIndex: 3
+        }, //1
         {
           width: 800,
           top: 100,
           left: 200,
           opacity: 1,
-          zIndex: 4,
-        },//2
+          zIndex: 4
+        }, //2
         {
           width: 600,
           top: 70,
           left: 600,
           opacity: 0.8,
-          zIndex: 3,
-        },//3
+          zIndex: 3
+        }, //3
         {
           width: 400,
           top: 20,
           left: 750,
           opacity: 0.2,
-          zIndex: 2,
-        }//4
-      ],
-    }
+          zIndex: 2
+        } //4
+      ]
+    };
   },
   methods: {
     next() {
@@ -290,8 +313,8 @@ export default {
       if (this.active2 >= 3) this.active2 = 0;
     },
     hanldClick() {
-      console.log(777)
-    },
+      console.log(777);
+    }
   },
   components: {
     YuButton,
@@ -304,33 +327,33 @@ export default {
     YuCarousel,
     YuCarouselItem,
     YuNotification,
-    YuAlert,
-  },
+    YuAlert
+  }
 };
 </script>
 
 <style lang="scss" type="text/scss">
-  @import "../assets/css/varible";
-  .title {
-    color: $text;
-    padding: 14px 0;
-    margin: 20px 0;
-    border-bottom: 1px solid $border;
-  }
-  .sub-title {
-    color: $text;
-    padding: 0 8px;
-    margin: 20px 0;
-    border-left: 4px solid $primary;
-  }
-  .dropdown-list{
-    .list-content{
-      display: inline-block;
-      float: left;
-      margin-right: 50px;
-    }
-  }
-  .box{
+@import "../assets/css/varible";
+.title {
+  color: $text;
+  padding: 14px 0;
+  margin: 20px 0;
+  border-bottom: 1px solid $border;
+}
+.sub-title {
+  color: $text;
+  padding: 0 8px;
+  margin: 20px 0;
+  border-left: 4px solid $primary;
+}
+.dropdown-list {
+  .list-content {
+    display: inline-block;
     float: left;
+    margin-right: 50px;
   }
+}
+.box {
+  float: left;
+}
 </style>
