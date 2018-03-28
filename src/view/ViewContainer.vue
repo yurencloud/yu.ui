@@ -389,6 +389,47 @@
     <div class="sub-title">普通用法 上传多文件</div>
     <yu-upload url="/api/uploads" multiple="multiple">点击上传多文件</yu-upload>
 
+    <div class="sub-title">显示上传列表和状态</div>
+    <yu-upload url="/api/uploads" multiple="multiple" list>点击上传多文件</yu-upload>
+    <yu-upload url="/api/upload" list>点击上传单文件</yu-upload>
+
+    <div class="sub-title">显示多种文件图标</div>
+    <div style="margin-bottom: 20px;">
+      <i class="iconfont icon-f-file"></i>
+      <i class="iconfont icon-f-word"></i>
+      <i class="iconfont icon-f-pdf"></i>
+      <i class="iconfont icon-f-excel"></i>
+      <i class="iconfont icon-f-image"></i>
+      <i class="iconfont icon-f-archive"></i>
+      <i class="iconfont icon-f-powerpoint"></i>
+      <i class="iconfont icon-f-audio"></i>
+    </div>
+    <yu-upload url="/api/uploads" multiple="multiple" list multiIcon>点击上传多文件</yu-upload>
+
+    <div class="sub-title">上传图片并显示图片</div>
+    <yu-upload url="/api/upload" type="image" />
+
+    <div class="sub-title">限制上传文件大小</div>
+    <yu-upload url="/api/upload" :maxSize="1024" >点击上传</yu-upload>
+
+    <div class="sub-title">上传图片显示缩略图</div>
+    <yu-upload url="/api/uploads" multiple previewList list >点击上传</yu-upload>
+
+    <div class="sub-title">自定义触发按钮</div>
+    <yu-upload url="/api/uploads" type="defined" >
+      <yu-button shape="circle" icon="icon-upload" type="danger" />
+    </yu-upload>
+
+    <div class="title">等级</div>
+    <div class="sub-title">普通用法</div>
+    <yu-rate/>
+
+    <div class="sub-title">显示label</div>
+    <yu-rate labeled/>
+
+    <div class="sub-title">显示label</div>
+    <yu-rate :label="label"/>
+
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
     <!--<yu-loading />-->
@@ -445,12 +486,14 @@ import YuTimePicker from '../components/time-picker';
 import YuScrollSelect from '../components/scroll-select';
 import YuDatePicker from '../components/date-picker';
 import YuUpload from '../components/upload';
+import YuRate from '../components/rate';
 
 
 export default {
   name: 'ViewContainer',
   data() {
     return {
+      label: () => {return ['', '极差2', '失望2', '一般2', '满意2', '惊喜2']},
       fetchScroll: [],
       time: {
         start: '09:00',
@@ -804,6 +847,7 @@ export default {
     YuScrollSelect,
     YuDatePicker,
     YuUpload,
+    YuRate,
   },
   mounted() {
     const the = this;
