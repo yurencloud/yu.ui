@@ -17,7 +17,7 @@
          </div>
          <div class="inner" v-show="inner">
            <div>{{innerContent}}</div>
-           <div class="close" @click="open"><i class="iconfont icon-close"></i></div>
+           <div class="close" @click="close"><i class="iconfont icon-close"></i></div>
          </div>
        </div>
     </div>
@@ -74,13 +74,11 @@ export default {
         document.getElementsByClassName('mask')[0].style.display = 'none';
       }
     },
-    open() {
+    close() {
       this.inner = !this.inner;
     },
   },
-  beforeMount() {
 
-  },
 }
 </script>
 

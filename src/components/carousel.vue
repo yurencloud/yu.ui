@@ -119,20 +119,20 @@ export default {
       // 小圆点
       for (let i = 0; i < lines.length; i++) {
         lines[i].index = i;
-        lines[i].onclick = function() {
+        lines[i].addEventListener('click', () => {
           for (let j = 0; j < lines.length; j++) {
             lines[j].className = '';
           }
           lines[this.index].className = 'now';
           animate(ul, -this.index * imgWidth, 50);
-        }
+        })
       }
     });
     this.lastSrc = this.$children[0].src;
     this.items = this.$children.length - 1;
     document.querySelectorAll('.yu-img-warp')[0].style.width = `${this.$children.length}00%`;
     const list = document.querySelectorAll('.yu-img-warp li');
-    for (let i = 0; i < list.length; i++ ) {
+    for (let i = 0; i < list.length; i++) {
       list[i].style.width = `${(1 / this.$children.length) * 100}%`;
     }
     //  轮播图

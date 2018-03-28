@@ -10,6 +10,8 @@
 export default {
   name: 'YuTabsNav',
   inject: ['rootTabs'],
+  methods: {
+  },
   mounted() {
     // console.log(this.rootTabs)
   },
@@ -26,12 +28,13 @@ export default {
   text-align: center;
   box-sizing: border-box;
   color: $light-text;
+  cursor: pointer;
   i{
     margin-right: 5px;
     font-size: $large;
   }
 }
 .yu-tabs-nav.active{
-  border-bottom: 2px solid #409EFF;
+
   }
 </style>

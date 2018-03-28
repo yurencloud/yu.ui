@@ -3,12 +3,14 @@
        :style="{width:width,}"
        :class="[type,tabPosition]">
     <ul class="tabs-nav"
-        @click="active">
+        @click="active"
+    >
      <slot name="nav"/>
       <i class="iconfont icon-add-circle-o"
         v-if="addable"
         @click="addItem"
         id="icon"/>
+      <i class="line-left"></i>
     </ul>
     <div class="tabs-item clearfix" >
       <slot name="item"/>
@@ -49,13 +51,28 @@ export default {
       if (this.addable) {
         len = e.target.parentNode.children.length - 1
       }
-      for (let i = 0; i < len; i++) {
+      for (let i = 0; i < len - 1; i++) {
         e.target.parentNode.children[i].index = i;
         e.target.parentNode.children[i].classList.remove('active');
         document.getElementsByClassName('tabs-item')[0].children[i].classList.remove('active');
       }
-      e.target.classList.add('active');
+      const line = document.getElementsByClassName('line-left')[0];
+      if (this.tabPosition === 'left' || this.tabPosition === 'right') {
+        line.style.top = `${e.target.index * 40}px`;
+      } else if (this.tabPosition === 'bottom' || !this.tabPosition) {
+        line.style.left = `${e.target.index * 100}px`;
+      }
       document.getElementsByClassName('tabs-item')[0].children[e.target.index].classList.add('active');
+      if (this.tabPosition) {
+        setTimeout(() => {
+          e.target.classList.add('active');
+        }, 300);
+      } else {
+        e.target.classList.add('active');
+      }
+      this.$nextTick(() => {
+        console.log(document.getElementsByClassName('tabs-nav')[0].children[0].style);
+      })
     },
     addItem(e) {
       e.stopPropagation();
@@ -65,6 +82,7 @@ export default {
   mounted() {
     this.$children[0].$el.classList.add('active');
     this.$children[this.$children.length / 2].$el.classList.add('active');
+
   },
 }
 </script>
@@ -78,11 +96,29 @@ export default {
     width: 100%;
     border-bottom:1px solid #ddd;
     box-sizing: border-box;
+    position: relative;
     i{
       display: inline-block;
       float: right;
       margin: 10px 20px;
       font-size: $huge;
+    }
+    .line-left{
+      display: block;
+      height: 3px;
+      width: 100px;
+      background-color: $primary;
+      position: absolute;
+      transition: all .3s linear;
+      left: 0;
+      bottom: 0;
+      margin: 0;
+    }
+    li{
+      border-bottom: 3px solid #fff;
+    }
+    li.active{
+      border-bottom: 3px solid $primary;
     }
   }
   .tabs-item{
@@ -118,9 +154,16 @@ export default {
         border-top-right-radius: 3px;
       }
     }
+
     li.active{
       border-bottom: 1px solid #fff;
-      color: #409EFF;
+      color: $primary;
+    }
+    li{
+      border-bottom: none;
+    }
+    .line-left{
+      display: none;
     }
   }
 }
@@ -134,13 +177,17 @@ export default {
       border-left: none;
       border-right: none;
       li{
+        border-bottom: none;
+      }
+      .line-left{
+        display: none;
       }
       li.active{
         background-color:#fff;
         border-bottom: 2px solid #fff;
         border-left: 1px solid $dark-border;
         border-right: 1px solid $dark-border;
-        color: #409EFF;
+        color: $primary;
         &:first-child{
           border-left: none;
         }
@@ -154,6 +201,24 @@ export default {
     flex-direction: column-reverse;
     .tabs-nav{
       margin: 0;
+      position: relative;
+      .line-left{
+        display: block;
+        height: 3px;
+        width: 100px;
+        background-color: $primary;
+        position: absolute;
+        transition: all .3s linear;
+        left: 0;
+        bottom: 0;
+        margin: 0;
+      }
+      li{
+        border-bottom: 3px solid #fff;
+      }
+      li.active{
+        border-bottom: 3px solid $primary;
+      }
     }
   }
 .yu-tabs.bottom.border-card{
@@ -181,18 +246,73 @@ export default {
   .yu-tabs.left{
     display: flex;
     .tabs-nav{
-      display: flex;
-      flex-direction: column;
-      width: 200px;
+      max-width: 150px;
       border: none;
       text-align: center;
+      position: relative;
+      .line-left{
+        display: block;
+        height: 40px;
+        width: 3px;
+        background-color: $primary;
+        position: absolute;
+        transition: all .3s linear;
+        right: 0;
+        top: 0;
+        margin: 0;
+      }
       li{
-        border: none;
+        display: block;
+        border-bottom: none;
+        border-right: 2px solid $light-border;
+      }
+      li.active{
+        color: $primary;
       }
     }
-    /*todo  位置还需要调整*/
     .tabs-item{
-      width: calc(100%- 200px);
+      width: calc(100% - 150px);
+      .yu-tabs-item{
+        width: 100%;
+        color: $dark-text;
+      }
+    }
+  }
+  /*right*/
+  .yu-tabs.right{
+    display: flex;
+    flex-direction: row-reverse;
+    .tabs-nav{
+      max-width: 150px;
+      border: none;
+      text-align: center;
+      position: relative;
+      .line-left{
+        display: block;
+        height: 40px;
+        width: 3px;
+        background-color: $primary;
+        position: absolute;
+        transition: all .3s linear;
+        left: 0;
+        top: 0;
+        margin: 0;
+      }
+      li{
+        display: block;
+        border-bottom: none;
+        border-left: 2px solid $light-border;
+      }
+      li.active{
+        color: $primary;
+      }
+    }
+    .tabs-item {
+      width: calc(100% - 150px);
+      .yu-tabs-item {
+        width: 100%;
+        color: $dark-text;
+      }
     }
   }
 </style>

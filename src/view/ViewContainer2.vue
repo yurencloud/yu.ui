@@ -135,7 +135,7 @@
     </div>
     <div style="height: 100px;"></div>
     <div class="sub-title" style="margin-top: 100px">tabs------>tablan效果</div>
-    <!--<yu-tabs @click="hanldClick" type="card">-->
+    <!--<yu-tabs type="card">-->
       <!--<yu-tabs-nav slot="nav">用户管理</yu-tabs-nav>-->
       <!--<yu-tabs-nav slot="nav">配置管理</yu-tabs-nav>-->
       <!--<yu-tabs-nav slot="nav">角色管理</yu-tabs-nav>-->
@@ -148,7 +148,7 @@
     <!--</yu-tabs>-->
     <div style="height: 100px;"></div>
     <div class="sub-title" style="margin-top: 100px">tabs------>borderCard效果</div>
-    <!--<yu-tabs @click="hanldClick" type="border-card">-->
+    <!--<yu-tabs type="border-card">-->
       <!--<yu-tabs-nav slot="nav">用户管理</yu-tabs-nav>-->
       <!--<yu-tabs-nav slot="nav">配置管理</yu-tabs-nav>-->
       <!--<yu-tabs-nav slot="nav">角色管理</yu-tabs-nav>-->
@@ -160,9 +160,9 @@
       <!--<yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>-->
     <!--</yu-tabs>-->
     <div class="sub-title" style="margin-top: 100px">tabs------>自定义标签效果</div>
-    <yu-tabs @click="hanldClick"  tab-position="left">
-    <yu-tabs-nav slot="nav"><i class="iconfont icon-table"></i>用户管理</yu-tabs-nav>
-    <yu-tabs-nav slot="nav"><i class="iconfont icon-stack-overflow"></i>配置管理</yu-tabs-nav>
+    <yu-tabs   width="900px" tab-position="right">
+    <yu-tabs-nav slot="nav">用户管理</yu-tabs-nav>
+    <yu-tabs-nav slot="nav">配置管理</yu-tabs-nav>
     <yu-tabs-nav slot="nav">角色管理</yu-tabs-nav>
     <yu-tabs-nav slot="nav">定时任补偿</yu-tabs-nav>
     <yu-tabs-item slot="item">第一个辗转一流年，时光穿梭，悄然从指缝间溜走，岁月如水，轻轻地蒸发，光景却是一样的安之若素。站在岁月的渡口，我将四季的光阴，裁剪成五光十色，编织成最美的花环，待你经过我的身边，送与你，最馨香的美好。
@@ -195,6 +195,27 @@
     <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126451245&di=c23e9a0ee71c9ea455461b4a4041b27c&imgtype=0&src=http%3A%2F%2Fb.zol-img.com.cn%2Fdesk%2Fbizhi%2Fimage%2F5%2F2560x1600%2F1413270044320.jpg"/>
     <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126517861&di=4869b08f577db1f3c61eae7fef95180d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8694a4c27d1ed21b4c049c31a76eddc450da3f10.jpg"/>
     </yu-carousel>
+    <div class="sub-title" style="margin-top: 100px">通知</div>
+    <yu-notification title="提示" content="这是一条不会自动关闭的提示"  position="top-left">
+      <yu-button>不可自动关闭</yu-button>
+    </yu-notification>
+    <yu-notification title="提示" content="这是一条不会自动关闭的提示" :duration="3" position="bottom-right">
+      <yu-button>可自动关闭</yu-button>
+    </yu-notification>
+    <yu-notification title="提示" content="这是一条不会自动关闭的提示" :duration="3" :showClose="true" position="top-right">
+      <yu-button>右上</yu-button>
+    </yu-notification>
+    <yu-notification title="提示" content="这是一条不会自动关闭的提示" :duration="3" position="bottom-left">
+      <yu-button>左下</yu-button>
+    </yu-notification>
+    <yu-notification title="提示" content="这是一条不会自动关闭的提示" :duration="3" :showClose="false" position="top-right" type="success">
+      <yu-button>隐藏关闭按钮</yu-button>
+    </yu-notification>
+    <yu-notification title="提示" content="这是一条不会自动关闭的提示" :showClose="true" position="top-right"  offset="200px" iconClass="icon-commenting">
+      <yu-button>自定义图标</yu-button>
+    </yu-notification>
+    <div class="sub-title" style="margin-top: 100px">警告</div>
+    <yu-alert title="成功提示的文案" type="success"/>
     <div style="height: 200px;width: 30px"></div>
 
   </div>
@@ -211,6 +232,8 @@ import YuTabsItem from '../components/tabs-item';
 import YuTabsNav from '../components/tabs-nav';
 import YuCarousel from '../components/carousel';
 import YuCarouselItem from '../components/carousel-item';
+import YuNotification from '../components/notification';
+import YuAlert from '../components/alert';
 
 export default {
   name: 'ViewContainer',
@@ -280,6 +303,8 @@ export default {
     YuTabsItem,
     YuCarousel,
     YuCarouselItem,
+    YuNotification,
+    YuAlert,
   },
 };
 </script>
