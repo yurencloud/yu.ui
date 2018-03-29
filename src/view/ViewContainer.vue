@@ -427,8 +427,131 @@
     <div class="sub-title">显示label</div>
     <yu-rate labeled/>
 
-    <div class="sub-title">显示label</div>
-    <yu-rate :label="label"/>
+    <div class="sub-title">自定义label</div>
+    <yu-rate :label="label2" labeled/>
+
+    <div class="sub-title">设置默认值，并只读</div>
+    <yu-rate readOnly :defaultValue="3"/>
+
+    <div class="title">表单</div>
+    <div class="sub-title">典型表单</div>
+    <yu-form>
+      <yu-field label="活动名称">
+        <yu-input/>
+      </yu-field>
+      <yu-field label="活动动物">
+        <yu-select text="请选择动物" overflow>
+          <yu-option label="猫" value="1"/>
+          <yu-option label="狗" value="2" disabled/>
+          <yu-option label="狗" value="3"/>
+          <yu-option label="狗" value="4"/>
+          <yu-option label="狗" value="5"/>
+        </yu-select>
+      </yu-field>
+      <yu-field label="选择日期">
+        <yu-date-picker style="width: 50%;display: inline-block;"/>
+        <yu-time-picker style="width: 48%;display: inline-block;"/>
+      </yu-field>
+      <yu-field label="即时配送">
+        <yu-switch label="确认"/>
+      </yu-field>
+      <yu-field label="活动性质">
+          <yu-checkbox @change="checkboxChange" checked label="1">苹果</yu-checkbox>
+          <yu-checkbox @change="checkboxChange" label="2">西瓜</yu-checkbox>
+          <yu-checkbox @change="checkboxChange" label="3">桃子</yu-checkbox>
+      </yu-field>
+      <yu-field label="特殊资源">
+        <yu-radios>
+          <yu-radio @change="radioChange" checked label="1">苹果</yu-radio>
+          <yu-radio @change="radioChange" label="2">香蕉</yu-radio>
+          <yu-radio @change="radioChange" label="3">桃子</yu-radio>
+        </yu-radios>
+      </yu-field>
+      <yu-field label="活动形式">
+        <yu-input type="textarea" />
+      </yu-field>
+      <yu-field>
+        <yu-button type="primary">提交</yu-button>
+        <yu-button>重置</yu-button>
+      </yu-field>
+    </yu-form>
+
+    <div class="sub-title">行内表单</div>
+    <yu-form inline>
+      <yu-field label="活动名称">
+        <yu-input/>
+      </yu-field>
+      <yu-field label="活动动物">
+        <yu-select text="请选择动物" overflow>
+          <yu-option label="猫" value="1"/>
+          <yu-option label="狗" value="2" disabled/>
+          <yu-option label="狗" value="3"/>
+          <yu-option label="狗" value="4"/>
+          <yu-option label="狗" value="5"/>
+        </yu-select>
+      </yu-field>
+      <yu-field>
+        <yu-button type="primary">提交</yu-button>
+        <yu-button>重置</yu-button>
+      </yu-field>
+    </yu-form>
+
+
+    <div class="sub-title">label对齐方式</div>
+    <yu-form>
+      <yu-field label="顶对齐" align="top">
+        <yu-input/>
+      </yu-field>
+      <yu-field label="左对齐" align="left">
+        <yu-input/>
+      </yu-field>
+      <yu-field label="右对齐" align="right">
+        <yu-input/>
+      </yu-field>
+    </yu-form>
+
+    <div class="sub-title">表单验证</div>
+    <yu-form >
+      <yu-field label="活动名称" validate>
+        <yu-input name="activeName"/>
+      </yu-field>
+      <yu-field label="活动动物" validate>
+        <yu-select text="请选择动物" overflow>
+          <yu-option label="猫" value="1"/>
+          <yu-option label="狗" value="2" disabled/>
+          <yu-option label="狗" value="3"/>
+          <yu-option label="狗" value="4"/>
+          <yu-option label="狗" value="5"/>
+        </yu-select>
+      </yu-field>
+      <yu-field label="选择日期" validate>
+        <yu-date-picker style="width: 50%;display: inline-block;"/>
+        <yu-time-picker style="width: 48%;display: inline-block;"/>
+      </yu-field>
+      <yu-field label="即时配送" validate>
+        <yu-switch label="确认"/>
+      </yu-field>
+      <yu-field label="活动性质" validate>
+        <yu-checkbox @change="checkboxChange" checked label="1">苹果</yu-checkbox>
+        <yu-checkbox @change="checkboxChange" label="2">西瓜</yu-checkbox>
+        <yu-checkbox @change="checkboxChange" label="3">桃子</yu-checkbox>
+      </yu-field>
+      <yu-field label="特殊资源" validate>
+        <yu-radios>
+          <yu-radio @change="radioChange" checked label="1">苹果</yu-radio>
+          <yu-radio @change="radioChange" label="2">香蕉</yu-radio>
+          <yu-radio @change="radioChange" label="3">桃子</yu-radio>
+        </yu-radios>
+      </yu-field>
+      <yu-field label="活动形式" validate>
+        <yu-input type="textarea" />
+      </yu-field>
+      <yu-field>
+        <yu-button type="primary">提交</yu-button>
+        <yu-button>重置</yu-button>
+      </yu-field>
+    </yu-form>
+
 
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
@@ -487,13 +610,15 @@ import YuScrollSelect from '../components/scroll-select';
 import YuDatePicker from '../components/date-picker';
 import YuUpload from '../components/upload';
 import YuRate from '../components/rate';
+import YuForm from '../components/form';
+import YuField from '../components/field';
 
 
 export default {
   name: 'ViewContainer',
   data() {
     return {
-      label: () => {return ['', '极差2', '失望2', '一般2', '满意2', '惊喜2']},
+      label2: ['', '极差2', '失望2', '一般2', '满意2', '惊喜2'],
       fetchScroll: [],
       time: {
         start: '09:00',
@@ -848,6 +973,8 @@ export default {
     YuDatePicker,
     YuUpload,
     YuRate,
+    YuForm,
+    YuField,
   },
   mounted() {
     const the = this;

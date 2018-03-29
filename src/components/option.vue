@@ -46,10 +46,10 @@ export default {
     font-size: $normal;
     padding:4px 8px;
     &:hover:not(.disabled){
-      background-color: $background;
+      background-color: $lighter-border;
     }
     &.active{
-      background-color: $background;
+      background-color: $lighter-border;
       font-weight: bold;
       color: $primary;
     }

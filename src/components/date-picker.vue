@@ -378,6 +378,7 @@ export default {
       color: $text;
       box-shadow: $box-shadow;
       table.date{
+        width: 100%;
         margin: 0 auto;
         thead{
           tr{

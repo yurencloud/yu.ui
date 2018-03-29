@@ -14,11 +14,16 @@ export default {
   name: 'YuRate',
   data() {
     return {
-      value: 0,
+      value: this.defaultValue || 0,
       selectValue: 0,
     };
   },
   props: {
+    defaultValue: {
+      type: Number,
+      default: 0,
+    },
+    readOnly: Boolean,
     checked: Boolean,
     disabled: Boolean,
     vertical: Boolean,
@@ -32,19 +37,22 @@ export default {
     labeled: Boolean,
     label: {
       type: Array,
-      default: () => {return ['', '极差', '失望', '一般', '满意', '惊喜']},
+      default: () => ['', '极差', '失望', '一般', '满意', '惊喜'],
     },
   },
   methods: {
     handleClick($event) {
+      if (this.readOnly) return;
       const value = $event.target.getAttribute('data-value');
       this.selectValue = value;
       this.value = value;
     },
     handleMouseout() {
+      if (this.readOnly) return;
       this.value = this.selectValue;
     },
     changeValue(value) {
+      if (this.readOnly) return;
       this.value = value;
     },
   },
