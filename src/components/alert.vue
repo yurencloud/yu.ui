@@ -1,6 +1,7 @@
 <template>
   <div class="yu-alert"
-       :class="[type,{center:center},{description:description}]">
+       :class="[type,{center:center},{description:description}]"
+       v-show="isShow">
        <!-- icon -->
     <i class="icon iconfont"
        v-if='showIcon'
@@ -14,35 +15,50 @@
       <div class="alert-auxiliary">{{description}}</div>
     </div>
     <!-- 关闭图标或文字 -->
-    <div class="alert-close">
-      <i class="iconfont icon-close"></i>
+    <div class="alert-close" @click="close">
+      {{closeText}}
+      <i class="iconfont icon-close" v-if="!closeText"></i>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "YuAlert",
+  name: 'YuAlert',
   data() {
     return {
       icons: {
-        success: "icon-check-circle",
-        info: "icon-information",
-        warming: "icon-warning-circle",
-        error: "icon-close-circle"
-      }
+        success: 'icon-check-circle',
+        info: 'icon-information',
+        warming: 'icon-warning-circle',
+        error: 'icon-close-circle',
+      },
+      isShow: true,
     };
   },
   props: {
     title: String,
-    type: String,
+    type: {
+      type: String,
+      default: 'info',
+    },
     showIcon: Boolean,
     center: Boolean,
-    description: String
+    description: String,
+    closeText: String,
+    closeable: Boolean,
   },
   mounted() {
-    console.log(this.showIcon);
-  }
+
+  },
+  methods: {
+    close() {
+      if (!this.closeable) {
+        this.isShow = !this.isShow;
+        this.$emit('click', event);
+      }
+    },
+  },
 };
 </script>
 
@@ -56,6 +72,7 @@ export default {
   font-size: $normal;
   margin-bottom: 10px;
   position: relative;
+  box-sizing: border-box;
   i {
     margin-right: 3px;
     font-size: $large;
@@ -64,6 +81,7 @@ export default {
     position: absolute;
     right: 10px;
     top: 6px;
+    cursor: pointer;
   }
   .alert-text {
     display: inline-block;
@@ -76,17 +94,17 @@ export default {
 }
 // 警告
 .yu-alert.warming {
-  background-color: lighten($color: $warming, $amount: 35);
+  background-color: lighten($warming, 35);
   color: $warming;
 }
 // 错误
 .yu-alert.error {
-  background-color: lighten($color: $danger, $amount: 25);
+  background-color: lighten( $danger,  25);
   color: $danger;
 }
 // 信息
 .yu-alert.info {
-  background-color: lighten($color: $info, $amount: 35);
+  background-color: lighten($info,35);
   color: $info;
 }
 // 居中

@@ -239,27 +239,61 @@
        <yu-alert title="成功提示的文案" type="error" show-icon description='哈哈哈哈哈哈哈啊,这是辅助性文字'/>
        <yu-alert title="成功提示的文案" type="info" show-icon description='啦啦啦啦啦啦啦,这是辅助性文字'/>
        <yu-alert title="成功提示的文案" type="warming" show-icon description='尕尕尜尜过过,这是辅助性文字'/>
+    <div class="sub-title" style="margin-top: 100px">警告---关闭按钮为自定义文本</div>
+    <yu-alert title="成功提示的文案" type="success" show-icon description='这是一段辅助性的文字啊,哈哈哈哈哈哈哈'  close-text="知道了"/>
+    <yu-alert title="成功提示的文案" type="error" show-icon description='哈哈哈哈哈哈哈啊,这是辅助性文字'/>
+    <yu-alert title="成功提示的文案哈哈哈哈哈哈" type="info" show-icon description='啦啦啦啦啦啦啦,这是辅助性文字' closable/>
+    <yu-alert title="成功提示的文案" type="warming" show-icon description='尕尕尜尜过过,这是辅助性文字' @click="alert"/>
+    <div class="sub-title" style="margin-top: 100px">警告---不能关闭的警告框</div>
+    <yu-alert title="成功提示的文案哈哈哈哈哈哈" type="info" show-icon description='啦啦啦啦啦啦啦,这是辅助性文字' closeable/>
+    <yu-alert title="成功提示的文案" type="success" show-icon description='这是一段辅助性的文字啊,哈哈哈哈哈哈哈'  closeable close-text="知道了"/>
+    <yu-alert title="成功提示的文案" type="error" show-icon description='哈哈哈哈哈哈哈啊,这是辅助性文字' closeable/>
+    <div class="sub-title" style="margin-top: 100px">message</div>
+    <yu-message  message="这是一条消息提示" type="success">
+      <yu-button :plain="true" >打开消息提示</yu-button>
+    </yu-message>
+    <div class="sub-title" style="margin-top: 100px">message----自定义图标</div>
+    <yu-message  message="这是一条消息提示" icon-class="icon-lantern" :duration="3">
+      <yu-button :plain="true" >打开消息提示</yu-button>
+    </yu-message>
+    <div class="sub-title" style="margin-top: 100px">message----HTML片段</div>
+    <yu-message  message="<h1>哈哈哈哈</h1>" icon-class="icon-lantern" dangerouslyUseHTMLString :duration="3">
+      <yu-button :plain="true" >HTML片段</yu-button>
+    </yu-message>
+    <div class="sub-title" style="margin-top: 100px">message----居中+自定义图标</div>
+    <yu-message  message="这是一条消息提示" center icon-class="icon-lantern" :duration="3">
+      <yu-button :plain="true" >打开消息提示</yu-button>
+    </yu-message>
+    <div class="sub-title" style="margin-top: 100px">message----warming</div>
+    <yu-message  message="这是一条消息提示" type="warming">
+      <yu-button :plain="true" >打开消息提示</yu-button>
+    </yu-message>
+    <div class="sub-title" style="margin-top: 100px">messagebox---基本用法</div>
+    <yu-message-box>
+      哈哈哈哈哈
+    </yu-message-box>
     <div style="height: 200px;width: 30px"></div>
-
   </div>
 </template>
 
 <script>
-import "whatwg-fetch";
-import YuButton from "../components/button";
-import YuSteps from "../components/steps";
-import YuStep from "../components/step";
-import YuToolTip from "../components/tooltip";
-import YuTabs from "../components/tabs";
-import YuTabsItem from "../components/tabs-item";
-import YuTabsNav from "../components/tabs-nav";
-import YuCarousel from "../components/carousel";
-import YuCarouselItem from "../components/carousel-item";
-import YuNotification from "../components/notification";
-import YuAlert from "../components/alert";
+import 'whatwg-fetch';
+import YuButton from '../components/button';
+import YuSteps from '../components/steps';
+import YuStep from '../components/step';
+import YuToolTip from '../components/tooltip';
+import YuTabs from '../components/tabs';
+import YuTabsItem from '../components/tabs-item';
+import YuTabsNav from '../components/tabs-nav';
+import YuCarousel from '../components/carousel';
+import YuCarouselItem from '../components/carousel-item';
+import YuNotification from '../components/notification';
+import YuAlert from '../components/alert';
+import YuMessage from '../components/message';
+import YuMessageBox from '../components/message-box';
 
 export default {
-  name: "ViewContainer",
+  name: 'ViewContainer',
   data() {
     return {
       active1: 0,
@@ -270,37 +304,37 @@ export default {
           top: 20,
           left: 50,
           opacity: 0.2,
-          zIndex: 2
-        }, //0
+          zIndex: 2,
+        }, // 0
         {
           width: 600,
           top: 70,
           left: 0,
           opacity: 0.8,
-          zIndex: 3
-        }, //1
+          zIndex: 3,
+        }, // 1
         {
           width: 800,
           top: 100,
           left: 200,
           opacity: 1,
-          zIndex: 4
-        }, //2
+          zIndex: 4,
+        }, // 2
         {
           width: 600,
           top: 70,
           left: 600,
           opacity: 0.8,
-          zIndex: 3
-        }, //3
+          zIndex: 3,
+        }, // 3
         {
           width: 400,
           top: 20,
           left: 750,
           opacity: 0.2,
-          zIndex: 2
-        } //4
-      ]
+          zIndex: 2,
+        }, // 4
+      ],
     };
   },
   methods: {
@@ -312,9 +346,12 @@ export default {
       this.active2 += 1;
       if (this.active2 >= 3) this.active2 = 0;
     },
-    hanldClick() {
-      console.log(777);
-    }
+    alert() {
+      alert(99);
+    },
+  },
+  mounted() {
+    console.log(this);
   },
   components: {
     YuButton,
@@ -327,8 +364,10 @@ export default {
     YuCarousel,
     YuCarouselItem,
     YuNotification,
-    YuAlert
-  }
+    YuAlert,
+    YuMessage,
+    YuMessageBox,
+  },
 };
 </script>
 

@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: "YuNotification",
+  name: 'YuNotification',
   props: {
     title: String,
     content: String,
@@ -38,35 +38,35 @@ export default {
     position: String,
     showClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
     type: String,
-    iconClass: String
+    iconClass: String,
   },
   data() {
     return {
       isActive: false,
       typeItem: {
         error: {
-          icon: "icon-close-circle",
-          color: "#F56C6C"
+          icon: 'icon-close-circle',
+          color: '#F56C6C',
         },
         info: {
-          icon: "icon-information",
-          color: "#409EFF"
+          icon: 'icon-information',
+          color: '#409EFF',
         },
         warming: {
-          icon: "icon-warning-circle",
-          color: "#E6A23C"
+          icon: 'icon-warning-circle',
+          color: '#E6A23C',
         },
         success: {
-          icon: "icon-check-circle",
-          color: "#67C23A"
-        }
+          icon: 'icon-check-circle',
+          color: '#67C23A',
+        },
       },
       isIconClass: true,
       icon: String,
-      color: String
+      color: String,
     };
   },
   methods: {
@@ -82,19 +82,19 @@ export default {
       }
     },
     handleClick(event) {
-      this.$emit("click", event);
-    }
+      this.$emit('click', event);
+    },
   },
   mounted() {
     if (this.type) {
       this.icon = this.typeItem[this.type].icon;
       this.color = this.typeItem[this.type].color;
-      this.iconClass = "";
+      this.iconClass = '';
     } else {
-      this.icon = "";
-      this.color = "#409EFF";
+      this.icon = '';
+      this.color = '#409EFF';
     }
-  }
+  },
 };
 </script>
 
