@@ -117,6 +117,9 @@ export default {
       if (this.options) {
         this.search = false;
       }
+      if (this.$parent.isField) {
+        this.$parent.handleBlur({ name: this.name, value: this.value });
+      }
       this.$emit('blur', event);
     },
     handleFocus(event) {
@@ -130,6 +133,9 @@ export default {
       this.$emit('focus', event);
     },
     handleChange() {
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value });
+      }
       this.$emit('change', this.value);
     },
     changeValue(value) {

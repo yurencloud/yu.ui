@@ -6,9 +6,10 @@
 
 <script>
 export default {
-  name: 'YuButtons',
+  name: 'YuForm',
   props: {
     inline: Boolean,
+    rules: Object,
   },
 };
 </script>

@@ -1,22 +1,24 @@
 <template>
-  <div class="yu-field" >
+  <div class="yu-field" :class="{error:error}" >
     <label :class="[align]">{{label}}</label>
     <div class="field">
       <slot/>
+      <div v-if="error" class="errorMessage">{{message}}</div>
     </div>
-    <slot/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'YuButtons',
+  name: 'YuField',
   data() {
     return {
       // {name:age,value:23}
       value: {},
       error: false,
       message: '',
+      trigger: 'submit',
+      isField: true, // 提供子组件判断父组件是field使用
     }
   },
   props: {
@@ -28,50 +30,91 @@ export default {
       default: 'left',
     },
     addLineHeight: Boolean,
+    defaultMessage: {
+      type: Object,
+      default: () => ({
+        required: '$name必填选项',
+        min: '$name最小为$value个字符',
+        max: '$name最大为$value个字符',
+        maxNumber: '$name不得大于$value',
+        minNumber: '$name不得小于$value',
+      }),
+    },
   },
   methods: {
     setValue(name, value) {
       // 如果这个field需要验证
+      const valueObj = { name, value };
+      if (!this.error) this.value = valueObj;
+    },
+    handleChange() {
       if (this.validate) {
-        const rules = this.$parent.rules;
+        this.trigger = 'change';
+        this.validateByRules(this.$parent.rules, this.value);
       }
-      this.value = { name, value };
+    },
+    handleBlur(value) {
+      this.value = value;
+      if (this.validate) {
+        this.trigger = 'blur';
+        this.validateByRules(this.$parent.rules, value);
+      }
+    },
+    handleSubmit() {
+      if (this.validate) {
+        this.trigger = 'submit';
+        this.validateByRules(this.$parent.rules, this.value);
+      }
     },
     validateByRules(rules, value) {
       const validates = rules[value.name];
+      if (!validates) return;
       validates.forEach((item) => {
         // name: [
-        //   { required: true, message: '请输入活动名称', trigger: 'blur' },
-        //   { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        //   { prop: 'required', value: true, message: '必填选项', trigger: 'blur', name: '字段的中文名或英文名(这个值默认为'')' },
+        //   { prop: 'min', value: 3, message: '最小为3个字符'}
+        //   { prop: 'max', value: 3, message: '最大为5个字符'}
+        //   { prop: 'maxNumber', value: 3, message: '不得大于3'}
+        //   { prop: 'minNumber', value: 3, message: '不得小于3'}
         // ],
-        // TODO:: 待继续
-        for (const key in item) {
-          if (item.hasOwnProperty(key)) {
-            switch (key) {
-              case 'require':// 默认false,
-                if (item.require) {
-                  if (!value.name) this.setError(item);
-                }
-                break;
-              case 'max':// 默认false,
-                if (item.max < value.value) this.setError(item);
-                break;
-              default:
-                break;
-            }
-          }
+        if (item.trigger &&　this.trigger !== item.trigger) return;
+
+        switch (item.prop) {
+          case 'required':// 默认false,
+            if (item.value && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            break;
+          case 'max':
+            if (item.value < value.value.length) this.setError(item);
+            break;
+          case 'min':
+            if (item.value > value.value.length) this.setError(item);
+            break;
+          case 'maxNumber':
+            if (item.value < value.value) this.setError(item);
+            break;
+          case 'minNumber':
+            if (item.value > value.value) this.setError(item);
+            break;
+          case 'checked':
+            if (value.value !== 'on') this.setError(item);
+            break;
+          case 'email':
+            if (value.value.match(/^(.+)@(.+)$/)) this.setError(item);
+            break;
+          default:
+            break;
         }
       })
     },
     setError(item) {
       this.error = true;
-      this.message = message;
+      this.message = item.message || this.getMessage(item);
     },
-  },
-  mounted() {
-    if (this.label.length > 4) {
-      this.addLineHeight = true;
-    }
+    getMessage(item) {
+      let message = this.defaultMessage[item.prop];
+      message = message.replace('$name', item.name).replace('$value', item.value);
+      return message;
+    },
   },
 };
 </script>
@@ -82,7 +125,7 @@ export default {
   .yu-field {
     color: $text;
     font-size: 0;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     label{
       font-size: 16px;
       width: 90px;
@@ -108,6 +151,7 @@ export default {
       display: inline-block;
       box-sizing: border-box;
       width: 370px;
+      position: relative;
       .yu-input{
         input{
           width: 100%;
@@ -118,6 +162,26 @@ export default {
       }
       .yu-switch{
         margin-top: 10px;
+      }
+    }
+
+    &.error{
+      .field {
+        .yu-input {
+          input {
+            border: 1px solid $danger;
+          }
+          textarea {
+            border: 1px solid $danger;
+          }
+        }
+        .errorMessage{
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          font-size: 14px;
+          color: $danger;
+        }
       }
     }
 
