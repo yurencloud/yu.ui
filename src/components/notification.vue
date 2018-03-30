@@ -53,7 +53,7 @@ export default {
         },
         info: {
           icon: 'icon-information',
-          color: '#409EFF',
+          color: '#909399',
         },
         warming: {
           icon: 'icon-warning-circle',

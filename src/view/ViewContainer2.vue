@@ -269,8 +269,31 @@
       <yu-button :plain="true" >打开消息提示</yu-button>
     </yu-message>
     <div class="sub-title" style="margin-top: 100px">messagebox---基本用法</div>
-    <yu-message-box>
-      哈哈哈哈哈
+    <yu-message-box showCancelButton
+                    cancelButtonText="取消"
+                    confirmButtonText="确定"
+                    showConfirmButton
+                    message="人生几何春已夏"
+                    title="提示"
+                    :event="messageBoxEvent"
+                    isWarming
+    >
+      点击打开message-box
+    </yu-message-box>
+
+    <div class="sub-title" style="margin-top: 100px">messagebox---input框</div>
+    <yu-message-box showCancelButton
+                    cancelButtonText="取消"
+                    confirmButtonText="确定"
+                    showConfirmButton
+                    message="请输入邮箱地址"
+                    title="提示"
+                    :event="messageBoxEvent"
+                    isInput
+                    inputErrorMessage="您输入的邮箱地址格式不正确"
+                    :inputPattern="/[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/"
+    >
+      点击打开message-box
     </yu-message-box>
     <div style="height: 200px;width: 30px"></div>
   </div>
@@ -335,6 +358,21 @@ export default {
           zIndex: 2,
         }, // 4
       ],
+      messageBoxEvent: {
+        confirm: () => {
+          return {
+            messagePopverType: 'success',
+            messagePopverText: '您输入得邮箱地址为:',
+          }
+        },
+        cancle: () => {
+          return {
+            messagePopverType: 'info',
+            messagePopverText: '取消删除',
+          }
+        },
+
+      },
     };
   },
   methods: {
