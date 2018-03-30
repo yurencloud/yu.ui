@@ -511,7 +511,7 @@
     </yu-form>
 
     <div class="sub-title">表单验证</div>
-    <yu-form >
+    <yu-form :rules="rules">
       <yu-field label="活动名称" validate>
         <yu-input name="activeName"/>
       </yu-field>
@@ -618,6 +618,12 @@ export default {
   name: 'ViewContainer',
   data() {
     return {
+      rules: {
+        activeName: [
+          { prop: 'required', value: true, message: '必填选项', trigger: 'blur' },
+          { prop: 'maxNumber', value: 5, message: '数字最大为5', trigger: 'blur' },
+        ],
+      },
       label2: ['', '极差2', '失望2', '一般2', '满意2', '惊喜2'],
       fetchScroll: [],
       time: {
