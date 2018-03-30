@@ -38,6 +38,7 @@ export default {
         max: '$name最大为$value个字符',
         maxNumber: '$name不得大于$value',
         minNumber: '$name不得小于$value',
+        email: '邮箱格式不正确',
       }),
     },
   },
@@ -95,11 +96,18 @@ export default {
           case 'minNumber':
             if (item.value > value.value) this.setError(item);
             break;
-          case 'checked':
-            if (value.value !== 'on') this.setError(item);
-            break;
           case 'email':
             if (value.value.match(/^(.+)@(.+)$/)) this.setError(item);
+            break;
+          case 'url':
+            const reg = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
+            if (value.value.match(reg)) this.setError(item);
+            break;
+          case 'integer':
+            if (parseInt(value.value, 0) !== value.value) this.setError(item);
+            break;
+          case 'number':
+            if (isNaN(value.value)) this.setError(item);
             break;
           default:
             break;
