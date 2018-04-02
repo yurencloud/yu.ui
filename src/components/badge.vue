@@ -1,10 +1,15 @@
 <template>
 <div class="yu-badge">
-  <div class="badge">
-    <!--todo   数字以外的内容-->
-    {{value}} <span v-if="addShow">+</span>
+  <div style="display: inline-block" v-if="!hidden">
+    <div class="badge" v-if="!isDot">
+      {{value}} <span v-if="addShow.default">+</span>
+    </div>
+    <div class="dot" v-else>
+    </div>
   </div>
-  <slot/>
+  <div class="slot" @click="handleClick">
+    <slot/>
+  </div>
 </div>
 </template>
 
@@ -13,17 +18,30 @@ export default {
   name: 'YuBadge',
   data() {
     return {
-      addShow: false,
+      addShow: {
+        type: Boolean,
+        default: false,
+      },
     }
   },
   props: {
-    value: Number,
+    value: String,
     max: Number,
+    isDot: Boolean,
+    hidden: Boolean,
+  },
+  methods: {
+    handleClick(event) {
+      this.$emit('click', event);
+    },
   },
   mounted() {
-    if (this.max < this.value) {
-      this.value = this.max;
-      this.addShow = true;
+    console.log(Number(this.value));
+    if (Number(this.value)) {
+      if (this.max < Number(this.value)) {
+        this.value = this.max;
+        this.addShow.default = true;
+      }
     }
   },
 }
@@ -39,7 +57,7 @@ export default {
     height: 20px;
     line-height: 20px;
     border-radius: 10px;
-    padding: 0 5px;
+    padding: 0 7px;
     text-align: center;
     background-color:$danger;
     display: inline-block;
@@ -47,7 +65,23 @@ export default {
     font-size: $tiny;
     position: absolute;
     right: -3px;
-    top: -10px;
+    top: -7px;
+  }
+  .slot{
+    display: inline-block;
+    padding: 5px;
+  }
+  .yu-button{
+    margin: 0;
+  }
+  .dot{
+    background-color: $danger;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    right: 3px;
+    top: 0px;
   }
 }
 </style>

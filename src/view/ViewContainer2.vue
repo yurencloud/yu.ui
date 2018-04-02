@@ -344,9 +344,38 @@
     <yu-badge value="99">
       <yu-button type="small">评价</yu-button>
     </yu-badge>
-    <yu-badge :value="99" :max="10">
+    <yu-badge value="99" :max="10">
       <yu-button type="small">评价</yu-button>
     </yu-badge>
+    <yu-badge value="New">
+      <yu-button type="small">评价</yu-button>
+    </yu-badge>
+    <yu-badge value="Hot">
+      <yu-button>评价</yu-button>
+    </yu-badge>
+    <yu-badge is-dot>
+     数据查询
+    </yu-badge>
+    <yu-badge is-dot hidden>
+      <yu-button>评价</yu-button>
+    </yu-badge>
+    <div class="sub-title" style="margin-top: 100px">progress---进度条  ---line</div>
+    <yu-progress type="line" stroke-height="10px" :percentage="80"/>
+    <yu-progress type="line" stroke-height="10px" :percentage="0"/>
+    <yu-progress type="line" stroke-height="10px" :percentage="100"/>
+    <yu-progress type="line" stroke-height="10px" :percentage="50" status="exception"/>
+    <div class="sub-title" style="margin-top: 100px">progress---进度条  ---line----文字在内部</div>
+    <yu-progress type="line" stroke-height="20px" :percentage="80" :text-inside="true"/>
+    <yu-progress type="line" stroke-height="20px" :percentage="0" :text-inside="true"/>
+    <yu-progress type="line" stroke-height="20px" :percentage="100" :text-inside="true"/>
+    <yu-progress type="line" stroke-height="20px" :percentage="50" status="exception" :text-inside="true"/>
+    <div class="sub-title" style="margin-top: 100px">progress---进度条  ---Cricle</div>
+    <yu-progress type="cricle" stroke-height="10px" color="rgb(142, 113, 199)" :percentage="80"/>
+    <yu-progress type="cricle" stroke-height="10px" :percentage="50"/>
+    <yu-progress type="cricle" stroke-height="10px" status = "exception" :percentage="50"/>
+    <yu-progress type="cricle" stroke-height="10px" :percentage="100"/>
+    <div class="sub-title" style="margin-top: 100px">tag----标签---基本用法</div>
+    <yu-tag>哈哈哈</yu-tag>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
@@ -367,6 +396,8 @@ import YuAlert from '../components/alert';
 import YuMessage from '../components/message';
 import YuMessageBox from '../components/message-box';
 import YuBadge from '../components/badge';
+import YuProgress from '../components/progress';
+import YuTag from '../components/tag';
 
 export default {
   name: 'ViewContainer',
@@ -473,6 +504,8 @@ export default {
     YuMessage,
     YuMessageBox,
     YuBadge,
+    YuProgress,
+    YuTag,
   },
 };
 </script>

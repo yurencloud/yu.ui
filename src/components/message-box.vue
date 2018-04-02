@@ -20,7 +20,7 @@
         <!--input框-->
         <div class="message-input" v-else>
           <div class="input-title">{{message}}</div>
-          <input :type="inputType" class="input" :placeholder="inputValue? inputValue :''">
+          <input :type="inputType ? inputType : 'text'" class="input" :placeholder="inputValue? inputValue :''">
           <!--验证错误-->
           <div class="verification-result"
                 v-if="!result"
@@ -33,7 +33,7 @@
           <div class="message-cancle"
                :class="[cancelButtonClass,]">
             <yu-button size="small"
-                       v-if="showCancelButton"
+                       v-if="!showCancelButton"
             >
               {{cancelButtonText}}
             </yu-button>
@@ -43,7 +43,7 @@
             <yu-button
               type="primary"
               size="small"
-              v-if="showConfirmButton"
+              v-if="!showConfirmButton"
             >
               {{confirmButtonText}}
             </yu-button>
