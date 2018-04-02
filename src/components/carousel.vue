@@ -29,7 +29,7 @@ export default {
     autoplay: false,
     interval: Number,
     type: String,
-    position: [],
+    position: null,
   },
   data() {
     return {
