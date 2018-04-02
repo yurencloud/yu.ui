@@ -275,7 +275,7 @@
                     showConfirmButton
                     message="人生几何春已夏"
                     title="提示"
-                    :event="messageBoxEvent"
+                    :event="messageBox"
                     isWarming
     >
       点击打开message-box
@@ -292,9 +292,61 @@
                     isInput
                     inputErrorMessage="您输入的邮箱地址格式不正确"
                     :inputPattern="/[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/"
+                    inputValue="请在此处输入邮箱地址"
     >
       点击打开message-box
     </yu-message-box>
+    <div class="sub-title" style="margin-top: 100px">messagebox---居中</div>
+    <yu-message-box showCancelButton
+                    cancelButtonText="取消"
+                    confirmButtonText="确定"
+                    showConfirmButton
+                    message="人生几何春已夏"
+                    title="提示"
+                    :event="messageBox"
+                    isWarming
+                    center
+                    input-type="text"
+    >
+      点击打开message-box
+    </yu-message-box>
+    <div class="sub-title" style="margin-top: 100px">messagebox---不出现删除符号</div>
+    <yu-message-box showCancelButton
+                    cancelButtonText="取消"
+                    confirmButtonText="确定"
+                    showConfirmButton
+                    message="人生几何春已夏"
+                    title="提示"
+                    :event="messageBox"
+                    isWarming
+                    center
+                    showClose
+    >
+      点击打开message-box
+    </yu-message-box>
+    <div class="sub-title" style="margin-top: 100px">messagebox---锁屏</div>
+    <yu-message-box showCancelButton
+                    cancelButtonText="取消"
+                    confirmButtonText="确定"
+                    showConfirmButton
+                    message="人生几何春已夏"
+                    title="提示"
+                    :event="messageBox"
+                    isWarming
+                    center
+                    showClose
+                    lockScroll
+                    type="warming"
+    >
+      点击打开message-box
+    </yu-message-box>
+    <div class="sub-title" style="margin-top: 100px">badge---标记---基本用法</div>
+    <yu-badge value="99">
+      <yu-button type="small">评价</yu-button>
+    </yu-badge>
+    <yu-badge :value="99" :max="10">
+      <yu-button type="small">评价</yu-button>
+    </yu-badge>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
@@ -314,6 +366,7 @@ import YuNotification from '../components/notification';
 import YuAlert from '../components/alert';
 import YuMessage from '../components/message';
 import YuMessageBox from '../components/message-box';
+import YuBadge from '../components/badge';
 
 export default {
   name: 'ViewContainer',
@@ -368,10 +421,24 @@ export default {
         cancle: () => {
           return {
             messagePopverType: 'info',
-            messagePopverText: '取消删除',
+            messagePopverText: '已取消删除',
           }
         },
 
+      },
+      messageBox: {
+        confirm: () => {
+          return {
+            messagePopverType: 'success',
+            messagePopverText: '删除成功',
+          }
+        },
+        cancle: () => {
+          return {
+            messagePopverType: 'info',
+            messagePopverText: '已取消删除',
+          }
+        },
       },
     };
   },
@@ -405,6 +472,7 @@ export default {
     YuAlert,
     YuMessage,
     YuMessageBox,
+    YuBadge,
   },
 };
 </script>

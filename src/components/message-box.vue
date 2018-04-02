@@ -3,22 +3,24 @@
    <!--弹出框-->
     <div class="message-dialog"
          v-show="isShow"
+         :class='[{center:center},customClass]'
     >
       <div class="dialog-box"
            @click="handleClick"
       >
-        <div class="message-title">{{title}} <i class="iconfont icon-close" id="message-icon"></i></div>
+        <div class="message-title">{{title}} <i class="iconfont icon-close" v-if="!showClose" id="message-icon"></i></div>
         <!--文字-->
         <div class="message-text" v-if="!isInput">
-          <i :class="['iconfont',warming]"
-             v-if="isWarming"
+          <i :class="['iconfont',typeItems[type].icon]"
+             v-if="type"
+             :style="{color:typeItems[type].color}"
           ></i>
           <div>{{message}}</div>
         </div>
         <!--input框-->
         <div class="message-input" v-else>
           <div class="input-title">{{message}}</div>
-          <input type="text" class="input">
+          <input :type="inputType" class="input" :placeholder="inputValue? inputValue :''">
           <!--验证错误-->
           <div class="verification-result"
                 v-if="!result"
@@ -28,14 +30,16 @@
         </div>
         <div class="message-btn">
           <!--确认和取消按钮-->
-          <div class="message-cancle">
+          <div class="message-cancle"
+               :class="[cancelButtonClass,]">
             <yu-button size="small"
                        v-if="showCancelButton"
             >
               {{cancelButtonText}}
             </yu-button>
           </div>
-          <div class="message-confirm">
+          <div class="message-confirm"
+               :class="[confirmButtonClass,]">
             <yu-button
               type="primary"
               size="small"
@@ -53,7 +57,7 @@
          :class="[messagePopver.messagePopverType,{active:isActive},]"
     >
       <i :class="['iconfont',typeItems[messagePopver.messagePopverType] ? typeItems[messagePopver.messagePopverType].icon : '',]"></i>
-      <span>{{messagePopver.messagePopverText || ''}}</span>
+      <span>{{messagePopver.messagePopverText + (value ? value : '')|| ''}}</span>
     </div>
    <div class="message-trigger" @click="onclick">
      <slot/>
@@ -74,9 +78,17 @@ export default {
       isShow: false,
       messageShow: false,
       typeItems: {
+        error: {
+          icon: 'icon-close-circle',
+          color: '#F56C6C',
+        },
         info: {
           icon: 'icon-information',
           color: '#909399',
+        },
+        warming: {
+          icon: 'icon-warning-circle',
+          color: '#E6A23C',
         },
         success: {
           icon: 'icon-check-circle',
@@ -86,7 +98,6 @@ export default {
       messagePopver: {},
       icon: String,
       isActive: false,
-      warming: 'icon-warning-circle',
       result: true,
       value: String,
     }
@@ -99,42 +110,55 @@ export default {
     message: String,
     title: String,
     event: null,
-    isWarming: Boolean,
     isInput: Boolean,
     inputErrorMessage: String,
     inputPattern: null,
+    center: Boolean,
+    showClose: Boolean,
+    lockScroll: Boolean,
+    inputValue: String,
+    cancelButtonClass: String,
+    confirmButtonClass: String,
+    inputType: String,
+    type: String,
+    customClass: String,
   },
   methods: {
     onclick() {
       this.isShow = !this.isShow;
+      if (this.lockScroll) {
+        document.querySelector('body').classList.add('lock-scroll');
+      }
     },
     handleClick(event) {
       if (event.target.parentNode.className === 'message-confirm') {
         this.event ? this.messagePopver = this.event.confirm() : '';
-        this.change();
         if (this.isInput) {
           this.value = document.querySelector('.yu-message-box input').value;
           this.result = this.inputPattern.test(this.value);
-          //  todo  存在bug
+          this.result ? this.change() : '';
+        }else{
+          this.value = '';
           this.result ? this.change() : '';
         }
-        this.$emit('click', event)
+        document.querySelector('.yu-message-box input').value = '';
+        // this.$emit('click', event)
       } else if (event.target.parentNode.className === 'message-cancle' || event.target.id === 'message-icon') {
         this.event ? this.messagePopver = this.event.cancle() : '';
+        this.value = '';
         this.change();
       }
     },
     change() {
       this.isShow = !this.isShow;
       this.isActive = !this.isActive;
+      document.querySelector('body').classList.remove('lock-scroll');
       setTimeout(() => {
         this.isActive = !this.isActive;
       }, 2000);
     },
   },
-  mounted() {
-    console.log(this);
-  },
+
 
 }
 </script>
@@ -146,6 +170,7 @@ export default {
     display: inline-block;
     .message-dialog{
       position: fixed;
+      z-index: 999;
       width: 100%;
       height: 100%;
       top: 0;
@@ -177,7 +202,7 @@ export default {
           }
         }
         .message-text{
-          margin: 10px 0;
+          margin: 15px 0;
           vertical-align: center;
           position: relative;
           i{
@@ -217,7 +242,7 @@ export default {
           }
         }
         .message-btn{
-          float: right;
+          text-align: right;
         }
         .message-cancle{
           display: inline-block;
@@ -259,5 +284,12 @@ export default {
       cursor: pointer;
       color: $primary;
     }
+    .message-dialog.center{
+      text-align: center;
+      .message-btn{
+        display: inline-block;
+      }
+    }
   }
 </style>
+
