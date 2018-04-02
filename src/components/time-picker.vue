@@ -1,6 +1,6 @@
 <template>
   <div class="yu-time-picker">
-    <yu-input v-if="type==='simple'" prefix="icon-clock" :options="options" overflow clearable/>
+    <yu-input v-if="type==='simple'" prefix="icon-clock" :options="options" overflow clearable :name="name"/>
     <yu-scroll-select
       :split="':'"
       ref="scroll"
@@ -49,6 +49,7 @@ export default {
         }
       },
     },
+    name: String,
   },
   methods: {
     getMinute(time) {

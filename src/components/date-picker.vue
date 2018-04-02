@@ -1,6 +1,15 @@
 <template>
   <div class="yu-date-picker">
-    <yu-input  ref="input" :name="name" prefix="icon-calender" overflow clearable @click="handleClick" :placeholder="placeholder"/>
+    <yu-input  ref="input"
+               :name="name"
+               prefix="icon-calender"
+               overflow
+               clearable
+               @click="handleClick"
+               @blur="handleBlur"
+               @change="handleChange"
+               @clear="handleClear"
+               :placeholder="placeholder"/>
     <!--选择日期-->
     <div v-show="visible && active==='day'" class="container">
       <div class="head">
@@ -102,7 +111,7 @@ export default {
       years: [],
       year: 0,
       month: 0,
-      value: null,
+      value: '',
       visible: false,
       placeholder: '',
       yearStart: 0,
@@ -140,8 +149,24 @@ export default {
     },
   },
   methods: {
+    handleClear() {
+      this.value = '';
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value });
+      }
+    },
+    handleBlur() {
+      if (this.$parent.isField) {
+        this.$parent.handleBlur({ name: this.name, value: this.value });
+      }
+    },
+    handleChange() {
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value });
+      }
+    },
     handleClick() {
-      this.visible = true;
+      this.visible = !this.visible;
     },
     getDateStr(date) {
       const year = date.getFullYear();
@@ -191,7 +216,7 @@ export default {
       }
       this.days = group;
       this.$refs.input.changeValue('');
-      this.value = null;
+      this.value = '';
     },
     getMonths() {
       const tds = [];
@@ -211,7 +236,7 @@ export default {
       }
       this.months = group;
       this.$refs.input.changeValue('');
-      this.value = null;
+      this.value = '';
     },
     getYears() {
       const tds = [];
@@ -230,11 +255,11 @@ export default {
       }
       this.years = group;
       this.$refs.input.changeValue('');
-      this.value = null;
+      this.value = '';
     },
     selectDay($event) {
       // 刷新日期
-      if (this.value) {
+      if (this.value.trim().length !== 0) {
         document.querySelector('.date tr td.active').classList.remove('active');
       }
       // 添加选中日期
@@ -248,10 +273,13 @@ export default {
       this.value = node.getAttribute('data-value');
       this.visible = false;
       this.$refs.input.changeValue(this.value);
+      if (this.$parent.isField) {
+        this.$parent.handleBlur({ name: this.name, value: this.value });
+      }
     },
     selectMonth($event) {
       // 刷新日期
-      if (this.value) {
+      if (this.value.trim().length !== 0) {
         document.querySelector('.date.month tr td.active').classList.remove('active');
       }
       // 添加选中日期
@@ -271,10 +299,13 @@ export default {
         this.visible = false;
         this.$refs.input.changeValue(this.value);
       }
+      if (this.$parent.isField) {
+        this.$parent.handleBlur({ name: this.name, value: this.value });
+      }
     },
     selectYear($event) {
       // 刷新日期
-      if (this.value) {
+      if (this.value.trim().length !== 0) {
         document.querySelector('.date.month tr td.active').classList.remove('active');
       }
       // 添加选中日期
@@ -293,6 +324,9 @@ export default {
       } else {
         this.visible = false;
         this.$refs.input.changeValue(this.value);
+      }
+      if (this.$parent.isField) {
+        this.$parent.handleBlur({ name: this.name, value: this.value });
       }
     },
     getByActive() {
@@ -354,6 +388,7 @@ export default {
         div{
           display: inline-block;
           padding: 8px;
+          font-size: $normal;
           span:hover{
             color:$primary;
             cursor: pointer;

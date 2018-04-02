@@ -1,14 +1,19 @@
 <template>
-  <div class="yu-field" :class="{error:error}" >
-    <label :class="[align]">{{label}}</label>
+  <div class="yu-field" :class="[{error:error}]" >
+    <label :class="[align,{noLabel:noLabel}]">{{label}}</label>
     <div class="field">
       <slot/>
-      <div v-if="error" class="errorMessage">{{message}}</div>
+      <span v-if="!list&&error" class="errorMessage">{{messages[0]}}</span>
+      <div v-if="list&&error" class="errorMessages">
+        <p v-bind:key="index" v-for="(index, item) in messages">{{item}}</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+const validation = require('yu.validation');
+
 export default {
   name: 'YuField',
   data() {
@@ -16,7 +21,7 @@ export default {
       // {name:age,value:23}
       value: {},
       error: false,
-      message: '',
+      messages: [],
       trigger: 'submit',
       isField: true, // 提供子组件判断父组件是field使用
     }
@@ -29,7 +34,8 @@ export default {
       type: String,
       default: 'left',
     },
-    addLineHeight: Boolean,
+    noLabel: Boolean,
+    list: Boolean,
     defaultMessage: {
       type: Object,
       default: () => ({
@@ -38,17 +44,39 @@ export default {
         max: '$name最大为$value个字符',
         maxNumber: '$name不得大于$value',
         minNumber: '$name不得小于$value',
-        email: '邮箱格式不正确',
+        email: '$name邮箱格式不正确',
+        url: '$nameURL网址不正确',
+        integer: '$name必须是整数',
+        number: '$name必须是数字',
+        contain: '$name必须包含"$value"',
+        notContain: '$name不得包含"$value"',
+        match: '$name的值必须和$other相同',
+        different: '$name的值必须和$other不同',
+        chinese: '$name必须为中文',
+        idNumber: '$name身份证不正确',
+        password: '$name密码格式不符合要求',
+        mobile: '$name手机号格式不正确',
+        telephone: '$name电话号码格式不正确',
+        domain: '$name域名格式不正确',
+        username: '$name用户名格式不正确',
+        ip: '$nameIP地址不正确',
+        accepted: '$name必须选择',
+        between: '$name必须在$value之间',
+        in: '$name必须为[$value]之一',
+        notIn: '$name不可以是[$value]之一',
+        regex: '$name必须符合规则',
+        requiredIf: '当填写了$other，则$name为必填选项',
+        requiredWithout: '当未填写$other，则$name为必填选项',
+        requiredWith: '当填写了$other其中一项，则$name为必填选项',
+        requiredWithAll: '当填写了$other中所有选项，则$name为必填选项',
+        requiredWithoutAll: '当未填写$other中所有选项，则$name为必填选项',
       }),
     },
   },
   methods: {
-    setValue(name, value) {
-      // 如果这个field需要验证
-      const valueObj = { name, value };
-      if (!this.error) this.value = valueObj;
-    },
-    handleChange() {
+    handleChange(value) {
+      this.value = value;
+      this.$parent.setValues(value);
       if (this.validate) {
         this.trigger = 'change';
         this.validateByRules(this.$parent.rules, this.value);
@@ -56,33 +84,28 @@ export default {
     },
     handleBlur(value) {
       this.value = value;
+      this.$parent.setValues(value);
       if (this.validate) {
         this.trigger = 'blur';
         this.validateByRules(this.$parent.rules, value);
       }
     },
-    handleSubmit() {
-      if (this.validate) {
-        this.trigger = 'submit';
-        this.validateByRules(this.$parent.rules, this.value);
-      }
-    },
     validateByRules(rules, value) {
+      const the = this;
       const validates = rules[value.name];
       if (!validates) return;
+      // 初始化错误信息
+      this.error = false;
+      this.messages = [];
       validates.forEach((item) => {
         // name: [
-        //   { prop: 'required', value: true, message: '必填选项', trigger: 'blur', name: '字段的中文名或英文名(这个值默认为'')' },
-        //   { prop: 'min', value: 3, message: '最小为3个字符'}
-        //   { prop: 'max', value: 3, message: '最大为5个字符'}
-        //   { prop: 'maxNumber', value: 3, message: '不得大于3'}
-        //   { prop: 'minNumber', value: 3, message: '不得小于3'}
+        //   { prop: 'required', value: true, message: '必填选项', trigger: 'blur', name: '字段的中文名或英文名(这个值默认为'')', other: '另一字段的中文名称' },
         // ],
         if (item.trigger &&　this.trigger !== item.trigger) return;
-
+        let result;
         switch (item.prop) {
           case 'required':// 默认false,
-            if (item.value && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            if (!value.name || value.value.trim().length === 0) this.setError(item);
             break;
           case 'max':
             if (item.value < value.value.length) this.setError(item);
@@ -97,17 +120,111 @@ export default {
             if (item.value > value.value) this.setError(item);
             break;
           case 'email':
-            if (value.value.match(/^(.+)@(.+)$/)) this.setError(item);
+            if (!validation.isEmail(value.value)) this.setError(item);
             break;
           case 'url':
-            const reg = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
-            if (value.value.match(reg)) this.setError(item);
+            if (!validation.isUrl(value.value)) this.setError(item);
             break;
           case 'integer':
-            if (parseInt(value.value, 0) !== value.value) this.setError(item);
+            if (!validation.isInteger(value.value)) this.setError(item);
             break;
           case 'number':
-            if (isNaN(value.value)) this.setError(item);
+            if (!validation.isNumber(value.value)) this.setError(item);
+            break;
+          case 'contain':
+            if (value.value.indexOf(item.value) === -1) this.setError(item);
+            break;
+          case 'notContain':
+            if (value.value.indexOf(item.value) > -1) this.setError(item);
+            break;
+            // 要和已经存在的字段的值相同,每次只能match一个，但可以添加多个match验证
+          case 'match':
+            if (the.$parent.getValue(item.value) !== value.value) this.setError(item);
+            break;
+          case 'different':
+            if (the.$parent.getValue(item.value) === value.value) this.setError(item);
+            break;
+          case 'chinese':
+            if (!validation.isChinese(value.value)) this.setError(item);
+            break;
+          case 'idNumber':
+            if (!validation.isIdNumber(value.value)) this.setError(item);
+            break;
+          case 'password':
+            if (!validation.isPassword(value.value)) this.setError(item);
+            break;
+          case 'mobile':
+            if (!validation.isMobile(value.value)) this.setError(item);
+            break;
+          case 'telephone':
+            if (!validation.isTelephone(value.value)) this.setError(item);
+            break;
+          case 'domain':
+            if (!validation.isDomain(value.value)) this.setError(item);
+            break;
+          case 'username':
+            if (!validation.isUsername(value.value)) this.setError(item);
+            break;
+          case 'ip':
+            if (!validation.isIp(value.value)) this.setError(item);
+            break;
+          // 判断接受，比如同意
+          case 'accepted':
+            if (value.value !== 'on' && value.value !== true && value.value !== 1) this.setError(item);
+            break;
+          // 数字区间 [low, high],含边界
+          case 'between':
+            if (item.value[0] > value.value || item.value[1] < value.value) this.setError(item);
+            break;
+          // 值在数组中 [1,2,3] ['a','b','c']
+          case 'in':
+            if (item.value.indexOf(value.value) === -1) this.setError(item);
+            break;
+          // 值不在数组中 [1,2,3] ['a','b','c']
+          case 'notIn':
+            if (item.value.indexOf(value.value) !== -1) this.setError(item);
+            break;
+          // 自定义正则 验证
+          case 'regex':
+            if (!item.value.test(value.value)) this.setError(item);
+            break;
+          // 如果指定1个字段有值，那么该字段也必须有
+          case 'requiredIf':
+            if (the.$parent.hasValue(item.value) && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            break;
+          // 如果指定1个字段没值，那么该字段也必须有
+          case 'requiredWithout':
+            if (!the.$parent.hasValue(item.value) && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            break;
+          // 如果指定多个字段其中一个有值['name','age']，那么该字段也必须有
+          case 'requiredWith':
+            result = false;
+            item.value.forEach((i) => {
+              if (the.$parent.hasValue(i)) {
+                result = true;
+              }
+            });
+            if (result && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            break;
+          // 如果指定多个字段全部有值['name','age']，那么该字段也必须有
+          case 'requiredWithAll':
+            result = true;
+            item.value.forEach((i) => {
+              if (!the.$parent.hasValue(i)) {
+                result = false;
+              }
+            });
+            if (result && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            break;
+          // 如果指定多个字段全部没有值['name','age']，那么该字段也必须有
+          case 'requiredWithoutAll':
+            result = true;
+            item.value.forEach((i) => {
+              if (the.$parent.hasValue(i)) {
+                result = false;
+              }
+            });
+            if (result && (!value.name || value.value.trim().length === 0)) this.setError(item);
             break;
           default:
             break;
@@ -116,11 +233,11 @@ export default {
     },
     setError(item) {
       this.error = true;
-      this.message = item.message || this.getMessage(item);
+      this.messages.push(item.message || this.getMessage(item));
     },
     getMessage(item) {
       let message = this.defaultMessage[item.prop];
-      message = message.replace('$name', item.name).replace('$value', item.value);
+      message = message.replace('$name', item.name).replace('$value', item.value ? item.value.toString() : '').replace('$other', item.other);
       return message;
     },
   },
@@ -134,6 +251,11 @@ export default {
     color: $text;
     font-size: 0;
     margin-bottom: 14px;
+    display: inline-block;
+    vertical-align: top;
+    .noLabel{
+      display: none!important;
+    }
     label{
       font-size: 16px;
       width: 90px;
@@ -158,8 +280,8 @@ export default {
       vertical-align: top;
       display: inline-block;
       box-sizing: border-box;
-      width: 370px;
-      position: relative;
+      width: 80%;
+      min-width: 370px;
       .yu-input{
         input{
           width: 100%;
@@ -184,11 +306,16 @@ export default {
           }
         }
         .errorMessage{
-          position: absolute;
-          bottom: -8px;
-          left: 0;
+          float: left;
           font-size: 14px;
           color: $danger;
+        }
+        .errorMessages{
+          font-size: 14px;
+          color: $danger;
+          p{
+            margin: 2px;
+          }
         }
       }
     }

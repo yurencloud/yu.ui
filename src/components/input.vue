@@ -109,6 +109,7 @@ export default {
   methods: {
     clear() {
       this.value = '';
+      this.$emit('clear');
     },
     handleClick(event) {
       this.$emit('click', event);

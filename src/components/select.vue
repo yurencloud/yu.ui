@@ -8,12 +8,15 @@
       suffix="icon-angle-down"
       :placeholder="text"
       :disabled="disabled"
+      :name="name"
+      clearable
+      @clear="clear"
     />
     <div class="options" :class="[{overflow:overflow}]" v-show="visible">
       <slot/>
     </div>
     <!--选中选项显示-->
-    <div class="selected" v-if="selects.length>0">
+    <div class="selected" v-if="showSelects && selects.length>0">
       <yu-selected v-for="item in selects" v-bind:key="item.value" :value="item.value">{{item.label}}</yu-selected>
     </div>
   </div>
@@ -39,6 +42,8 @@ export default {
     disabled: Boolean,
     multi: Boolean,
     options: Array,
+    name: String,
+    showSelects: Boolean,
   },
   created() {
     this.$on('handleSelect', this.handleSelect);
@@ -46,30 +51,69 @@ export default {
   },
 
   methods: {
+    clear() {
+      this.value = '';
+      this.label = '';
+      this.selects = [];
+
+      this.$children.forEach((item) => {
+        item.hide = false;
+      });
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: '' });
+      }
+    },
     handleClick(event) {
       this.visible = !this.visible;
       if (!this.visible) event.target.blur();
     },
     handleSelect(option) {
+      const labels = [];
+      const values = [];
       if (this.multi) {
         this.selects.push(option);
+        this.selects.forEach((item) => {
+          values.push(item.value);
+          labels.push(item.label);
+        })
       }
-      this.$refs.input.value = option.label;
+      this.$refs.input.value = this.multi ? labels.toString() : option.label;
       this.$refs.input.$el.children[0].blur();
       this.value = option.value;
       this.label = option.label;
       this.visible = false;
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.multi ? values.toString() : this.value });
+      }
     },
     handleBlur() {
       this.visible = false;
+      if (this.$parent.isField) {
+        const values = [];
+        this.selects.forEach((item) => {
+          values.push(item.value);
+        })
+        this.$parent.handleBlur({ name: this.name, value: this.multi ? values.toString() : this.value });
+      }
     },
     cancelSelect(option) {
-      this.selects.splice(this.selects.findIndex(item => item.value === option.value), 1)
+      const labels = [];
+      const values = [];
+      this.selects.splice(this.selects.findIndex(item => item.value === option.value), 1);
+      this.selects.forEach((item) => {
+        values.push(item.value);
+        labels.push(item.label);
+      })
+      this.$refs.input.value = labels.toString();
+      this.$refs.input.$el.children[0].blur();
       this.$children.forEach((item) => {
         if (item.value === option.value) {
           item.hide = false;
         }
       })
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: values.toString() });
+      }
     },
   },
 

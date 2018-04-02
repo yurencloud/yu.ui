@@ -248,7 +248,7 @@
     </yu-select>
 
     <div class="sub-title">显示选项</div>
-    <yu-select text="请选择动物" overflow multi>
+    <yu-select text="请选择动物" overflow multi showSelects>
       <yu-option label="猫" value="1"/>
       <yu-option label="狗" value="2" disabled/>
       <yu-option label="狗" value="3"/>
@@ -511,12 +511,27 @@
     </yu-form>
 
     <div class="sub-title">表单验证</div>
-    <yu-form :rules="rules">
+    <yu-form :rules="rules" width="1000px">
       <yu-field label="活动名称" validate>
         <yu-input name="activeName"/>
       </yu-field>
+      <yu-field label="活动名称2" validate>
+        <yu-input name="activeName2"/>
+      </yu-field>
+      <yu-field label="活动名称3" validate>
+        <yu-input name="activeName3"/>
+      </yu-field>
       <yu-field label="活动动物" validate>
-        <yu-select text="请选择动物" overflow>
+        <yu-select name="animal" text="请选择动物" overflow>
+          <yu-option label="猫" value="1"/>
+          <yu-option label="狗" value="2" disabled/>
+          <yu-option label="狗" value="3"/>
+          <yu-option label="狗" value="4"/>
+          <yu-option label="狗" value="5"/>
+        </yu-select>
+      </yu-field>
+      <yu-field label="活动动物" validate>
+        <yu-select name="animal" text="请选择动物" overflow multi>
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
           <yu-option label="狗" value="3"/>
@@ -525,8 +540,10 @@
         </yu-select>
       </yu-field>
       <yu-field label="选择日期" validate>
-        <yu-date-picker style="width: 50%;display: inline-block;"/>
-        <yu-time-picker style="width: 48%;display: inline-block;"/>
+        <yu-date-picker name="date" style="width: 50%;" />
+      </yu-field>
+      <yu-field validate no-label>
+        <yu-time-picker name="time" style="width: 48%;" />
       </yu-field>
       <yu-field label="即时配送" validate>
         <yu-switch label="确认"/>
@@ -620,8 +637,49 @@ export default {
     return {
       rules: {
         activeName: [
-          { prop: 'required', value: true, message: '必填选项', trigger: 'blur' },
-          { prop: 'maxNumber', value: 5, message: '数字最大为5', trigger: 'blur' },
+          { prop: 'required', value: true, trigger: 'blur', name: '活动名称' },
+          // { prop: 'min', value: 4, trigger: 'blur', name: '活动名称' },
+          // { prop: 'max', value: 7, trigger: 'blur', name: '活动名称' },
+          // { prop: 'email', trigger: 'blur', name: '活动名称' },
+          // { prop: 'minNumber', value: 4, trigger: 'blur', name: '活动名称' },
+          // { prop: 'maxNumber', value: 6, trigger: 'blur', name: '活动名称' },
+          // { prop: 'url', trigger: 'blur', name: '活动名称' },
+          // { prop: 'integer', trigger: 'blur', name: '活动名称' },
+          // { prop: 'number', trigger: 'blur', name: '活动名称' },
+          // { prop: 'contain', value: 'abc', trigger: 'blur', name: '活动名称' },
+          // { prop: 'notContain', value: 'abc', trigger: 'blur', name: '活动名称' },
+          // { prop: 'chinese', trigger: 'blur', name: '活动名称' },
+          // { prop: 'idNumber', trigger: 'blur', name: '活动名称' },
+          // { prop: 'password', trigger: 'blur', name: '活动名称' },
+          // { prop: 'mobile', trigger: 'blur', name: '活动名称' },
+          // { prop: 'between', value: [1, 6], trigger: 'blur', name: '活动名称' },
+          // { prop: 'notIn', value: ['1', '6'], trigger: 'blur', name: '活动名称' },
+          // { prop: 'regex', value: /^-?\d+$/, trigger: 'blur', message: '正则整数', name: '活动名称' },
+        ],
+        activeName2: [
+          // { prop: 'match', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          // { prop: 'different', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          // { prop: 'requiredIf', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          // { prop: 'requiredWithout', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          // { prop: 'requiredWith', value: ['activeName'], trigger: 'blur', name: '活动名称2', other: '活动名称' },
+        ],
+        activeName3: [
+          // { prop: 'match', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          // { prop: 'different', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          // { prop: 'requiredIf', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          // { prop: 'requiredWithout', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          // { prop: 'requiredWith', value: ['activeName', 'activeName2'], trigger: 'blur', name: '活动名称3', other: '活动名称或活动名称2' },
+          // { prop: 'requiredWithAll', value: ['activeName', 'activeName2'], trigger: 'blur', name: '活动名称3', other: '活动名称和活动名称2' },
+          // { prop: 'requiredWithoutAll', value: ['activeName', 'activeName2'], trigger: 'blur', name: '活动名称3', other: '活动名称和活动名称2' },
+        ],
+        animal: [
+          { prop: 'required', trigger: 'blur', name: '动物' },
+        ],
+        date: [
+          { prop: 'required', trigger: 'blur', name: '日期' },
+        ],
+        time: [
+          { prop: 'required', trigger: 'blur', name: '时间' },
         ],
       },
       label2: ['', '极差2', '失望2', '一般2', '满意2', '惊喜2'],
