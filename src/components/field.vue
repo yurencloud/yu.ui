@@ -76,24 +76,26 @@ export default {
   methods: {
     handleChange(value) {
       this.value = value;
-      this.$parent.setValues(value);
+      const parent = (this.$parent.isFields ? this.$parent.$parent : this.$parent);
+      parent.setValues(value);
       if (this.validate) {
         this.trigger = 'change';
-        this.validateByRules(this.$parent.rules, this.value);
+        this.validateByRules(parent.rules, this.value);
       }
     },
     handleBlur(value) {
       this.value = value;
-      this.$parent.setValues(value);
+      const parent = (this.$parent.isFields ? this.$parent.$parent : this.$parent);
+      parent.setValues(value);
       if (this.validate) {
         this.trigger = 'blur';
-        this.validateByRules(this.$parent.rules, value);
+        this.validateByRules(parent.rules, value);
       }
     },
     validateByRules(rules, value) {
-      const the = this;
       const validates = rules[value.name];
       if (!validates) return;
+      const parent = (this.$parent.isFields ? this.$parent.$parent : this.$parent);
       // 初始化错误信息
       this.error = false;
       this.messages = [];
@@ -139,10 +141,10 @@ export default {
             break;
             // 要和已经存在的字段的值相同,每次只能match一个，但可以添加多个match验证
           case 'match':
-            if (the.$parent.getValue(item.value) !== value.value) this.setError(item);
+            if (parent.getValue(item.value) !== value.value) this.setError(item);
             break;
           case 'different':
-            if (the.$parent.getValue(item.value) === value.value) this.setError(item);
+            if (parent.getValue(item.value) === value.value) this.setError(item);
             break;
           case 'chinese':
             if (!validation.isChinese(value.value)) this.setError(item);
@@ -190,17 +192,17 @@ export default {
             break;
           // 如果指定1个字段有值，那么该字段也必须有
           case 'requiredIf':
-            if (the.$parent.hasValue(item.value) && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            if (parent.hasValue(item.value) && (!value.name || value.value.trim().length === 0)) this.setError(item);
             break;
           // 如果指定1个字段没值，那么该字段也必须有
           case 'requiredWithout':
-            if (!the.$parent.hasValue(item.value) && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            if (!parent.hasValue(item.value) && (!value.name || value.value.trim().length === 0)) this.setError(item);
             break;
           // 如果指定多个字段其中一个有值['name','age']，那么该字段也必须有
           case 'requiredWith':
             result = false;
             item.value.forEach((i) => {
-              if (the.$parent.hasValue(i)) {
+              if (parent.hasValue(i)) {
                 result = true;
               }
             });
@@ -210,7 +212,7 @@ export default {
           case 'requiredWithAll':
             result = true;
             item.value.forEach((i) => {
-              if (!the.$parent.hasValue(i)) {
+              if (!parent.hasValue(i)) {
                 result = false;
               }
             });
@@ -220,7 +222,7 @@ export default {
           case 'requiredWithoutAll':
             result = true;
             item.value.forEach((i) => {
-              if (the.$parent.hasValue(i)) {
+              if (parent.hasValue(i)) {
                 result = false;
               }
             });

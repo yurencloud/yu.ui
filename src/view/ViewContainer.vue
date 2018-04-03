@@ -539,12 +539,16 @@
           <yu-option label="狗" value="5"/>
         </yu-select>
       </yu-field>
-      <yu-field label="选择日期" validate>
+      <yu-fields>
+
+      <yu-field label="选择日期" validate no-label>
         <yu-date-picker name="date" style="width: 50%;" />
       </yu-field>
       <yu-field validate no-label>
         <yu-time-picker name="time" style="width: 48%;" />
       </yu-field>
+      </yu-fields>
+
       <yu-field label="即时配送" validate>
         <yu-switch label="确认"/>
       </yu-field>
@@ -629,6 +633,7 @@ import YuUpload from '../components/upload';
 import YuRate from '../components/rate';
 import YuForm from '../components/form';
 import YuField from '../components/field';
+import YuFields from '../components/fields';
 
 
 export default {
@@ -1039,6 +1044,7 @@ export default {
     YuRate,
     YuForm,
     YuField,
+    YuFields,
   },
   mounted() {
     const the = this;
