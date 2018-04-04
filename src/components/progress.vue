@@ -68,7 +68,6 @@ export default {
     if (this.type === 'cricle') {
       this.$nextTick(() => {
         let demo2 = this.$refs.bar;
-        console.log(demo2);
         let circleLength = Math.floor(2 * Math.PI * demo2.getAttribute('r'));
         demo2.setAttribute('stroke-dasharray', `${circleLength * (this.percentage / 100)},10000`);
       })

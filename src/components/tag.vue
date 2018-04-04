@@ -1,14 +1,19 @@
 <template>
-  <div class="yu-tag"
-       :class="[type,]"
-       @click="close"
-       v-if="isShow">
-    <slot/>
-    <i class="iconfont"
-       v-if="closable"
-       :class="[{'icon-close':closable,'close-circle':!closeIcon}]"
-    ></i>
-  </div>
+  <transition :name="disableTransitions ? '' : 'fade'">
+    <div class="yu-tag"
+         :class="[type,size,{hit:!hit}]"
+         v-if="isShow"
+         :style="{backgroundColor:color}">
+      <slot/>
+      <i class="iconfont"
+         v-if="closable"
+         :class="[{'icon-close':closable,'icon-close-circle':!closeIcon}]"
+         @click.stop="handleClose"
+         @mouseover="toggle"
+         @mouseleave="toggle"
+      ></i>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -17,6 +22,10 @@ export default {
   props: {
     type: String,
     closable: Boolean,
+    size: String,
+    hit: Boolean,
+    disableTransitions: Boolean,
+    color: String,
   },
   data() {
     return {
@@ -25,11 +34,11 @@ export default {
     }
   },
   methods: {
-    close() {
-      this.isShow = !this.isShow;
-    },
     toggle() {
       this.closeIcon = !this.closeIcon;
+    },
+    handleClose(event) {
+      this.$emit('close', event);
     },
   },
 }
@@ -39,7 +48,7 @@ export default {
   @import "../assets/css/varible";
   @import "../assets/css/function";
   .yu-tag{
-     padding:0 10px;
+     padding:0 7px;
     border: $primary;
     background-color: lighten($primary,33);
     display: inline-block;
@@ -54,10 +63,12 @@ export default {
     margin-right: 10px;
     margin-bottom: 10px;
     i{
-      font-size: $small;
+      font-size: $normal;
       margin-left: 3px;
+      cursor: pointer;
     }
   }
+  /*不同主题的*/
   .yu-tag.info{
     border: $info;
     background-color: lighten($info,35);
@@ -82,5 +93,29 @@ export default {
     color: $danger;
     border: 1px solid lighten($danger,20);
   }
-
+  /*不同尺寸的*/
+  .yu-tag.medium{
+    height: 28px;
+    line-height: 26px;
+  }
+  .yu-tag.small{
+    height: 24px;
+    line-height: 22px;
+  }
+  .yu-tag.mini{
+    height: 20px;
+    line-height: 18px;
+  }
+  /*边框*/
+  .yu-tag.hit{
+    border: none;
+  }
+  /*过渡*/
+  .fade-enter, .fade-leave-active {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .fade-enter-active, .fade-leave-active{
+    transition: all .3s linear;
+  }
 </style>

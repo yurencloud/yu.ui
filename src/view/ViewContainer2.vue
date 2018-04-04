@@ -386,6 +386,34 @@
     <yu-tag closable type="success">标签一</yu-tag>
     <yu-tag closable type="warming">标签一</yu-tag>
     <yu-tag closable type="error">标签一</yu-tag>
+    <div class="sub-title" style="margin-top: 100px">tag----标签---不同尺寸的</div>
+    <yu-tag closable>标签一</yu-tag>
+    <yu-tag closable type="info" size="medium">标签一</yu-tag>
+    <yu-tag closable type="success" size="small">标签一</yu-tag>
+    <yu-tag closable type="warming" size="mini">标签一</yu-tag>
+    <yu-tag closable type="error">标签一</yu-tag>
+    <div class="sub-title" style="margin-top: 100px">tag----标签---没有边框的</div>
+    <yu-tag closable hit>标签一</yu-tag>
+    <yu-tag closable hit type="info" size="medium">标签一</yu-tag>
+    <yu-tag closable hit type="success" size="small">标签一</yu-tag>
+    <yu-tag closable hit type="warming" size="mini">标签一</yu-tag>
+    <yu-tag closable hit type="error" @close="handleClose">标签一</yu-tag>
+    <div class="sub-title" style="margin-top: 100px">tag----标签---关闭时出现动画----可删除</div>
+    <yu-tag v-for="item in tags"
+           closable
+           :disable-transitions="false"
+           @close="Close(item)">{{item}}</yu-tag>
+    <yu-tag closable hit type="error" @close="handleClose" colo="pink">标签一</yu-tag>
+    <div class="sub-title" style="margin-top: 100px">table</div>
+    <yu-table :widths="widths" :data="tabItem"/>
+    <div class="sub-title" style="margin-top: 100px">table----带有斑马纹</div>
+    <yu-table :widths="widths" :data="tabItem" stripe/>
+    <div class="sub-title" style="margin-top: 100px">table----带边框的表格</div>
+    <yu-table :widths="widths" :data="tabItem" border />
+    <div class="sub-title" style="margin-top: 100px">table----带状态的表格</div>
+    <yu-table :widths="widths" :data="tabItem" border status/>
+    <div class="sub-title" style="margin-top: 100px">table----固定表头</div>
+    <yu-table :widths="widths" :data="tabItem" border height="300px"/>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
@@ -408,6 +436,7 @@ import YuMessageBox from '../components/message-box';
 import YuBadge from '../components/badge';
 import YuProgress from '../components/progress';
 import YuTag from '../components/tag';
+import YuTable from '../components/table';
 
 export default {
   name: 'ViewContainer',
@@ -481,6 +510,64 @@ export default {
           }
         },
       },
+      tags: ['标签一', '标签二', '标签三'],
+      widths: {
+        data: '180px',
+        name: '180px',
+        address: '460px',
+      },
+      tabItem: [
+        {
+          data: '日期',
+          name: '姓名',
+          address: '地址',
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎哈哈哈哈哈哈',
+          address: '上海市普陀区金沙江路 1518 弄',
+          type: 'warming',
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄',
+          type: 'success',
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄',
+          type: 'info',
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+          type: 'danger',
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+        },
+      ],
     };
   },
   methods: {
@@ -494,6 +581,12 @@ export default {
     },
     alert() {
       alert(99);
+    },
+    handleClose() {
+      alert('哈哈哈哈哈哈')
+    },
+    Close(tag) {
+      this.tags.splice(this.tags.indexOf(tag), 1);
     },
   },
   mounted() {
@@ -516,6 +609,7 @@ export default {
     YuBadge,
     YuProgress,
     YuTag,
+    YuTable,
   },
 };
 </script>
