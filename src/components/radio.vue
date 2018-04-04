@@ -1,7 +1,7 @@
 <template>
   <label class="yu-radio" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
   <span class="radio">
-    <input type="radio" :name="name" :value="isChecked?label:''" >
+    <input type="radio" :name="name" :value="value" >
   </span>
     <span><slot/></span>
   </label>
@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       isChecked: this.checked,
+      value: this.label,
     };
   },
   props: {
@@ -34,7 +35,7 @@ export default {
       // 如果禁用，直接返回
       if (this.disabled) return;
       // 如果是单选组，则重置全部
-      if (this.$parent.$options._componentTag === 'yu-radios') {
+      if (this.$parent.isRadios) {
         this.$parent.$children.forEach((item) => {
           if (item.label !== this.label) {
             item.isChecked = false
@@ -42,9 +43,17 @@ export default {
         });
       }
 
-      this.$emit('change', !this.isChecked ? this.label : '');
       // 开关当前单选
       this.isChecked = !this.isChecked;
+      this.$emit('change', this.label, this.isChecked);
+
+      if (this.$parent.isRadios) {
+        this.$parent.handleChange(this.value, this.isChecked);
+      }
+
+      if (this.$parent.isField) {
+        this.$parent.handleChange(this.name, this.isChecked ? this.value : '');
+      }
     },
   },
 };

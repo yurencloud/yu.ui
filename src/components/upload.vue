@@ -112,6 +112,15 @@ export default {
         }
       }
 
+      if (this.type === 'image') {
+        this.visible = false;
+        this.preview = this.getObjectURL(this.files[0]);
+      }
+
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.files });
+      }
+
       fetch(this.url, {
         method: 'POST',
         body: formData,
@@ -130,11 +139,6 @@ export default {
         }, (error) => {
           console.log(error.message);
         })
-
-      if (this.type === 'image') {
-        this.visible = false;
-        this.preview = this.getObjectURL(this.files[0]);
-      }
     },
     handleClick() {
       this.$refs.input.click();

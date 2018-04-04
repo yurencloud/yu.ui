@@ -12,6 +12,7 @@
       :defaultValue='number'
       :disabled="disabled"
       @change="handleChange"
+      @blur="handleBlur"
     />
     <yu-button
       :size="size"
@@ -53,6 +54,18 @@ export default {
     },
     handleChange(value) {
       this.number = parseInt(value, 0);
+    },
+    handleBlur() {
+      if (this.$parent.isField) {
+        this.$parent.handleBlur({ name: this.name, value: this.number });
+      }
+    },
+  },
+  watch: {
+    number(value) {
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value });
+      }
     },
   },
   components: {
