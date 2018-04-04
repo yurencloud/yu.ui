@@ -9,6 +9,7 @@
                @blur="handleBlur"
                @change="handleChange"
                @clear="handleClear"
+               :width="width"
                :placeholder="placeholder"/>
     <!--选择日期-->
     <div v-show="visible && active==='day'" class="container">
@@ -120,6 +121,7 @@ export default {
   },
   props: {
     disabled: Boolean,
+    width: String,
     name: {
       type: String,
       default: 'date',

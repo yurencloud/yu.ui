@@ -4,8 +4,10 @@
       ref="input"
       placeholder="请选择"
       readonly
+      :name="name"
       suffix="icon-angle-down"
       @click="handleClick"
+      v-model="value"
     />
     <div v-if="cascader" class="options" v-show="visible">
       <div class="cascader first">
@@ -74,6 +76,7 @@ export default {
     defaultValue: Object, // 元素要有对应的active属性
     changeOnSelect: Boolean,
     remote: Boolean, // 远程加载数据
+    name: String,
   },
   components: {
     YuInput,
@@ -133,16 +136,20 @@ export default {
     },
     changeValue() {
       const value = this.value;
+
       let text = '';
       if (this.short) {
         const temp = value.third || value.second || value.first;
         text = temp.label;
       } else {
-        text = value.first.label + (value.second ? ` / ${value.second.label}` : '') + (value.third ? ` / ${value.third.label}` : '');
+        text = value.first.label + (value.second ? `/${value.second.label}` : '') + (value.third ? `/${value.third.label}` : '');
       }
       this.$refs.input.changeValue(text);
       if (!this.changeOnSelect) {
         this.visible = false;
+      }
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: text });
       }
     },
     activeOption($event) {
@@ -160,6 +167,9 @@ export default {
   created() {
     const body = document.body;
     const the = this;
+    if (this.$parent.isField) {
+      this.$parent.fixCascader = true;
+    }
     body.addEventListener('click', (e) => {
       if (e.currentTarget.tagName === 'BODY'
         && e.target.tagName !== 'INPUT'

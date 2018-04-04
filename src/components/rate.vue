@@ -6,6 +6,7 @@
     <i data-value="4" class="iconfont" :class="[value>=4?'icon-star':'icon-star-o']" @mouseover="changeValue(4)"></i>
     <i data-value="5" class="iconfont" :class="[value==5?'icon-star':'icon-star-o']" @mouseover="changeValue(5)"></i>
     <span v-if="labeled">{{label[value]}}</span>
+    <input type="text" :name="name" :value="value" style="display: none">
   </div>
 </template>
 
@@ -24,15 +25,10 @@ export default {
       default: 0,
     },
     readOnly: Boolean,
-    checked: Boolean,
     disabled: Boolean,
     vertical: Boolean,
     name: {
       type: String,
-    },
-    type: {
-      type: String,
-      default: 'default',
     },
     labeled: Boolean,
     label: {
@@ -54,6 +50,10 @@ export default {
     changeValue(value) {
       if (this.readOnly) return;
       this.value = value;
+
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value });
+      }
     },
   },
 };
@@ -63,8 +63,10 @@ export default {
   @import "../assets/css/varible";
 
   .yu-rate {
+    padding: 5px 0;
     height: 30px;
     font-size: 0;
+    line-height: 30px;
     i{
       transition: all .4s;
       display: inline-block;

@@ -1,7 +1,7 @@
 <template>
   <label class="yu-checkbox" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
     <span class="checkbox">
-      <input type="checkbox" :name="name" :value="isChecked?label:''">
+      <input type="checkbox" ref="input" :name="name" :value="value">
     </span>
     <span><slot/></span>
   </label>
@@ -12,6 +12,7 @@ export default {
   name: 'YuCheckbox',
   data() {
     return {
+      value: this.label,
       isChecked: this.checked,
     };
   },
@@ -28,20 +29,21 @@ export default {
       default: 'default',
     },
   },
-  created() {
-    this.$on('toggleAll', (value) => {
-      this.$parent.$children.forEach((item) => {
-        item.isChecked = value
-      });
-    });
-  },
   methods: {
     handleClick() {
       // 如果禁用，直接返回
       if (this.disabled) return;
       this.isChecked = !this.isChecked;
-      this.$emit('change', this.isChecked ? this.label : '');
+      this.$emit('change', this.name, this.isChecked, this.value);
       this.$emit('click');
+      if (this.$parent.isCheckboxs) {
+        if (this.value === undefined) return;
+        this.$parent.handleChange(this.value, this.isChecked);
+        return;
+      }
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ value: this.isChecked ? this.value : '' });
+      }
     },
   },
 };
@@ -61,7 +63,7 @@ export default {
     }
     .checkbox {
       margin-right: 6px;
-      margin-bottom: -1px;
+      margin-bottom: -2px;
       display: inline-block;
       width: 14px;
       height: 14px;

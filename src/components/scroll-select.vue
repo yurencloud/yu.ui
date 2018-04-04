@@ -9,6 +9,8 @@
       clearable
       :prefix="prefix"
       :placeholder="placeholder"
+      :name="name"
+      @clear="handleClear"
     />
     <div class="container"
          @mouseover="handleMouseover"
@@ -85,6 +87,7 @@ export default {
     options: Array,
     prefix: String,
     placeholder: String,
+    name: String,
     split: {
       type: String,
       default: '/',
@@ -92,6 +95,12 @@ export default {
   },
 
   methods: {
+    handleClear() {
+      this.value = '';
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: '' });
+      }
+    },
     handleMouseover() {
       this.scrollTop = document.getElementsByTagName('html')[0].scrollTop;
       document.addEventListener('scroll', this.stopScroll)
@@ -204,6 +213,9 @@ export default {
       }
       this.value = value
       this.visible = false;
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value });
+      }
     },
   },
   watch: {
@@ -224,7 +236,6 @@ export default {
 
   .yu-scroll-select {
     position: relative;
-    margin: auto 8px 12px auto;
     .line {
       position: absolute;
       top: 80px;

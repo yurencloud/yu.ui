@@ -32,11 +32,19 @@
     </span>
     <textarea
       v-if="type==='textarea'"
-      name=""
+      :name="name"
       id=""
       :cols="cols"
       :rows="rows"
       :placeholder="placeholder"
+      @click="handleClick"
+      @blur="handleBlur"
+      @focus="handleFocus"
+      @change="handleChange"
+      @keyup="handleKeyup"
+      v-model="value"
+      :style="{width:width}"
+      :readonly="readonly"
     ></textarea>
     <!--后置组件-->
     <slot v-if="$slots.append" class="append" name="append"/>

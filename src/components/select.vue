@@ -130,7 +130,6 @@ export default {
 
   .yu-select {
     position: relative;
-    margin: auto 8px 12px auto;
     .options {
       background-color: #fff;
       position: absolute;

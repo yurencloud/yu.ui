@@ -21,6 +21,7 @@
         ></span>
       </div>
     </div>
+    <input type="text" :name="name" v-model="value" style="display: none;">
   </div>
 </template>
 
@@ -62,6 +63,7 @@ export default {
       type: [Number, String],
     },
     point: Boolean,
+    name: String,
   },
   methods: {
     handleMousedown($event) {
@@ -105,7 +107,7 @@ export default {
     setOffset($event, type) {
       if (this.offset) return;
       if (type === 'bar') this.offset = $event.currentTarget.offsetLeft;
-      if (type === 'circle') this.offset = $event.pageX - (this.defaultValue ? this.defaultValue / this.total  * this.width  : 0);
+      if (type === 'circle') this.offset = $event.pageX - (this.defaultValue ? this.defaultValue / this.total * this.width : 0);
     },
   },
   computed: {
@@ -120,6 +122,13 @@ export default {
         range[i] = i * this.step;
       }
       return range;
+    },
+  },
+  watch: {
+    value(value) {
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value });
+      }
     },
   },
   components: {

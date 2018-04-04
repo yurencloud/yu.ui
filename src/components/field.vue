@@ -1,7 +1,7 @@
 <template>
-  <div class="yu-field" :class="[{error:error}]" >
+  <div class="yu-field" :class="[{error:error},{inline:inline}]">
     <label :class="[align,{noLabel:noLabel}]">{{label}}</label>
-    <div class="field">
+    <div class="field" :class="{cascader: fixCascader}" :style="{width:fieldWidth}">
       <slot/>
       <span v-if="!list&&error" class="errorMessage">{{messages[0]}}</span>
       <div v-if="list&&error" class="errorMessages">
@@ -14,6 +14,7 @@
 <script>
 const validation = require('yu.validation');
 
+
 export default {
   name: 'YuField',
   data() {
@@ -24,22 +25,26 @@ export default {
       messages: [],
       trigger: 'submit',
       isField: true, // 提供子组件判断父组件是field使用
+      fixCascader: false,
     }
   },
   props: {
     label: String,
-    validate: Boolean,
-    default: '',
+    inline: {
+      type: Boolean,
+      default: false,
+    },
     align: {
       type: String,
       default: 'left',
     },
     noLabel: Boolean,
     list: Boolean,
+    fieldWidth: String,
     defaultMessage: {
       type: Object,
       default: () => ({
-        required: '$name必填选项',
+        required: '$name为必填选项',
         min: '$name最小为$value个字符',
         max: '$name最大为$value个字符',
         maxNumber: '$name不得大于$value',
@@ -76,26 +81,20 @@ export default {
   methods: {
     handleChange(value) {
       this.value = value;
-      const parent = (this.$parent.isFields ? this.$parent.$parent : this.$parent);
-      parent.setValues(value);
-      if (this.validate) {
-        this.trigger = 'change';
-        this.validateByRules(parent.rules, this.value);
-      }
+      this.$parent.setValues(value);
+      this.trigger = 'change';
+      this.validateByRules(this.$parent.rules, value);
     },
     handleBlur(value) {
       this.value = value;
-      const parent = (this.$parent.isFields ? this.$parent.$parent : this.$parent);
-      parent.setValues(value);
-      if (this.validate) {
-        this.trigger = 'blur';
-        this.validateByRules(parent.rules, value);
-      }
+      this.$parent.setValues(value);
+      this.trigger = 'blur';
+      this.validateByRules(this.$parent.rules, value);
     },
     validateByRules(rules, value) {
+      const the = this;
       const validates = rules[value.name];
       if (!validates) return;
-      const parent = (this.$parent.isFields ? this.$parent.$parent : this.$parent);
       // 初始化错误信息
       this.error = false;
       this.messages = [];
@@ -103,130 +102,131 @@ export default {
         // name: [
         //   { prop: 'required', value: true, message: '必填选项', trigger: 'blur', name: '字段的中文名或英文名(这个值默认为'')', other: '另一字段的中文名称' },
         // ],
-        if (item.trigger &&　this.trigger !== item.trigger) return;
+        if (item.trigger && this.trigger !== item.trigger) return;
         let result;
+        const notEmpty = (value.name && value.value.toString().trim().length !== 0)
         switch (item.prop) {
-          case 'required':// 默认false,
-            if (!value.name || value.value.trim().length === 0) this.setError(item);
+          case 'required':
+            if (!notEmpty) this.setError(item);
             break;
           case 'max':
-            if (item.value < value.value.length) this.setError(item);
+            if (notEmpty && item.value < value.value.length) this.setError(item);
             break;
           case 'min':
-            if (item.value > value.value.length) this.setError(item);
+            if (notEmpty && item.value > value.value.length) this.setError(item);
             break;
           case 'maxNumber':
-            if (item.value < value.value) this.setError(item);
+            if (notEmpty && item.value < value.value) this.setError(item);
             break;
           case 'minNumber':
-            if (item.value > value.value) this.setError(item);
+            if (notEmpty && item.value > value.value) this.setError(item);
             break;
           case 'email':
-            if (!validation.isEmail(value.value)) this.setError(item);
+            if (notEmpty && !validation.isEmail(value.value)) this.setError(item);
             break;
           case 'url':
-            if (!validation.isUrl(value.value)) this.setError(item);
+            if (notEmpty && !validation.isUrl(value.value)) this.setError(item);
             break;
           case 'integer':
-            if (!validation.isInteger(value.value)) this.setError(item);
+            if (notEmpty && !validation.isInteger(value.value)) this.setError(item);
             break;
           case 'number':
-            if (!validation.isNumber(value.value)) this.setError(item);
+            if (notEmpty && !validation.isNumber(value.value)) this.setError(item);
             break;
           case 'contain':
-            if (value.value.indexOf(item.value) === -1) this.setError(item);
+            if (notEmpty && value.value.indexOf(item.value) === -1) this.setError(item);
             break;
           case 'notContain':
-            if (value.value.indexOf(item.value) > -1) this.setError(item);
+            if (notEmpty && value.value.indexOf(item.value) > -1) this.setError(item);
             break;
             // 要和已经存在的字段的值相同,每次只能match一个，但可以添加多个match验证
           case 'match':
-            if (parent.getValue(item.value) !== value.value) this.setError(item);
+            if (notEmpty && the.$parent.getValue(item.value) !== value.value) this.setError(item);
             break;
           case 'different':
-            if (parent.getValue(item.value) === value.value) this.setError(item);
+            if (notEmpty && the.$parent.getValue(item.value) === value.value) this.setError(item);
             break;
           case 'chinese':
-            if (!validation.isChinese(value.value)) this.setError(item);
+            if (notEmpty && !validation.isChinese(value.value)) this.setError(item);
             break;
           case 'idNumber':
-            if (!validation.isIdNumber(value.value)) this.setError(item);
+            if (notEmpty && !validation.isIdNumber(value.value)) this.setError(item);
             break;
           case 'password':
-            if (!validation.isPassword(value.value)) this.setError(item);
+            if (notEmpty && !validation.isPassword(value.value)) this.setError(item);
             break;
           case 'mobile':
-            if (!validation.isMobile(value.value)) this.setError(item);
+            if (notEmpty && !validation.isMobile(value.value)) this.setError(item);
             break;
           case 'telephone':
-            if (!validation.isTelephone(value.value)) this.setError(item);
+            if (notEmpty && !validation.isTelephone(value.value)) this.setError(item);
             break;
           case 'domain':
-            if (!validation.isDomain(value.value)) this.setError(item);
+            if (notEmpty && !validation.isDomain(value.value)) this.setError(item);
             break;
           case 'username':
-            if (!validation.isUsername(value.value)) this.setError(item);
+            if (notEmpty && !validation.isUsername(value.value)) this.setError(item);
             break;
           case 'ip':
-            if (!validation.isIp(value.value)) this.setError(item);
+            if (notEmpty && !validation.isIp(value.value)) this.setError(item);
             break;
-          // 判断接受，比如同意
+            // 判断接受，比如同意
           case 'accepted':
-            if (value.value !== 'on' && value.value !== true && value.value !== 1) this.setError(item);
+            if (notEmpty && value.value !== 'on' && value.value !== true && value.value !== 1) this.setError(item);
             break;
-          // 数字区间 [low, high],含边界
+            // 数字区间 [low, high],含边界
           case 'between':
-            if (item.value[0] > value.value || item.value[1] < value.value) this.setError(item);
+            if (notEmpty && (item.value[0] > value.value || item.value[1] < value.value)) this.setError(item);
             break;
-          // 值在数组中 [1,2,3] ['a','b','c']
+            // 值在数组中 [1,2,3] ['a','b','c']
           case 'in':
-            if (item.value.indexOf(value.value) === -1) this.setError(item);
+            if (notEmpty && item.value.indexOf(value.value) === -1) this.setError(item);
             break;
-          // 值不在数组中 [1,2,3] ['a','b','c']
+            // 值不在数组中 [1,2,3] ['a','b','c']
           case 'notIn':
-            if (item.value.indexOf(value.value) !== -1) this.setError(item);
+            if (notEmpty && item.value.indexOf(value.value) !== -1) this.setError(item);
             break;
-          // 自定义正则 验证
+            // 自定义正则 验证
           case 'regex':
-            if (!item.value.test(value.value)) this.setError(item);
+            if (notEmpty && !item.value.test(value.value)) this.setError(item);
             break;
-          // 如果指定1个字段有值，那么该字段也必须有
+            // 如果指定1个字段有值，那么该字段也必须有
           case 'requiredIf':
-            if (parent.hasValue(item.value) && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            if (the.$parent.hasValue(item.value) && !notEmpty) this.setError(item);
             break;
-          // 如果指定1个字段没值，那么该字段也必须有
+            // 如果指定1个字段没值，那么该字段也必须有
           case 'requiredWithout':
-            if (!parent.hasValue(item.value) && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            if (!the.$parent.hasValue(item.value) && !notEmpty) this.setError(item);
             break;
-          // 如果指定多个字段其中一个有值['name','age']，那么该字段也必须有
+            // 如果指定多个字段其中一个有值['name','age']，那么该字段也必须有
           case 'requiredWith':
             result = false;
             item.value.forEach((i) => {
-              if (parent.hasValue(i)) {
+              if (the.$parent.hasValue(i)) {
                 result = true;
               }
             });
-            if (result && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            if (result && !notEmpty) this.setError(item);
             break;
-          // 如果指定多个字段全部有值['name','age']，那么该字段也必须有
+            // 如果指定多个字段全部有值['name','age']，那么该字段也必须有
           case 'requiredWithAll':
             result = true;
             item.value.forEach((i) => {
-              if (!parent.hasValue(i)) {
+              if (!the.$parent.hasValue(i)) {
                 result = false;
               }
             });
-            if (result && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            if (result && !notEmpty) this.setError(item);
             break;
-          // 如果指定多个字段全部没有值['name','age']，那么该字段也必须有
+            // 如果指定多个字段全部没有值['name','age']，那么该字段也必须有
           case 'requiredWithoutAll':
             result = true;
             item.value.forEach((i) => {
-              if (parent.hasValue(i)) {
+              if (the.$parent.hasValue(i)) {
                 result = false;
               }
             });
-            if (result && (!value.name || value.value.trim().length === 0)) this.setError(item);
+            if (result && !notEmpty) this.setError(item);
             break;
           default:
             break;
@@ -253,12 +253,24 @@ export default {
     color: $text;
     font-size: 0;
     margin-bottom: 14px;
-    display: inline-block;
+    display: block;
     vertical-align: top;
-    .noLabel{
-      display: none!important;
+    &.inline {
+      display: inline-block;
+      .field {
+        width: auto;
+        .yu-input {
+          width: auto;
+          textarea {
+            width: auto;
+          }
+        }
+      }
     }
-    label{
+    .noLabel {
+      display: none !important;
+    }
+    label {
       font-size: 16px;
       width: 90px;
       height: 40px;
@@ -266,38 +278,43 @@ export default {
       box-sizing: border-box;
       padding-right: 12px;
     }
-    label.top{
+    label.top {
       display: block;
       margin-bottom: 12px;
     }
-    label.left{
+    label.left {
       display: inline-block;
       text-align: left;
     }
-    label.right{
+    label.right {
       display: inline-block;
       text-align: right;
     }
-    .field{
+
+    .field {
       vertical-align: top;
       display: inline-block;
       box-sizing: border-box;
       width: 80%;
-      min-width: 370px;
-      .yu-input{
+      .yu-input {
         input{
           width: 100%;
         }
-        textarea{
-          width: 90%;
+        textarea {
+          width: 95%;
         }
       }
-      .yu-switch{
+      .yu-switch {
         margin-top: 10px;
       }
+      &.cascader {
+        min-width: 500px;
+      }
     }
-
-    &.error{
+    .three.field {
+      min-width: 370px;
+    }
+    &.error {
       .field {
         .yu-input {
           input {
@@ -307,15 +324,15 @@ export default {
             border: 1px solid $danger;
           }
         }
-        .errorMessage{
-          float: left;
+        .errorMessage {
+          /*float: left;*/
           font-size: 14px;
           color: $danger;
         }
-        .errorMessages{
+        .errorMessages {
           font-size: 14px;
           color: $danger;
-          p{
+          p {
             margin: 2px;
           }
         }

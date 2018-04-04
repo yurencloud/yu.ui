@@ -448,10 +448,7 @@
           <yu-option label="狗" value="5"/>
         </yu-select>
       </yu-field>
-      <yu-field label="选择日期">
-        <yu-date-picker style="width: 50%;display: inline-block;"/>
-        <yu-time-picker style="width: 48%;display: inline-block;"/>
-      </yu-field>
+      <br>
       <yu-field label="即时配送">
         <yu-switch label="确认"/>
       </yu-field>
@@ -511,17 +508,18 @@
     </yu-form>
 
     <div class="sub-title">表单验证</div>
-    <yu-form :rules="rules" width="1000px">
-      <yu-field label="活动名称" validate>
+    <div class="message">提醒：如果想要其中某个字段有多个input并排，需要增大form的width，然后使用inline属性</div>
+    <yu-form :rules="rules" width="600px">
+      <yu-field label="活动名称" >
         <yu-input name="activeName"/>
       </yu-field>
-      <yu-field label="活动名称2" validate>
+      <yu-field label="活动名称2" >
         <yu-input name="activeName2"/>
       </yu-field>
-      <yu-field label="活动名称3" validate>
+      <yu-field label="活动名称3" >
         <yu-input name="activeName3"/>
       </yu-field>
-      <yu-field label="活动动物" validate>
+      <yu-field label="活动动物" >
         <yu-select name="animal" text="请选择动物" overflow>
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
@@ -530,7 +528,7 @@
           <yu-option label="狗" value="5"/>
         </yu-select>
       </yu-field>
-      <yu-field label="活动动物" validate>
+      <yu-field label="活动动物" >
         <yu-select name="animal" text="请选择动物" overflow multi>
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
@@ -539,38 +537,54 @@
           <yu-option label="狗" value="5"/>
         </yu-select>
       </yu-field>
-      <yu-fields>
-
-      <yu-field label="选择日期" validate no-label>
-        <yu-date-picker name="date" style="width: 50%;" />
+      <yu-field label="选择日期"  inline >
+        <yu-date-picker name="date"/>
       </yu-field>
-      <yu-field validate no-label>
-        <yu-time-picker name="time" style="width: 48%;" />
+      <yu-field  no-label inline>
+        <yu-time-picker name="time"/>
       </yu-field>
-      </yu-fields>
-
-      <yu-field label="即时配送" validate>
-        <yu-switch label="确认"/>
+      <yu-field label="即时配送" >
+        <yu-switch name="confirm" label="确认"/>
       </yu-field>
-      <yu-field label="活动性质" validate>
-        <yu-checkbox @change="checkboxChange" checked label="1">苹果</yu-checkbox>
-        <yu-checkbox @change="checkboxChange" label="2">西瓜</yu-checkbox>
-        <yu-checkbox @change="checkboxChange" label="3">桃子</yu-checkbox>
+      <yu-field label="活动性质" >
+        <yu-checkboxs name="fruit" select-all>
+        <yu-checkbox  checked label="1">苹果</yu-checkbox>
+        <yu-checkbox   label="2">西瓜</yu-checkbox>
+        <yu-checkbox  label="3">桃子</yu-checkbox>
+        </yu-checkboxs>
       </yu-field>
-      <yu-field label="特殊资源" validate>
-        <yu-radios>
-          <yu-radio @change="radioChange" checked label="1">苹果</yu-radio>
-          <yu-radio @change="radioChange" label="2">香蕉</yu-radio>
-          <yu-radio @change="radioChange" label="3">桃子</yu-radio>
+      <yu-field label="特殊资源" >
+        <yu-radios name="fruit2">
+          <yu-radio checked label="1">苹果</yu-radio>
+          <yu-radio label="2">香蕉</yu-radio>
+          <yu-radio label="3">桃子</yu-radio>
         </yu-radios>
       </yu-field>
-      <yu-field label="活动形式" validate>
-        <yu-input type="textarea" />
+      <yu-field label="活动形式" >
+        <yu-input name="xin" type="textarea" />
       </yu-field>
-      <yu-field>
+      <yu-field label="等级" >
+        <yu-rate name="rate"/>
+      </yu-field>
+      <yu-field label="上传文件" >
+        <yu-upload url="/api/upload" type="image" />
+      </yu-field>
+      <yu-field label="滚动列表" >
+        <yu-scroll-select name="list" :options="cascader" placeholder="请选择"/>
+      </yu-field>
+      <yu-field label="范围选择" >
+        <yu-slider name="range"/>
+      </yu-field>
+      <yu-field label="级联选择" >
+        <yu-cascader name="cascader" :cascader="cascader"/>
+      </yu-field>
+      <yu-field label="计数器" >
+        <yu-counter name="counter"/>
+      </yu-field>
+
         <yu-button type="primary">提交</yu-button>
         <yu-button>重置</yu-button>
-      </yu-field>
+
     </yu-form>
 
 
@@ -633,7 +647,6 @@ import YuUpload from '../components/upload';
 import YuRate from '../components/rate';
 import YuForm from '../components/form';
 import YuField from '../components/field';
-import YuFields from '../components/fields';
 
 
 export default {
@@ -642,9 +655,9 @@ export default {
     return {
       rules: {
         activeName: [
-          { prop: 'required', value: true, trigger: 'blur', name: '活动名称' },
+          // { prop: 'required', value: true, trigger: 'blur', name: '活动名称' },
           // { prop: 'min', value: 4, trigger: 'blur', name: '活动名称' },
-          // { prop: 'max', value: 7, trigger: 'blur', name: '活动名称' },
+          { prop: 'min', value: 7, trigger: 'blur', name: '活动名称' },
           // { prop: 'email', trigger: 'blur', name: '活动名称' },
           // { prop: 'minNumber', value: 4, trigger: 'blur', name: '活动名称' },
           // { prop: 'maxNumber', value: 6, trigger: 'blur', name: '活动名称' },
@@ -685,6 +698,21 @@ export default {
         ],
         time: [
           { prop: 'required', trigger: 'blur', name: '时间' },
+        ],
+        confirm: [
+          { prop: 'accepted', trigger: 'change', name: '确认' },
+        ],
+        fruit: [
+          { prop: 'required', trigger: 'change', name: '水果' },
+        ],
+        fruit2: [
+          { prop: 'required', trigger: 'change', name: '水果2' },
+        ],
+        xin: [
+          { prop: 'required', trigger: 'blur', name: '形式' },
+        ],
+        rate: [
+          { prop: 'minNumber', value: 3, trigger: 'change', name: '形式' },
         ],
       },
       label2: ['', '极差2', '失望2', '一般2', '满意2', '惊喜2'],
@@ -1044,7 +1072,6 @@ export default {
     YuRate,
     YuForm,
     YuField,
-    YuFields,
   },
   mounted() {
     const the = this;
@@ -1096,5 +1123,16 @@ export default {
   .my-description {
     float: right;
     color: $lighter-text;
+  }
+
+  .message {
+    width: 100%;
+    height: 40px;
+    background: $success;
+    line-height: 40px;
+    color: #fff;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 20px 0;
   }
 </style>

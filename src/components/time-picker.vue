@@ -1,6 +1,18 @@
 <template>
   <div class="yu-time-picker">
-    <yu-input v-if="type==='simple'" prefix="icon-clock" :options="options" overflow clearable :name="name"/>
+    <yu-input v-if="type==='simple'"
+              prefix="icon-clock"
+              :options="options"
+              overflow
+              clearable
+              :name="name"
+              :placeholder="placeholder"
+              @blur="handleBlur"
+              @change="handleChange"
+              @clear="handleClear"
+              ref="input"
+              :width="width"
+    />
     <yu-scroll-select
       :split="':'"
       ref="scroll"
@@ -21,11 +33,13 @@ export default {
   name: 'YuTimePicker',
   data() {
     return {
+      value: '',
       sixty: [],
     }
   },
   props: {
     disabled: Boolean,
+    width: String,
     type: {
       type: String,
       default: 'simple',
@@ -50,8 +64,30 @@ export default {
       },
     },
     name: String,
+    placeholder: {
+      type: String,
+      default: '请选择时间',
+    },
   },
   methods: {
+    handleClear() {
+      this.value = '';
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value });
+      }
+    },
+    handleBlur() {
+      this.value = this.$refs.input.value;
+      if (this.$parent.isField) {
+        this.$parent.handleBlur({ name: this.name, value: this.value });
+      }
+    },
+    handleChange() {
+      this.value = this.$refs.input.value;
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value });
+      }
+    },
     getMinute(time) {
       const arr = time.split(':');
       return (parseInt(arr[0], 0) * 60) + parseInt(arr[1], 0);

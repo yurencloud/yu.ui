@@ -48,7 +48,11 @@ export default {
     handleClick() {
       if (this.disabled) return;
       this.checked = !this.checked;
+      this.value = this.checked ? this.activeValue : this.inactiveValue;
       this.$emit('click', this.value)
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value });
+      }
     },
   },
 };
