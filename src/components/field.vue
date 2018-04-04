@@ -1,11 +1,20 @@
 <template>
   <div class="yu-field" :class="[{error:error},{inline:inline}]">
-    <label :class="[align,{noLabel:noLabel}]">{{label}}</label>
-    <div class="field" :class="{cascader: fixCascader}" :style="{width:fieldWidth}">
+    <label :class="[align,{noLabel:noLabel}]">
+      {{label}}
+    </label>
+    <div class="field"
+         :class="{cascader: fixCascader}"
+         :style="{width:fieldWidth}"
+    >
       <slot/>
-      <span v-if="!list&&error" class="errorMessage">{{messages[0]}}</span>
+      <span v-if="!list&&error" class="errorMessage">
+        {{messages[0]}}
+      </span>
       <div v-if="list&&error" class="errorMessages">
-        <p v-bind:key="index" v-for="(index, item) in messages">{{item}}</p>
+        <p v-bind:key="index" v-for="(index, item) in messages">
+          {{item}}
+        </p>
       </div>
     </div>
   </div>
@@ -79,6 +88,10 @@ export default {
     },
   },
   methods: {
+    handleSubmit() {
+      this.trigger = 'submit';
+      this.validateByRules(this.$parent.rules, this.value);
+    },
     handleChange(value) {
       this.value = value;
       this.$parent.setValues(value);
@@ -104,99 +117,100 @@ export default {
         // ],
         if (item.trigger && this.trigger !== item.trigger) return;
         let result;
-        const notEmpty = (value.name && value.value.toString().trim().length !== 0)
+        const notEmpty = (value.name && value.value.toString().trim().length !== 0);
+        let error = false;
         switch (item.prop) {
           case 'required':
-            if (!notEmpty) this.setError(item);
+            error = !notEmpty;
             break;
           case 'max':
-            if (notEmpty && item.value < value.value.length) this.setError(item);
+            error = (notEmpty && item.value < value.value.length);
             break;
           case 'min':
-            if (notEmpty && item.value > value.value.length) this.setError(item);
+            error = (notEmpty && item.value > value.value.length);
             break;
           case 'maxNumber':
-            if (notEmpty && item.value < value.value) this.setError(item);
+            error = (notEmpty && item.value < value.value);
             break;
           case 'minNumber':
-            if (notEmpty && item.value > value.value) this.setError(item);
+            error = (notEmpty && item.value > value.value);
             break;
           case 'email':
-            if (notEmpty && !validation.isEmail(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isEmail(value.value));
             break;
           case 'url':
-            if (notEmpty && !validation.isUrl(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isUrl(value.value));
             break;
           case 'integer':
-            if (notEmpty && !validation.isInteger(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isInteger(value.value));
             break;
           case 'number':
-            if (notEmpty && !validation.isNumber(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isNumber(value.value));
             break;
           case 'contain':
-            if (notEmpty && value.value.indexOf(item.value) === -1) this.setError(item);
+            error = (notEmpty && value.value.indexOf(item.value) === -1);
             break;
           case 'notContain':
-            if (notEmpty && value.value.indexOf(item.value) > -1) this.setError(item);
+            error = (notEmpty && value.value.indexOf(item.value) > -1);
             break;
             // 要和已经存在的字段的值相同,每次只能match一个，但可以添加多个match验证
           case 'match':
-            if (notEmpty && the.$parent.getValue(item.value) !== value.value) this.setError(item);
+            error = (notEmpty && the.$parent.getValue(item.value) !== value.value);
             break;
-          case 'different':
-            if (notEmpty && the.$parent.getValue(item.value) === value.value) this.setError(item);
+          case 'derror =ferent':
+            error = (notEmpty && the.$parent.getValue(item.value) === value.value);
             break;
           case 'chinese':
-            if (notEmpty && !validation.isChinese(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isChinese(value.value));
             break;
           case 'idNumber':
-            if (notEmpty && !validation.isIdNumber(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isIdNumber(value.value));
             break;
           case 'password':
-            if (notEmpty && !validation.isPassword(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isPassword(value.value));
             break;
           case 'mobile':
-            if (notEmpty && !validation.isMobile(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isMobile(value.value));
             break;
           case 'telephone':
-            if (notEmpty && !validation.isTelephone(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isTelephone(value.value));
             break;
           case 'domain':
-            if (notEmpty && !validation.isDomain(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isDomain(value.value));
             break;
           case 'username':
-            if (notEmpty && !validation.isUsername(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isUsername(value.value));
             break;
           case 'ip':
-            if (notEmpty && !validation.isIp(value.value)) this.setError(item);
+            error = (notEmpty && !validation.isIp(value.value));
             break;
             // 判断接受，比如同意
           case 'accepted':
-            if (notEmpty && value.value !== 'on' && value.value !== true && value.value !== 1) this.setError(item);
+            error = (notEmpty && value.value !== 'on' && value.value !== true && value.value !== 1);
             break;
             // 数字区间 [low, high],含边界
           case 'between':
-            if (notEmpty && (item.value[0] > value.value || item.value[1] < value.value)) this.setError(item);
+            error = (notEmpty && (item.value[0] > value.value || item.value[1] < value.value));
             break;
             // 值在数组中 [1,2,3] ['a','b','c']
           case 'in':
-            if (notEmpty && item.value.indexOf(value.value) === -1) this.setError(item);
+            error = (notEmpty && item.value.indexOf(value.value) === -1);
             break;
             // 值不在数组中 [1,2,3] ['a','b','c']
           case 'notIn':
-            if (notEmpty && item.value.indexOf(value.value) !== -1) this.setError(item);
+            error = (notEmpty && item.value.indexOf(value.value) !== -1);
             break;
             // 自定义正则 验证
           case 'regex':
-            if (notEmpty && !item.value.test(value.value)) this.setError(item);
+            error = (notEmpty && !item.value.test(value.value));
             break;
             // 如果指定1个字段有值，那么该字段也必须有
           case 'requiredIf':
-            if (the.$parent.hasValue(item.value) && !notEmpty) this.setError(item);
+            error = (the.$parent.hasValue(item.value) && !notEmpty);
             break;
             // 如果指定1个字段没值，那么该字段也必须有
           case 'requiredWithout':
-            if (!the.$parent.hasValue(item.value) && !notEmpty) this.setError(item);
+            error = (!the.$parent.hasValue(item.value) && !notEmpty);
             break;
             // 如果指定多个字段其中一个有值['name','age']，那么该字段也必须有
           case 'requiredWith':
@@ -206,7 +220,7 @@ export default {
                 result = true;
               }
             });
-            if (result && !notEmpty) this.setError(item);
+            error = (result && !notEmpty);
             break;
             // 如果指定多个字段全部有值['name','age']，那么该字段也必须有
           case 'requiredWithAll':
@@ -216,7 +230,7 @@ export default {
                 result = false;
               }
             });
-            if (result && !notEmpty) this.setError(item);
+            error = (result && !notEmpty);
             break;
             // 如果指定多个字段全部没有值['name','age']，那么该字段也必须有
           case 'requiredWithoutAll':
@@ -226,11 +240,13 @@ export default {
                 result = false;
               }
             });
-            if (result && !notEmpty) this.setError(item);
+            error = (result && !notEmpty);
             break;
           default:
             break;
         }
+
+        if (error) this.setError(item);
       })
     },
     setError(item) {

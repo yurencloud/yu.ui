@@ -1,7 +1,12 @@
 <template>
-  <label class="yu-checkbox" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
+  <label class="yu-checkbox"
+         @click.prevent="handleClick"
+         :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
     <span class="checkbox">
-      <input type="checkbox" ref="input" :name="name" :value="value">
+      <input type="checkbox"
+             ref="input"
+             :name="name"
+             :value="value">
     </span>
     <span><slot/></span>
   </label>

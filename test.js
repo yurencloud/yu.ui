@@ -1,10 +1,9 @@
-const fetch = require('whatwg-fetch').fetch;
+function hello() {
+  for(let i = 0;i<10;i++){
+    if(i===5) continue;
+    console.log(i);
+  }
+  console.log('end');
+}
 
-fetch('/api/fruits', {
-    method: 'GET',
-  },
-).then((response) => {
-  response.text().then(data => console.log(data));
-}, (error) => {
-  console.log(error.message);
-})
+hello();

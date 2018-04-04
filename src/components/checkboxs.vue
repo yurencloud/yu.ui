@@ -1,6 +1,12 @@
 <template>
   <div>
-    <yu-checkbox :name="name" v-show="selectAll" class="selectAll" ignore :class="[{isChecked:isChecked}]" @click="handleClick">全选</yu-checkbox>
+    <yu-checkbox :name="name"
+                 v-show="selectAll"
+                 class="selectAll"
+                 ignore
+                 :class="[{isChecked:isChecked}]"
+                 @click="handleClick"
+    >全选</yu-checkbox>
     <slot/>
   </div>
 </template>
