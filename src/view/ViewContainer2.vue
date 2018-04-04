@@ -512,13 +512,13 @@ export default {
       },
       tags: ['标签一', '标签二', '标签三'],
       widths: {
-        data: '180px',
+        date: '200px',
         name: '180px',
         address: '460px',
       },
       tabItem: [
         {
-          data: '日期',
+          date: '日期',
           name: '姓名',
           address: '地址',
         },
