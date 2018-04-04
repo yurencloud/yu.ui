@@ -375,7 +375,17 @@
     <yu-progress type="cricle" stroke-height="10px" status = "exception" :percentage="50"/>
     <yu-progress type="cricle" stroke-height="10px" :percentage="100"/>
     <div class="sub-title" style="margin-top: 100px">tag----标签---基本用法</div>
-    <yu-tag>哈哈哈</yu-tag>
+    <yu-tag>标签一</yu-tag>
+    <yu-tag type="info">标签一</yu-tag>
+    <yu-tag type="success">标签一</yu-tag>
+    <yu-tag type="warming">标签一</yu-tag>
+    <yu-tag type="error">标签一</yu-tag>
+    <div class="sub-title" style="margin-top: 100px">tag----标签---可关闭</div>
+    <yu-tag closable>标签一</yu-tag>
+    <yu-tag closable type="info">标签一</yu-tag>
+    <yu-tag closable type="success">标签一</yu-tag>
+    <yu-tag closable type="warming">标签一</yu-tag>
+    <yu-tag closable type="error">标签一</yu-tag>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
