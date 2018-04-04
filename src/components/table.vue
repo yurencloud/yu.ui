@@ -1,8 +1,9 @@
 <template>
   <div class="yu-table"
        :class="[{stripe:stripe,border:border,status:status,'fix-heade':height},]"
-        :style="[{height:height}]">
-    <table>
+       :style="[{height:height}]"
+        >
+    <table :style="[{height:height}]">
       <tr class="yu-tr"
           v-for="(item,index) in data"
           :class="['tr-'+index,item.type,]"
@@ -44,9 +45,9 @@ export default {
   @import "../assets/css/function";
   .yu-table{
     display: inline-block;
-    overflow: auto;
     table{
       border-collapse:collapse;
+      overflow: auto;
       tr{
         &:first-child{
           td{
@@ -55,6 +56,7 @@ export default {
               color: lighten($info,5);
             }
           }
+          background-color: #fff;
         }
         &:hover:not(.tr-0){
           background-color: lighten($info,39);
@@ -138,8 +140,14 @@ export default {
   .yu-table.fix-heade{
     position: relative;
     table{
+      padding-top: 44px;
       tr{
         /*todo*/
+       &:first-child{
+         position: absolute;
+         left: 0;
+         top: 0;
+       }
       }
     }
   }
