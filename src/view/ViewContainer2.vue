@@ -414,6 +414,15 @@
     <yu-table :widths="widths" :data="tabItem" border status/>
     <div class="sub-title" style="margin-top: 100px">table----固定表头</div>
     <yu-table :widths="widths" :data="tabItem" border height="300px"/>
+    <div class="sub-title" style="margin-top: 100px;">table---固定列</div>
+    <yu-table :widths="width" :data="Item" border width="800px"/>
+    <div class="sub-title" style="margin-top: 100px;">table---单选</div>
+    <yu-table :widths="width" :data="Items"/>
+    <div style="margin-top: 10px">
+      <yu-button @click="setCurrent">选择第二行</yu-button>
+    </div>
+    <div class="sub-title" style="margin-top: 100px;">pagination---分页--基础用法</div>
+    <yu-pagination :total="70" :page-size="10"/>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
@@ -437,6 +446,7 @@ import YuBadge from '../components/badge';
 import YuProgress from '../components/progress';
 import YuTag from '../components/tag';
 import YuTable from '../components/table';
+import YuPagination from '../components/pagination';
 
 export default {
   name: 'ViewContainer',
@@ -516,6 +526,22 @@ export default {
         name: '180px',
         address: '460px',
       },
+      width: {
+        date: '200px',
+        age: '180px',
+        name: '180px',
+        money: '180px',
+        a: '180px',
+        b: '180px',
+        c: '180px',
+        address: '460px',
+        operation: '100px',
+      },
+      width1: {
+        date: '200px',
+        name: '180px',
+        address: '460px',
+      },
       tabItem: [
         {
           date: '日期',
@@ -524,7 +550,7 @@ export default {
         },
         {
           date: '2016-05-03',
-          name: '王小虎',
+          name: '王小虎22222',
           address: '上海市普陀区金沙江路 1516 弄',
         },
         {
@@ -568,6 +594,88 @@ export default {
           address: '上海市普陀区金沙江路 1516 弄',
         },
       ],
+      Item: [
+        {
+          date: '日期',
+          name: '姓名',
+          age: '年龄',
+          money: '金额',
+          a: '出售',
+          b: '哈哈',
+          c: '嘎嘎',
+          address: '地址',
+          operation: '操作',
+        },
+        {
+          date: '2018-08-16',
+          name: '王小虎',
+          age: '20',
+          money: '20',
+          a: '56',
+          b: '36',
+          c: '99',
+          address: '上海市浦东新区999号',
+          operation: {
+            operation1: '删除',
+            operation2: '编辑',
+          },
+        },
+        {
+          date: '2018-08-16',
+          name: '王小虎',
+          age: '20',
+          money: '20',
+          a: '56',
+          b: '36',
+          c: '99',
+          address: '上海市浦东新区999号',
+          operation: {
+            operation1: '删除',
+            operation2: '编辑',
+          },
+        },
+        {
+          date: '2018-08-16',
+          name: '王小虎',
+          age: '20',
+          money: '20',
+          a: '56',
+          b: '36',
+          c: '99',
+          address: '上海市浦东新区999号',
+          operation: {
+            operation1: '删除',
+            operation2: '编辑',
+          },
+        },
+      ],
+      Items: [
+        {
+          date: '日期',
+          name: '姓名',
+          address: '地址',
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎22222',
+          address: '上海市普陀区金沙江路 1516 弄',
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+        },
+        {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+        },
+      ],
     };
   },
   methods: {
@@ -587,6 +695,9 @@ export default {
     },
     Close(tag) {
       this.tags.splice(this.tags.indexOf(tag), 1);
+    },
+    setCurrent() {
+      alert(999);
     },
   },
   mounted() {
@@ -610,6 +721,7 @@ export default {
     YuProgress,
     YuTag,
     YuTable,
+    YuPagination,
   },
 };
 </script>

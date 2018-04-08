@@ -1,19 +1,21 @@
 <template>
   <div class="yu-table"
-       :class="[{stripe:stripe,border:border,status:status,'fix-heade':height},]"
-       :style="[{height:height}]"
+       :class="[{stripe:stripe,border:border,status:status,'fix-heade':height,'fix-column':width,},]"
+       :style="[{height:height,width:width,}]"
         >
-    <table :style="[{height:height}]">
+    <table :style="[{height:height,width:width}]" border="0" cellspacing="0" cellpadding="0">
       <tr class="yu-tr"
           v-for="(item,index) in data"
           :class="['tr-'+index,item.type,]"
           v-bind:key="index">
         <td class="yu-td" v-for="(value,ind) in item"
             v-bind:key="ind"
-            :style="[{width:widths[ind]}]"
             v-if="!(ind === 'type')"
         >
-          <div>{{value}}</div>
+          <div :style="[{width:widths[ind]}]" v-if="(typeof value) === 'string'">{{value}}</div>
+          <div v-else :style="[{width:widths[ind]}]">
+            <span v-for="v in value" >{{v}}</span>
+          </div>
         </td>
       </tr>
     </table>
@@ -34,8 +36,10 @@ export default {
     border: Boolean,
     status: Boolean,
     height: String,
+    width: String,
   },
   mounted() {
+    console.log(typeof this.data[0].name)
   },
 }
 </script>
@@ -54,6 +58,7 @@ export default {
             div{
               font-weight: 800;
               color: lighten($info,5);
+              box-sizing: border-box;
             }
           }
           background-color: #fff;
@@ -70,6 +75,9 @@ export default {
             padding-left: 10px;
             color: darken($info,15);
             font-size: $normal;
+            span{
+              margin-left: 10px;
+            }
           }
         }
       }
@@ -85,6 +93,7 @@ export default {
       }
     }
   }
+  /*有边框*/
   .border.yu-table{
     table{
       border: 1px solid lighten($info,30);
@@ -140,15 +149,54 @@ export default {
   .yu-table.fix-heade{
     position: relative;
     table{
-      padding-top: 44px;
+      overflow: auto;
+      display: block;
+      padding-top: 40px;
       tr{
-        /*todo*/
-       &:first-child{
-         position: absolute;
-         left: 0;
-         top: 0;
-       }
+        &:first-child{
+          position: absolute;
+          top:1px;
+        }
+        div{
+          box-sizing: border-box;
+        }
       }
+    }
+  }
+  /*固定列*/
+  .yu-table.fix-column{
+    position: relative;
+    border-left: 1px solid lighten($info,30);
+    table{
+      overflow: auto;
+      display: block;
+      box-sizing: border-box;
+      padding-left: 200px;
+        tr{
+          display: block;
+          td{
+            background-color: #fff;
+            div{
+              box-sizing: border-box;
+            }
+            &:first-child{
+              position: absolute;
+              font-size: 14px;
+              left: 0;
+            }
+          }
+          &:last-child{
+            td{
+              border-bottom: none;
+            }
+          }
+          &:first-child{
+            td{
+              padding-top: 11px;
+              z-index: 9999;
+            }
+          }
+        }
     }
   }
 
