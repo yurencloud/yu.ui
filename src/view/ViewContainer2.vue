@@ -422,7 +422,15 @@
       <yu-button @click="setCurrent">选择第二行</yu-button>
     </div>
     <div class="sub-title" style="margin-top: 100px;">pagination---分页--基础用法</div>
-    <yu-pagination :total="70" :page-size="10"/>
+    <yu-pagination :total="70" :page-size="10"   />
+    <div class="sub-title" style="margin-top: 100px;">pagination---分页--小型</div>
+    <yu-pagination :total="70" :page-size="10"  small prev-text="上一页" next-text="下一页" />
+    <div class="sub-title" style="margin-top: 100px;">pagination---分页--背景</div>
+    <yu-pagination :total="70" :page-size="10"  background />
+    <div>当前是第{{current}}页</div>
+    <div class="sub-title" style="margin-top: 100px;">pagination---分页--超多个</div>
+    <yu-pagination :total="1000" :page-size="10"  background  @click="currentpage"/>
+    <div>当前是第{{current}}页</div>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
@@ -676,6 +684,7 @@ export default {
           address: '上海市普陀区金沙江路 1516 弄',
         },
       ],
+      current: 1,
     };
   },
   methods: {
@@ -698,6 +707,9 @@ export default {
     },
     setCurrent() {
       alert(999);
+    },
+    currentpage(current) {
+     this.current = current;
     },
   },
   mounted() {
