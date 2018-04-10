@@ -587,6 +587,21 @@
 
     </yu-form>
 
+    <div class="sub-title">表单提交</div>
+    <yu-form :rules="rules" action="/api/fruits" width="600px" method="POST" @success="success" native>
+      <yu-field label="水果id" >
+        <yu-input name="id"/>
+      </yu-field>
+
+      <yu-field label="水果名称" >
+        <yu-input name="fruit"/>
+      </yu-field>
+
+      <yu-button type="primary" submit>提交</yu-button>
+      <yu-button>重置</yu-button>
+
+    </yu-form>
+
 
     <!--<div class="title">加载动画</div>-->
     <!--<div class="sub-title">普通使用</div>-->
@@ -1033,6 +1048,9 @@ export default {
             console.log(error.message);
           })
       }
+    },
+    success(data){
+      console.log('表单接收成功',data);
     },
   },
   components: {

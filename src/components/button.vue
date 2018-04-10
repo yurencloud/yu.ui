@@ -33,11 +33,19 @@ export default {
       type: String,
       default: 'button',
     },
+    submit: Boolean,
   },
   methods: {
     handleClick(event) {
       if (!this.disabled) {
-        this.$emit('click', event)
+        this.$emit('click', event);
+        if (this.submit) {
+          if (this.$parent.isForm) {
+            this.$parent.submit()
+          } else if (this.$parent.$parent.isForm) {
+            this.$parent.$parent.submit()
+          }
+        }
       }
     },
   },
