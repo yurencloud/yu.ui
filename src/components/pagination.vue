@@ -150,7 +150,7 @@ export default {
       this.nextChange = !this.nextChange;
     },
     goto() {
-      this.index = document.querySelector('.pagination-go input').value;
+      this.index = Number(document.querySelector('.pagination-go input').value);
     },
   },
   computed: {
@@ -280,6 +280,4 @@ export default {
       }
     }
   }
-
-
 </style>
