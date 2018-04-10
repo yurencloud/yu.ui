@@ -1,40 +1,65 @@
 <template>
-  <div class="yu-pagination" :class="[{small:small,background:background}]">
-    <ul class="pagination"  @click="handleClick()">
-      <li  class="pagination-reduce"
-           :class="{disable:leftDisable}">
-        <i class="iconfont icon-angle-left left" v-if="!prevText"></i>
-       {{prevText}}
+  <div class="yu-pagination"
+       :class="{background:background}">
+    <span style="margin-right: 10px" v-if="showTotal">总共{{total}}条数据</span>
+    <ul class="yu-paging">
+      <!-- prev -->
+      <li
+        :class="['paging-item', 'paging-item--prev', {'paging-item--disabled' : index === 1}]"
+        @click="prev">
+        <i class="iconfont icon-angle-left" v-if="!prevText"></i>
+       <span> {{prevText}}</span>
       </li>
-      <li class="pagination-left"
-          v-if="count"
-          @mouseover="leftchange"
-          @mouseleave="leftchange">
-        <i class="iconfont"
-           :class="{'icon-bar-h':leftIcon,'icon-angle-double-left':!leftIcon}"></i>
-      </li>
-      <li v-for="n in num"
-          v-bind:key="n"
-          :index="n"
-          v-if="n <= 5"
-          :class="[{active:((n + more) === currentNum),}]">
-        <!--todo   数值变化问题-->
-        {{n + more}}
-      </li>
-      <li class="pagination-right"
-          @mouseover="change"
-          @mouseleave="change"
+      <li
+        :class="['paging-item', 'paging-item--first', {'paging-item--disabled' : index === 1}]"
+        @click="first"
+        v-if="showPrevMore">1</li>
+
+      <li
+        :class="['paging-item', 'paging-item--more']"
+        v-if="showPrevMore"
+        @click="prevMore"
+        @mouseenter="revToggle"
+        @mouseleave="revToggle"
       >
-        <i class="iconfont"
-           :class="{'icon-bar-h':iconChange,'icon-angle-double-right':!iconChange}"></i>
+        <span v-if="prevChange">...</span>
+        <i class="iconfont icon-angle-double-left"
+           v-else
+        ></i>
       </li>
-      <li>{{num}}</li>
-      <li class="pagination-add"
-          :class="{disable:!rightDisable}">
-        <i class="iconfont icon-angle-right right" v-if="!nextText"></i>
-       {{nextText}}
+      <li
+        :class="['paging-item', {'paging-item--current' : index === pager}]"
+        v-for="pager in pagers"
+        @click="go(pager)">
+        {{ pager }}
+      </li>
+      <li
+        :class="['paging-item', 'paging-item--more']"
+        v-if="shownextMore"
+        @mouseenter="nextToggle"
+        @mouseleave="nextToggle"
+        @click="nextMore"
+        >
+        <span v-if="nextChange">...</span>
+        <i class="iconfont icon-angle-double-right" v-else></i>
+      </li>
+      <!--last-->
+      <li  :class="['paging-item', 'paging-item--last', {'paging-item--disabled' : index === pages}]"
+           @click="last"
+           v-if="shownextMore">
+        {{pages}}
+      </li>
+      <!-- next -->
+      <li
+        :class="['paging-item', 'paging-item--next', {'paging-item--disabled' : index === pages}]"
+        @click="next">
+        <span v-if="nextText"> {{nextText}}</span>
+        <i class="iconfont icon-angle-right" v-else></i>
       </li>
     </ul>
+    <div class="pagination-go" v-if="goTo">
+     前往<input type="text" :value="index" @keyup.enter="goto()">页
+    </div>
   </div>
 </template>
 
@@ -42,214 +67,219 @@
 export default {
   name: 'YuPagination',
   props: {
-    total: Number,
-    pageSize: Number,
-    small: Boolean,
+    //  页面中可见的页码数
+    perPages: {
+      type: Number,
+      default: 5,
+    },
+    //  当前页码
+    pageIndex: {
+      type: Number,
+      default: 1,
+    },
+    //  每页显示的条数
+    pageSize: {
+      type: Number,
+      default: 10,
+    },
+    //  总记录条数
+    total: {
+      type: Number,
+      default: 100,
+    },
     prevText: String,
     nextText: String,
     background: Boolean,
+    showTotal: Boolean,
+    goTo: Boolean,
   },
   data() {
     return {
-      num: Number,
-      currentNum: 1,
-      rightDisable: {
-        type: Boolean,
-        default: true,
-      },
-      leftDisable: {
-        type: Boolean,
-        default: true,
-      },
-      iconChange: Boolean,
-      more: 0,
-      count: 0,
-      leftIcon: Boolean,
+      index: this.pageIndex,
+      size: this.total || 1,
+      limit: this.pageSize,
+      showPrevMore: false,
+      showNextMore: false,
+      prevChange: true,
+      nextChange: true,
+      lastDisable: true,
+      firstDisable: true,
     }
   },
   methods: {
-    handleClick(e) {
-      e = event || e;
-      const  target = e.target;
-      if (target.tagName === 'UL') {
-        return false;
-      }
-      if (!this.disabled) {
-        if (target.tagName === 'LI') {
-          if (target.classList.contains('pagination-reduce')) {
-            this.reduce();
-          } else if (target.classList.contains('pagination-add')) {
-            this.add();
-          } else if (target.classList.contains('pagination-right')) {
-            this.left();
-          } else if (target.classList.contains('pagination-left')) {
-            this.right();
-          } else {
-            this.currentNum = Number(target.innerText);
-            this.rightDisable = true;
-            this.leftDisable = false;
-            this.currentNum === this.num ? this.rightDisable = false : '';
-            this.currentNum === 1 ? this.leftDisable = true : '';
-          }
-        }
-        this.$emit('click', this.currentNum);
+    prev() {
+      if (this.index > 1) {
+        this.go(this.index - 1);
       }
     },
-    add() {
-      if (this.rightDisable) {
-        this.leftDisable = false;
-        if(this.currentNum < this.num) {
-          this.currentNum += 1;
-          if(this.currentNum > 5) {
-            this.more += 1;
-          }
-          if(this.currentNum === this.num) {
-            this.rightDisable = false;
-          }
-        }
-      } else {
-        return false;
+    next() {
+      if (this.index < this.total / this.pageSize) {
+        this.go(this.index + 1);
       }
     },
-    reduce() {
-      if (!this.leftDisable) {
-        this.rightDisable = true;
-        if (this.currentNum > 1) {
-          this.currentNum -= 1;
-          if (this.currentNum < 2){
-            this.more -= 1;
-          }
-          if(this.currentNum === 1) {
-            this.leftDisable = true;
-          }
-        }
-      } else {
-        return false;
+    first() {
+      if (this.index !== 1) {
+        this.go(1);
       }
     },
-    change(e) {
-      e.stopPropagation()
-      this.iconChange = !this.iconChange;
-    },
-    leftchange(){
-      this.leftIcon = !this.leftIcon;
-    },
-    left() {
-      this.count += 1;
-      this.more = 5 * this.count
-      this.currentNum = this.currentNum + 5
-    },
-    right() {
-      if (this.count) {
-        this.count -= 1;
-        this.more = 5 * this.count;
-        this.currentNum = this.currentNum - 5;
+    last() {
+      if (this.index !== this.pages) {
+        this.go(this.pages);
       }
+    },
+    nextMore() {
+      if (this.index < this.total / this.pageSize) {
+        this.go(this.index + 5);
+      }
+    },
+    prevMore() {
+      if (this.index > 1) {
+        this.go(this.index - 5);
+      }
+    },
+    go(page) {
+      if (this.index !== page) {
+        this.index = page;
+        this.$emit('change', this.index)
+      }
+    },
+    revToggle() {
+      this.prevChange = !this.prevChange;
+    },
+    nextToggle() {
+      this.nextChange = !this.nextChange;
+    },
+    goto() {
+      this.index = document.querySelector('.pagination-go input').value;
     },
   },
-  mounted() {
-    this.num = this.total / this.pageSize;
+  computed: {
+    pages() {
+      return Math.ceil(this.size / this.limit);
+    },
+    //  计算页码
+    pagers() {
+      const arr = [];
+      const perPages = this.perPages;
+      const pageCount = this.pages;
+      const current = this.index;
+      //  偏移
+      const _deviation = (perPages - 1) / 2;
+      const deviation = {
+        // 开始值
+        start: current - _deviation,
+        //  结束值
+        end: current + _deviation,
+      };
+      //  开始值小于1 时
+      if (deviation.start < 1) {
+        deviation.end = deviation.end + (1 - deviation.start);
+        deviation.start = 1;
+      }
+      //  结束值大于总页数时
+      if (deviation.end > pageCount) {
+        deviation.start = deviation.start - (deviation.end - pageCount);
+        deviation.end = pageCount;
+      }
+      if (deviation.start < 1) deviation.start = 1;
+      this.showPrevMore = (deviation.start > 1);
+      this.shownextMore = (deviation.end < pageCount);
+      for (let i = deviation.start; i <= deviation.end; i++) {
+        arr.push(i);
+      }
+      return arr;
+    },
+  },
+  watch: {
+    pageIndex(val) {
+      this.index = val || 1;
+    },
+    pageSize(val) {
+      this.limit = val || 10;
+    },
+    total(val) {
+      this.size = val || 1
+    },
   },
 }
 </script>
 
-<style scoped lang="scss" type="text/scss">
+<style lang="scss" type="text/scss"  scoped>
   @import "../assets/css/varible";
   @import "../assets/css/function";
   .yu-pagination{
-    .pagination{
+    .yu-paging{
       display: inline-block;
-      li{
-        float: left;
-        list-style: none;
-        padding: 5px;
-        color: $dark-text;
+      padding: 0;
+      list-style: none;
+      user-select: none;
+      .paging-item{
+        display: inline;
+        font-size: $normal;
+        position: relative;
+        padding: 6px 12px;
+        text-decoration: none;
         cursor: pointer;
-        font-weight: 700;
-        i{
-          color: $dark-text;
-        }
-        &:hover{
-          color: $primary;
-        }
-      }
-      li.active{
-        color: $primary;
-      }
-      li.disable{
-        cursor:not-allowed;
-        i{
-          color: lighten( $info,30);
-        }
-      }
-    }
-  }
-  /*小型的分页*/
-  .yu-pagination.small{
-    .pagination{
-      li{
-       font-size: $tiny;
-        i{
-          color: $dark-text;
-          font-size: $tiny;
-        }
-        &:hover{
-          color: $primary;
-        }
-        padding-top: 7px;
-        &:first-child,&:last-child{
-          padding: 5px;
-        }
-      }
-      li.active{
-        color: $primary;
-      }
-      li.disable{
-        color: lighten( $info,30);
-        cursor:not-allowed;
-        i{
-          color:lighten( $info,30);
-        }
-      }
-    }
-  }
-  /*带有背景的分页*/
-  .yu-pagination.background{
-    .pagination{
-      li{
-        background-color:lighten( $info,35);
-        margin-right: 10px;
-        padding: 4px 8px;
-        border-radius: 3px;
         color: $dark-text;
-        font-weight: normal;
-        i{
-          color: $dark-text;
-        }
+        font-weight: 700;
         &:hover{
-          color: #fff;
-          background-color: $primary;
-          i{
-            color: #fff;
-          }
+          color:  $primary;
         }
-        &:first-child,&:last-child{
-          padding: 4px;
+        &.paging-item--disabled,
+        &.paging-item--more{
+          background-color: #fff;
+          color: $light-text;
+        }
+        &.paging-item--disabled{
+          cursor: not-allowed;
+          opacity: .75;
+        }
+        &.paging-item--more,
+        &.paging-item--current {
+          cursor: default;
+        }
+        /*选中*/
+        &.paging-item--current{
+          color: $primary;
         }
       }
-      li.active{
-        color: #fff;
-        background-color: $primary;
-      }
-      li.disable{
-        background-color: lighten( $info,40);
-        color: lighten( $info,30);
-        cursor:not-allowed;
-        i{
-          color: $info;
+    }
+    .pagination-go{
+      display: inline-block;
+      input{
+        margin: 0 10px;
+        width: 50px;
+        height: 25px;
+        border-radius: 5px;
+        border: 1px solid $info;
+        padding-left: 5px;
+        box-sizing: border-box;
+        outline: none;
+        &:focus{
+          border-radius: 5px;
+          border: 1px solid $primary;
         }
       }
     }
   }
+  /*带有背景的*/
+  .yu-pagination.background{
+    .yu-paging{
+      .paging-item{
+        background-color: lighten($info,35);
+        margin-right: 10px;
+        border-radius: 3px;
+        &:hover{
+          background-color: $primary;
+          color: white;
+        }
+        &.paging-item--current{
+          background-color: $primary;
+          color: white;
+        }
+      }
+    }
+  }
+
 
 </style>
