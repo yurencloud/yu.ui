@@ -419,12 +419,16 @@
     <div class="sub-title" style="margin-top: 100px;">table---单选</div>
     <yu-table :widths="width" :data="Items"/>
     <div style="margin-top: 10px">
-      <yu-button @click="setCurrent">选择第二行</yu-button>
+      <yu-button @click="slectTwo(2)">选择第二行</yu-button>
+      <yu-button @click="cancleSelect(2)">取消选择</yu-button>
     </div>
-    <div>当前是第{{current}}页</div>
     <div class="sub-title" style="margin-top: 100px;">pagination---分页--超多个</div>
     <yu-pagination @change="currentpage" background :show-size="size" changeSize goTo/>
     <div>当前是第{{current}}页</div>
+    <div class="sub-title" style="margin-top: 100px;">弹出框----基础</div>
+    <yu-popover ref="popover1">
+      <yu-button slot="trigger">点击激活</yu-button>
+    </yu-popover>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
@@ -449,9 +453,17 @@ import YuProgress from '../components/progress';
 import YuTag from '../components/tag';
 import YuTable from '../components/table';
 import YuPagination from '../components/pagination';
+import YuPopover from '../components/popover';
 
 export default {
   name: 'ViewContainer',
+  directives: {
+    popover: {
+      inserted(el, binding) {
+        console.log(binding.arg);
+      },
+    },
+  },
   data() {
     return {
       active1: 0,
@@ -719,6 +731,14 @@ export default {
     currentpage(current) {
       this.current = current;
     },
+    slectTwo(num) {
+      this.Items[num].type = 'info';
+      // console.log(this.Items);
+      // console.log(this.tabItem);
+    },
+    cancleSelect(num) {
+      this.Items[num].type = '';
+    },
   },
   mounted() {
   },
@@ -741,6 +761,7 @@ export default {
     YuTag,
     YuTable,
     YuPagination,
+    YuPopover,
   },
 };
 </script>

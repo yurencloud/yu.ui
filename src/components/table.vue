@@ -38,9 +38,6 @@ export default {
     height: String,
     width: String,
   },
-  mounted() {
-    console.log(typeof this.data[0].name)
-  },
 }
 </script>
 
@@ -49,12 +46,14 @@ export default {
   @import "../assets/css/function";
   .yu-table{
     display: inline-block;
+    border-left: none;
     table{
       border-collapse:collapse;
       overflow: auto;
       tr{
         &:first-child{
           td{
+            box-sizing: border-box;
             div{
               font-weight: 800;
               color: lighten($info,5);
@@ -166,11 +165,13 @@ export default {
   /*固定列*/
   .yu-table.fix-column{
     position: relative;
+    /*border-left: none;*/
     border-left: 1px solid lighten($info,30);
     table{
       overflow: auto;
       display: block;
       box-sizing: border-box;
+      border-top: none;
       padding-left: 200px;
         tr{
           display: block;
@@ -181,8 +182,11 @@ export default {
             }
             &:first-child{
               position: absolute;
-              font-size: 14px;
+              font-size: 16px;
               left: 0;
+            }
+            &:last-child{
+              border-right: none;
             }
           }
           &:last-child{
@@ -194,6 +198,7 @@ export default {
             td{
               padding-top: 11px;
               z-index: 9999;
+              border-top:  1px solid lighten($info,30);
             }
           }
         }
