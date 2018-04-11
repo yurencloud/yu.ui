@@ -85,6 +85,7 @@ export default {
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: this.multi ? values.toString() : this.value });
       }
+      this.$emit('selected', this.value);
     },
     handleBlur() {
       this.visible = false;

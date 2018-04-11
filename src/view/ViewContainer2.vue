@@ -423,7 +423,7 @@
     </div>
     <div>当前是第{{current}}页</div>
     <div class="sub-title" style="margin-top: 100px;">pagination---分页--超多个</div>
-    <yu-pagination @change="currentpage" background :current-page="3"  goTo/>
+    <yu-pagination @change="currentpage" background :show-size="size" :current-page="3" changeSize goTo/>
     <div>当前是第{{current}}页</div>
     <div style="height: 200px;width: 30px"></div>
   </div>
@@ -679,6 +679,20 @@ export default {
         },
       ],
       current: 1,
+      size: [
+        { label: '100条每页',
+          value: 100,
+        },
+        { label: '200条每页',
+          value: 200,
+        },
+        { label: '300条每页',
+          value: 300,
+        },
+        { label: '400条每页',
+          value: 400,
+        },
+      ],
     };
   },
   methods: {

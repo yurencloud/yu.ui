@@ -1,7 +1,20 @@
 <template>
   <div class="yu-pagination"
        :class="{background:background}">
-    <span style="margin-right: 10px" v-if="showTotal">总共{{total}}条数据</span>
+      <div class="yu-head" id="pagination-head">
+        <span style="margin-right: 10px" v-if="showTotal">总共{{total}}条数据</span>
+          <yu-select
+            @selected="getChange"
+            size="mini"
+            text="10条每页"
+            overflow
+            v-if="changeSize">
+            <yu-option
+              v-for="item in showSize"
+              :label="item.label"
+              :value="item.value"/>
+          </yu-select>
+      </div>
     <ul class="yu-paging">
       <!-- prev -->
       <li
@@ -64,6 +77,10 @@
 </template>
 
 <script>
+
+import YuSelect from './select';
+import YuOption from './option';
+
 export default {
   name: 'YuPagination',
   props: {
@@ -85,13 +102,18 @@ export default {
     //  总记录条数
     total: {
       type: Number,
-      default: 100,
+      default: 10000,
     },
     prevText: String,
     nextText: String,
     background: Boolean,
     showTotal: Boolean,
     goTo: Boolean,
+    changeSize: Boolean,
+    showSize: {
+      type: Array,
+      default: [],
+    },
   },
   data() {
     return {
@@ -106,7 +128,14 @@ export default {
       firstDisable: true,
     }
   },
+  components: {
+    YuSelect,
+    YuOption,
+  },
   methods: {
+    getChange(value) {
+      this.limit = Number(value);
+    },
     prev() {
       if (this.index > 1) {
         this.go(this.index - 1);
@@ -140,7 +169,6 @@ export default {
     go(page) {
       if (this.index !== page) {
         this.index = page;
-        this.$emit('change', this.index)
       }
     },
     revToggle() {
@@ -159,6 +187,9 @@ export default {
     },
     //  计算页码
     pagers() {
+      if (this.index > this.pages) {
+        this.index = 1;
+      }
       const arr = [];
       const perPages = this.perPages;
       const pageCount = this.pages;
@@ -187,6 +218,7 @@ export default {
       for (let i = deviation.start; i <= deviation.end; i++) {
         arr.push(i);
       }
+      this.$emit('change', this.index);
       return arr;
     },
   },
@@ -244,15 +276,28 @@ export default {
         }
       }
     }
+    #pagination-head.yu-head{
+      display: inline-block;
+      .yu-input span.suffix{
+        line-height: 32px;
+      }
+      .yu-input span.clearable i{
+        line-height: 32px;
+      }
+      .yu-input input{
+        height: 32px;
+        width: 130px;
+      }
+    }
     .pagination-go{
       display: inline-block;
       input{
         margin: 0 10px;
-        width: 50px;
-        height: 25px;
+        width: 48px;
+        height: 28px;
         border-radius: 5px;
         border: 1px solid $info;
-        padding-left: 5px;
+        padding-left: 9px;
         box-sizing: border-box;
         outline: none;
         &:focus{
