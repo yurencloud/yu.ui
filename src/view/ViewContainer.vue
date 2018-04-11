@@ -588,7 +588,7 @@
     </yu-form>
 
     <div class="sub-title">表单提交</div>
-    <yu-form :rules="rules" action="/api/fruits" width="600px" method="POST" @success="success" native>
+    <yu-form :rules="rules" action="/api/fruits" width="600px" method="POST" @success="success">
       <yu-field label="水果id" >
         <yu-input name="id"/>
       </yu-field>
@@ -662,7 +662,6 @@ import YuUpload from '../components/upload';
 import YuRate from '../components/rate';
 import YuForm from '../components/form';
 import YuField from '../components/field';
-
 
 export default {
   name: 'ViewContainer',
