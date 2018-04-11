@@ -55,7 +55,7 @@ export default {
     close() {
       if (!this.closeable) {
         this.isShow = !this.isShow;
-        this.$emit('click', event);
+        this.$emit('close', event);
       }
     },
   },

@@ -113,21 +113,24 @@ export default {
     const arr = this.position;
     let count = 0;
     let timer = null;
-    this.$nextTick(() => {
-      lines = document.querySelector('ol').children;
-      lines[0].className = 'now';
-      // 小圆点
-      for (let i = 0; i < lines.length; i++) {
-        lines[i].index = i;
-        lines[i].addEventListener('click', () => {
-          for (let j = 0; j < lines.length; j++) {
-            lines[j].className = '';
-          }
-          lines[this.index].className = 'now';
-          animate(ul, -this.index * imgWidth, 50);
-        })
-      }
-    });
+    if (!this.type) {
+      this.$nextTick(() => {
+        lines = document.querySelector('ol').children;
+        lines[0].className = 'now';
+        console.log(lines);
+        // 小圆点
+        for (let i = 0; i < lines.length; i++) {
+          lines[i].index = i;
+          lines[i].addEventListener('click', () => {
+            for (let j = 0; j < lines.length; j++) {
+              lines[j].className = '';
+            }
+            lines[this.index].className = 'now';
+            animate(ul, -this.index * imgWidth, 50);
+          })
+        }
+      });
+    }
     this.lastSrc = this.$children[0].src;
     this.items = this.$children.length - 1;
     document.querySelectorAll('.yu-img-warp')[0].style.width = `${this.$children.length}00%`;
