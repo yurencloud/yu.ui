@@ -59,29 +59,32 @@ export default {
         }
         if (item.error) error = true;
       })
-      // 发送原生表单
-      if (this.native) {
-        console.log(the.$refs.form);
-        const formData = new FormData();
-        for (const key in this.values) {
-          if (this.values.hasOwnProperty(key)) {
-            formData.append(key, this.values[key]);
-          }
-        }
-        console.log(123);
-        fetch(this.action, {
-          method: 'POST',
-          body: formData,
-        }).then((response) => {
-          response.text().then((data) => {
-            the.$emit('success', data);
-          });
-        }, (error) => {
-          the.$emit('error', error);
-          console.log(error.message);
-        });
-        return;
-      }
+
+      if (error) return;
+
+      // // 发送原生表单
+      // if (this.native) {
+      //   console.log(the.$refs.form);
+      //   const formData = new FormData();
+      //   for (const key in this.values) {
+      //     if (this.values.hasOwnProperty(key)) {
+      //       formData.append(key, this.values[key]);
+      //     }
+      //   }
+      //   console.log(123);
+      //   fetch(this.action, {
+      //     method: 'POST',
+      //     body: formData,
+      //   }).then((response) => {
+      //     response.text().then((data) => {
+      //       the.$emit('success', data);
+      //     });
+      //   }, (error) => {
+      //     the.$emit('error', error);
+      //     console.log(error.message);
+      //   });
+      //   return;
+      // }
 
       // 发送GET
       if (this.method.toUpperCase() === 'GET') {

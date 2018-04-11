@@ -39,7 +39,7 @@ export default {
       // 如果禁用，直接返回
       if (this.disabled) return;
       this.isChecked = !this.isChecked;
-      this.$emit('change', this.name, this.isChecked, this.value);
+      this.$emit('change', this.value, this.name, this.isChecked);
       this.$emit('click');
       if (this.$parent.isCheckboxs) {
         if (this.value === undefined) return;
