@@ -53,11 +53,13 @@ export default {
       },
     }
   },
-  mounted() {
-    this.iconClass ? this.type = '' : '';
-    if (this.dangerouslyUseHTMLString) {
-      this.$refs.content.innerHTML = this.message
-    }
+  computed: {
+    change() {
+      this.iconClass ? this.type = '' : '';
+      if (this.dangerouslyUseHTMLString) {
+        this.$refs.content.innerHTML = this.message
+      }
+    },
   },
   methods: {
     click() {

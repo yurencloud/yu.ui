@@ -6,16 +6,15 @@
          :class='[{center:center},customClass]'
     >
       <div class="dialog-box"
-           @click="handleClick"
       >
-        <div class="message-title">{{title}} <i class="iconfont icon-close" v-if="!showClose" id="message-icon"></i></div>
+        <div class="message-title">{{title}} <i class="iconfont icon-close" @click="cancle" v-if="!showClose" id="message-icon"></i></div>
         <!--文字-->
         <div class="message-text" v-if="!isInput">
           <i :class="['iconfont',typeItems[type].icon]"
              v-if="type"
              :style="{color:typeItems[type].color}"
           ></i>
-          <div>{{message}}</div>
+          <div :class="{margin:type}">{{message}}</div>
         </div>
         <!--input框-->
         <div class="message-input" v-else>
@@ -31,19 +30,21 @@
         <div class="message-btn">
           <!--确认和取消按钮-->
           <div class="message-cancle"
-               :class="[cancelButtonClass,]">
+               :class="[cancelButtonClass,]"
+               @click="confirm">
             <yu-button size="small"
-                       v-if="!showCancelButton"
+                       v-if="showCancelButton"
             >
               {{cancelButtonText}}
             </yu-button>
           </div>
           <div class="message-confirm"
-               :class="[confirmButtonClass,]">
+               :class="[confirmButtonClass,]"
+                @click="cancle">
             <yu-button
               type="primary"
               size="small"
-              v-if="!showConfirmButton"
+              v-if="showConfirmButton"
             >
               {{confirmButtonText}}
             </yu-button>
@@ -130,24 +131,24 @@ export default {
         document.querySelector('body').classList.add('lock-scroll');
       }
     },
-    handleClick(event) {
-      if (event.target.parentNode.className === 'message-confirm') {
-        this.event ? this.messagePopver = this.event.confirm() : '';
-        if (this.isInput) {
-          this.value = document.querySelector('.yu-message-box input').value;
-          this.result = this.inputPattern.test(this.value);
-          this.result ? this.change() : '';
-        }else{
-          this.value = '';
-          this.result ? this.change() : '';
-        }
-        document.querySelector('.yu-message-box input').value = '';
-        // this.$emit('click', event)
-      } else if (event.target.parentNode.className === 'message-cancle' || event.target.id === 'message-icon') {
-        this.event ? this.messagePopver = this.event.cancle() : '';
+    confirm(event) {
+      this.event ? this.messagePopver = this.event.confirm() : '';
+      if (this.isInput) {
+        this.value = document.querySelector('.yu-message-box input').value;
+        this.result = this.inputPattern.test(this.value);
+        this.result ? this.change() : '';
+      }else{
         this.value = '';
-        this.change();
+        this.result ? this.change() : '';
       }
+      document.querySelector('.yu-message-box input').value = '';
+      this.$emit('confirm', event);
+    },
+    cancle(event) {
+      this.event ? this.messagePopver = this.event.cancle() : '';
+      this.value = '';
+      this.change();
+      this.$emit('cancle', event);
     },
     change() {
       this.isShow = !this.isShow;
@@ -214,7 +215,9 @@ export default {
           }
           div{
             display: inline-block;
-            margin-left: 35px;
+            &.margin{
+              margin-left: 35px;
+            }
           }
         }
         .message-input{

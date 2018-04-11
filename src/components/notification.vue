@@ -64,7 +64,10 @@ export default {
           color: '#67C23A',
         },
       },
-      isIconClass: true,
+      isIconClass: {
+        type: Boolean,
+        default: true,
+      },
       icon: String,
       color: String,
     };
@@ -85,15 +88,17 @@ export default {
       this.$emit('click', event);
     },
   },
-  mounted() {
-    if (this.type) {
-      this.icon = this.typeItem[this.type].icon;
-      this.color = this.typeItem[this.type].color;
-      this.iconClass = '';
-    } else {
-      this.icon = '';
-      this.color = '#409EFF';
-    }
+  computed: {
+    change() {
+      if (this.type) {
+        this.icon = this.typeItem[this.type].icon;
+        this.color = this.typeItem[this.type].color;
+        this.iconClass = '';
+      } else {
+        this.icon = '';
+        this.color = '#409EFF';
+      }
+    },
   },
 };
 </script>
@@ -134,7 +139,8 @@ export default {
     .notification-icon {
       padding-right: 10px;
       i {
-        font-size: 30px;
+        font-size: 24px;
+        color: $info;
       }
     }
   }
