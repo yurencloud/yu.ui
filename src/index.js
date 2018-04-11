@@ -44,8 +44,53 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-module.exports = {
-  version: '1.0.1',
+const version = '1.0.4';
+
+const components = {
+  version,
+  install,
+  YuToolTip,
+  YuDialog,
+  YuButton,
+  YuButtons,
+  YuInput,
+  YuOption,
+  YuRadio,
+  YuRadios,
+  YuSelect,
+  YuCounter,
+  YuCheckbox,
+  YuCard,
+  YuCarousel,
+  YuCollapseItem,
+  YuCollapse,
+  YuMenuItem,
+  YuNavMenu,
+  YuCheckboxs,
+  YuLoading,
+  YuCounterSide,
+  YuSelected,
+  YuCascader,
+  YuSwitch,
+  YuDropDown,
+  YuDropdownMenu,
+  YuDropdownItem,
+  YuBreadcrumb,
+  YuBreadcrumbItem,
+  YuSlider,
+  YuTimePicker,
+  YuScrollSelect,
+  YuDatePicker,
+  YuUpload,
+  YuRate,
+  YuForm,
+  YuField,
+}
+
+export default components;
+
+export {
+  version,
   install,
   YuToolTip,
   YuDialog,
@@ -84,5 +129,3 @@ module.exports = {
   YuForm,
   YuField,
 };
-
-module.exports.default = module.exports;

@@ -662,6 +662,7 @@ import YuUpload from '../components/upload';
 import YuRate from '../components/rate';
 import YuForm from '../components/form';
 import YuField from '../components/field';
+// import {YuButton} from '../index';
 
 export default {
   name: 'ViewContainer',
