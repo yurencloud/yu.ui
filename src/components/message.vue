@@ -57,6 +57,7 @@ export default {
     change() {
       this.iconClass ? this.type = '' : '';
       if (this.dangerouslyUseHTMLString) {
+        console.log(this.$refs)
         this.$refs.content.innerHTML = this.message
       }
     },

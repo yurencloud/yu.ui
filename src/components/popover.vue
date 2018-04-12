@@ -100,7 +100,12 @@ export default {
          left: 40px;
          transform: rotateX(180deg);
        }
+       /*todo*/
        &.right{
+         right: -21px;
+         top: 25%;
+         -webkit-transform: rotate(-90deg) translateY(-50%);
+         transform: rotate(-90deg) translateY(-50%);
        }
      }
    }
