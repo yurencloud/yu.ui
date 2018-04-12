@@ -70,7 +70,7 @@ export default {
   border-radius: 5px;
   width: 100%;
   font-size: $normal;
-  margin-bottom: 10px;
+  margin-bottom:20px ;
   position: relative;
   box-sizing: border-box;
   i {
@@ -89,22 +89,22 @@ export default {
 }
 /*成功*/
 .yu-alert.success {
-  background-color: lighten($success, 40);
+  background-color: lighten($success, 45);
   color: $success;
 }
 // 警告
 .yu-alert.warming {
-  background-color: lighten($warming, 35);
+  background-color: lighten($warming, 40);
   color: $warming;
 }
 // 错误
 .yu-alert.error {
-  background-color: lighten( $danger,  25);
+  background-color: lighten( $danger,  27);
   color: $danger;
 }
 // 信息
 .yu-alert.info {
-  background-color: lighten($info,35);
+  background-color: lighten($info,37);
   color: $info;
 }
 // 居中
