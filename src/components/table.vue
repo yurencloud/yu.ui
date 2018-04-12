@@ -12,8 +12,8 @@
             v-bind:key="ind"
             v-if="!(ind === 'type')"
         >
-          <div :style="[{width:widths[ind]}]" v-if="(typeof value) === 'string'">{{value}}</div>
-          <div v-else :style="[{width:widths[ind]}]">
+          <div :style="[{width:widths? widths[ind] :''}]" v-if="(typeof value) === 'string'">{{value}}</div>
+          <div v-else :style="[{width:widths? widths[ind] :''}]">
             <span v-for="v in value" >{{v}}</span>
           </div>
         </td>
@@ -30,7 +30,8 @@ export default {
     }
   },
   props: {
-    widths: {},
+    widths: {
+    },
     data: {},
     stripe: Boolean,
     border: Boolean,
@@ -66,7 +67,7 @@ export default {
           background-color: lighten($info,39);
         }
         td{
-          padding: 12px 0;
+          padding: 12px;
           border-bottom: 1px solid lighten($info,30);
           box-sizing: border-box;
           div{
@@ -159,50 +160,40 @@ export default {
         div{
           box-sizing: border-box;
         }
+        td{
+          width: 240px;
+        }
       }
     }
   }
-  /*固定列*/
   .yu-table.fix-column{
     position: relative;
-    /*border-left: none;*/
-    border-left: 1px solid lighten($info,30);
     table{
       overflow: auto;
       display: block;
       box-sizing: border-box;
       border-top: none;
-      padding-left: 200px;
-        tr{
-          display: block;
-          td{
-            background-color: #fff;
-            div{
-              box-sizing: border-box;
-            }
-            &:first-child{
-              position: absolute;
-              font-size: 16px;
-              left: 0;
-            }
-            &:last-child{
-              border-right: none;
-            }
-          }
-          &:last-child{
-            td{
-              border-bottom: none;
-            }
+      padding-left: 175px;
+      tr{
+        td{
+          background-color: #fff;
+          div{
+            width: 150px;
+            box-sizing: border-box;
           }
           &:first-child{
-            td{
-              padding-top: 11px;
-              z-index: 9999;
-              border-top:  1px solid lighten($info,30);
-            }
+            position: absolute;
+            left: 0;
+            border-left: 1px solid lighten($info,30);
+            border-bottom: none;
+            border-top: 1px solid lighten($info,30);
           }
         }
+        &:first-child{
+        border-top:1px solid lighten($info,30) ;
+      }
+      }
     }
-  }
 
+  }
 </style>

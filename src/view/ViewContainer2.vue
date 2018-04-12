@@ -405,19 +405,19 @@
            @close="Close(item)">{{item}}</yu-tag>
     <yu-tag closable hit type="error" @close="handleClose" colo="pink">标签一</yu-tag>
     <div class="sub-title" style="margin-top: 100px">table</div>
-    <yu-table :widths="widths" :data="tabItem"/>
+    <yu-table  :data="tabItem"/>
     <div class="sub-title" style="margin-top: 100px">table----带有斑马纹</div>
-    <yu-table :widths="widths" :data="tabItem" stripe/>
+    <yu-table :data="tabItem" stripe/>
     <div class="sub-title" style="margin-top: 100px">table----带边框的表格</div>
-    <yu-table :widths="widths" :data="tabItem" border />
+    <yu-table :data="tabItem" border />
     <div class="sub-title" style="margin-top: 100px">table----带状态的表格</div>
-    <yu-table :widths="widths" :data="tabItem" border status/>
+    <yu-table  :data="tabItem" border status/>
     <div class="sub-title" style="margin-top: 100px">table----固定表头</div>
-    <yu-table :widths="widths" :data="tabItem" border height="300px"/>
-    <div class="sub-title" style="margin-top: 100px;">table---固定列</div>
-    <yu-table :widths="width" :data="Item" border width="800px"/>
+    <yu-table :data="tabItem" border height="300px"/>
+    <div class="sub-title"  style="margin-top: 100px;">table---固定列</div>
+    <yu-table  :data="Item" border width="800px"/>
     <div class="sub-title" style="margin-top: 100px;">table---单选</div>
-    <yu-table :widths="width" :data="Items"/>
+    <yu-table  :data="Items"/>
     <div style="margin-top: 10px">
       <yu-button @click="slectTwo(2)">选择第二行</yu-button>
       <yu-button @click="cancleSelect(2)">取消选择</yu-button>
@@ -426,7 +426,11 @@
     <yu-pagination @change="currentpage" background :show-size="size" changeSize goTo/>
     <div>当前是第{{current}}页</div>
     <div class="sub-title" style="margin-top: 100px;">弹出框----基础</div>
-    <yu-popover ref="popover1">
+    <yu-popover title="标题" content="这是一段文字,这是一段文字这是一段文字" left="0" top="-90px">
+      <yu-button slot="trigger">点击激活</yu-button>
+    </yu-popover>
+    <div class="sub-title" style="margin-top: 100px;">弹出框----不同方位</div>
+    <yu-popover title="标题" content="这是一段文字,这是一段文字这是一段文字" position="bottom" left="0" top="55px">
       <yu-button slot="trigger">点击激活</yu-button>
     </yu-popover>
     <div style="height: 200px;width: 30px"></div>
@@ -535,11 +539,11 @@ export default {
         },
       },
       tags: ['标签一', '标签二', '标签三'],
-      widths: {
-        date: '200px',
-        name: '180px',
-        address: '460px',
-      },
+      // widths: {
+      //   date: '200px',
+      //   name: '180px',
+      //   address: '460px',
+      // },
       width: {
         date: '200px',
         age: '180px',
@@ -733,8 +737,6 @@ export default {
     },
     slectTwo(num) {
       this.Items[num].type = 'info';
-      // console.log(this.Items);
-      // console.log(this.tabItem);
     },
     cancleSelect(num) {
       this.Items[num].type = '';
