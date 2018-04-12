@@ -56,8 +56,8 @@ export default {
   computed: {
     change() {
       this.iconClass ? this.type = '' : '';
+      //  todo Html代码显示有问题
       if (this.dangerouslyUseHTMLString) {
-        console.log(this.$refs)
         this.$refs.content.innerHTML = this.message
       }
     },
