@@ -433,6 +433,10 @@
     <yu-popover title="标题" content="这是一段文字,这是一段文字这是一段文字" position="bottom" left="0" top="55px">
       <yu-button slot="trigger">点击激活</yu-button>
     </yu-popover>
+    <div class="sub-title" style="margin-top: 100px;">弹出框----不同方位</div>
+    <yu-popover title="标题" content="这是一段文字,这是一段文字这是一段文字" position="right" left="0" top="55px">
+      <yu-button slot="trigger">点击激活</yu-button>
+    </yu-popover>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
