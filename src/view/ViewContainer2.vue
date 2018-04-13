@@ -1,6 +1,21 @@
 <template>
   <div id="container" style="margin: 30px">
     <h2>YU.UI---2</h2>
+    <yu-drop-down trigger="hover">
+      <span slot="title">
+        <yu-button type="primary" size="small">
+          下拉列表<i class="iconfont icon-angle-up"></i>
+        </yu-button>
+      </span>
+      <yu-dropdown-menu slot="menu">
+        <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
+        <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
+        <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
+        <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
+        <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
+        <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
+      </yu-dropdown-menu>
+    </yu-drop-down>
     <div class="sub-title">步骤条----基础用法</div>
     <yu-steps :active="active2">
       <yu-step title="步骤一"/>
@@ -462,6 +477,9 @@ import YuTag from '../components/tag';
 import YuTable from '../components/table';
 import YuPagination from '../components/pagination';
 import YuPopover from '../components/popover';
+import YuDropDown from '../components/dropdown';
+import YuDropdownItem from '../components/dropdown-item';
+import YuDropdownMenu from '../components/dropdown-menu';
 
 export default {
   name: 'ViewContainer',
@@ -768,6 +786,9 @@ export default {
     YuTable,
     YuPagination,
     YuPopover,
+    YuDropDown,
+    YuDropdownItem,
+    YuDropdownMenu,
   },
 };
 </script>

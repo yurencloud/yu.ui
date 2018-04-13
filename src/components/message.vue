@@ -53,13 +53,14 @@ export default {
       },
     }
   },
+  mounted() {
+    if (this.dangerouslyUseHTMLString) {
+      this.$refs.content.innerHTML = this.message
+    }
+  },
   computed: {
     change() {
       this.iconClass ? this.type = '' : '';
-      //  todo Html代码显示有问题
-      if (this.dangerouslyUseHTMLString) {
-        this.$refs.content.innerHTML = this.message
-      }
     },
   },
   methods: {
@@ -83,9 +84,9 @@ export default {
   @import "../assets/css/varible";
   @import "../assets/css/function";
   .yu-message{
-   height: 30px;
+   display: inline-block;
     .message{
-      padding: 15px 20px;
+      padding: 10px 20px;
       min-width: 330px;
       border-radius: 5px;
       position: fixed;

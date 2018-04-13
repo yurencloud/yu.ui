@@ -31,7 +31,7 @@
           <!--确认和取消按钮-->
           <div class="message-cancle"
                :class="[cancelButtonClass,]"
-               @click="confirm">
+               @click="cancle">
             <yu-button size="small"
                        v-if="showCancelButton"
             >
@@ -40,7 +40,7 @@
           </div>
           <div class="message-confirm"
                :class="[confirmButtonClass,]"
-                @click="cancle">
+                @click="confirm">
             <yu-button
               type="primary"
               size="small"
@@ -293,6 +293,12 @@ export default {
         display: inline-block;
       }
     }
+  }
+</style>
+<style>
+  .lock-scroll{
+    height: 100%;
+    overflow: hidden;
   }
 </style>
 

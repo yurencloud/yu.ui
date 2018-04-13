@@ -52,7 +52,7 @@ export default {
     status: String,
   },
   mounted() {
-    this.lastLine = this.$el.nextElementSibling;
+    this.$el.nextElementSibling ? this.lastLine = true : this.lastLine = false;
     this.conduct = !this.$el.previousElementSibling;
     if (this.rootSteps.simple) {
       this.lastLine = false;
@@ -101,7 +101,7 @@ export default {
           color: $danger;
         }
       }
-      .wait{
+      .warming{
         i{
           color: $warming;
         }
@@ -121,7 +121,7 @@ export default {
           color: $danger;
         }
       }
-      .have-wait{
+      .have-warming{
         i{
           color: $warming;
         }
@@ -207,7 +207,7 @@ export default {
           color: $danger;
         }
       }
-      .have-wait{
+      .have-warming{
         i{
           color: $warming;
         }

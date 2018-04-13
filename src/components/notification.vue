@@ -1,5 +1,5 @@
 <template>
-  <div class="yu-notification" @click="handleClick">
+  <div class="yu-notification">
     <div class="notification" ref="notification"
          :class="[{active:isActive},position]"
          :style="{top:offset}">
@@ -14,7 +14,7 @@
         <div class="notification-title">
           {{title}}
           <i class="iconfont icon-close"
-             @click="onclose"
+             @click="close"
              v-if="showClose">
           </i></div>
         <div class="notification-content">
@@ -23,7 +23,8 @@
       </div>
     </div>
     <div class="notification-btn"
-         @click="onclick"><slot/></div>
+         @click="onclick">
+      <slot/></div>
   </div>
 </template>
 
@@ -73,8 +74,9 @@ export default {
     };
   },
   methods: {
-    onclose() {
+    close() {
       this.isActive = false;
+      this.$emit('click', event);
     },
     onclick() {
       this.isActive = true;
@@ -83,9 +85,6 @@ export default {
           this.isActive = false;
         }, this.duration * 1000);
       }
-    },
-    handleClick(event) {
-      this.$emit('click', event);
     },
   },
   computed: {
@@ -107,6 +106,7 @@ export default {
 @import "../assets/css/varible";
 @import "../assets/css/function";
 .yu-notification {
+  display: inline-block;
   .notification {
     position: fixed;
     z-index: 9999;
@@ -143,6 +143,9 @@ export default {
         color: $info;
       }
     }
+  }
+  .notification-btn{
+    display: inline-block;
   }
   .notification.top-right {
     top: 0;
