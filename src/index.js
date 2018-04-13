@@ -34,6 +34,22 @@ import YuUpload from './components/upload';
 import YuRate from './components/rate';
 import YuForm from './components/form';
 import YuField from './components/field';
+import YuSteps from './components/steps';
+import YuStep from './components/step';
+import YuTabs from './components/tabs';
+import YuTabsItem from './components/tabs-item';
+import YuTabsNav from './components/tabs-nav';
+import YuCarouselItem from './components/carousel-item';
+import YuNotification from './components/notification';
+import YuAlert from './components/alert';
+import YuMessage from './components/message';
+import YuMessageBox from './components/message-box';
+import YuBadge from './components/badge';
+import YuProgress from './components/progress';
+import YuTag from './components/tag';
+import YuTable from './components/table';
+import YuPagination from './components/pagination';
+import YuPopover from './components/popover';
 
 // 在Vue全局安装一些快捷方法
 function install(Vue, opts = {}) {
@@ -44,7 +60,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-const version = '1.0.4';
+const version = '1.0.5';
 
 const components = {
   version,
@@ -85,6 +101,22 @@ const components = {
   YuRate,
   YuForm,
   YuField,
+  YuSteps,
+  YuStep,
+  YuTabs,
+  YuTabsItem,
+  YuTabsNav,
+  YuCarouselItem,
+  YuNotification,
+  YuAlert,
+  YuMessage,
+  YuMessageBox,
+  YuBadge,
+  YuProgress,
+  YuTag,
+  YuTable,
+  YuPagination,
+  YuPopover,
 }
 
 export default components;
@@ -128,4 +160,20 @@ export {
   YuRate,
   YuForm,
   YuField,
+  YuSteps,
+  YuStep,
+  YuTabs,
+  YuTabsItem,
+  YuTabsNav,
+  YuCarouselItem,
+  YuNotification,
+  YuAlert,
+  YuMessage,
+  YuMessageBox,
+  YuBadge,
+  YuProgress,
+  YuTag,
+  YuTable,
+  YuPagination,
+  YuPopover,
 };
