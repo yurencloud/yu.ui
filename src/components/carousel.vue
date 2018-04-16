@@ -2,11 +2,11 @@
     <div class="yu-carousel" ref="carousel"
          :class="[type]"
          :style="{width:width,height:height}">
-      <ul class="yu-img-warp">
+      <ul class="yu-img-warp" ref="warp">
         <slot/>
         <yu-carousel-item :src="lastSrc" v-if="!type"/>
       </ul>
-      <ol v-if="!type">
+      <ol v-if="!type" ref="lines">
         <li v-for="(value,index) in items"></li>
       </ol>
       <div class="carousel-arrow">
@@ -115,7 +115,7 @@ export default {
     let timer = null;
     if (!this.type) {
       this.$nextTick(() => {
-        lines = document.querySelector('ol').children;
+        lines = this.$refs.lines.children;
         lines[0].className = 'now';
         console.log(lines);
         // 小圆点
@@ -133,8 +133,9 @@ export default {
     }
     this.lastSrc = this.$children[0].src;
     this.items = this.$children.length - 1;
-    document.querySelectorAll('.yu-img-warp')[0].style.width = `${this.$children.length}00%`;
-    const list = document.querySelectorAll('.yu-img-warp li');
+    this.$refs.warp.style.width = `${this.$children.length}00%`;
+    // const list = document.querySelectorAll('.yu-img-warp li');
+    const list = this.$refs.warp.children;
     for (let i = 0; i < list.length; i++) {
       list[i].style.width = `${(1 / this.$children.length) * 100}%`;
     }
@@ -157,7 +158,7 @@ export default {
           }
         }
       } else {
-        if ( count >= imgs.length - 1 ) {
+        if (count >= imgs.length - 1) {
           ul.style.left = 0;
           count = 0
         }
@@ -180,7 +181,7 @@ export default {
           lock = false;
           arr.push(arr.shift());
           for (let i = 0; i < imgs.length; i++) {
-            animate1(imgs[i], arr[i] , () => {
+            animate1(imgs[i], arr[i], () => {
               lock = true;
             })
           }
@@ -194,7 +195,7 @@ export default {
         count -= 1;
         animate(ul, -count * imgWidth, 50);
 
-        for (let i = 0; i < lines.length; i++){
+        for (let i = 0; i < lines.length; i++) {
           lines[i].className = '';
         }
         lines[count].className = 'now';

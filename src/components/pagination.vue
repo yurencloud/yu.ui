@@ -87,7 +87,7 @@ export default {
     //  页面中可见的页码数
     perPages: {
       type: Number,
-      default: 5,
+      default: 7,
     },
     //  当前页码
     pageIndex: {
@@ -102,7 +102,7 @@ export default {
     //  总记录条数
     total: {
       type: Number,
-      default: 10000,
+      default: 0,
     },
     prevText: String,
     nextText: String,
@@ -112,7 +112,8 @@ export default {
     changeSize: Boolean,
     showSize: {
       type: Array,
-      default: [],
+      default: () => [],
+
     },
   },
   data() {
@@ -311,7 +312,7 @@ export default {
   .yu-pagination.background{
     .yu-paging{
       .paging-item{
-        background-color: lighten($info,35);
+        background-color: lighten($info,37);
         margin-right: 10px;
         border-radius: 3px;
         &:hover{

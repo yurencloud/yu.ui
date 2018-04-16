@@ -35,9 +35,16 @@ export default {
       this.$emit('click', event);
     },
   },
+  mounted() {
+    if (Number(this.value)) {
+      if (this.max < Number(this.value)) {
+        this.value = this.max;
+        this.addShow.default = true;
+      }
+    }
+  },
   computed: {
     change() {
-      console.log(Number(this.value));
       if (Number(this.value)) {
         if (this.max < Number(this.value)) {
           this.value = this.max;
