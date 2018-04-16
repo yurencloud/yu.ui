@@ -52,13 +52,15 @@ export default {
     handleAdd() {
       this.$refs.input.changeValue(this.number += this.step);
     },
-    handleChange(value) {
+    handleChange(value, name) {
       this.number = parseInt(value, 0);
+      this.$emit('change', value, name);
     },
-    handleBlur() {
+    handleBlur(event) {
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.number });
       }
+      this.$emit('blur', event)
     },
   },
   watch: {

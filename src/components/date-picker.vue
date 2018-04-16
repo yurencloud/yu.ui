@@ -157,15 +157,17 @@ export default {
         this.$parent.handleChange({ name: this.name, value: this.value });
       }
     },
-    handleBlur() {
+    handleBlur(event) {
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.value });
       }
+      this.$emit('blur', event);
     },
-    handleChange() {
+    handleChange(value, name) {
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: this.value });
       }
+      this.$emit('change', value, name);
     },
     handleClick() {
       this.visible = !this.visible;

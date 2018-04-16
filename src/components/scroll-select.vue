@@ -17,7 +17,7 @@
          @mouseleave="handleMouseleave"
          v-show="visible"
     >
-      <div class="scrolls" :class="[{overflow:overflow}]">
+      <div class="scrolls">
         <div class="line"></div>
         <div class="scrollList" @scroll="firstScroll($event)">
           <ul>
@@ -63,7 +63,7 @@
 import YuInput from './input';
 
 export default {
-  name: 'YuSelect',
+  name: 'YuScrollSelect',
   data() {
     return {
       visible: false,
@@ -80,10 +80,8 @@ export default {
     };
   },
   props: {
-    overflow: Boolean,
     remote: Boolean,
     disabled: Boolean,
-    multi: Boolean,
     options: Array,
     prefix: String,
     placeholder: String,
@@ -103,7 +101,7 @@ export default {
     },
     handleMouseover() {
       this.scrollTop = document.getElementsByTagName('html')[0].scrollTop;
-      document.addEventListener('scroll', this.stopScroll)
+      document.addEventListener('scroll', this.stopScroll);
     },
     handleMouseleave() {
       document.removeEventListener('scroll', this.stopScroll);
@@ -124,12 +122,12 @@ export default {
         } else {
           this.fix = false;
           if (this.remote) {
-            this.$emit('firstFetch', second)
-            return
+            this.$emit('firstFetch', second);
+            return;
           }
           this.secondOptions = second.children;
         }
-      }, 400)
+      }, 400);
     },
     firstClick(index, $event) {
       this.firstActive = index;
@@ -141,14 +139,14 @@ export default {
       setTimeout(() => {
         this.secondActive = parseInt($event.target.scrollTop / 40, 0);
         $event.target.scrollTop = this.secondActive * 40;
-        const third = this.secondOptions[this.secondActive]
+        const third = this.secondOptions[this.secondActive];
         if (third.disabled) {
           this.fix = false;
         } else {
           this.fix = false;
           if (this.remote) {
-            this.$emit('secondFetch', third)
-            return
+            this.$emit('secondFetch', third);
+            return;
           }
           this.thirdOptions = third.children;
         }
@@ -166,7 +164,7 @@ export default {
         this.thirdActive = parseInt($event.target.scrollTop / 40, 0);
         $event.target.scrollTop = this.thirdActive * 40;
         the.fix = false;
-      }, 400)
+      }, 400);
     },
     thirdClick(index, $event) {
       this.thirdActive = index;
@@ -191,17 +189,17 @@ export default {
         if (item.value === option.value) {
           item.hide = false;
         }
-      })
+      });
     },
     handleCancel() {
       this.visible = false;
     },
     handleConfirm() {
-      const first = this.options[this.firstActive]
+      const first = this.options[this.firstActive];
       const second = this.secondOptions ? this.secondOptions[this.secondActive] : {};
       const third = this.thirdOptions ? this.thirdOptions[this.thirdActive] : {};
       if (first.disabled || second.disabled || third.disabled) {
-        alert('不可以选择无效选项')
+        alert('不可以选择无效选项');
         return;
       }
       let value = first.label;
@@ -211,7 +209,7 @@ export default {
       if (third.label) {
         value += (this.split + third.label);
       }
-      this.value = value
+      this.value = value;
       this.visible = false;
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: this.value });

@@ -23,11 +23,11 @@ export default {
     }
   },
   props: {
+    name: String,
     isCheckboxs: {
       type: Boolean,
       default: true,
     },
-    name: String,
     selectAll: {
       type: Boolean,
       default: false,
@@ -41,7 +41,7 @@ export default {
       const the = this;
       // 重置
       this.value = [];
-      this.isChecked = !this.isChecked
+      this.isChecked = !this.isChecked;
       this.$children.forEach((item, index) => {
         item.isChecked = this.isChecked;
         if (index > 0) {
@@ -52,13 +52,13 @@ export default {
             the.value.splice(the.value.indexOf(item.value), 1);
           }
         }
-      })
+      });
 
       this.$parent.handleChange({ name: the.name, value: this.value.toString() });
     },
     handleChange(value, isChecked) {
       if (isChecked) {
-        this.value.push(value)
+        this.value.push(value);
       } else {
         this.value.splice(this.value.indexOf(value), 1);
       }
@@ -70,9 +70,9 @@ export default {
   mounted() {
     this.$children.forEach((item, index) => {
       if (index > 0 && item.isChecked) {
-        this.value.push(item.value)
+        this.value.push(item.value);
       }
-    })
+    });
   },
 };
 </script>

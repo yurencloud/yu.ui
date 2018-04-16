@@ -22,13 +22,7 @@ export default {
     disabled: Boolean,
     label: String,
     vertical: Boolean,
-    name: {
-      type: String,
-    },
-    type: {
-      type: String,
-      default: 'default',
-    },
+    name: String,
   },
   methods: {
     handleClick() {
@@ -45,7 +39,7 @@ export default {
 
       // 开关当前单选
       this.isChecked = !this.isChecked;
-      this.$emit('change', this.label, this.isChecked);
+      this.$emit('change', this.label, this.isChecked, this.name);
 
       if (this.$parent.isRadios) {
         this.$parent.handleChange(this.value, this.isChecked);

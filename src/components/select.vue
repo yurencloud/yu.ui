@@ -6,7 +6,7 @@
       @click="handleClick"
       @blur="handleBlur"
       suffix="icon-angle-down"
-      :placeholder="text"
+      :placeholder="placeholder"
       :disabled="disabled"
       :name="name"
       clearable
@@ -38,7 +38,7 @@ export default {
   },
   props: {
     overflow: Boolean,
-    text: String,
+    placeholder: String,
     disabled: Boolean,
     multi: Boolean,
     options: Array,
@@ -87,7 +87,7 @@ export default {
       }
       this.$emit('selected', this.value);
     },
-    handleBlur() {
+    handleBlur(event) {
       this.visible = false;
       if (this.$parent.isField) {
         const values = [];
@@ -96,6 +96,7 @@ export default {
         })
         this.$parent.handleBlur({ name: this.name, value: this.multi ? values.toString() : this.value });
       }
+      this.$emit('blur', event);
     },
     cancelSelect(option) {
       const labels = [];
