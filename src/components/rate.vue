@@ -25,11 +25,7 @@ export default {
       default: 0,
     },
     readOnly: Boolean,
-    disabled: Boolean,
-    vertical: Boolean,
-    name: {
-      type: String,
-    },
+    name: String,
     labeled: Boolean,
     label: {
       type: Array,
