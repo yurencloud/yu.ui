@@ -11,9 +11,10 @@
         <td class="yu-td" v-for="(value,ind) in item"
             v-bind:key="ind"
             v-if="!(ind === 'type')"
+            :style="[{width:widths? widths[ind] :''}]"
         >
-          <div :style="[{width:widths? widths[ind] :''}]" v-if="(typeof value) === 'string'">{{value}}</div>
-          <div v-else :style="[{width:widths? widths[ind] :''}]">
+          <div v-if="(typeof value) === 'string'">{{value}}</div>
+          <div v-else >
             <span v-for="v in value" >{{v}}</span>
           </div>
         </td>
@@ -38,6 +39,9 @@ export default {
     status: Boolean,
     height: String,
     width: String,
+  },
+  mounted() {
+    console.log(this.widths);
   },
 }
 </script>
@@ -72,7 +76,6 @@ export default {
           box-sizing: border-box;
           div{
             display: inline-block;
-            padding-left: 10px;
             color: darken($info,15);
             font-size: $normal;
             span{
@@ -159,9 +162,6 @@ export default {
         }
         div{
           box-sizing: border-box;
-        }
-        td{
-          width: 240px;
         }
       }
     }

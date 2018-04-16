@@ -420,15 +420,15 @@
            @close="Close(item)">{{item}}</yu-tag>
     <yu-tag closable hit type="error" @close="handleClose" colo="pink">标签一</yu-tag>
     <div class="sub-title" style="margin-top: 100px">table</div>
-    <yu-table  :data="tabItem"/>
+    <yu-table :widths="width1"  :data="tabItem"/>
     <div class="sub-title" style="margin-top: 100px">table----带有斑马纹</div>
     <yu-table :data="tabItem" stripe/>
     <div class="sub-title" style="margin-top: 100px">table----带边框的表格</div>
     <yu-table :data="tabItem" border />
-    <div class="sub-title" style="margin-top: 100px">table----带状态的表格</div>
-    <yu-table  :data="tabItem" border status/>
-    <div class="sub-title" style="margin-top: 100px">table----固定表头</div>
-    <yu-table :data="tabItem" border height="300px"/>
+    <div class="sub-title"  style="margin-top: 100px">table----带状态的表格</div>
+    <yu-table  :data="tabItem" border :widths="width1" status/>
+    <div class="sub-title"  style="margin-top: 100px">table----固定表头</div>
+    <yu-table :data="tabItem" :widths="width1"  border height="300px"/>
     <div class="sub-title"  style="margin-top: 100px;">table---固定列</div>
     <yu-table  :data="Item" border width="800px"/>
     <div class="sub-title" style="margin-top: 100px;">table---单选</div>
