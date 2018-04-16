@@ -19,17 +19,18 @@ export default {
   },
   data() {
     return {
-      separator: '',
+      separator: '/',
       len: Number,
       next: '',
     }
   },
   methods: {
-    go() {
+    go(event) {
       const self = this;
       if (this.to) {
         self.$router.history.replace(this.to);
       }
+      this.$emit('click', event)
     },
   },
   mounted() {
@@ -47,6 +48,7 @@ export default {
     display: inline-block;
    font-size: $large;
     font-weight: 800;
+    cursor: pointer;
     .point{
       color: $light-text;
       font-weight: 500;

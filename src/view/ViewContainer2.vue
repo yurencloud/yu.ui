@@ -73,68 +73,68 @@
     </div>
     <div class="sub-title" style="margin-top: 50px">文字提示框---按钮大小变化</div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" placement="top">
+      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" placement="top">
        <yu-button size="small" type="primary">上边</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" placement="top">
+      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" placement="top">
         <yu-button size="mini" type="success">上边</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" placement="top">
+      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true"  placement="top">
         <yu-button type="warming">上边</yu-button>
       </yu-tool-tip>
     </div>
     <div class="sub-title" style="margin-top: 100px">文字提示框---方位变化</div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" placement="top-left">
+      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" placement="top-left">
         <yu-button type="warming">上左</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" placement="top-right">
+      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" placement="top-right">
         <yu-button type="warming">上右</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="35" placement="top">
+      <yu-tool-tip content="35" :show-arrow="true" placement="top">
         <span style="width: 20px;height:20px;display: inline-block;background-color:pink;box-sizing: border-box;border-radius: 50%"></span>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" placement="left">
+      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="left">
         <yu-button type="warming">左侧</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" placement="left">
+      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="left">
         <yu-button type="warming" size="mini">左侧</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" placement="right">
+      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="right">
         <yu-button type="warming">右侧</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" placement="right">
+      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="right">
         <yu-button type="warming" size="small">右侧</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" placement="bottom">
+      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="bottom">
         <yu-button type="warming" size="small">下边</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" placement="bottom">
+      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="bottom">
         <yu-button type="warming" >da下边</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" placement="bottom-left">
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" placement="bottom-left">
         <yu-button type="warming" >da下边</yu-button>
       </yu-tool-tip>
     </div>
@@ -161,8 +161,8 @@
       <!--<yu-tabs-item slot="item">第三个</yu-tabs-item>-->
       <!--<yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>-->
     <!--</yu-tabs>-->
-    <div style="height: 100px;"></div>
-    <div class="sub-title" style="margin-top: 100px">tabs------>borderCard效果</div>
+    <!--<div style="height: 100px;"></div>-->
+    <!--<div class="sub-title" style="margin-top: 100px">tabs&#45;&#45;&#45;&#45;&ndash;&gt;borderCard效果</div>-->
     <!--<yu-tabs type="border-card">-->
       <!--<yu-tabs-nav slot="nav">用户管理</yu-tabs-nav>-->
       <!--<yu-tabs-nav slot="nav">配置管理</yu-tabs-nav>-->
@@ -174,7 +174,7 @@
       <!--<yu-tabs-item slot="item">第三个</yu-tabs-item>-->
       <!--<yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>-->
     <!--</yu-tabs>-->
-    <div class="sub-title" style="margin-top: 100px">tabs------>自定义标签效果</div>
+    <!--<div class="sub-title" style="margin-top: 100px">tabs&#45;&#45;&#45;&#45;&ndash;&gt;自定义标签效果</div>-->
     <yu-tabs   width="900px" tab-position="right">
     <yu-tabs-nav slot="nav">用户管理</yu-tabs-nav>
     <yu-tabs-nav slot="nav">配置管理</yu-tabs-nav>
@@ -186,22 +186,47 @@
     <yu-tabs-item slot="item">第三个</yu-tabs-item>
     <yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>
     </yu-tabs>
+    <yu-tabs   width="900px" tab-position="left">
+      <yu-tabs-nav slot="nav">用户管理</yu-tabs-nav>
+      <yu-tabs-nav slot="nav">配置管理</yu-tabs-nav>
+      <yu-tabs-nav slot="nav">角色管理</yu-tabs-nav>
+      <yu-tabs-nav slot="nav">定时任补偿</yu-tabs-nav>
+      <yu-tabs-item slot="item">第一个辗转一流年，时光穿梭，悄然从指缝间溜走，岁月如水，轻轻地蒸发，光景却是一样的安之若素。站在岁月的渡口，我将四季的光阴，裁剪成五光十色，编织成最美的花环，待你经过我的身边，送与你，最馨香的美好。
+        红尘的冷暖，已渐看透，任性的脚步，亦不再游走。择一隅清幽，修篱，种菊，安度一世春秋。一个人的时候，善待自己，两个人的时候，善待对方。最好的幸福，就是选择自己所爱的，爱自己所选择的。喜欢就该去珍惜，珍惜就不要轻易放弃。</yu-tabs-item>
+      <yu-tabs-item slot="item">第二个</yu-tabs-item>
+      <yu-tabs-item slot="item">第三个</yu-tabs-item>
+      <yu-tabs-item slot="item">第四个时任补偿</yu-tabs-item>
+    </yu-tabs>
+    <yu-tabs   width="900px" tab-position="bottom">
+      <yu-tabs-nav slot="nav">用户管理</yu-tabs-nav>
+      <yu-tabs-nav slot="nav">配置管理</yu-tabs-nav>
+      <yu-tabs-nav slot="nav">角色管理</yu-tabs-nav>
+      <yu-tabs-nav slot="nav">定时任补偿</yu-tabs-nav>
+      <yu-tabs-item slot="item">第一个辗转一流年，时光穿梭，悄然从指缝间溜走，岁月如水，轻轻地蒸发，光景却是一样的安之若素。站在岁月的渡口，我将四季的光阴，裁剪成五光十色，编织成最美的花环，待你经过我的身边，送与你，最馨香的美好。
+        红尘的冷暖，已渐看透，任性的脚步，亦不再游走。择一隅清幽，修篱，种菊，安度一世春秋。一个人的时候，善待自己，两个人的时候，善待对方。最好的幸福，就是选择自己所爱的，爱自己所选择的。喜欢就该去珍惜，珍惜就不要轻易放弃。</yu-tabs-item>
+      <yu-tabs-item slot="item">岁月如水，轻轻地蒸发，悄秋然从指缝间溜走，岁月如水，轻轻地蒸发，光景却是一样的安之若素。站在岁月的渡口，我将四季的光阴，裁剪成五光十色，编织成最美的花环，待你经过我的身边，送与你，最馨香的美好。
+        红尘的冷暖，已渐看透，任性的脚步，亦不再游走。择一隅清幽，修篱，种菊，安度一世春秋。一个人的时候，善待自己，两个人的时候，善待对方。最好的幸福，就是选择自己所爱的，爱自己所选择的。喜欢就该去珍惜，珍惜就不要轻易放弃。</yu-tabs-item>
+      <yu-tabs-item slot="item">篱，种菊，安度一世春秋待自己，两个人的时候，善待对方。最好的幸福，待自己，两个人的时候，善待对方。最好的幸福，待自己，两个人的时候，善待对方。最好的幸福，待自己，两个人的时候，善待对方。最好
+        待自己，两个人的时候，善待对方。最好的幸福，待自己，两个人的时候，善待对方。最好的幸福，待自己，两个人的时候，善待对方。最好的幸福，待自己，两个人的时候，善待对方。最好的幸福，的幸福，待自己，两个人的时候，善待对方。最好的幸福，</yu-tabs-item>
+      <yu-tabs-item slot="item">第悄然从指缝间溜走，岁月如水，轻轻地蒸发，悄然从指缝间溜走，岁月如水，轻轻地蒸发，悄然从指缝间溜走，岁月如水，轻轻地蒸发，悄然从指缝间溜走，岁月如水，轻轻地蒸发，悄然从指缝间溜走，岁月如水，轻轻地蒸发，
+        悄然从指缝间溜走，岁月如水，轻轻地蒸发，悄然从指缝间溜走，岁月如水，轻轻地蒸发，悄然从指缝间溜走，岁月如水，轻，轻轻地蒸发，悄然从指缝间溜走，岁月如水，轻轻地蒸发，悄然从指缝间溜走，岁月如水，轻轻地蒸发，</yu-tabs-item>
+    </yu-tabs>
     <div class="sub-title" style="margin-top: 100px">Carousel----轮播图效果</div>
-    <!--<yu-carousel width="600px" height="300px">-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173912&di=379eb2a8b6f9442fa4cd5105dff9255b&imgtype=0&src=http%3A%2F%2Fpic40.nipic.com%2F20140427%2F12728082_192158112000_2.png"/>-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173910&di=baabab0cc88a73d7f0538b95826c1ed8&imgtype=0&src=http%3A%2F%2Fpic8.nipic.com%2F20100716%2F5372314_005516302742_2.jpg"/>-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173902&di=b59ab8a5ec759a78854d8dd407a5e630&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8718367adab44aedad9a0930b91c8701a08bfb0a.jpg"/>-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126451245&di=c23e9a0ee71c9ea455461b4a4041b27c&imgtype=0&src=http%3A%2F%2Fb.zol-img.com.cn%2Fdesk%2Fbizhi%2Fimage%2F5%2F2560x1600%2F1413270044320.jpg"/>-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126517861&di=4869b08f577db1f3c61eae7fef95180d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8694a4c27d1ed21b4c049c31a76eddc450da3f10.jpg"/>-->
-    <!--</yu-carousel>-->
+    <yu-carousel width="600px" height="300px">
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173912&di=379eb2a8b6f9442fa4cd5105dff9255b&imgtype=0&src=http%3A%2F%2Fpic40.nipic.com%2F20140427%2F12728082_192158112000_2.png"/>
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173910&di=baabab0cc88a73d7f0538b95826c1ed8&imgtype=0&src=http%3A%2F%2Fpic8.nipic.com%2F20100716%2F5372314_005516302742_2.jpg"/>
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173902&di=b59ab8a5ec759a78854d8dd407a5e630&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8718367adab44aedad9a0930b91c8701a08bfb0a.jpg"/>
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126451245&di=c23e9a0ee71c9ea455461b4a4041b27c&imgtype=0&src=http%3A%2F%2Fb.zol-img.com.cn%2Fdesk%2Fbizhi%2Fimage%2F5%2F2560x1600%2F1413270044320.jpg"/>
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126517861&di=4869b08f577db1f3c61eae7fef95180d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8694a4c27d1ed21b4c049c31a76eddc450da3f10.jpg"/>
+    </yu-carousel>
     <div class="sub-title" style="margin-top: 100px">Carousel----轮播图效果---自动播放</div>
-    <!--<yu-carousel width="600px" height="300px" :autoplay="true" :interval="1000">-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173912&di=379eb2a8b6f9442fa4cd5105dff9255b&imgtype=0&src=http%3A%2F%2Fpic40.nipic.com%2F20140427%2F12728082_192158112000_2.png"/>-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173910&di=baabab0cc88a73d7f0538b95826c1ed8&imgtype=0&src=http%3A%2F%2Fpic8.nipic.com%2F20100716%2F5372314_005516302742_2.jpg"/>-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173902&di=b59ab8a5ec759a78854d8dd407a5e630&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8718367adab44aedad9a0930b91c8701a08bfb0a.jpg"/>-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126451245&di=c23e9a0ee71c9ea455461b4a4041b27c&imgtype=0&src=http%3A%2F%2Fb.zol-img.com.cn%2Fdesk%2Fbizhi%2Fimage%2F5%2F2560x1600%2F1413270044320.jpg"/>-->
-      <!--<yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126517861&di=4869b08f577db1f3c61eae7fef95180d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8694a4c27d1ed21b4c049c31a76eddc450da3f10.jpg"/>-->
-    <!--</yu-carousel>-->
+    <yu-carousel width="600px" height="300px" :autoplay="true" :interval="1000">
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173912&di=379eb2a8b6f9442fa4cd5105dff9255b&imgtype=0&src=http%3A%2F%2Fpic40.nipic.com%2F20140427%2F12728082_192158112000_2.png"/>
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173910&di=baabab0cc88a73d7f0538b95826c1ed8&imgtype=0&src=http%3A%2F%2Fpic8.nipic.com%2F20100716%2F5372314_005516302742_2.jpg"/>
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173902&di=b59ab8a5ec759a78854d8dd407a5e630&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8718367adab44aedad9a0930b91c8701a08bfb0a.jpg"/>
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126451245&di=c23e9a0ee71c9ea455461b4a4041b27c&imgtype=0&src=http%3A%2F%2Fb.zol-img.com.cn%2Fdesk%2Fbizhi%2Fimage%2F5%2F2560x1600%2F1413270044320.jpg"/>
+      <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522126517861&di=4869b08f577db1f3c61eae7fef95180d&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F8694a4c27d1ed21b4c049c31a76eddc450da3f10.jpg"/>
+    </yu-carousel>
     <div class="sub-title" style="margin-top: 100px">Carousel----轮播图效果--旋转木马播放</div>
     <yu-carousel width="1200px" height="500px"  :position="arr"  type="card">
     <yu-carousel-item src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522125173912&di=379eb2a8b6f9442fa4cd5105dff9255b&imgtype=0&src=http%3A%2F%2Fpic40.nipic.com%2F20140427%2F12728082_192158112000_2.png"/>
@@ -438,7 +463,7 @@
       <yu-button @click="cancleSelect(2)">取消选择</yu-button>
     </div>
     <div class="sub-title" style="margin-top: 100px;">pagination---分页--超多个</div>
-    <yu-pagination @change="currentpage" background :show-size="size" changeSize goTo/>
+    <yu-pagination @change="currentpage" :total="500" background :showSize="size" changeSize goTo/>
     <div>当前是第{{current}}页</div>
     <div class="sub-title" style="margin-top: 100px;">弹出框----基础</div>
     <yu-popover title="标题" content="这是一段文字,这是一段文字这是一段文字" left="0" top="-90px">
@@ -480,6 +505,8 @@ import YuPopover from '../components/popover';
 import YuDropDown from '../components/dropdown';
 import YuDropdownItem from '../components/dropdown-item';
 import YuDropdownMenu from '../components/dropdown-menu';
+import YuNavMenu from '../components/navmenu';
+import YuMenuItem from '../components/menu-item';
 
 export default {
   name: 'ViewContainer',
@@ -780,12 +807,14 @@ export default {
     YuAlert,
     YuMessage,
     YuMessageBox,
+    YuNavMenu,
     YuBadge,
     YuProgress,
     YuTag,
     YuTable,
     YuPagination,
     YuPopover,
+    YuMenuItem,
     YuDropDown,
     YuDropdownItem,
     YuDropdownMenu,

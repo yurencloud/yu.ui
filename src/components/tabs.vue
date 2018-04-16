@@ -9,10 +9,10 @@
       <i class="iconfont icon-add-circle-o"
         v-if="addable"
         @click="addItem"
-        id="icon"/>
-      <i class="line-left"></i>
+         id="icon"></i>
+      <i class="line-left" ref="line"></i>
     </ul>
-    <div class="tabs-item clearfix" >
+    <div class="tabs-item clearfix" ref="tabitem">
       <slot name="item"/>
     </div>
   </div>
@@ -54,15 +54,15 @@ export default {
       for (let i = 0; i < len - 1; i++) {
         e.target.parentNode.children[i].index = i;
         e.target.parentNode.children[i].classList.remove('active');
-        document.getElementsByClassName('tabs-item')[0].children[i].classList.remove('active');
+        this.$refs.tabitem.children[i].classList.remove('active');
       }
-      const line = document.getElementsByClassName('line-left')[0];
+      const line = this.$refs.line;
       if (this.tabPosition === 'left' || this.tabPosition === 'right') {
         line.style.top = `${e.target.index * 40}px`;
       } else if (this.tabPosition === 'bottom' || !this.tabPosition) {
         line.style.left = `${e.target.index * 100}px`;
       }
-      document.getElementsByClassName('tabs-item')[0].children[e.target.index].classList.add('active');
+      this.$refs.tabitem.children[e.target.index].classList.add('active');
       if (this.tabPosition) {
         setTimeout(() => {
           e.target.classList.add('active');
@@ -73,6 +73,7 @@ export default {
       this.$nextTick(() => {
         console.log(document.getElementsByClassName('tabs-nav')[0].children[0].style);
       })
+      this.$emit('click', e);
     },
     addItem(e) {
       e.stopPropagation();
@@ -110,7 +111,6 @@ export default {
       background-color: $primary;
       position: absolute;
       transition: all .3s linear;
-      left: 0;
       bottom: 0;
       margin: 0;
     }
@@ -172,7 +172,7 @@ export default {
     box-shadow: $box-shadow;
     .tabs-nav{
       height: 43px;
-      background-color: lighten($background,15);
+      background-color: lighten($info,35);
       border: 1px solid $dark-border;
       border-left: none;
       border-right: none;

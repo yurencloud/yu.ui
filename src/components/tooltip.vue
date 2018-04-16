@@ -73,6 +73,7 @@ export default {
      transition:all .2s linear;
      position: absolute;
      white-space:nowrap;
+     z-index: 9999;
    }
     .light{
       color: #000;
