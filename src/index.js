@@ -60,7 +60,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-const version = '1.0.10';
+const version = '1.0.11';
 
 const components = {
   version,

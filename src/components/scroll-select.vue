@@ -11,6 +11,7 @@
       :placeholder="placeholder"
       :name="name"
       @clear="handleClear"
+      :width="width"
     />
     <div class="container"
          @mouseover="handleMouseover"
@@ -86,6 +87,7 @@ export default {
     prefix: String,
     placeholder: String,
     name: String,
+    width: String,
     split: {
       type: String,
       default: '/',

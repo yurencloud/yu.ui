@@ -42,6 +42,7 @@ export default {
   props: {
     name: String,
     size: String,
+    width: String,
     disabled: {
       type: Boolean,
       default: false,

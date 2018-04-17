@@ -13,6 +13,7 @@
       :disabled="disabled"
       @change="handleChange"
       @blur="handleBlur"
+      :width="width"
     />
     <yu-button
       :size="size"
@@ -36,6 +37,7 @@ export default {
   props: {
     name: String,
     size: String,
+    width: String,
     disabled: {
       type: Boolean,
       default: false,

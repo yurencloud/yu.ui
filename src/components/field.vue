@@ -90,20 +90,20 @@ export default {
   methods: {
     handleSubmit() {
       this.trigger = 'submit';
-      if (this.$parent.rules) return;
+      if (!this.$parent.rules) return;
       this.validateByRules(this.$parent.rules, this.value);
     },
     handleChange(value) {
       this.value = value;
       this.$parent.setValues(value);
-      if (this.$parent.rules) return;
+      if (!this.$parent.rules) return;
       this.trigger = 'change';
       this.validateByRules(this.$parent.rules, value);
     },
     handleBlur(value) {
       this.value = value;
       this.$parent.setValues(value);
-      if (this.$parent.rules) return;
+      if (!this.$parent.rules) return;
       this.trigger = 'blur';
       this.validateByRules(this.$parent.rules, value);
     },
