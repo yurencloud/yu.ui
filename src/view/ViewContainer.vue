@@ -729,7 +729,7 @@ export default {
           { prop: 'minNumber', value: 3, trigger: 'change', name: '形式' },
         ],
       },
-      label2: ['', '极差2', '失望2', '一般2', '满意2', '惊喜2'],
+      label2: ['极差2', '失望2', '一般2', '满意2', '惊喜2'],
       fetchScroll: [],
       time: {
         start: '09:00',
