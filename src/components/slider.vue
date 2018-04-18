@@ -2,7 +2,6 @@
   <div class="yu-slider"
        :class="[{disabled:disabled}]"
   >
-    <div style="margin-bottom: 20px">{{value}}</div>
     <div class="bottom-bar" @click="handleBarClick($event)" :style="{width:width+'px'}">
       <div class="top-bar" :style="{width: move+'%'}">
         <span class="point"
@@ -12,13 +11,16 @@
               :style="{left:item+'%'}"
               @click="handlePointClick(item)"
         ></span>
+
         <span
           ref="circle"
           @mousedown="handleMousedown($event)"
           class="circle"
           :style="{left: move+'%'}"
           :class="{hover:press}"
-        ></span>
+        >
+            <span v-if="tooltip" class="tooltip">{{value}}</span>
+          </span>
       </div>
     </div>
     <input type="text" :name="name" v-model="value" style="display: none;">
@@ -26,7 +28,6 @@
 </template>
 
 <script>
-import YuToolTip from './tooltip';
 
 export default {
   name: 'YuSlider',
@@ -64,6 +65,10 @@ export default {
     },
     point: Boolean,
     name: String,
+    tooltip: {
+      type: Boolean,
+      default: true,
+    },
   },
   methods: {
     handleMousedown($event) {
@@ -78,12 +83,16 @@ export default {
         let move = Math.ceil(($event.clientX - this.offset) / this.width * 100);
         if (this.step) {
           if (this.range.indexOf(move) > -1) {
-            if (move) { if (move < this.min) move = this.min }
+            if (move) {
+              if (move < this.min) move = this.min
+            }
             if (move > this.max) move = this.max
             this.move = move;
           }
         } else {
-          if (move) { if (move < this.min) move = this.min }
+          if (move) {
+            if (move < this.min) move = this.min
+          }
           if (move > this.max) move = this.max
           this.move = move;
         }
@@ -131,9 +140,6 @@ export default {
       }
     },
   },
-  components: {
-    YuToolTip,
-  },
 };
 </script>
 
@@ -143,18 +149,18 @@ export default {
   .yu-slider {
     margin-right: 12px;
     margin-bottom: 20px;
-    &.disabled{
-      .bottom-bar{
-        .top-bar{
-          background-color: lighten($info,20);
-          .circle{
-            border-color: lighten($info,20);
-            &.hover{
+    &.disabled {
+      .bottom-bar {
+        .top-bar {
+          background-color: lighten($info, 20);
+          .circle {
+            border-color: lighten($info, 20);
+            &.hover {
               width: 16px;
               height: 16px;
               top: -6px;
             }
-            &:hover{
+            &:hover {
               width: 16px;
               height: 16px;
               top: -6px;
@@ -173,7 +179,22 @@ export default {
         height: 6px;
         border-radius: 3px;
         background-color: $primary;
+
         .circle {
+          .tooltip {
+            position: absolute;
+            top: -30px;
+            height: 20px;
+            padding: 2px 7px;
+            line-height: 20px;
+            background: #373737;
+            border-radius: 4px;
+            color: #fff;
+            margin-left: -8px;
+            text-align: center;
+            min-width: 20px;
+            display: none;
+          }
           transform: translateX(-8px);
           position: absolute;
           top: -6px;
@@ -189,11 +210,17 @@ export default {
             width: 20px;
             height: 20px;
             top: -8px;
+            .tooltip {
+              display: inline-block;
+            }
           }
           &:hover {
             width: 20px;
             height: 20px;
             top: -8px;
+            .tooltip {
+              display: inline-block;
+            }
           }
         }
         .point {
