@@ -41,7 +41,7 @@ export default {
         return;
       }
       if (this.$parent.isField) {
-        this.$parent.handleChange({ value: this.isChecked ? this.value : '' });
+        this.$parent.handleChange({ value: this.isChecked ? this.value : '', name: this.name });
       }
     },
   },
