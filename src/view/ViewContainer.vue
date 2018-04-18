@@ -641,7 +641,6 @@ import YuCarousel from '../components/carousel';
 import YuCollapseItem from '../components/collapse-item';
 import YuCollapse from '../components/collapse';
 import YuMenuItem from '../components/menu-item';
-import YuNavMenu from '../components/navmenu';
 import YuCheckboxs from '../components/checkboxs';
 import YuLoading from '../components/loading';
 import YuCounterSide from '../components/counter-side';
@@ -917,9 +916,6 @@ export default {
           value: 'navigation',
           label: 'Navigation',
           children: [{
-            value: 'menu',
-            label: 'NavMenu 导航菜单',
-          }, {
             value: 'tabs',
             label: 'Tabs 标签页',
           }, {
@@ -1069,7 +1065,6 @@ export default {
     YuCollapseItem,
     YuCollapse,
     YuMenuItem,
-    YuNavMenu,
     YuCheckboxs,
     YuLoading,
     YuCounterSide,

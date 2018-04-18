@@ -254,7 +254,6 @@ export default {
         text-decoration: none;
         cursor: pointer;
         color: $dark-text;
-        font-weight: 700;
         &:hover{
           color:  $primary;
         }

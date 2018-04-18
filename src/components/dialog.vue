@@ -1,25 +1,18 @@
 <template>
   <div class="yu-dialog">
-    <div @click="toggle" class="click">{{tag}}</div>
-    <div class="mask">
-       <div class="dialog">
-         <div class="title">
-           {{title}}
-         </div>
-         <div class="close" @click="toggle" ><i class="iconfont icon-close"></i></div>
-         <div class="content" v-if="iscontent">{{content}}</div>
-         <div class="content" v-else>
-           <slot/>
-         </div>
-         <div class="btn">
-           <yu-button disabled size="small" @click.native="toggle">取消</yu-button>
-           <yu-button size="small" type="primary" @click.native="open">打开内部弹出框</yu-button>
-         </div>
-         <div class="inner" v-show="inner">
-           <div>{{innerContent}}</div>
-           <div class="close" @click="close"><i class="iconfont icon-close"></i></div>
-         </div>
-       </div>
+    <div class="dialog-content" ref="content" @click="change"></div>
+    <div class="dialog" :class="{'center':center}" v-if="isShow">
+      <div class="dialog-inner">
+        <div class="inner">
+          <div class="dialog-title">{{title}}<i class="iconfont icon-close" @click="change"></i></div>
+          <div class="inner-content" v-if="inner">{{inner}}</div>
+          <div class="inner-other" v-else><slot/></div>
+        </div>
+        <div class="dialog-btn">
+          <yu-button size="medium" v-if="showCancle" @click="close($event)">{{cancleText}}</yu-button>
+          <yu-button type="primary" size="medium" v-if="showConfirm" @click="confirm($event)">{{confirmText}}</yu-button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,54 +24,51 @@ export default {
   name: 'YuDialog',
   data() {
     return {
-      warp: false,
-      inner: false,
-    };
+      isShow: false,
+    }
   },
   props: {
-    tag: {
+    lockScroll: Boolean,
+    content: String,
+    title: String,
+    inner: String,
+    showCancle: Boolean,
+    showConfirm: Boolean,
+    cancleText: {
       type: String,
-      default: '点击查看',
+      default: '取消',
     },
-    title: {
+    confirmText: {
       type: String,
-      default: '提示',
+      default: '确认',
     },
-    content: {
-      type: String,
-      default: '提示信息',
+    center: Boolean,
+  },
+  methods: {
+    change() {
+      this.isShow = !this.isShow;
+      this.lockScroll = this.isShow;
+      if (this.lockScroll) {
+        document.getElementsByTagName('body')[0].classList.add('lock');
+      } else if (!this.lockScroll) {
+        document.getElementsByTagName('body')[0].classList.remove('lock');
+      }
     },
-    iscontent: {
-      type: Boolean,
-      default: true,
+    close(event) {
+      this.change();
+      this.$emit('cancle', event)
     },
-    type: {
-      type: String,
-      default: '',
+    confirm(event) {
+      this.change();
+      this.$emit('confirm', event)
     },
-    innerContent: {
-      type: String,
-      default: '',
-    },
+  },
+  mounted() {
+    this.$refs.content.innerHTML = this.content;
   },
   components: {
     YuButton,
   },
-  methods: {
-    toggle() {
-      this.warp = !this.warp;
-      console.log(this._props.isContent);
-      if (this.warp) {
-        document.getElementsByClassName('mask')[0].style.display = 'block';
-      } else {
-        document.getElementsByClassName('mask')[0].style.display = 'none';
-      }
-    },
-    close() {
-      this.inner = !this.inner;
-    },
-  },
-
 }
 </script>
 
@@ -86,66 +76,65 @@ export default {
   @import "../assets/css/varible";
   @import "../assets/css/function";
   .yu-dialog{
-    .mask{
-      z-index: 99999;
-      display: none;
-      position: fixed;
-      left: 0;
-      top: 0;
+    .dialog-content{
+      display: inline-block;
+      cursor: pointer;
+    }
+    .dialog{
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,.4);
-      .dialog{
-        padding: 15px 30px;
+      position: fixed;
+      background-color:rgba(0,0,0,0.4);
+      top: 0;
+      left: 0;
+      z-index: 99999;
+      .dialog-inner{
         width: 30%;
+        padding: 20px;
         background-color: #fff;
+        opacity: 1;
         position: absolute;
-        left: 50%;
         top: 50%;
+        left: 50%;
         transform: translate(-50%,-50%);
-        .title{
-          color: #000;
-          font-size: $big;
-          padding: 5px 0;
-          text-align: center;
-        }
-        .close{
-          position: absolute;
-          right: 10px;
-          top: 5px;
-          i{
+        .inner{
+          .dialog-title{
+            margin-bottom: 10px;
             font-size: $huge;
-            color: $text;
+            i{
+              float: right;
+            }
+          }
+          .inner-content{
+            margin: 20px 0;
           }
         }
-        .content{
-          padding: 20px 0;
-          color: $text;
+        .dialog-btn{
+          float: right;
         }
-        .btn{
-          text-align: right;
-        }
-      }
-      .inner{
-        width: 80%;
-        height: 40%;
-        position: absolute;
-        z-index: 999;
-        top: 20%;
-        left: 50%;
-        transform: translate(-50%,-40%);
-        background-color: #ffffff;
-        color:$dark-text;
-        padding: 15px;
-        box-shadow:0 1px 28px #888;
       }
     }
   }
-
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
+/*居中显示*/
+  .yu-dialog{
+    .dialog.center{
+      .dialog-inner{
+        .inner{
+          .dialog-title{
+            text-align: center;
+          }
+        }
+        .dialog-btn{
+          float: none;
+          text-align: center;
+        }
+      }
+    }
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
+</style>
+<style>
+  body.lock{
+    height: 100%;
+    overflow: hidden;
   }
 </style>
