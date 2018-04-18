@@ -13,6 +13,7 @@
               ref="input"
               :width="width"
               :disabled="disabled"
+              :size="size"
     />
     <yu-scroll-select
       :split="':'"
@@ -74,6 +75,7 @@ export default {
       type: String,
       default: '请选择时间',
     },
+    size: String,
   },
   methods: {
     handleClear() {
