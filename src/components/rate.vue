@@ -5,7 +5,7 @@
     <i data-value="3" class="iconfont" :class="[value>=3?'icon-star':'icon-star-o']" @mouseover="changeValue(3)"></i>
     <i data-value="4" class="iconfont" :class="[value>=4?'icon-star':'icon-star-o']" @mouseover="changeValue(4)"></i>
     <i data-value="5" class="iconfont" :class="[value==5?'icon-star':'icon-star-o']" @mouseover="changeValue(5)"></i>
-    <span v-if="labeled">{{label[value]}}</span>
+    <span v-if="labeled">{{label[value-1]}}</span>
     <input type="text" :name="name" :value="value" style="display: none">
   </div>
 </template>
@@ -25,15 +25,11 @@ export default {
       default: 0,
     },
     readOnly: Boolean,
-    disabled: Boolean,
-    vertical: Boolean,
-    name: {
-      type: String,
-    },
+    name: String,
     labeled: Boolean,
     label: {
       type: Array,
-      default: () => ['', '极差', '失望', '一般', '满意', '惊喜'],
+      default: () => ['极差', '失望', '一般', '满意', '惊喜'],
     },
   },
   methods: {

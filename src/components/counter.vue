@@ -2,6 +2,7 @@
   <div class="yu-counter">
     <yu-button
       :size="size"
+      class="counter"
       @click="handleSubtract"
       :disabled="disabled"
     >-</yu-button>
@@ -11,12 +12,15 @@
       :name="name"
       :defaultValue='number'
       :disabled="disabled"
+      class="counter"
       @change="handleChange"
       @blur="handleBlur"
+      :width="width"
     />
     <yu-button
       :size="size"
       @click="handleAdd"
+      class="counter"
       :disabled="disabled"
     >+</yu-button>
   </div>
@@ -36,6 +40,7 @@ export default {
   props: {
     name: String,
     size: String,
+    width: String,
     disabled: {
       type: Boolean,
       default: false,
@@ -52,13 +57,15 @@ export default {
     handleAdd() {
       this.$refs.input.changeValue(this.number += this.step);
     },
-    handleChange(value) {
+    handleChange(value, name) {
       this.number = parseInt(value, 0);
+      this.$emit('change', value, name);
     },
-    handleBlur() {
+    handleBlur(event) {
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.number });
       }
+      this.$emit('blur', event)
     },
   },
   watch: {
@@ -81,7 +88,7 @@ export default {
   .yu-counter {
     display: inline-block;
     font-size: 0;
-    .yu-input {
+    .yu-input.counter {
       display: inline-block;
       box-sizing: border-box;
       margin-right: 0;
@@ -91,16 +98,16 @@ export default {
         text-align: center;
       }
     }
-    .yu-button {
+    .yu-button.counter {
       vertical-align: top;
       background: $background;
       margin-right: 0;
       width: 50px;
     }
-    .yu-button:nth-child(1) {
+    .yu-button.counter:nth-child(1) {
       border-radius: 4px 0 0 4px;
     }
-    .yu-button:nth-child(3) {
+    .yu-button.counter:nth-child(3) {
       border-radius: 0 4px 4px 0;
     }
   }

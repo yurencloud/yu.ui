@@ -66,7 +66,6 @@ export default {
     font-family: $font-family;
     transition: all .3s ease;
     outline: none;
-    /*box-sizing: border-box;*/
 
     // 默认属性
     background-color: #fff;

@@ -9,6 +9,7 @@
                @blur="handleBlur"
                @change="handleChange"
                @clear="handleClear"
+               :disabled="disabled"
                :width="width"
                :placeholder="placeholder"/>
     <!--选择日期-->
@@ -37,8 +38,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-bind:key="index" v-for="(item,index) in days" @click="selectDay($event)">
-            <td v-bind:key="day.value" :data-value="day.value" :class="[day.className]" v-for="day in item">
+          <tr v-bind:key="index" v-for="(item,index) in days">
+            <td v-bind:key="day.value" :class="[day.className,{active: day.active}]" v-for="day in item" @click="selectDay(day)">
               <div>{{day.label}}</div>
             </td>
           </tr>
@@ -62,8 +63,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-bind:key="index" v-for="(item,index) in months" @click="selectMonth($event)">
-            <td v-bind:key="month.value" :data-value="month.value" :class="[month.className]" v-for="month in item">
+          <tr v-bind:key="index" v-for="(item,index) in months">
+            <td v-bind:key="month.value" :data-value="month.value" :class="[month.className, {active:month.active}]" v-for="month in item" @click="selectMonth(month)">
               <div>{{month.label}}</div>
             </td>
           </tr>
@@ -87,8 +88,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-bind:key="index" v-for="(item,index) in years" @click="selectYear($event)">
-            <td v-bind:key="year.value" :data-value="year.value" :class="[year.className]" v-for="year in item">
+          <tr v-bind:key="index" v-for="(item,index) in years">
+            <td v-bind:key="year.value" :data-value="year.value" :class="[year.className, {active:year.active}]" v-for="year in item" @click="selectYear(year)">
               <div>{{year.label}}</div>
             </td>
           </tr>
@@ -130,25 +131,6 @@ export default {
       type: String,
       default: 'day',
     },
-    optionParam: {
-      type: Object,
-      default() {
-        return {
-          start: '00:00',
-          step: '00:30',
-          end: '24:00',
-        }
-      },
-    },
-    selectParam: {
-      type: Object,
-      default() {
-        return {
-          start: '00:00:00',
-          end: '24:00:00',
-        }
-      },
-    },
   },
   methods: {
     handleClear() {
@@ -157,15 +139,17 @@ export default {
         this.$parent.handleChange({ name: this.name, value: this.value });
       }
     },
-    handleBlur() {
+    handleBlur(event) {
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.value });
       }
+      this.$emit('blur', event);
     },
-    handleChange() {
+    handleChange(value, name) {
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: this.value });
       }
+      this.$emit('change', value, name);
     },
     handleClick() {
       this.visible = !this.visible;
@@ -259,40 +243,33 @@ export default {
       this.$refs.input.changeValue('');
       this.value = '';
     },
-    selectDay($event) {
+    selectDay(day) {
+      // 当日期是其他月份的，不允许选择
+      if (day.className.indexOf('otherMonth') > -1) return;
+
       // 刷新日期
-      if (this.value.trim().length !== 0) {
-        document.querySelector('.date tr td.active').classList.remove('active');
-      }
-      // 添加选中日期
-      let node;
-      if ($event.target.parentNode.nodeName === 'TR') {
-        node = $event.target;
-      } else {
-        node = $event.target.parentNode;
-      }
-      node.classList.add('active');
-      this.value = node.getAttribute('data-value');
+      this.days.forEach((item) => {
+        item.forEach((i) => {
+          i.active = false;
+        })
+      });
+      day.active = true;
+      this.value = day.value;
       this.visible = false;
       this.$refs.input.changeValue(this.value);
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.value });
       }
     },
-    selectMonth($event) {
-      // 刷新日期
-      if (this.value.trim().length !== 0) {
-        document.querySelector('.date.month tr td.active').classList.remove('active');
-      }
-      // 添加选中日期
-      let node;
-      if ($event.target.parentNode.nodeName === 'TR') {
-        node = $event.target;
-      } else {
-        node = $event.target.parentNode;
-      }
-      node.classList.add('active');
-      this.value = node.getAttribute('data-value');
+    selectMonth(month) {
+      // 刷新月份
+      this.months.forEach((item) => {
+        item.forEach((i) => {
+          i.active = false;
+        })
+      });
+      month.active = true;
+      this.value = month.value;
       if (this.type !== 'month') {
         this.month = parseInt(this.value.substr(4, 2), 0);
         this.active = 'day';
@@ -305,20 +282,15 @@ export default {
         this.$parent.handleBlur({ name: this.name, value: this.value });
       }
     },
-    selectYear($event) {
-      // 刷新日期
-      if (this.value.trim().length !== 0) {
-        document.querySelector('.date.month tr td.active').classList.remove('active');
-      }
-      // 添加选中日期
-      let node;
-      if ($event.target.parentNode.nodeName === 'TR') {
-        node = $event.target;
-      } else {
-        node = $event.target.parentNode;
-      }
-      node.classList.add('active');
-      this.value = node.getAttribute('data-value');
+    selectYear(year) {
+      // 刷新年份
+      this.years.forEach((item) => {
+        item.forEach((i) => {
+          i.active = false;
+        })
+      });
+      year.active = true;
+      this.value = year.value;
       if (this.type !== 'year') {
         this.year = this.value;
         this.active = 'month';
@@ -437,7 +409,7 @@ export default {
             height: 40px;
             font-weight: normal;
             color: $text;
-            &:hover{
+            &:hover:not(.otherMonth){
               color: $primary;
               cursor: pointer;
             }

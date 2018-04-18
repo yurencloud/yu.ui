@@ -7,6 +7,7 @@
       :defaultValue='number'
       :disabled="disabled"
       @change="handleChange"
+      @blur="handleBlur"
     />
     <div>
       <button
@@ -41,6 +42,7 @@ export default {
   props: {
     name: String,
     size: String,
+    width: String,
     disabled: {
       type: Boolean,
       default: false,
@@ -59,6 +61,10 @@ export default {
     },
     handleChange(value) {
       this.number = parseInt(value, 0);
+      this.$emit('change', value, name);
+    },
+    handleBlur(event) {
+      this.$emit('blur', event);
     },
   },
   components: {

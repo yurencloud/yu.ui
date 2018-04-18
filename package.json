@@ -1,6 +1,10 @@
 {
   "name": "yu.ui",
+<<<<<<< HEAD
   "version": "1.0.10",
+=======
+  "version": "1.0.14",
+>>>>>>> e965aca8f703a9309833f44fff4861b11c79e89f
   "description": "yu vue ui components project",
   "author": {
     "name": "mackwang/jiaqingzheng",

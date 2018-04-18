@@ -12,6 +12,7 @@
               @clear="handleClear"
               ref="input"
               :width="width"
+              :disabled="disabled"
     />
     <yu-scroll-select
       :split="':'"
@@ -21,6 +22,8 @@
       :options="cascader"
       @firstFetch="firstFetch"
       @secondFetch="secondFetch"
+      :placeholder="placeholder"
+      :disabled="disabled"
     />
   </div>
 </template>
@@ -63,7 +66,10 @@ export default {
         }
       },
     },
-    name: String,
+    name: {
+      type: String,
+      default: 'time',
+    },
     placeholder: {
       type: String,
       default: '请选择时间',
@@ -76,17 +82,19 @@ export default {
         this.$parent.handleChange({ name: this.name, value: this.value });
       }
     },
-    handleBlur() {
+    handleBlur(event) {
       this.value = this.$refs.input.value;
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.value });
       }
+      this.$emit('blur', event);
     },
-    handleChange() {
+    handleChange(value, name) {
       this.value = this.$refs.input.value;
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: this.value });
       }
+      this.$emit('change', value, name)
     },
     getMinute(time) {
       const arr = time.split(':');

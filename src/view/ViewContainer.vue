@@ -199,7 +199,6 @@
     >
     </yu-input>
 
-
     <div class="title">计数器</div>
     <div class="sub-title">基础用法</div>
     <yu-counter/>
@@ -217,20 +216,20 @@
 
     <div class="title">下拉选择</div>
     <div class="sub-title">基础用法</div>
-    <yu-select text="请选择动物">
+    <yu-select placeholder="请选择动物">
       <yu-option label="猫" value="1"/>
       <yu-option label="狗" value="2"/>
     </yu-select>
 
     <div class="sub-title">多选项滚动</div>
-    <yu-select text="请选择动物" overflow>
+    <yu-select placeholder="请选择动物" overflow>
       <yu-option label="猫" value="1"/>
       <yu-option label="狗" value="2"/>
       <yu-option label="狗" value="2"/>
     </yu-select>
 
     <div class="sub-title">有禁用选项</div>
-    <yu-select text="请选择动物" overflow>
+    <yu-select placeholder="请选择动物" overflow>
       <yu-option label="猫" value="1"/>
       <yu-option label="狗" value="2" disabled/>
       <yu-option label="狗" value="2"/>
@@ -239,7 +238,7 @@
     </yu-select>
 
     <div class="sub-title">禁用状态</div>
-    <yu-select text="请选择动物" overflow disabled>
+    <yu-select placeholder="请选择动物" overflow disabled>
       <yu-option label="猫" value="1"/>
       <yu-option label="狗" value="2" disabled/>
       <yu-option label="狗" value="2"/>
@@ -248,7 +247,7 @@
     </yu-select>
 
     <div class="sub-title">显示选项</div>
-    <yu-select text="请选择动物" overflow multi showSelects>
+    <yu-select placeholder="请选择动物" overflow multi showSelects>
       <yu-option label="猫" value="1"/>
       <yu-option label="狗" value="2" disabled/>
       <yu-option label="狗" value="3"/>
@@ -257,7 +256,7 @@
     </yu-select>
 
     <div class="sub-title">自定义选项</div>
-    <yu-select text="请选择动物" overflow>
+    <yu-select placeholder="请选择动物" overflow>
       <yu-option label="猫" value="1">
         <span>猫猫</span>
         <span style="float: right;color:#ccc;">可爱的动物</span>
@@ -267,7 +266,7 @@
         <span style="float: right;color:#ccc;">凶狠的动物</span>
       </yu-option>
     </yu-select>
-    <yu-select text="请选择动物" overflow>
+    <yu-select placeholder="请选择动物" overflow>
       <yu-option label="猫" value="1">
         <div>猫猫</div>
         <div style="color:#ccc">可爱的动物</div>
@@ -440,7 +439,7 @@
         <yu-input/>
       </yu-field>
       <yu-field label="活动动物">
-        <yu-select text="请选择动物" overflow>
+        <yu-select placeholder="请选择动物" overflow>
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
           <yu-option label="狗" value="3"/>
@@ -479,7 +478,7 @@
         <yu-input/>
       </yu-field>
       <yu-field label="活动动物">
-        <yu-select text="请选择动物" overflow>
+        <yu-select placeholder="请选择动物" overflow>
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
           <yu-option label="狗" value="3"/>
@@ -520,7 +519,7 @@
         <yu-input name="activeName3"/>
       </yu-field>
       <yu-field label="活动动物" >
-        <yu-select name="animal" text="请选择动物" overflow>
+        <yu-select name="animal" placeholder="请选择动物" overflow>
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
           <yu-option label="狗" value="3"/>
@@ -529,7 +528,7 @@
         </yu-select>
       </yu-field>
       <yu-field label="活动动物" >
-        <yu-select name="animal" text="请选择动物" overflow multi>
+        <yu-select name="animal" placeholder="请选择动物" overflow multi>
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
           <yu-option label="狗" value="3"/>
@@ -730,7 +729,7 @@ export default {
           { prop: 'minNumber', value: 3, trigger: 'change', name: '形式' },
         ],
       },
-      label2: ['', '极差2', '失望2', '一般2', '满意2', '惊喜2'],
+      label2: ['极差2', '失望2', '一般2', '满意2', '惊喜2'],
       fetchScroll: [],
       time: {
         start: '09:00',

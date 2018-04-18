@@ -26,13 +26,7 @@ export default {
     disabled: Boolean,
     label: String,
     vertical: Boolean,
-    name: {
-      type: String,
-    },
-    type: {
-      type: String,
-      default: 'default',
-    },
+    name: String,
   },
   methods: {
     handleClick() {

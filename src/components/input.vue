@@ -145,7 +145,7 @@ export default {
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: this.value });
       }
-      this.$emit('change', this.value);
+      this.$emit('change', this.value, this.name);
     },
     changeValue(value) {
       this.value = value;
