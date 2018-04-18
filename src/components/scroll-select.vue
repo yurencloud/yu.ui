@@ -12,6 +12,7 @@
       :name="name"
       @clear="handleClear"
       :width="width"
+      :size="size"
     />
     <div class="container"
          @mouseover="handleMouseover"
@@ -88,6 +89,7 @@ export default {
     placeholder: String,
     name: String,
     width: String,
+    size: String,
     split: {
       type: String,
       default: '/',

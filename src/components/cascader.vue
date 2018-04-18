@@ -2,12 +2,15 @@
   <div class="yu-cascader">
     <yu-input
       ref="input"
-      placeholder="请选择"
+      :placeholder="placeholder"
       readonly
       :name="name"
       suffix="icon-angle-down"
       @click="handleClick"
       v-model="value"
+      :size="size"
+      :width="width"
+      :disabled="disabled"
     />
     <div v-if="cascader" class="options" v-show="visible">
       <div class="cascader first">
@@ -77,6 +80,13 @@ export default {
     changeOnSelect: Boolean,
     remote: Boolean, // 远程加载数据
     name: String,
+    width: String,
+    size: String,
+    disabled: Boolean,
+    placeholder: {
+      type: String,
+      default: '请选择',
+    },
   },
   components: {
     YuInput,

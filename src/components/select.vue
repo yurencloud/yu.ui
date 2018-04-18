@@ -11,6 +11,7 @@
       :name="name"
       clearable
       :width="width"
+      :size="size"
       @clear="clear"
     />
     <div class="options" :class="[{overflow:overflow}]" v-show="visible">
@@ -46,6 +47,7 @@ export default {
     name: String,
     showSelects: Boolean,
     width: String,
+    size: String,
   },
   created() {
     this.$on('handleSelect', this.handleSelect);
