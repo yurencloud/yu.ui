@@ -477,22 +477,33 @@
     <yu-popover title="标题" content="这是一段文字,这是一段文字这是一段文字" position="right" left="0" top="55px">
       <yu-button slot="trigger">点击激活</yu-button>
     </yu-popover>
-    <div class="sub-title">導航菜單</div>
-    <yu-nav-menu>
-      <yu-nav-menu-item index="1" disabled>这是一级</yu-nav-menu-item>
-      <yu-sub-menu>
-        <template slot="title" index="2">这是一级2</template>
-        <yu-nav-menu-item>  这是二级</yu-nav-menu-item>
-        <yu-nav-menu-group>
-          <template slot="item">  这是二级2</template>
-          <yu-nav-menu-item index="1">这是三级</yu-nav-menu-item>
-          <yu-nav-menu-item index="1">这是三级</yu-nav-menu-item>
-          <yu-nav-menu-item index="1">这是三级</yu-nav-menu-item>
-        </yu-nav-menu-group>
-      </yu-sub-menu>
-      <yu-nav-menu-item index="3">这是一级3</yu-nav-menu-item>
-      <yu-nav-menu-item index="4">这是一级4</yu-nav-menu-item>
-    </yu-nav-menu>
+    <div class="sub-title">dialog对话框</div>
+    <yu-dialog content="点击打开弹框"
+               title="提示"
+               inner="这是一条提示信息"/>
+    <div class="sub-title">dial有表格的对话框</div>
+    <yu-dialog content="<h1>点击打开弹框</h1>" title="提示">
+      <yu-table :widths="width1"  :data="tabItem"/>
+    </yu-dialog>
+    <yu-dialog content="<h1>点击打开弹框</h1>" showConfirm title="提示">
+      <yu-form>
+        <yu-field label="活动动物" >
+          <yu-select name="animal" placeholder="请选择动物" overflow multi>
+            <yu-option label="猫" value="1"/>
+            <yu-option label="狗" value="2" disabled/>
+            <yu-option label="狗" value="3"/>
+            <yu-option label="狗" value="4"/>
+            <yu-option label="狗" value="5"/>
+          </yu-select>
+        </yu-field>
+        <yu-field label="选择日期"  inline >
+          <yu-date-picker name="date"/>
+        </yu-field>
+      </yu-form>
+    </yu-dialog>
+    <div class="sub-title">居中显示</div>
+    <yu-dialog content="<h1>点击打开弹框</h1>" showConfirm showCancle center title="提示" inner="这是一条提示信息">
+    </yu-dialog>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
@@ -521,11 +532,36 @@ import YuPopover from '../components/popover';
 import YuDropDown from '../components/dropdown';
 import YuDropdownItem from '../components/dropdown-item';
 import YuDropdownMenu from '../components/dropdown-menu';
-import YuNavMenu from '../components/navmenu';
 import YuMenuItem from '../components/menu-item';
-import YuNavMenuItem from '../components/navmenu-item';
-import YuSubMenu from '../components/submenu';
-import YuNavMenuGroup from '../components/navmenu-group';
+import YuDialog from '../components/dialog';
+import YuButtons from '../components/buttons';
+import YuInput from '../components/input';
+import YuOption from '../components/option';
+import YuRadio from '../components/radio';
+import YuRadios from '../components/radios';
+import YuSelect from '../components/select';
+import YuCounter from '../components/counter';
+import YuCheckbox from '../components/checkbox';
+import YuCard from '../components/card';
+import YuCollapseItem from '../components/collapse-item';
+import YuCollapse from '../components/collapse';
+import YuCheckboxs from '../components/checkboxs';
+import YuLoading from '../components/loading';
+import YuCounterSide from '../components/counter-side';
+import YuSelected from '../components/selected';
+import YuCascader from '../components/cascader';
+import YuSwitch from '../components/switch';
+import YuBreadcrumb from '../components/breadcrumb';
+import YuBreadcrumbItem from '../components/breadcrumb-item';
+import YuSlider from '../components/slider';
+import YuTimePicker from '../components/time-picker';
+import YuScrollSelect from '../components/scroll-select';
+import YuDatePicker from '../components/date-picker';
+import YuUpload from '../components/upload';
+import YuRate from '../components/rate';
+import YuForm from '../components/form';
+import YuField from '../components/field';
+
 
 export default {
   name: 'ViewContainer',
@@ -824,22 +860,46 @@ export default {
     YuCarouselItem,
     YuNotification,
     YuAlert,
+    YuDialog,
     YuMessage,
-    YuSubMenu,
     YuMessageBox,
-    YuNavMenu,
-    YuNavMenuItem,
-    YuNavMenuGroup,
     YuBadge,
     YuProgress,
     YuTag,
     YuTable,
     YuPagination,
     YuPopover,
+    YuButtons,
+    YuInput,
+    YuOption,
+    YuRadio,
+    YuRadios,
+    YuSelect,
+    YuCounter,
+    YuCheckbox,
+    YuCard,
+    YuCollapseItem,
+    YuCollapse,
     YuMenuItem,
+    YuCheckboxs,
+    YuLoading,
+    YuCounterSide,
+    YuSelected,
+    YuCascader,
+    YuSwitch,
     YuDropDown,
-    YuDropdownItem,
     YuDropdownMenu,
+    YuDropdownItem,
+    YuBreadcrumb,
+    YuBreadcrumbItem,
+    YuSlider,
+    YuTimePicker,
+    YuScrollSelect,
+    YuDatePicker,
+    YuUpload,
+    YuRate,
+    YuForm,
+    YuField,
   },
 };
 </script>
