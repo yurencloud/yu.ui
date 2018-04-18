@@ -28,6 +28,7 @@ export default {
     }
   },
   props: {
+    lockScroll: Boolean,
     content: String,
     title: String,
     inner: String,
@@ -46,18 +47,23 @@ export default {
   methods: {
     change() {
       this.isShow = !this.isShow;
+      this.lockScroll = this.isShow;
+      if (this.lockScroll) {
+        document.getElementsByTagName('body')[0].classList.add('lock');
+      } else if (!this.lockScroll) {
+        document.getElementsByTagName('body')[0].classList.remove('lock');
+      }
     },
     close(event) {
-      this.isShow = !this.isShow;
+      this.change();
       this.$emit('cancle', event)
     },
     confirm(event) {
-      this.isShow = !this.isShow;
+      this.change();
       this.$emit('confirm', event)
     },
   },
   mounted() {
-    console.log(this.$refs.content);
     this.$refs.content.innerHTML = this.content;
   },
   components: {
@@ -124,5 +130,11 @@ export default {
         }
       }
     }
+  }
+</style>
+<style>
+  body.lock{
+    height: 100%;
+    overflow: hidden;
   }
 </style>

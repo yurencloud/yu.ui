@@ -502,7 +502,7 @@
       </yu-form>
     </yu-dialog>
     <div class="sub-title">居中显示</div>
-    <yu-dialog content="<h1>点击打开弹框</h1>" showConfirm showCancle center title="提示" inner="这是一条提示信息">
+    <yu-dialog content="<h1>点击打开弹框</h1>" showConfirm showCancle center title="提示" lockScroll inner="这是一条提示信息">
     </yu-dialog>
     <div style="height: 200px;width: 30px"></div>
   </div>
