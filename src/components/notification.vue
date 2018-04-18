@@ -10,7 +10,7 @@
            :class="[iconClass,icon,]"
         ></i>
       </div>
-      <div>
+      <div class="notification-content">
         <div class="notification-title">
           {{title}}
           <i class="iconfont icon-close"
@@ -119,6 +119,9 @@ export default {
     margin-top: 20px;
     margin-right: 20px;
     transition: all 0.3s linear;
+    .notification-content{
+      display: inline-block;
+    }
     .notification-title {
       font-size: $large;
       font-weight: 800;
@@ -135,9 +138,12 @@ export default {
       font-size: $normal;
       color: $text;
     }
-    display: flex;
     .notification-icon {
+      display: inline-block;
       padding-right: 10px;
+      position: relative;
+      top: -25px;
+      left: 0;
       i {
         font-size: 24px;
         color: $info;

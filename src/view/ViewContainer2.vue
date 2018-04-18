@@ -477,6 +477,22 @@
     <yu-popover title="标题" content="这是一段文字,这是一段文字这是一段文字" position="right" left="0" top="55px">
       <yu-button slot="trigger">点击激活</yu-button>
     </yu-popover>
+    <div class="sub-title">導航菜單</div>
+    <yu-nav-menu>
+      <yu-nav-menu-item index="1" disabled>这是一级</yu-nav-menu-item>
+      <yu-sub-menu>
+        <template slot="title" index="2">这是一级2</template>
+        <yu-nav-menu-item>  这是二级</yu-nav-menu-item>
+        <yu-nav-menu-group>
+          <template slot="item">  这是二级2</template>
+          <yu-nav-menu-item index="1">这是三级</yu-nav-menu-item>
+          <yu-nav-menu-item index="1">这是三级</yu-nav-menu-item>
+          <yu-nav-menu-item index="1">这是三级</yu-nav-menu-item>
+        </yu-nav-menu-group>
+      </yu-sub-menu>
+      <yu-nav-menu-item index="3">这是一级3</yu-nav-menu-item>
+      <yu-nav-menu-item index="4">这是一级4</yu-nav-menu-item>
+    </yu-nav-menu>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>
@@ -507,6 +523,9 @@ import YuDropdownItem from '../components/dropdown-item';
 import YuDropdownMenu from '../components/dropdown-menu';
 import YuNavMenu from '../components/navmenu';
 import YuMenuItem from '../components/menu-item';
+import YuNavMenuItem from '../components/navmenu-item';
+import YuSubMenu from '../components/submenu';
+import YuNavMenuGroup from '../components/navmenu-group';
 
 export default {
   name: 'ViewContainer',
@@ -806,8 +825,11 @@ export default {
     YuNotification,
     YuAlert,
     YuMessage,
+    YuSubMenu,
     YuMessageBox,
     YuNavMenu,
+    YuNavMenuItem,
+    YuNavMenuGroup,
     YuBadge,
     YuProgress,
     YuTag,
