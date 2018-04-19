@@ -1,25 +1,50 @@
 <template>
-    <ul class="yu-dropdown-menu">
-      <slot/>
-    </ul>
+    <div class="yu-dropdown-menu" v-if="rootDrop.isShow">
+      <div class="dropdown-angle"></div>
+      <ul class="menu-ul">
+        <slot/>
+      </ul>
+    </div>
 </template>
 
 <script>
 export default {
   name: 'YuDropdownMenu',
+  inject: ['rootDrop'],
+  methods: {
+  },
 }
 </script>
 
 <style lang="scss" type="text/scss" scoped>
   @import "../assets/css/varible";
   @import "../assets/css/function";
-.yu-dropdown-menu{
-  box-shadow: $box-shadow;
-  border-radius: 5px;
-  overflow: hidden;
-  margin-top: 5px;
-  max-height: 0;
-  transition: all .3s linear;
-  padding: 0;
-}
+  .yu-dropdown-menu{
+    background-color: #fff;
+    box-shadow: $box-shadow;
+    max-width: 100px;
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 200;
+    margin-top: 10px;
+    .menu-ul{
+      background-color: #fff;
+      padding: 0;
+      margin: 5px 0;
+    }
+    .dropdown-angle{
+      width: 8px;
+      height: 8px;
+      display: inline-block;
+      background-color: #fff;
+      position: absolute;
+      left: 50%;
+      top: -5px;
+      border-top: 1px solid $light-border;
+      border-right: 1px solid $light-border;
+      transform: translateX(-50%) rotate(-45deg);
+      z-index: 0;
+    }
+  }
+
 </style>

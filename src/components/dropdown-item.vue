@@ -1,7 +1,9 @@
 <template>
-    <li class="yu-dropdown-item" @click="handleClick" :class="[{disabled:disabled},]">
-      <slot/>
-    </li>
+   <li class="yu-dropdown-item"
+       :class="[{disabled:disabled},{divided:divided}]"
+       :command="command">
+     <slot/>
+   </li>
 </template>
 
 <script>
@@ -9,15 +11,8 @@ export default {
   name: 'YuDropdownItem',
   props: {
     disabled: Boolean,
+    divided: Boolean,
     command: String,
-  },
-  methods: {
-    handleClick() {
-      if (!this.disabled && this.command) {
-        console.log((`click on item ${this.command}`));
-        this.$emit('click', this.command);
-      }
-    },
   },
 }
 </script>
@@ -26,15 +21,22 @@ export default {
   @import "../assets/css/varible";
   @import "../assets/css/function";
 .yu-dropdown-item{
-  list-style: none;
-  padding: 10px 20px 10px 15px;
+ list-style: none;
+  padding: 5px 20px;
+  text-align: center;
+  cursor: pointer;
   font-size: $normal;
-  &:hover:not(.disabled){
-    background-color: $background;
-    color: lighten($primary,0.5);
+  &:hover{
+    background-color: lighten($primary,30);
+    color: $primary;
   }
 }
   .yu-dropdown-item.disabled{
-    color: $light-text;
+    background-color: lighten($info,38);
+    color: $info;
+    cursor:not-allowed;
+  }
+  .yu-dropdown-item.divided{
+    border-top: 1px solid lighten($info,30);
   }
 </style>

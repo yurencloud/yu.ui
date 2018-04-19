@@ -1,21 +1,6 @@
 <template>
   <div id="container" style="margin: 30px">
     <h2>YU.UI---2</h2>
-    <yu-drop-down trigger="hover">
-      <span slot="title">
-        <yu-button type="primary" size="small">
-          下拉列表<i class="iconfont icon-angle-up"></i>
-        </yu-button>
-      </span>
-      <yu-dropdown-menu slot="menu">
-        <yu-dropdown-item command="1">黄金糕</yu-dropdown-item>
-        <yu-dropdown-item command="2">牛奶糖</yu-dropdown-item>
-        <yu-dropdown-item command="3">宫保鸡丁</yu-dropdown-item>
-        <yu-dropdown-item command="4" disabled>辣子鸡块</yu-dropdown-item>
-        <yu-dropdown-item command="5">狮子头</yu-dropdown-item>
-        <yu-dropdown-item command="6">蚵仔煎</yu-dropdown-item>
-      </yu-dropdown-menu>
-    </yu-drop-down>
     <div class="sub-title">步骤条----基础用法</div>
     <yu-steps :active="active2">
       <yu-step title="步骤一"/>
@@ -504,6 +489,40 @@
     <div class="sub-title">居中显示</div>
     <yu-dialog content="<h1>点击打开弹框</h1>" showConfirm showCancle center title="提示" lockScroll inner="这是一条提示信息">
     </yu-dialog>
+    <!--下拉框-->
+    <div class="sub-title">下拉框--->基本用法</div>
+    <yu-drop-down>
+      <span>下拉菜单<i class="iconfont icon-angle-down"></i></span>
+      <yu-dropdown-menu>
+        <yu-dropdown-item>狮子头</yu-dropdown-item>
+        <yu-dropdown-item>黄金糕</yu-dropdown-item>
+        <yu-dropdown-item>螺蛳粉</yu-dropdown-item>
+        <yu-dropdown-item>臭豆腐</yu-dropdown-item>
+        <yu-dropdown-item>铁板烧</yu-dropdown-item>
+      </yu-dropdown-menu>
+    </yu-drop-down>
+    <div class="sub-title">下拉框--->disable</div>
+    <yu-drop-down>
+      <span>下拉菜单<i class="iconfont icon-angle-down"></i></span>
+      <yu-dropdown-menu>
+        <yu-dropdown-item command="a">狮子头</yu-dropdown-item>
+        <yu-dropdown-item command="b">黄金糕</yu-dropdown-item>
+        <yu-dropdown-item command="c">螺蛳粉</yu-dropdown-item>
+        <yu-dropdown-item command="d" :disabled="true">臭豆腐</yu-dropdown-item>
+        <yu-dropdown-item command="e">铁板烧</yu-dropdown-item>
+      </yu-dropdown-menu>
+    </yu-drop-down>
+<div class="sub-title">下拉框--->button</div>
+    <yu-drop-down>
+      <yu-button>更多菜单</yu-button>
+      <yu-dropdown-menu>
+        <yu-dropdown-item command="a">狮子头</yu-dropdown-item>
+        <yu-dropdown-item command="b">黄金糕</yu-dropdown-item>
+        <yu-dropdown-item command="c">螺蛳粉</yu-dropdown-item>
+        <yu-dropdown-item command="d" :disabled="true">臭豆腐</yu-dropdown-item>
+        <yu-dropdown-item command="e" divided>铁板烧</yu-dropdown-item>
+      </yu-dropdown-menu>
+    </yu-drop-down>
     <div style="height: 200px;width: 30px"></div>
   </div>
 </template>

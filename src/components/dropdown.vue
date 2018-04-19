@@ -1,22 +1,19 @@
 <template>
-  <div class="yu-drop-down" @mouseover="mouse"
-                            @mouseout="mouse"
-                            @click="toggle">
-      <div class="dropdown-title" :class="{trans:isShow}">
-        <slot name="title"/>
-      </div>
-     <div class="options" :class="[{transition:isShow}]">
-       <slot name="menu"/>
-     </div>
-  </div>
+ <div class="yu-drop-down"
+      @click="command($event)">
+   <!--触发下拉框的部分-->
+   <div class="trigger" >
+     <slot/>
+   </div>
+   <div class="list">
+     <slot name="list"/>
+   </div>
+ </div>
 </template>
 
 <script>
 export default {
   name: 'YuDropDown',
-  props: {
-    trigger: String,
-  },
   data() {
     return {
       isShow: false,
@@ -28,14 +25,17 @@ export default {
     }
   },
   methods: {
-    mouse() {
-      if (this.trigger === 'click') { return; }
+    command(event) {
       this.isShow = !this.isShow;
+      const target = event.target;
+      if (target.tagName === 'LI' && (target.className.indexOf('disabled') === -1)) {
+        const comm = target.getAttribute('command');
+        this.$emit('command', comm);
+        this.visibleChange();
+      }
     },
-    toggle(e) {
-      e.stopImmediatePropagation();
-      if (this.trigger === 'hover') { return; }
-      this.isShow = !this.isShow;
+    visibleChange() {
+      this.$emit('visibleChange', this.isShow);
     },
   },
 }
@@ -45,27 +45,9 @@ export default {
   @import "../assets/css/varible";
   @import "../assets/css/function";
 .yu-drop-down{
-  width: auto;
   display: inline-block;
-  padding: 5px 10px;
-  position: relative;
-  .transition{
-   ul{
-     max-height: 400px;
-   }
-  }
-  .dropdown-title{
-    i{
-      position: absolute;
-      top: 8px;
-      right: 10px;
-      transition: all 0.3s linear;
-    }
-  }
-  .trans{
-      i{
-        transform: rotate(-180deg);
-      }
+  .list{
+    position: relative;
   }
 }
 </style>
