@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       items: 0,
-      lastSrc: String,
+      lastSrc: '',
     }
   },
   methods: {
@@ -117,7 +117,6 @@ export default {
       this.$nextTick(() => {
         lines = this.$refs.lines.children;
         lines[0].className = 'now';
-        console.log(lines);
         // 小圆点
         for (let i = 0; i < lines.length; i++) {
           lines[i].index = i;

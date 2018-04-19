@@ -168,7 +168,7 @@ export default {
         font-weight: 800;
       }
       .description{
-        padding: 5px 10px;
+        padding: 5px 10px 5px 0;
       }
       .success-text{
         color: $success;

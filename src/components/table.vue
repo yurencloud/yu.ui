@@ -15,7 +15,7 @@
         >
           <div v-if="(typeof value) === 'string'">{{value}}</div>
           <div v-else >
-            <span v-for="v in value" >{{v}}</span>
+            <span v-for="v in value" :key="v">{{v}}</span>
           </div>
         </td>
       </tr>
@@ -40,9 +40,7 @@ export default {
     height: String,
     width: String,
   },
-  mounted() {
-    console.log(this.widths);
-  },
+
 }
 </script>
 
