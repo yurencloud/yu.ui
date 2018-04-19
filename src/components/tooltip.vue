@@ -3,14 +3,14 @@
     <!--提示框-->
     <div class="tooltip"
          v-show="isShow"
-         :class="[effect,]">{{content}}</div>
+         :class="[effect,]">
+      {{content}}
+    </div>
   <!--文字-->
     <div class="text" @mouseover="over"
                       @mouseout="over">
-      <i class="iconfont"
-         v-if="showArrow"
-         :class="[{'icon-caret-down':top,'icon-angle-down':isLight}]"
-         v-show="isShow"></i>
+      <div class="arrow angle" v-if="isLight" v-show="isShow"></div>
+      <div class="arrow iconfont" v-else v-show="isShow"></div>
       <slot/>
     </div>
 </div>
@@ -67,126 +67,130 @@ export default {
      background-color:#000;
      display: block;
      border-radius: 5px;
-     top: -33px;
+     top: -39px;
      font-size: $small;
-     transform: translateX(-25%);
      transition:all .2s linear;
      position: absolute;
      white-space:nowrap;
      z-index: 9999;
    }
     .light{
-      color: #000;
       background-color: white;
       border: 1px solid #000;
+      color: $dark-text;
     }
     .text{
       margin-top: 10px;
       position: relative;
       display: inline-block;
-      i{
+      .angle{
+        width: 8px;
+        height: 8px;
+        display: inline-block;
+        background-color: #fff;
         position: absolute;
         left: 50%;
-        font-size: $huge;
-        transform: translateX(-50%);
-        top: -18px;
+        bottom:-5px;
+        border-top: 1px solid #000;
+        border-right: 1px solid #000;
+        transform: translateX(-50%) rotate(-45deg);
+        z-index: 100000;
+        top: -15px;
+      }
+      .iconfont{
+        position: absolute;
+        left: 50%; width: 8px;
+        display: inline-block;
+        background-color: #000;
+        height: 8px;
+        transform: translateX(-50%) rotate(-45deg);
+        top: -16px;
+        z-index: 100000;
       }
       .icon-angle-down{
         background-color: #fff;
       }
     }
   }
-  /*提示框在--上左*/
-  .yu-tooltip.top-left{
+  /*上*/
+  .yu-tooltip.top{
     .tooltip{
-      transform: translateX(0);
-    }
-  }
-  /*提示框在--上右*/
-  .yu-tooltip.top-right{
-    .tooltip{
+      left: 50%;
       transform: translateX(-50%);
     }
-  }
-  /*提示框在--左侧*/
-  .yu-tooltip.left{
-    .tooltip{
-      transform: translateX(-25%);
-      position: absolute;
-      left: -105%;
-      top: 10px;
+    .angle{
+    transform: rotate(135deg);
     }
+  }
+  /*上有*/
+  .yu-tooltip.top-right{
+    .tooltip{
+      right: 8px;
+    }
+    .angle{
+      transform: rotate(135deg);
+    }
+  }
+  /*下部*/
+.yu-tooltip.bottom{
+  .tooltip{
+    top: auto;
+    bottom: -34px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .arrow{
+    top: auto;
+    bottom: 0;
+  }
+  .arrow.iconfont{
+   bottom: -1px;
+  }
+}
+  /*下左*/
+  .yu-tooltip.bottom-left{
+    .tooltip{
+      left: 0;
+      top: auto;
+      bottom: -34px;
+    }
+    .arrow{
+      top: auto;
+      bottom: 0;
+    }
+    .arrow.iconfont{
+      bottom: -1px;
+    }
+  }
+  /*下右*/
+  .yu-tooltip.bottom-right{
+    .tooltip{
+      right: 8px;
+      top: auto;
+      bottom: -34px;
+    }
+    .arrow{
+      top: auto;
+      bottom: 0;
+    }
+    .arrow.iconfont{
+      bottom: -1px;
+    }
+  }
+  /*右侧*/
+  .yu-tooltip.right{
     .text{
-      i{
-        position: absolute;
-        top: 16%;
-        left: -20%;
-        transform: rotate(-90deg);
+     position: relative;
+      .arrow{
+        left: calc(100% - 4px);
+        top: calc(50% - 4px);
+        transform: translateY(-50%) rotate(-135deg);
       }
+    }
+    .tooltip{
+      left: 100%;
+      top: 12px;
     }
   }
 
-  /*提示框在--右侧*/
-  .yu-tooltip.right{
-    .tooltip{
-      transform: translateX(-25%);
-      left: 120%;
-      top: 10px;
-    }
-    .text{
-      margin-top: 10px;
-      position: relative;
-      display: inline-block;
-      margin-right: 10px;
-      i{
-        position: absolute;
-        top: 16%;
-        left: 90%;
-        transform: rotate(90deg);
-      }
-    }
-  }
-  /*下中*/
-  .yu-tooltip.bottom{
-    .tooltip{
-      top: 100%;
-      transform: translateX(-50%);
-      left: 50%;
-    }
-    .text{
-      i{
-        left: 50%;
-        transform: translateX(-50%) rotate(180deg);
-        top: 76%;
-      }
-    }
-  }
-  /*下左边*/
-  .yu-tooltip.bottom-left{
-    .tooltip{
-      top: 100%;
-      transform: translateX(0);
-    }
-    .text{
-      i{
-        left: 50%;
-        transform: translateX(-50%) rotate(180deg);
-        top: 76%;
-      }
-    }
-  }
-  /*下右边*/
-  .yu-tooltip.bottom-right{
-    .tooltip{
-      top: 100%;
-      transform: translateX(-50%);
-    }
-    .text{
-      i{
-        left: 50%;
-        transform: translateX(-50%) rotate(180deg);
-        top: 76%;
-      }
-    }
-  }
 </style>

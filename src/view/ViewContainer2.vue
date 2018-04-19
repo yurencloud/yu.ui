@@ -58,79 +58,64 @@
     </div>
     <div class="sub-title" style="margin-top: 50px">文字提示框---按钮大小变化</div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" placement="top">
-       <yu-button size="small" type="primary">上边</yu-button>
+      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true">
+       <yu-button size="small" >上边</yu-button>
+      </yu-tool-tip>
+      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" >
+        <yu-button size="mini" >上边</yu-button>
       </yu-tool-tip>
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" placement="top">
-        <yu-button size="mini" type="success">上边</yu-button>
-      </yu-tool-tip>
+
     </div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true"  placement="top">
-        <yu-button type="warming">上边</yu-button>
+    </div>
+    <div class="sub-title" style="margin-top: 100px">文字提示框---方位变化</div>
+    <div class="box" style="margin-left: 100px">
+      <!--<yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true">-->
+        <!--<yu-button type="warming">左侧</yu-button>-->
+      <!--</yu-tool-tip>-->
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" effect="light" placement="top">
+        <yu-button >上左</yu-button>
+      </yu-tool-tip>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" effect="light" placement="top-right">
+        <yu-button >上右</yu-button>
+      </yu-tool-tip>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" effect="light" placement="bottom">
+        <yu-button>下面</yu-button>
+      </yu-tool-tip>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" effect="light" placement="bottom-left">
+        <yu-button>下左</yu-button>
+      </yu-tool-tip>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" effect="light" placement="bottom-right">
+        <yu-button>下右</yu-button>
+      </yu-tool-tip>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈" effect="light"  :show-arrow="true" placement="right">
+        <yu-button>右侧</yu-button>
       </yu-tool-tip>
     </div>
     <div class="sub-title" style="margin-top: 100px">文字提示框---方位变化</div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" placement="top-left">
-        <yu-button type="warming">上左</yu-button>
+      <!--<yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true">-->
+      <!--<yu-button type="warming">左侧</yu-button>-->
+      <!--</yu-tool-tip>-->
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true"  placement="top">
+        <yu-button>上左</yu-button>
       </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" placement="top-right">
-        <yu-button type="warming">上右</yu-button>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" placement="top-right">
+        <yu-button>上右</yu-button>
       </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="35" :show-arrow="true" placement="top">
-        <span style="width: 20px;height:20px;display: inline-block;background-color:pink;box-sizing: border-box;border-radius: 50%"></span>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true"  placement="bottom">
+        <yu-button>下面</yu-button>
       </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="left">
-        <yu-button type="warming">左侧</yu-button>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" placement="bottom-left">
+        <yu-button>下左</yu-button>
       </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="left">
-        <yu-button type="warming" size="mini">左侧</yu-button>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" placement="bottom-right">
+        <yu-button>下右</yu-button>
       </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="right">
-        <yu-button type="warming">右侧</yu-button>
-      </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="right">
-        <yu-button type="warming" size="small">右侧</yu-button>
-      </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="bottom">
-        <yu-button type="warming" size="small">下边</yu-button>
-      </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true" placement="bottom">
-        <yu-button type="warming" >da下边</yu-button>
-      </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" placement="bottom-left">
-        <yu-button type="warming" >da下边</yu-button>
-      </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈"  :show-arrow="true" placement="bottom-right">
-        <yu-button type="warming" >da下边</yu-button>
-      </yu-tool-tip>
-    </div>
-    <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈哈" :show-arrow="true" effect="light" placement="bottom-right">
-        <yu-button type="warming" >da下边</yu-button>
+      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈"  :show-arrow="true" placement="right">
+        <yu-button>右侧</yu-button>
       </yu-tool-tip>
     </div>
     <div style="height: 100px;"></div>
