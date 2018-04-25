@@ -14,7 +14,6 @@ import YuCarousel from './components/carousel';
 import YuCollapseItem from './components/collapse-item';
 import YuCollapse from './components/collapse';
 import YuMenuItem from './components/menu-item';
-import YuNavMenu from './components/navmenu';
 import YuCheckboxs from './components/checkboxs';
 import YuLoading from './components/loading';
 import YuCounterSide from './components/counter-side';
@@ -60,7 +59,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-const version = '1.0.18';
+const version = '1.0.20';
 
 const components = {
   version,
@@ -81,7 +80,6 @@ const components = {
   YuCollapseItem,
   YuCollapse,
   YuMenuItem,
-  YuNavMenu,
   YuCheckboxs,
   YuLoading,
   YuCounterSide,
@@ -140,7 +138,6 @@ export {
   YuCollapseItem,
   YuCollapse,
   YuMenuItem,
-  YuNavMenu,
   YuCheckboxs,
   YuLoading,
   YuCounterSide,
