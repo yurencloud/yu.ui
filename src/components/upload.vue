@@ -245,7 +245,7 @@ export default {
           color: $success
         }
         .orange {
-          color: $warming;
+          color: $warning;
         }
         .violet {
           color: darken($primary, 20);

@@ -271,6 +271,7 @@ export default {
         background-color: $background;
         &:hover {
           border: 1px solid $border;
+          cursor: not-allowed;
         }
         &:focus {
           border: 1px solid $border;

@@ -108,8 +108,8 @@ export default {
   /*不同状态的tr*/
   .status.yu-table{
     table{
-      tr.warming{
-        background-color: lighten($warming,40);
+      tr.warning{
+        background-color: lighten($warning,40);
         &:hover:not(.tr-0){
           background-color: lighten($info,39);
         }

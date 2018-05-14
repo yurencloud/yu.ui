@@ -17,7 +17,6 @@ import YuMenuItem from './components/menu-item';
 import YuCheckboxs from './components/checkboxs';
 import YuLoading from './components/loading';
 import YuCounterSide from './components/counter-side';
-import YuSelected from './components/selected';
 import YuCascader from './components/cascader';
 import YuSwitch from './components/switch';
 import YuDropDown from './components/dropdown';
@@ -59,7 +58,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-const version = '1.0.20';
+const version = '1.1.0';
 
 const components = {
   version,
@@ -83,7 +82,6 @@ const components = {
   YuCheckboxs,
   YuLoading,
   YuCounterSide,
-  YuSelected,
   YuCascader,
   YuSwitch,
   YuDropDown,
@@ -141,7 +139,6 @@ export {
   YuCheckboxs,
   YuLoading,
   YuCounterSide,
-  YuSelected,
   YuCascader,
   YuSwitch,
   YuDropDown,

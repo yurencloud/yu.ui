@@ -11,15 +11,21 @@
       &.disabled {
         border: 1px solid lighten($color, 25);
         background-color: lighten($color, 25);
+        cursor: not-allowed;
       }
       &:hover:not(.disabled), &:focus:not(.disabled) {
         color: #fff;
         border: 1px solid lighten($color, 10);
         background-color: lighten($color, 10);
       }
+      &.loading{
+        border: 1px solid lighten($color, 15);
+        background-color: lighten($color, 15);
+      }
     }
   }
 }
+
 
 @mixin generalAllColorPlainButton() {
   @each $type in $types {
@@ -33,6 +39,7 @@
         color: lighten($color, 25);
         border: 1px solid lighten($color, 25);
         background-color: lighten($color, 50);
+        cursor: not-allowed;
       }
       &:hover:not(.disabled), &:focus:not(.disabled) {
         border: 1px solid $color;
@@ -90,6 +97,7 @@
       span.prefix {
         line-height: $height;
         i {
+            top: - $height*0.6;
           @if $height > $small-height {
             font-size: $normal
           } @else {
@@ -100,6 +108,7 @@
       span.suffix {
         line-height: $height;
         i {
+          top: - $height*0.6;
           @if $height > $small-height {
             font-size: $normal
           } @else {

@@ -12,6 +12,7 @@
       :width="width"
       :disabled="disabled"
     />
+    <transition name="fade">
     <div v-if="cascader" class="options" v-show="visible">
       <div class="cascader first">
         <div class="option"
@@ -53,6 +54,7 @@
         </div>
       </div>
     </div>
+    </transition>
   </div>
 </template>
 
@@ -199,6 +201,16 @@ export default {
   .yu-cascader{
     @include angleAnimation();
     position: relative;
+    .fade-enter-active {
+      transition: all .2s ease;
+    }
+    .fade-leave-active {
+      transition: all .2s ease;
+    }
+    .fade-enter, .fade-leave-to
+      /* .slide-fade-leave-active for below version 2.1.8 */ {
+      opacity: 0;
+    }
     .options {
       background-color: #fff;
       position: absolute;
@@ -210,6 +222,10 @@ export default {
       color: $text;
       box-shadow: $box-shadow;
       font-size: 0;
+      /*过渡*/
+      /* 可以设置不同的进入和离开动画 */
+      /* 设置持续时间和动画函数 */
+
       div.cascader{
         min-width: 160px;
         height: 200px;
@@ -226,6 +242,9 @@ export default {
         &::-webkit-scrollbar-thumb {
           border-radius: 2px;
           background-color: $border;
+        }
+        &:last-child{
+          padding-right: 1px;
         }
       }
       .option{

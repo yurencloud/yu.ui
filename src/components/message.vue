@@ -44,7 +44,7 @@ export default {
       icons: {
         success: 'icon-check-circle',
         info: 'icon-information',
-        warming: 'icon-warning-circle',
+        warning: 'icon-warning-circle',
         error: 'icon-close-circle',
       },
       isShow: {
@@ -127,10 +127,10 @@ export default {
     border: 1px solid $success;
   }
   // 警告
-  .message.warming {
-    background-color: lighten($warming, 35);
-    color: $warming;
-    border: 1px solid lighten($warming,30);
+  .message.warning {
+    background-color: lighten($warning, 35);
+    color: $warning;
+    border: 1px solid lighten($warning,30);
   }
   // 错误
   .message.error {

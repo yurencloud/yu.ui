@@ -5,7 +5,7 @@
                  class="selectAll"
                  ignore
                  :class="[{isChecked:isChecked}]"
-                 @click="handleClick"
+                 @click="selectAllClick"
     >全选</yu-checkbox>
     <slot/>
   </div>
@@ -37,7 +37,8 @@ export default {
     YuCheckbox,
   },
   methods: {
-    handleClick() {
+    // 负责全选
+    selectAllClick() {
       const the = this;
       // 重置
       this.value = [];
@@ -45,7 +46,6 @@ export default {
       this.$children.forEach((item, index) => {
         item.isChecked = this.isChecked;
         if (index > 0) {
-          console.log(item);
           if (this.isChecked) {
             the.value.push(item.value);
           } else {
@@ -53,8 +53,10 @@ export default {
           }
         }
       });
-
-      this.$parent.handleChange({ name: the.name, value: this.value.toString() });
+      // 提交至表单
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value.toString() });
+      }
     },
     handleChange(value, isChecked) {
       if (isChecked) {

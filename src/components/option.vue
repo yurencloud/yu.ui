@@ -44,7 +44,7 @@ export default {
 
   .yu-select>.options>.option{
     font-size: $normal;
-    padding:4px 8px;
+    padding:8px 8px;
     &:hover:not(.disabled){
       background-color: $background;
     }

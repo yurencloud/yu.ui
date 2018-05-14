@@ -99,19 +99,20 @@ export default {
         background: #fff;
         border-radius: 8px;
         transition: all .4s ease;
-        transform: translateX(0px);
+        transform: translateX(0px) translateY(-1px);
       }
       transition: background-color .4s ease;
       &.on {
         .circle{
           transition: all .4s ease;
-          transform: translateX(20px);
+          transform: translateX(20px) translateY(-1px);
         }
         @include generalAllColorSwitch();
       }
     }
     &.disabled{
       color:lighten($text,25);
+      cursor: not-allowed;
     }
   }
 </style>

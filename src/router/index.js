@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ViewContainer from '@/view/ViewContainer'
-import ViewContainer2 from '@/view/ViewContainer2'
-import ViewTest from '@/view/ViewTest'
+import Button from '../example/button'
+import Radio from '../example/radio'
+import Checkbox from '../example/checkbox'
+import Input from '../example/input'
+import Counter from '../example/counter'
+import Select from '../example/select'
+import Switch from '../example/switch'
+import Cascader from '../example/cascader'
 
 Vue.use(Router)
 
@@ -10,18 +15,39 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'view-container',
-      component: ViewContainer,
+      component: Button,
     },
     {
-      path: '/2',
-      name: 'view-container2',
-      component: ViewContainer2,
+      path: '/button',
+      component: Button,
     },
     {
-      path: '/test',
-      name: 'view-test',
-      component: ViewTest,
+      path: '/radio',
+      component: Radio,
+    },
+    {
+      path: '/checkbox',
+      component: Checkbox,
+    },
+    {
+      path: '/input',
+      component: Input,
+    },
+    {
+      path: '/counter',
+      component: Counter,
+    },
+    {
+      path: '/select',
+      component: Select,
+    },
+    {
+      path: '/cascader',
+      component: Cascader,
+    },
+    {
+      path: '/switch',
+      component: Switch,
     },
   ],
 })

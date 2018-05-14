@@ -101,9 +101,9 @@ export default {
           color: $danger;
         }
       }
-      .warming{
+      .warning{
         i{
-          color: $warming;
+          color: $warning;
         }
       }
       .finish{
@@ -121,9 +121,9 @@ export default {
           color: $danger;
         }
       }
-      .have-warming{
+      .have-warning{
         i{
-          color: $warming;
+          color: $warning;
         }
       }
       .have-finish{
@@ -189,7 +189,7 @@ export default {
       }
       .wait{
         i{
-          color: $warming;
+          color: $warning;
         }
       }
       .finish{
@@ -207,9 +207,9 @@ export default {
           color: $danger;
         }
       }
-      .have-warming{
+      .have-warning{
         i{
-          color: $warming;
+          color: $warning;
         }
       }
       .have-finish{

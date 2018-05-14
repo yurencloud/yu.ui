@@ -39,6 +39,7 @@ export default {
     handleClick(event) {
       if (!this.disabled) {
         this.$emit('click', event);
+        this.checked = !this.checked;
         if (this.submit) {
           if (this.$parent.isForm) {
             this.$parent.submit()
@@ -76,10 +77,12 @@ export default {
       color: $primary;
       border: 1px solid lighten($primary,10);
       background-color: lighten($primary,35);
+      z-index: 1;
     }
     &.disabled{
       color:$lighter-text;
       background: $background;
+      cursor: not-allowed;
     }
 
     @include generalAllSizeButton();

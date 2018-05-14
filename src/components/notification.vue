@@ -56,7 +56,7 @@ export default {
           icon: 'icon-information',
           color: '#909399',
         },
-        warming: {
+        warning: {
           icon: 'icon-warning-circle',
           color: '#E6A23C',
         },

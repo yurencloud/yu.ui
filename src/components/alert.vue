@@ -30,7 +30,7 @@ export default {
       icons: {
         success: 'icon-check-circle',
         info: 'icon-information',
-        warming: 'icon-warning-circle',
+        warning: 'icon-warning-circle',
         error: 'icon-close-circle',
       },
       isShow: true,
@@ -93,9 +93,9 @@ export default {
   color: $success;
 }
 // 警告
-.yu-alert.warming {
-  background-color: lighten($warming, 40);
-  color: $warming;
+.yu-alert.warning {
+  background-color: lighten($warning, 40);
+  color: $warning;
 }
 // 错误
 .yu-alert.error {

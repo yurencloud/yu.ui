@@ -19,14 +19,21 @@
     </div>
     <!--选中选项显示-->
     <div class="selected" v-if="showSelects && selects.length>0">
-      <yu-selected v-for="item in selects" v-bind:key="item.value" :value="item.value">{{item.label}}</yu-selected>
+      <yu-tag closable
+              v-for="item in selects"
+              v-bind:key="item.value"
+              :value="item.value"
+              :type="tagType"
+              @close="handleCloseTag(item)">
+        {{item.label}}
+      </yu-tag>
     </div>
   </div>
 </template>
 
 <script>
 import YuInput from './input';
-import YuSelected from './selected';
+import YuTag from './tag';
 
 export default {
   name: 'YuSelect',
@@ -40,7 +47,10 @@ export default {
   },
   props: {
     overflow: Boolean,
-    placeholder: String,
+    placeholder: {
+      type: String,
+      default: '请选择',
+    },
     disabled: Boolean,
     multi: Boolean,
     options: Array,
@@ -48,6 +58,7 @@ export default {
     showSelects: Boolean,
     width: String,
     size: String,
+    tagType: String,
   },
   created() {
     this.$on('handleSelect', this.handleSelect);
@@ -121,11 +132,14 @@ export default {
         this.$parent.handleChange({ name: this.name, value: values.toString() });
       }
     },
+    handleCloseTag(item) {
+      this.cancelSelect({ value: item.value })
+    },
   },
 
   components: {
     YuInput,
-    YuSelected,
+    YuTag,
   },
 };
 </script>
@@ -143,7 +157,6 @@ export default {
       z-index: 1000;
       min-width: 175px;
       border: 1px solid $border;
-      padding: 8px 0;
       margin-top: 8px;
       border-radius: 4px;
       color: $text;

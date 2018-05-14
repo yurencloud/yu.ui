@@ -87,7 +87,7 @@ export default {
           icon: 'icon-information',
           color: '#909399',
         },
-        warming: {
+        warning: {
           icon: 'icon-warning-circle',
           color: '#E6A23C',
         },
@@ -208,7 +208,7 @@ export default {
           position: relative;
           i{
             font-size: 24px;
-            color: $warming;
+            color: $warning;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);

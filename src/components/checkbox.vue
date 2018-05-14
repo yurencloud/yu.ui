@@ -61,6 +61,7 @@ export default {
       display: none;
     }
     .checkbox {
+      transition: background-color .4s;
       margin-right: 6px;
       margin-bottom: -2px;
       display: inline-block;
@@ -78,6 +79,7 @@ export default {
     }
     &.checked{
       .checkbox {
+
         position: relative;
         border: 1px solid $primary;
         border-radius: 2px;

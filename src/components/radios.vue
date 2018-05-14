@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="yu-radios">
     <slot/>
   </div>
 </template>

@@ -8,14 +8,14 @@
     <yu-button>默认按钮</yu-button>
     <yu-button type="primary">主要按钮</yu-button>
     <yu-button type="success">成功按钮</yu-button>
-    <yu-button type="warming">警告按钮</yu-button>
+    <yu-button type="warning">警告按钮</yu-button>
     <yu-button type="danger">危险按钮</yu-button>
     <yu-button type="info">信息按钮</yu-button>
     <br/>
     <yu-button plain>朴素按钮</yu-button>
     <yu-button type="primary" plain>主要按钮</yu-button>
     <yu-button type="success" plain>成功按钮</yu-button>
-    <yu-button type="warming" plain>警告按钮</yu-button>
+    <yu-button type="warning" plain>警告按钮</yu-button>
     <yu-button type="danger" plain>危险按钮</yu-button>
     <yu-button type="info" plain>信息按钮</yu-button>
 
@@ -47,14 +47,14 @@
     <yu-button disabled>默认按钮</yu-button>
     <yu-button type="primary" disabled>主要按钮</yu-button>
     <yu-button type="success" disabled>成功按钮</yu-button>
-    <yu-button type="warming" disabled>警告按钮</yu-button>
+    <yu-button type="warning" disabled>警告按钮</yu-button>
     <yu-button type="danger" disabled>危险按钮</yu-button>
     <yu-button type="info" disabled>信息按钮</yu-button>
     <br/>
     <yu-button plain disabled>朴素按钮</yu-button>
     <yu-button type="primary" plain disabled>主要按钮</yu-button>
     <yu-button type="success" plain disabled>成功按钮</yu-button>
-    <yu-button type="warming" plain disabled>警告按钮</yu-button>
+    <yu-button type="warning" plain disabled>警告按钮</yu-button>
     <yu-button type="danger" plain disabled>危险按钮</yu-button>
     <yu-button type="info" plain disabled>信息按钮</yu-button>
 
@@ -277,14 +277,6 @@
       </yu-option>
     </yu-select>
 
-    <div class="title">选项元素</div>
-    <yu-selected>
-      选项一
-    </yu-selected>
-    <yu-selected>
-      选项二
-    </yu-selected>
-
     <div class="title">级联选择</div>
     <div class="sub-title">普通用法</div>
     <yu-cascader :cascader="cascader"/>
@@ -316,7 +308,7 @@
     <yu-switch on type="danger"/>
     <yu-switch on type="success"/>
     <yu-switch on type="info"/>
-    <yu-switch on type="warming"/>
+    <yu-switch on type="warning"/>
 
     <div class="sub-title">标签文字</div>
     <yu-switch on label="关灯"/>
@@ -644,7 +636,6 @@ import YuMenuItem from '../components/menu-item';
 import YuCheckboxs from '../components/checkboxs';
 import YuLoading from '../components/loading';
 import YuCounterSide from '../components/counter-side';
-import YuSelected from '../components/selected';
 import YuCascader from '../components/cascader';
 import YuSwitch from '../components/switch';
 import YuDropDown from '../components/dropdown';
@@ -1068,7 +1059,6 @@ export default {
     YuCheckboxs,
     YuLoading,
     YuCounterSide,
-    YuSelected,
     YuCascader,
     YuSwitch,
     YuDropDown,

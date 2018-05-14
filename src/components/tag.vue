@@ -81,11 +81,11 @@ export default {
     color: $success;
     border: 1px solid lighten($success,30);
   }
-  .yu-tag.warming{
-    border: $warming;
-    background-color: lighten($warming,40);
-    color: $warming;
-    border: 1px solid lighten($warming,30);
+  .yu-tag.warning{
+    border: $warning;
+    background-color: lighten($warning,40);
+    color: $warning;
+    border: 1px solid lighten($warning,30);
   }
   .yu-tag.error{
     border: $danger;
@@ -113,9 +113,8 @@ export default {
   /*过渡*/
   .fade-enter, .fade-leave-active {
     opacity: 0;
-    transform: scaleX(0);
   }
   .fade-enter-active, .fade-leave-active{
-    transition: all .3s linear;
+    transition: opacity .2s linear;
   }
 </style>

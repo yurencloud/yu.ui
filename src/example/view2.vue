@@ -73,7 +73,7 @@
     <div class="sub-title" style="margin-top: 100px">文字提示框---方位变化</div>
     <div class="box" style="margin-left: 100px">
       <!--<yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true">-->
-        <!--<yu-button type="warming">左侧</yu-button>-->
+        <!--<yu-button type="warning">左侧</yu-button>-->
       <!--</yu-tool-tip>-->
       <yu-tool-tip content="与君歌一曲，请君为我侧耳听。" :show-arrow="true" effect="light" placement="top">
         <yu-button >上左</yu-button>
@@ -118,7 +118,7 @@
     <div class="sub-title" style="margin-top: 100px">文字提示框---方位变化</div>
     <div class="box" style="margin-left: 100px">
       <!--<yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true">-->
-      <!--<yu-button type="warming">左侧</yu-button>-->
+      <!--<yu-button type="warning">左侧</yu-button>-->
       <!--</yu-tool-tip>-->
       <yu-tool-tip content="与君歌一曲，请君为我侧耳听。" :show-arrow="true" effect="light" placement="top">
         <yu-button >上左</yu-button>
@@ -248,33 +248,33 @@
     <div class="sub-title" style="margin-top: 100px">警告</div>
     <yu-alert title="成功提示的文案" type="success"/>
     <yu-alert title="信息提示的文本" type="info"/>
-    <yu-alert title='警告提示的文本' type='warming'/>
+    <yu-alert title='警告提示的文本' type='warning'/>
     <yu-alert title="错误提示的文本" type='error' />
       <div class="sub-title" style="margin-top: 100px">警告---带有icon</div>
        <yu-alert title="成功提示的文案" type="success" show-icon/>
        <yu-alert title="成功提示的文案" type="error" show-icon/>
        <yu-alert title="成功提示的文案" type="info" show-icon/>
-       <yu-alert title="成功提示的文案" type="warming" show-icon/>
+       <yu-alert title="成功提示的文案" type="warning" show-icon/>
      <div class="sub-title" style="margin-top: 100px">警告---居中</div>
        <yu-alert title="成功提示的文案" type="success" show-icon center/>
        <yu-alert title="成功提示的文案" type="error" show-icon center/>
        <yu-alert title="成功提示的文案" type="info" show-icon center/>
-       <yu-alert title="成功提示的文案" type="warming" show-icon center/>
+       <yu-alert title="成功提示的文案" type="warning" show-icon center/>
       <div class="sub-title" style="margin-top: 100px">警告---带有辅助性文字</div>
        <yu-alert title="成功提示的文案" type="success" description='这是一段辅助性的文字啊,哈哈哈哈哈哈哈' />
        <yu-alert title="成功提示的文案" type="error" description='哈哈哈哈哈哈哈啊,这是辅助性文字'/>
        <yu-alert title="成功提示的文案" type="info" description='啦啦啦啦啦啦啦,这是辅助性文字'/>
-       <yu-alert title="成功提示的文案" type="warming" description='尕尕尜尜过过,这是辅助性文字'/>
+       <yu-alert title="成功提示的文案" type="warning" description='尕尕尜尜过过,这是辅助性文字'/>
          <div class="sub-title" style="margin-top: 100px">警告---带有辅助性文字和icon</div>
        <yu-alert title="成功提示的文案" type="success" show-icon description='这是一段辅助性的文字啊,哈哈哈哈哈哈哈' />
        <yu-alert title="成功提示的文案" type="error" show-icon description='哈哈哈哈哈哈哈啊,这是辅助性文字'/>
        <yu-alert title="成功提示的文案" type="info" show-icon description='啦啦啦啦啦啦啦,这是辅助性文字'/>
-       <yu-alert title="成功提示的文案" type="warming" show-icon description='尕尕尜尜过过,这是辅助性文字'/>
+       <yu-alert title="成功提示的文案" type="warning" show-icon description='尕尕尜尜过过,这是辅助性文字'/>
     <div class="sub-title" style="margin-top: 100px">警告---关闭按钮为自定义文本</div>
     <yu-alert title="成功提示的文案" type="success" show-icon description='这是一段辅助性的文字啊,哈哈哈哈哈哈哈'  close-text="知道了"/>
     <yu-alert title="成功提示的文案" type="error" show-icon description='哈哈哈哈哈哈哈啊,这是辅助性文字'/>
     <yu-alert title="成功提示的文案哈哈哈哈哈哈" type="info" show-icon description='啦啦啦啦啦啦啦,这是辅助性文字' closable/>
-    <yu-alert title="成功提示的文案" type="warming" show-icon description='尕尕尜尜过过,这是辅助性文字' @click="alert"/>
+    <yu-alert title="成功提示的文案" type="warning" show-icon description='尕尕尜尜过过,这是辅助性文字' @click="alert"/>
     <div class="sub-title" style="margin-top: 100px">警告---不能关闭的警告框</div>
     <yu-alert title="成功提示的文案哈哈哈哈哈哈" type="info" show-icon description='啦啦啦啦啦啦啦,这是辅助性文字' closeable/>
     <yu-alert title="成功提示的文案" type="success" show-icon description='这是一段辅助性的文字啊,哈哈哈哈哈哈哈'  closeable close-text="知道了"/>
@@ -295,8 +295,8 @@
     <yu-message  message="这是一条消息提示" center icon-class="icon-lantern" :duration="3">
       <yu-button :plain="true" >打开消息提示</yu-button>
     </yu-message>
-    <div class="sub-title" style="margin-top: 100px">message----warming</div>
-    <yu-message  message="这是一条消息提示" type="warming">
+    <div class="sub-title" style="margin-top: 100px">message----warning</div>
+    <yu-message  message="这是一条消息提示" type="warning">
       <yu-button :plain="true" >打开消息提示</yu-button>
     </yu-message>
     <div class="sub-title" style="margin-top: 100px">messagebox---基本用法</div>
@@ -307,7 +307,7 @@
                     message="人生几何春已夏"
                     title="提示"
                     :event="messageBox"
-                    isWarming
+                    iswarning
     >
       点击打开message-box
     </yu-message-box>
@@ -335,7 +335,7 @@
                     message="人生几何春已夏"
                     title="提示"
                     :event="messageBox"
-                    isWarming
+                    iswarning
                     center
                     input-type="text"
     >
@@ -349,7 +349,7 @@
                     message="人生几何春已夏"
                     title="提示"
                     :event="messageBox"
-                    isWarming
+                    iswarning
                     center
                     showClose
     >
@@ -363,11 +363,11 @@
                     message="人生几何春已夏"
                     title="提示"
                     :event="messageBox"
-                    isWarming
+                    iswarning
                     center
                     showClose
                     lockScroll
-                    type="warming"
+                    type="warning"
     >
       点击打开message-box
     </yu-message-box>
@@ -409,25 +409,25 @@
     <yu-tag>标签一</yu-tag>
     <yu-tag type="info">标签一</yu-tag>
     <yu-tag type="success">标签一</yu-tag>
-    <yu-tag type="warming">标签一</yu-tag>
+    <yu-tag type="warning">标签一</yu-tag>
     <yu-tag type="error">标签一</yu-tag>
     <div class="sub-title" style="margin-top: 100px">tag----标签---可关闭</div>
     <yu-tag closable>标签一</yu-tag>
     <yu-tag closable type="info">标签一</yu-tag>
     <yu-tag closable type="success">标签一</yu-tag>
-    <yu-tag closable type="warming">标签一</yu-tag>
+    <yu-tag closable type="warning">标签一</yu-tag>
     <yu-tag closable type="error">标签一</yu-tag>
     <div class="sub-title" style="margin-top: 100px">tag----标签---不同尺寸的</div>
     <yu-tag closable>标签一</yu-tag>
     <yu-tag closable type="info" size="medium">标签一</yu-tag>
     <yu-tag closable type="success" size="small">标签一</yu-tag>
-    <yu-tag closable type="warming" size="mini">标签一</yu-tag>
+    <yu-tag closable type="warning" size="mini">标签一</yu-tag>
     <yu-tag closable type="error">标签一</yu-tag>
     <div class="sub-title" style="margin-top: 100px">tag----标签---没有边框的</div>
     <yu-tag closable hit>标签一</yu-tag>
     <yu-tag closable hit type="info" size="medium">标签一</yu-tag>
     <yu-tag closable hit type="success" size="small">标签一</yu-tag>
-    <yu-tag closable hit type="warming" size="mini">标签一</yu-tag>
+    <yu-tag closable hit type="warning" size="mini">标签一</yu-tag>
     <yu-tag closable hit type="error" @close="handleClose">标签一</yu-tag>
     <div class="sub-title" style="margin-top: 100px">tag----标签---关闭时出现动画----可删除</div>
     <yu-tag v-for="item in tags"
@@ -718,7 +718,7 @@ export default {
           date: '2016-05-02',
           name: '王小虎哈哈哈哈哈哈',
           address: '上海市普陀区金沙江路 1518 弄',
-          type: 'warming',
+          type: 'warning',
         }, {
           date: '2016-05-04',
           name: '王小虎',

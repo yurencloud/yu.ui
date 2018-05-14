@@ -66,11 +66,13 @@ export default {
       display: none;
     }
     .radio {
+      transition: border .2s;
       margin-right: 6px;
       margin-bottom: -1px;
       display: inline-block;
-      width: 14px;
-      height: 14px;
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
       border: 1px solid $dark-border;
       border-radius: 50%;
       background-color: #fff;
@@ -83,8 +85,8 @@ export default {
     }
     &.checked {
       .radio {
-        width: 6px;
-        height: 6px;
+        width: 16px;
+        height: 16px;
         border: 5px solid $primary;
         & + span {
           color: $primary;
@@ -94,8 +96,8 @@ export default {
 
     &.checked.disabled {
       .radio {
-        width: 6px;
-        height: 6px;
+        width: 16px;
+        height: 16px;
         border: 5px solid $lighter-text;
         & + span {
           color: $lighter-text;
