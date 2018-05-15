@@ -1,11 +1,11 @@
 <template>
   <div class="yu-switch" @click="handleClick" :class="[{disabled:disabled}]">
      <input type="checkbox" :disabled="disabled" :name="name" v-model="checked" :value="value">
-     <span v-if="!after">{{checked?activeLabel||label:inactiveLabel||label}}</span>
+     <span v-if="!after">{{checked?(activeLabel||label):(inactiveLabel||label)}}</span>
      <span class="switch" v-if="visible" :class="[{on:checked},type,{disabled:disabled}]">
       <span class="circle"></span>
     </span>
-    <span v-if="after">{{checked?activeLabel||label:inactiveLabel||label}}</span>
+    <span v-if="after">{{checked?(activeLabel||label):(inactiveLabel||label)}}</span>
   </div>
 
 </template>
@@ -99,13 +99,13 @@ export default {
         background: #fff;
         border-radius: 8px;
         transition: all .4s ease;
-        transform: translateX(0px) translateY(-1px);
+        transform: translateX(0px);
       }
       transition: background-color .4s ease;
       &.on {
         .circle{
           transition: all .4s ease;
-          transform: translateX(20px) translateY(-1px);
+          transform: translateX(20px);
         }
         @include generalAllColorSwitch();
       }

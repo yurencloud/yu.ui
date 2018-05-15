@@ -19,7 +19,10 @@
           :style="{left: move+'%'}"
           :class="{hover:press}"
         >
-            <span v-if="tooltip" class="tooltip">{{value}}</span>
+            <span v-if="tooltip" class="tooltip">
+              <span>{{value}}</span>{{valueUnit}}
+              <span class="tooltip-angle"></span>
+            </span>
           </span>
       </div>
     </div>
@@ -42,26 +45,26 @@ export default {
   props: {
     disabled: Boolean,
     min: {
-      type: [Number, String],
+      type: Number,
       default: 0,
     },
     max: {
-      type: [Number, String],
+      type: Number,
       default: 100,
     },
     step: {
-      type: [Number, String],
+      type: Number,
     },
     total: {
-      type: [Number, String],
+      type: Number,
       default: 100,
     },
     width: {
-      type: [Number, String],
+      type: Number,
       default: 400,
     },
     defaultValue: {
-      type: [Number, String],
+      type: Number,
     },
     point: Boolean,
     name: String,
@@ -69,6 +72,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    valueUnit: {
+      type: String,
+      default: '',
+    }, // value的单位，可以是%，元，$等
   },
   methods: {
     handleMousedown($event) {
@@ -183,7 +190,7 @@ export default {
         .circle {
           .tooltip {
             position: absolute;
-            top: -30px;
+            top: -36px;
             height: 20px;
             padding: 2px 7px;
             line-height: 20px;
@@ -194,6 +201,16 @@ export default {
             text-align: center;
             min-width: 20px;
             display: none;
+            .tooltip-angle{
+              display: inline-block;
+              height: 8px;
+              width: 8px;
+              background-color: #373737;
+              position: absolute;
+              bottom: -4px;
+              left: 14px;
+              transform: rotate(45deg);
+            }
           }
           transform: translateX(-8px);
           position: absolute;

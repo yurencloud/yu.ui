@@ -4,6 +4,14 @@
     <div class="title">计数器</div>
     <div class="sub-title">基础用法</div>
     <yu-counter/>
+    <div class="sub-title">最大值，最小值</div>
+    <yu-counter :max="5" :step="3"/>
+    <yu-counter :min="10"/>
+
+    <div class="sub-title">显示计量单位，元，%等</div>
+    <yu-counter value-unit="元" :min="0"/>
+    <yu-counter value-unit="元" :min="0" :max="10"/>
+
     <div class="sub-title">禁用状态</div>
     <yu-counter disabled/>
     <div class="sub-title">步数间隔</div>
@@ -15,6 +23,14 @@
 
     <div class="sub-title">单边控制样式</div>
     <yu-counter-side :step=5 size="medium "/>
+
+    <div class="sub-title">最大值，最小值</div>
+    <yu-counter-side :max="5" :step="3"/>
+    <yu-counter-side :min="10"/>
+
+    <div class="sub-title">显示计量单位，元，%等</div>
+    <yu-counter-side value-unit="元" :min="0"/>
+    <yu-counter-side value-unit="元" :min="0" :max="10"/>
 
     <div style="margin-bottom: 400px"></div>
   </div>

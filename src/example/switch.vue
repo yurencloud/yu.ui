@@ -20,6 +20,10 @@
     <yu-switch disabled label="关灯"/>
     <yu-switch on after label="关灯" disabled>></yu-switch>
 
+    <div class="sub-title">激活和非激活时的文字</div>
+    <yu-switch on activeLabel="开灯" inactiveLabel="关灯"/>
+    <yu-switch inactiveLabel="关灯" activeLabel="开灯">></yu-switch>
+
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>

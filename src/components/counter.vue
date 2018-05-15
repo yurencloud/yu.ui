@@ -2,15 +2,15 @@
   <div class="yu-counter">
     <yu-button
       :size="size"
-      class="counter"
+      class="counter sub"
       @click="handleSubtract"
-      :disabled="disabled"
+      :disabled="disabled || disabledSubtract"
     >-</yu-button>
     <yu-input
       :size="size"
       ref='input'
       :name="name"
-      :defaultValue='number'
+      :defaultValue='value+valueUnit'
       :disabled="disabled"
       class="counter"
       @change="handleChange"
@@ -20,8 +20,8 @@
     <yu-button
       :size="size"
       @click="handleAdd"
-      class="counter"
-      :disabled="disabled"
+      class="counter add"
+      :disabled="disabled || disabledAdd"
     >+</yu-button>
   </div>
 </template>
@@ -34,7 +34,9 @@ export default {
   name: 'YuCounter',
   data() {
     return {
-      number: this.step,
+      value: this.min || this.step,
+      disabledAdd: false,
+      disabledSubtract: this.min !== null || false,
     };
   },
   props: {
@@ -47,31 +49,63 @@ export default {
     },
     step: {
       type: Number,
-      default: 1,
+      default: 1, // 必须大于0
+    },
+    max: {
+      type: Number,
+      default: null,
+    }, // 包含
+    min: {
+      type: Number,
+      default: null,
+    }, // 包含
+    valueUnit: {
+      type: String,
+      default: '',
     },
   },
   methods: {
     handleSubtract() {
-      this.$refs.input.changeValue(this.number -= this.step);
+      this.value -= this.step;
+      this.$refs.input.changeValue(this.value + this.valueUnit);
     },
     handleAdd() {
-      this.$refs.input.changeValue(this.number += this.step);
+      this.value += this.step;
+      this.$refs.input.changeValue(this.value + this.valueUnit);
     },
     handleChange(value, name) {
-      this.number = parseInt(value, 0);
+      this.value = parseInt(value, 0);
       this.$emit('change', value, name);
     },
     handleBlur(event) {
       if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.number });
+        this.$parent.handleBlur({ name: this.name, value: this.value });
       }
       this.$emit('blur', event)
     },
   },
   watch: {
-    number(value) {
+    value() {
+      if (this.max !== null) {
+        if (this.value >= this.max) {
+          this.value = this.max;
+          this.$refs.input.changeValue(this.value + this.valueUnit);
+          this.disabledAdd = true;
+          return;
+        }
+        this.disabledAdd = false;
+      }
+      if (this.min !== null) {
+        if (this.value <= this.min) {
+          this.value = this.min;
+          this.$refs.input.changeValue(this.value + this.valueUnit);
+          this.disabledSubtract = true;
+        } else {
+          this.disabledSubtract = false;
+        }
+      }
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value });
+        this.$parent.handleChange({ name: this.name, value: this.value });
       }
     },
   },
@@ -104,10 +138,10 @@ export default {
       margin-right: 0;
       width: 50px;
     }
-    .yu-button.counter:nth-child(1) {
+    .yu-button.sub{
       border-radius: 4px 0 0 4px;
     }
-    .yu-button.counter:nth-child(3) {
+    .yu-button.add{
       border-radius: 0 4px 4px 0;
     }
   }

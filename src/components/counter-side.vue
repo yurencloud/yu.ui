@@ -4,24 +4,21 @@
       :size="size"
       ref='input'
       :name="name"
-      :defaultValue='number'
+      :defaultValue='value+valueUnit'
       :disabled="disabled"
       @change="handleChange"
       @blur="handleBlur"
     />
-    <div>
+    <div :class="[size]">
       <button
-        :size="size"
         @click="handleAdd"
-        :class="[{disabled:disabled}]"
-        :disabled="disabled"
+        :class="[{disabled:disabled||disabledAdd}]"
       >
         <i class="iconfont icon-angle-up"></i>
       </button>
       <button
-        :size="size"
         @click="handleSubtract"
-        :class="[{disabled:disabled}]"
+        :class="[{disabled:disabled||disabledSubtract}]"
       >
         <i class="iconfont icon-angle-down"></i>
       </button>
@@ -36,7 +33,9 @@ export default {
   name: 'YuCounterSide',
   data() {
     return {
-      number: this.step,
+      value: this.min || this.step,
+      disabledAdd: false,
+      disabledSubtract: this.min !== null || false,
     };
   },
   props: {
@@ -51,20 +50,59 @@ export default {
       type: Number,
       default: 1,
     },
+    max: {
+      type: Number,
+      default: null,
+    }, // 包含
+    min: {
+      type: Number,
+      default: null,
+    }, // 包含
+    valueUnit: {
+      type: String,
+      default: '',
+    },
   },
   methods: {
     handleSubtract() {
-      this.$refs.input.changeValue(this.number -= this.step);
+      this.value -= this.step;
+      this.$refs.input.changeValue(this.value + this.valueUnit);
     },
     handleAdd() {
-      this.$refs.input.changeValue(this.number += this.step);
+      this.value += this.step;
+      this.$refs.input.changeValue(this.value + this.valueUnit);
     },
     handleChange(value) {
-      this.number = parseInt(value, 0);
+      this.value = parseInt(value, 0);
       this.$emit('change', value, name);
     },
     handleBlur(event) {
       this.$emit('blur', event);
+    },
+  },
+  watch: {
+    value() {
+      if (this.max !== null) {
+        if (this.value >= this.max) {
+          this.value = this.max;
+          this.$refs.input.changeValue(this.value + this.valueUnit);
+          this.disabledAdd = true;
+          return;
+        }
+        this.disabledAdd = false;
+      }
+      if (this.min !== null) {
+        if (this.value <= this.min) {
+          this.value = this.min;
+          this.$refs.input.changeValue(this.value + this.valueUnit);
+          this.disabledSubtract = true;
+        } else {
+          this.disabledSubtract = false;
+        }
+      }
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value });
+      }
     },
   },
   components: {
@@ -90,7 +128,16 @@ export default {
       }
     }
     div{
-      height: 36px;
+      height: 40px;
+      &.medium{
+        height: 36px;
+      }
+      &.small{
+        height: 32px;
+      }
+      &.mini{
+        height: 28px;
+      }
       vertical-align: top;
       display: inline-block;
       button {
@@ -120,6 +167,7 @@ export default {
         &.disabled{
           color:$lighter-text;
           background: $background;
+          cursor: not-allowed;
         }
       }
       button:nth-child(1) {

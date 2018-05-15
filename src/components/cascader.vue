@@ -12,7 +12,7 @@
       :width="width"
       :disabled="disabled"
     />
-    <transition name="fade">
+    <collapse-transition>
     <div v-if="cascader" class="options" v-show="visible">
       <div class="cascader first">
         <div class="option"
@@ -54,11 +54,12 @@
         </div>
       </div>
     </div>
-    </transition>
+    </collapse-transition>
   </div>
 </template>
 
 <script>
+import { CollapseTransition } from 'vue2-transitions';
 import YuInput from './input';
 import YuLoading from './loading';
 
@@ -93,6 +94,7 @@ export default {
   components: {
     YuInput,
     YuLoading,
+    CollapseTransition,
   },
   methods: {
     handleClick() {
@@ -191,6 +193,7 @@ export default {
       }
     }, false);
   },
+
 };
 </script>
 
@@ -201,16 +204,6 @@ export default {
   .yu-cascader{
     @include angleAnimation();
     position: relative;
-    .fade-enter-active {
-      transition: all .2s ease;
-    }
-    .fade-leave-active {
-      transition: all .2s ease;
-    }
-    .fade-enter, .fade-leave-to
-      /* .slide-fade-leave-active for below version 2.1.8 */ {
-      opacity: 0;
-    }
     .options {
       background-color: #fff;
       position: absolute;
@@ -222,6 +215,7 @@ export default {
       color: $text;
       box-shadow: $box-shadow;
       font-size: 0;
+      overflow: hidden;
       /*过渡*/
       /* 可以设置不同的进入和离开动画 */
       /* 设置持续时间和动画函数 */

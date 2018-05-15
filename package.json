@@ -1,6 +1,6 @@
 {
   "name": "yu.ui",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "yu vue ui components project",
   "author": {
     "name": "mackwang/jiaqingzheng",
@@ -17,6 +17,7 @@
   "dependencies": {
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
+    "vue2-transitions": "^0.2.3",
     "whatwg-fetch": "^2.0.3",
     "yu.event": "^1.0.1",
     "yu.validation": "^1.0.1"

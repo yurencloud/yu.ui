@@ -8,6 +8,8 @@ import Counter from '../example/counter'
 import Select from '../example/select'
 import Switch from '../example/switch'
 import Cascader from '../example/cascader'
+import Slider from '../example/slider'
+import TimePicker from '../example/time-picker'
 
 Vue.use(Router)
 
@@ -48,6 +50,14 @@ export default new Router({
     {
       path: '/switch',
       component: Switch,
+    },
+    {
+      path: '/slider',
+      component: Slider,
+    },
+    {
+      path: '/time-picker',
+      component: TimePicker,
     },
   ],
 })

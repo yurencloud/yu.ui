@@ -344,7 +344,6 @@ export default {
       z-index: 1000;
       min-width: 175px;
       border: 1px solid $border;
-      padding: 8px 0;
       margin-top: 8px;
       border-radius: 4px;
       color: $text;
@@ -362,7 +361,7 @@ export default {
       }
       .option {
         font-size: $normal;
-        padding: 4px 8px;
+        padding: 12px 8px;
         &:hover {
           background-color: $background;
         }

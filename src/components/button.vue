@@ -121,6 +121,7 @@ export default {
       }
     }
 
+    // 以下修复input中使用的button
     &.append{
       display: inline-block;
       vertical-align: top;
@@ -134,6 +135,10 @@ export default {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       margin: 0;
+    }
+    // 以下修复counter中使用的button
+    &.counter{
+      font-size: 20px;
     }
   }
 </style>
