@@ -18,14 +18,13 @@
         border: 1px solid lighten($color, 10);
         background-color: lighten($color, 10);
       }
-      &.loading{
+      &.loading {
         border: 1px solid lighten($color, 15);
         background-color: lighten($color, 15);
       }
     }
   }
 }
-
 
 @mixin generalAllColorPlainButton() {
   @each $type in $types {
@@ -97,7 +96,7 @@
       span.prefix {
         line-height: $height;
         i {
-            top: - $height*0.6;
+          top: -$height*0.5;
           @if $height > $small-height {
             font-size: $normal
           } @else {
@@ -108,7 +107,18 @@
       span.suffix {
         line-height: $height;
         i {
-          top: - $height*0.6;
+          top: -$height*0.5;
+          @if $height > $small-height {
+            font-size: $normal
+          } @else {
+            font-size: $tiny
+          }
+        }
+      }
+      span.clearable {
+        line-height: $height;
+        i {
+          top: -$height*0.5;
           @if $height > $small-height {
             font-size: $normal
           } @else {

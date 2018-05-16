@@ -8,9 +8,11 @@
     <div class="sub-title">设置时间段和步长</div>
     <yu-time-picker :optionParam="time"/>
 
+    <div class="sub-title">设置时间最大值和最小值</div>
+    <yu-time-picker :optionParam="time2"/>
+
     <div class="sub-title">滚动时间列表选择</div>
     <yu-time-picker type="scroll" :selectParam="selectParam"/>
-
 
     <div class="sub-title">远程加载</div>
     <div>同滚动时间列表选择</div>
@@ -29,6 +31,13 @@ export default {
         start: '09:00',
         step: '00:15',
         end: '18:00',
+      },
+      time2: {
+        start: '09:00',
+        step: '00:15',
+        end: '18:00',
+        maxTime: '14:00',
+        minTime: '10:00',
       },
       selectParam: {
         start: '09:00:00',

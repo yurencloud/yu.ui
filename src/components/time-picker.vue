@@ -115,6 +115,8 @@ export default {
       const startMinute = this.getMinute(this.optionParam.start)
       const stepMinute = this.getMinute(this.optionParam.step)
       const endMinute = this.getMinute(this.optionParam.end)
+      const min = this.getMinute(this.optionParam.minTime || '00:00') // 设置最大值，最小值
+      const max = this.getMinute(this.optionParam.maxTime || '24:00')
       const options = [];
       let i = startMinute;
       while (i < endMinute) {
@@ -123,7 +125,7 @@ export default {
         let minutes = i % 60;
         minutes < 10 ? minutes = `0${minutes}` : minutes = minutes.toString();
         const result = `${hours}:${minutes}`;
-        options.push({ value: result, label: result })
+        options.push({ value: result, label: result, disabled: i < min || i > max })
         i += stepMinute;
       }
       return options;

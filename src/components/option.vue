@@ -57,7 +57,8 @@ export default {
       display: none;
     }
     &.disabled{
-      color:$lighter-text
+      color:$lighter-text;
+      cursor: not-allowed;
     }
   }
 

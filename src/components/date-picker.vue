@@ -1,103 +1,122 @@
 <template>
   <div class="yu-date-picker">
-    <yu-input  ref="input"
-               :name="name"
-               prefix="icon-calender"
-               overflow
-               clearable
-               @click="handleClick"
-               @blur="handleBlur"
-               @change="handleChange"
-               @clear="handleClear"
-               :disabled="disabled"
-               :width="width"
-               :size="size"
-               :placeholder="placeholder"/>
+    <yu-input ref="input"
+              :name="name"
+              prefix="icon-calender"
+              overflow
+              clearable
+              @click="handleClick"
+              @blur="handleBlur"
+              @change="handleChange"
+              @clear="handleClear"
+              :disabled="disabled"
+              :width="width"
+              :size="size"
+              :placeholder="placeholder"/>
     <!--选择日期-->
-    <div v-show="visible && active==='day'" class="container">
-      <div class="head">
-        <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYear"></i></a>
-        <a class="left"><i class="iconfont icon-angle-left"  @click="subtractMonth"></i></a>
-        <div>
-          <span @click="activeYear">{{year}}年</span>
-          <span @click="activeMonth">{{month}}月</span>
+    <transition name="zoom-in-top">
+      <div v-show="visible && active==='day'" class="container">
+        <div class="head">
+          <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYear"></i></a>
+          <a class="left"><i class="iconfont icon-angle-left" @click="subtractMonth"></i></a>
+          <div>
+            <span @click="activeYear">{{year}}年</span>
+            <span @click="activeMonth">{{month}}月</span>
+          </div>
+          <a class="right"><i class="iconfont icon-angle-double-right" @click="addYear"></i></a>
+          <a class="right"><i class="iconfont icon-angle-right" @click="addMonth"></i></a>
         </div>
-        <a class="right"><i class="iconfont icon-angle-double-right" @click="addYear"></i></a>
-        <a class="right"><i class="iconfont icon-angle-right" @click="addMonth"></i></a>
+        <div class="content">
+          <table class="date">
+            <thead>
+            <tr>
+              <th>日</th>
+              <th>一</th>
+              <th>二</th>
+              <th>三</th>
+              <th>四</th>
+              <th>五</th>
+              <th>六</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-bind:key="index" v-for="(item,index) in days">
+              <td v-bind:key="day.value"
+                  :class="[day.className,{active: day.active},{disabled: day.disabled}]"
+                  v-for="day in item"
+                  @click="selectDay(day)">
+                <div>{{day.label}}</div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="content">
-        <table class="date">
-          <thead>
-          <tr>
-            <th>日</th>
-            <th>一</th>
-            <th>二</th>
-            <th>三</th>
-            <th>四</th>
-            <th>五</th>
-            <th>六</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-bind:key="index" v-for="(item,index) in days">
-            <td v-bind:key="day.value" :class="[day.className,{active: day.active}]" v-for="day in item" @click="selectDay(day)">
-              <div>{{day.label}}</div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </transition>
+
+
     <!--选择月份-->
-    <div v-show="visible && active==='month'" class="container">
-      <div class="head">
-        <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYear"></i></a>
-        <div>
-          <span @click="activeYear">{{year}}年</span>
+    <transition name="zoom-in-top">
+      <div v-show="visible && active==='month'" class="container">
+        <div class="head">
+          <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYear"></i></a>
+          <div>
+            <span @click="activeYear">{{year}}年</span>
+          </div>
+          <a class="right"><i class="iconfont icon-angle-double-right" @click="addYear"></i></a>
         </div>
-        <a class="right"><i class="iconfont icon-angle-double-right" @click="addYear"></i></a>
+        <div class="content">
+          <table class="date month">
+            <thead>
+            <tr>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-bind:key="index" v-for="(item,index) in months">
+              <td v-bind:key="month.value"
+                  :data-value="month.value"
+                  :class="[month.className, {active:month.active}, {disabled: month.disabled}]"
+                  v-for="month in item"
+                  @click="selectMonth(month)">
+                <div>{{month.label}}</div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="content">
-        <table class="date month">
-          <thead>
-          <tr>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-bind:key="index" v-for="(item,index) in months">
-            <td v-bind:key="month.value" :data-value="month.value" :class="[month.className, {active:month.active}]" v-for="month in item" @click="selectMonth(month)">
-              <div>{{month.label}}</div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </transition>
     <!--选择年份-->
-    <div v-show="visible && active==='year'" class="container">
-      <div class="head">
-        <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYear"></i></a>
-        <div>
-          <span>{{yearStart}}年~{{yearStart+10}}年</span>
+    <transition name="zoom-in-top">
+      <div v-show="visible && active==='year'" class="container">
+        <div class="head">
+          <a class="left"><i class="iconfont icon-angle-double-left" @click="subtractYear"></i></a>
+          <div>
+            <span>{{yearStart}}年~{{yearStart+10}}年</span>
+          </div>
+          <a class="right"><i class="iconfont icon-angle-double-right" @click="addYear"></i></a>
         </div>
-        <a class="right"><i class="iconfont icon-angle-double-right" @click="addYear"></i></a>
+        <div class="content">
+          <table class="date month">
+            <thead>
+            <tr>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-bind:key="index" v-for="(item,index) in years">
+              <td v-bind:key="year.value"
+                  :data-value="year.value"
+                  :class="[year.className, {active:year.active}, {disabled: year.disabled}]"
+                  v-for="year in item"
+                  @click="selectYear(year)">
+                <div>{{year.label}}</div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="content">
-        <table class="date month">
-          <thead>
-          <tr>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-bind:key="index" v-for="(item,index) in years">
-            <td v-bind:key="year.value" :data-value="year.value" :class="[year.className, {active:year.active}]" v-for="year in item" @click="selectYear(year)">
-              <div>{{year.label}}</div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -133,6 +152,8 @@ export default {
       type: String,
       default: 'day',
     },
+    minDate: String,
+    maxDate: String,
   },
   methods: {
     handleClear() {
@@ -162,7 +183,7 @@ export default {
       let day = date.getDate();
       month = (month > 9) ? (`${month}`) : (`0${month}`);
       day = (day > 9) ? (`${day}`) : (`0${day}`);
-      return year + month + day;
+      return `${year}-${month}-${day}`;
     },
     addMonth() {
       this.month++;
@@ -184,15 +205,26 @@ export default {
       this.year = parseInt(this.year, 0) - num;
       this.getByActive();
     },
+    // 设置最大日期和最小值日期
+    limitDate(item, thisDay) {
+      if (this.minDate) {
+        item.disabled = (thisDay.getTime() < new Date(this.minDate).getTime());
+      }
+      if (this.maxDate) {
+        item.disabled = (thisDay.getTime() > new Date(this.maxDate).getTime());
+      }
+      return item;
+    },
     getDays() {
       const tds = [];
       for (let i = 0; i < 42; i++) {
         const thisDay = new Date(this.year, this.month - 1, i + 1 - this.firstDay.getDay());
         const thisDayStr = this.getDateStr(thisDay);
         tds[i] = { label: thisDay.getDate(), value: thisDayStr };
+        tds[i] = this.limitDate(tds[i], thisDay);
         if (thisDayStr === this.getDateStr(this.date)) { // 当前天
           tds[i].className = 'currentDay';
-        } else if (thisDayStr.substr(0, 6) === this.getDateStr(this.firstDay).substr(0, 6)) {
+        } else if (thisDayStr.substr(0, 7) === this.getDateStr(this.firstDay).substr(0, 7)) {
           tds[i].className = 'currentMonth'; // 当前月
         } else { // 其他月
           tds[i].className = 'otherMonth';
@@ -212,9 +244,10 @@ export default {
       for (let i = 0; i <= 11; i++) {
         const thisDay = new Date(this.year, this.month - 1, i + 1 - this.firstDay.getDay());
         const thisDayStr = this.getDateStr(thisDay);
-        const value = this.year + (i < 10 ? `0${(i + 1).toString()}` : (i + 1).toString());
+        const value = `${this.year}-${i < 10 ? `0${(i + 1).toString()}` : (i + 1).toString()}`;
         tds[i] = { label: monthArray[i], value };
-        if (thisDayStr === this.getDateStr(this.date).substr(0, 6)) { // 当前天
+        tds[i] = this.limitDate(tds[i], thisDay);
+        if (thisDayStr === this.getDateStr(this.date).substr(0, 7)) { // 当前天
           tds[i].className = 'currentMonth';
         }
       }
@@ -223,7 +256,6 @@ export default {
         group[i] = tds.slice(4 * (i - 1), 4 * i);
       }
       this.months = group;
-      this.$refs.input.changeValue('');
       this.value = '';
     },
     getYears() {
@@ -232,8 +264,12 @@ export default {
       const start = year - (year % 10);
       this.yearStart = start;
       for (let i = 0; i <= 10; i++) {
-        tds[i] = { label: start + i, value: start + i };
-        if (start + i === new Date().getFullYear()) { // 当前天
+        const _year = start + i;
+        // 设置最大日期和最小值日期
+        tds[i] = { label: _year, value: _year };
+        const thisDay = new Date(_year);
+        tds[i] = this.limitDate(tds[i], thisDay);
+        if (_year === new Date().getFullYear()) { // 当前天
           tds[i].className = 'currentYear';
         }
       }
@@ -242,10 +278,12 @@ export default {
         group[i] = tds.slice(4 * (i - 1), 4 * i);
       }
       this.years = group;
-      this.$refs.input.changeValue('');
       this.value = '';
     },
     selectDay(day) {
+      if (day.disabled) {
+        return;
+      }
       // 当日期是其他月份的，不允许选择
       if (day.className.indexOf('otherMonth') > -1) return;
 
@@ -258,12 +296,14 @@ export default {
       day.active = true;
       this.value = day.value;
       this.visible = false;
-      this.$refs.input.changeValue(this.value);
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.value });
       }
     },
     selectMonth(month) {
+      if (month.disabled) {
+        return;
+      }
       // 刷新月份
       this.months.forEach((item) => {
         item.forEach((i) => {
@@ -273,18 +313,20 @@ export default {
       month.active = true;
       this.value = month.value;
       if (this.type !== 'month') {
-        this.month = parseInt(this.value.substr(4, 2), 0);
+        this.month = parseInt(this.value.substr(5, 2), 0);
         this.active = 'day';
         this.getByActive();
       } else {
         this.visible = false;
-        this.$refs.input.changeValue(this.value);
       }
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.value });
       }
     },
     selectYear(year) {
+      if (year.disabled) {
+        return;
+      }
       // 刷新年份
       this.years.forEach((item) => {
         item.forEach((i) => {
@@ -299,7 +341,6 @@ export default {
         this.getByActive();
       } else {
         this.visible = false;
-        this.$refs.input.changeValue(this.value);
       }
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.value });
@@ -339,6 +380,11 @@ export default {
     this.month = this.date.getMonth() + 1;
     this.getByActive();
   },
+  watch: {
+    value(value) {
+      this.$refs.input.changeValue(value);
+    },
+  },
   components: {
     YuInput,
   },
@@ -347,34 +393,38 @@ export default {
 
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";
-  .yu-date-picker{
+  @import "../assets/css/animation";
+
+  .yu-date-picker {
+    @include zoomInTop();
+
     position: relative;
     .container {
       width: 330px;
-      .head{
+      .head {
         text-align: center;
-        a{
+        a {
           display: inline-block;
           padding: 8px;
-          &:hover{
-            color:$primary;
+          &:hover {
+            color: $primary;
             cursor: pointer;
           }
         }
-        div{
+        div {
           display: inline-block;
           padding: 8px;
           font-size: $normal;
-          span:hover{
-            color:$primary;
+          span:hover {
+            color: $primary;
             cursor: pointer;
           }
         }
-        .left{
-          float:left;
+        .left {
+          float: left;
         }
-        .right{
-          float:right;
+        .right {
+          float: right;
         }
       }
       background-color: #fff;
@@ -388,12 +438,12 @@ export default {
       border-radius: 4px;
       color: $text;
       box-shadow: $box-shadow;
-      table.date{
+      table.date {
         width: 100%;
         margin: 0 auto;
-        thead{
-          tr{
-            th{
+        thead {
+          tr {
+            th {
               border-bottom: 1px solid $border;
               font-size: 14px;
               width: 42px;
@@ -403,27 +453,27 @@ export default {
             }
           }
         }
-        tbody{
-          tr td{
+        tbody {
+          tr td {
             text-align: center;
             font-size: 14px;
             width: 42px;
             height: 40px;
             font-weight: normal;
             color: $text;
-            &:hover:not(.otherMonth){
+            &:hover:not(.otherMonth):not(.disabled) {
               color: $primary;
               cursor: pointer;
             }
-            &.otherMonth{
+            &.otherMonth {
               color: $lighter-text;
             }
-            &.currentDay{
+            &.currentDay {
               color: $primary;
               font-weight: bold;
             }
-            &.active{
-              div{
+            &.active:not(.disabled) {
+              div {
                 display: inline-block;
                 text-align: center;
                 line-height: 24px;
@@ -431,30 +481,37 @@ export default {
                 height: 24px;
                 background-color: $primary;
                 border-radius: 12px;
-                color:#fff;
+                color: #fff;
               }
+            }
+            &.disabled {
+              color: $lighter-text;
+              cursor: not-allowed;
             }
           }
         }
-        &.month{
-          tr td{
+        &.month {
+          tr td {
             width: 80px;
             height: 60px;
-            &.active{
-            div{
-              width: 80px;
-              height: 60px;
-              border-radius: 0;
-              background-color: #fff;
-              line-height: 60px;
-              font-weight: bold;
-              color: $primary;
+            &.active:not(.disabled) {
+              div {
+                width: 80px;
+                height: 60px;
+                border-radius: 0;
+                background-color: #fff;
+                line-height: 60px;
+                font-weight: bold;
+                color: $primary;
+              }
+            }
+            &.disabled {
+              color: $lighter-text;
+              cursor: not-allowed;
             }
           }
         }
       }
-
-    }
     }
   }
 </style>

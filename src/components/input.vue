@@ -28,7 +28,7 @@
     </span>
     <!--清除图标-->
     <span class="clearable" v-if="clearable && value" @click="clear">
-    <i class="iconfont icon-close-circle "></i>
+     <i class="iconfont icon-close-circle "></i>
     </span>
     <textarea
       v-if="type==='textarea'"
@@ -50,16 +50,18 @@
     <slot v-if="$slots.append" class="append" name="append"/>
 
     <!--输入提示-->
+    <transition name="zoom-in-top">
     <div v-if="options" v-show="search" class="options" :class="[{overflow:overflow}]">
       <yu-loading :loading="loading && remote"/>
       <yu-option ref="option"
-                 v-for="option in options"
-                 :key="option.value"
-                 :label="option.label"
-                 :value="option.value"
+                 v-for="item in options"
+                 :key="item.value"
+                 :disabled="item.disabled"
+                 :label="item.label"
+                 :value="item.value"
       />
     </div>
-
+    </transition>
 
   </div>
 </template>
@@ -90,7 +92,10 @@ export default {
     prefix: String,
     suffix: String,
     name: String,
-    size: String,
+    size: {
+      type: String,
+      default: 'normal',
+    },
     width: String,
     options: Array,
     overflow: Boolean,
@@ -227,8 +232,11 @@ export default {
 <style lang="scss" scoped type="text/scss">
   @import "../assets/css/varible";
   @import "../assets/css/function";
+  @import "../assets/css/animation";
 
   .yu-input {
+    @include zoomInTop();
+
     position: relative;
     display: block;
     margin-right: 8px;
@@ -279,34 +287,34 @@ export default {
       }
     }
 
-    span.clearable {
-      position: relative;
-      i {
-        font-size: $small;
-        color: $light-text;
-        position: absolute;
-        left: -25px;
-        line-height: 40px;
-      }
-    }
 
     span.prefix {
       position: relative;
+      vertical-align: top;
       color: $lighter-text;
-      line-height: $normal-height;
       i {
         position: absolute;
         left: 10px;
       }
     }
 
-    span.suffix {
+    span.clearable {
       position: relative;
-      color: $lighter-text;
-      line-height: $normal-height;
+      vertical-align: top;
+      color: $light-text;
       i {
         position: absolute;
-        left: -26px;
+        left: -25px;
+      }
+    }
+
+    span.suffix {
+      position: relative;
+      vertical-align: top;
+      color: $lighter-text;
+      i {
+        position: absolute;
+        left: -25px;
       }
     }
 
@@ -372,6 +380,10 @@ export default {
         }
         &.hide {
           display: none;
+        }
+        &.disabled{
+          color:$lighter-text;
+          cursor: not-allowed;
         }
       }
     }

@@ -14,20 +14,22 @@
       :size="size"
       @clear="clear"
     />
-    <div class="options" :class="[{overflow:overflow}]" v-show="visible">
-      <slot/>
-    </div>
-    <!--选中选项显示-->
-    <div class="selected" v-if="showSelects && selects.length>0">
-      <yu-tag closable
-              v-for="item in selects"
-              v-bind:key="item.value"
-              :value="item.value"
-              :type="tagType"
-              @close="handleCloseTag(item)">
-        {{item.label}}
-      </yu-tag>
-    </div>
+    <transition name="zoom-in-top">
+      <div class="options" :class="[{overflow:overflow}]" v-show="visible">
+        <slot/>
+      </div>
+      <!--选中选项显示-->
+      <div class="selected" v-if="showSelects && selects.length>0">
+        <yu-tag closable
+                v-for="item in selects"
+                v-bind:key="item.value"
+                :value="item.value"
+                :type="tagType"
+                @close="handleCloseTag(item)">
+          {{item.label}}
+        </yu-tag>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -149,6 +151,8 @@ export default {
   @import "../assets/css/animation";
 
   .yu-select {
+    @include zoomInTop();
+
     position: relative;
     .options {
       background-color: #fff;

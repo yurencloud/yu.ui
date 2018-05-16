@@ -10,6 +10,7 @@ import Switch from '../example/switch'
 import Cascader from '../example/cascader'
 import Slider from '../example/slider'
 import TimePicker from '../example/time-picker'
+import DatePicker from '../example/date-picker'
 
 Vue.use(Router)
 
@@ -58,6 +59,10 @@ export default new Router({
     {
       path: '/time-picker',
       component: TimePicker,
+    },
+    {
+      path: '/date-picker',
+      component: DatePicker,
     },
   ],
 })

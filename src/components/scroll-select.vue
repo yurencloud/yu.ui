@@ -14,6 +14,7 @@
       :width="width"
       :size="size"
     />
+    <transition name="zoom-in-top">
     <div class="container"
          @mouseover="handleMouseover"
          @mouseleave="handleMouseleave"
@@ -56,8 +57,8 @@
           <span @click="handleConfirm" class="confirm">确认</span>
         </div>
       </div>
-
     </div>
+    </transition>
   </div>
 </template>
 
@@ -131,7 +132,7 @@ export default {
           }
           this.secondOptions = second.children;
         }
-      }, 400);
+      }, 800);
     },
     firstClick(index, $event) {
       this.firstActive = index;
@@ -154,7 +155,7 @@ export default {
           }
           this.thirdOptions = third.children;
         }
-      }, 400)
+      }, 800)
     },
     secondClick(index, $event) {
       this.secondActive = index;
@@ -168,7 +169,7 @@ export default {
         this.thirdActive = parseInt($event.target.scrollTop / 40, 0);
         $event.target.scrollTop = this.thirdActive * 40;
         the.fix = false;
-      }, 400);
+      }, 800);
     },
     thirdClick(index, $event) {
       this.thirdActive = index;
@@ -237,6 +238,8 @@ export default {
   @import "../assets/css/animation";
 
   .yu-scroll-select {
+    @include zoomInTop();
+
     position: relative;
     .line {
       position: absolute;

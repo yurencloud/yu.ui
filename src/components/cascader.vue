@@ -12,7 +12,7 @@
       :width="width"
       :disabled="disabled"
     />
-    <collapse-transition>
+    <transition name="zoom-in-top">
     <div v-if="cascader" class="options" v-show="visible">
       <div class="cascader first">
         <div class="option"
@@ -54,12 +54,11 @@
         </div>
       </div>
     </div>
-    </collapse-transition>
+    </transition>
   </div>
 </template>
 
 <script>
-import { CollapseTransition } from 'vue2-transitions';
 import YuInput from './input';
 import YuLoading from './loading';
 
@@ -94,7 +93,6 @@ export default {
   components: {
     YuInput,
     YuLoading,
-    CollapseTransition,
   },
   methods: {
     handleClick() {
@@ -203,6 +201,9 @@ export default {
 
   .yu-cascader{
     @include angleAnimation();
+
+    @include zoomInTop();
+
     position: relative;
     .options {
       background-color: #fff;
