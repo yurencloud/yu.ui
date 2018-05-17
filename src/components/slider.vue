@@ -197,6 +197,7 @@ export default {
             background: #373737;
             border-radius: 4px;
             color: #fff;
+            font-size: $normal;
             margin-left: -8px;
             text-align: center;
             min-width: 20px;

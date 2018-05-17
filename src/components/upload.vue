@@ -15,7 +15,7 @@
       <i class="iconfont icon-add" v-show="visible"></i>
       <img v-if="preview" :src="preview" alt="preview">
     </div>
-    <div v-if="type==='defined'" @click="handleClick">
+    <div v-if="type==='defined'" class="defined" @click="handleClick">
       <slot/>
     </div>
     <ul v-if="list &&　files.length>0">
@@ -36,6 +36,7 @@
 <script>
 import 'whatwg-fetch';
 import YuButton from './button';
+import YuMessage from './message';
 
 export default {
   name: 'YuUpload',
@@ -63,9 +64,13 @@ export default {
     multiIcon: Boolean,
     maxSize: Number,
     previewList: Boolean,
+    headers: Object, // 头部
+    data: Object, // 额外参数
+    max: Number, // 文件最大同时上传数量
   },
   components: {
     YuButton,
+    YuMessage,
   },
   methods: {
     // 让父级去处理删除事件
@@ -77,6 +82,11 @@ export default {
       const formData = new FormData();
       this.files = $event.target.files;
       console.log(this.files);
+
+      // 最大上传数量
+      if (this.max && this.files.length() > this.max) {
+        return;
+      }
 
       // 添加icon的class
       if (this.multiIcon) {
@@ -93,6 +103,14 @@ export default {
         }
       } else {
         formData.append(this.name, $event.target.files[0]);
+      }
+
+      // 额外参数
+      if (this.data) {
+        const data = this.data;
+        Object.keys(data).forEach((key) => {
+          formData.append(key, data[key])
+        });
       }
 
       if (this.previewList) {
@@ -124,6 +142,7 @@ export default {
       fetch(this.url, {
         method: 'POST',
         body: formData,
+        headers: this.headers,
       })
         .then((response) => {
           response.text().then((data) => {
@@ -132,12 +151,15 @@ export default {
             // 返回对象data中要有status属性表明上传成功或失败
             if (parseInt(data.status, 0) === 1) {
               the.status = '上传成功.';
+              the.$emit('success', data);
             } else {
               the.status = '上传失败!';
+              the.$emit('error', data);
             }
           });
         }, (error) => {
           console.log(error.message);
+          the.$emit('error', error);
         })
     },
     handleClick() {
@@ -209,6 +231,9 @@ export default {
     color: $text;
     .input {
       display: none;
+    }
+    .defined{
+      display: inline-block;
     }
     ul {
       margin: 20px 0;

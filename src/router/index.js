@@ -11,6 +11,10 @@ import Cascader from '../example/cascader'
 import Slider from '../example/slider'
 import TimePicker from '../example/time-picker'
 import DatePicker from '../example/date-picker'
+import Upload from '../example/upload'
+import Rate from '../example/rate'
+import Form from '../example/form'
+import Table from '../example/table'
 
 Vue.use(Router)
 
@@ -63,6 +67,22 @@ export default new Router({
     {
       path: '/date-picker',
       component: DatePicker,
+    },
+    {
+      path: '/upload',
+      component: Upload,
+    },
+    {
+      path: '/rate',
+      component: Rate,
+    },
+    {
+      path: '/form',
+      component: Form,
+    },
+    {
+      path: '/table',
+      component: Table,
     },
   ],
 })

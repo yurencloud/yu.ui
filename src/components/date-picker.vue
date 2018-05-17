@@ -244,9 +244,8 @@ export default {
       for (let i = 0; i <= 11; i++) {
         const thisDay = new Date(this.year, this.month - 1, i + 1 - this.firstDay.getDay());
         const thisDayStr = this.getDateStr(thisDay);
-        const value = `${this.year}-${i < 10 ? `0${(i + 1).toString()}` : (i + 1).toString()}`;
+        const value = `${this.year}-${i < 9 ? `0${(i + 1).toString()}` : (i + 1).toString()}`;
         tds[i] = { label: monthArray[i], value };
-        tds[i] = this.limitDate(tds[i], thisDay);
         if (thisDayStr === this.getDateStr(this.date).substr(0, 7)) { // 当前天
           tds[i].className = 'currentMonth';
         }
@@ -267,8 +266,6 @@ export default {
         const _year = start + i;
         // 设置最大日期和最小值日期
         tds[i] = { label: _year, value: _year };
-        const thisDay = new Date(_year);
-        tds[i] = this.limitDate(tds[i], thisDay);
         if (_year === new Date().getFullYear()) { // 当前天
           tds[i].className = 'currentYear';
         }

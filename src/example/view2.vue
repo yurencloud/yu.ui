@@ -573,7 +573,6 @@ import YuCollapse from '../components/collapse';
 import YuCheckboxs from '../components/checkboxs';
 import YuLoading from '../components/loading';
 import YuCounterSide from '../components/counter-side';
-import YuSelected from '../components/selected';
 import YuCascader from '../components/cascader';
 import YuSwitch from '../components/switch';
 import YuBreadcrumb from '../components/breadcrumb';
@@ -909,7 +908,6 @@ export default {
     YuCheckboxs,
     YuLoading,
     YuCounterSide,
-    YuSelected,
     YuCascader,
     YuSwitch,
     YuDropDown,

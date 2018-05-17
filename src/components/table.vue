@@ -31,9 +31,8 @@ export default {
     }
   },
   props: {
-    widths: {
-    },
-    data: {},
+    widths: Object,
+    data: Object,
     stripe: Boolean,
     border: Boolean,
     status: Boolean,

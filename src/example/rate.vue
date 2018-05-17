@@ -1,30 +1,34 @@
 <template>
   <div id="container" style="margin: 30px">
     <h2>YU.UI</h2>
-    <div class="title">日期选择器</div>
+    <div class="title">等级</div>
     <div class="sub-title">普通用法</div>
-    <yu-date-picker/>
+    <yu-rate/>
 
-    <div class="sub-title">获取月份</div>
-    <yu-date-picker type="month"/>
+    <div class="sub-title">显示label</div>
+    <yu-rate labeled/>
 
-    <div class="sub-title">获取年份</div>
-    <yu-date-picker type="year"/>
+    <div class="sub-title">自定义label</div>
+    <yu-rate :label="label2" labeled/>
 
-    <div class="sub-title">最大日期和最小日期</div>
-    <yu-date-picker min-date="2018-05-15"/>
-    <yu-date-picker max-date="2018-05-15"/>
+    <div class="sub-title">设置默认值，并只读</div>
+    <yu-rate readOnly :defaultValue="3"/>
 
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
 <script>
-import YuDatePicker from '../components/date-picker';
+import YuRate from '../components/rate';
 
 export default {
+  data() {
+    return {
+      label2: ['极差2', '失望2', '一般2', '满意2', '惊喜2'],
+    }
+  },
   methods: {},
   components: {
-    YuDatePicker,
+    YuRate,
   },
 };
 </script>
