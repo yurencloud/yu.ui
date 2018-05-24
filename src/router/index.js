@@ -15,8 +15,12 @@ import Upload from '../example/upload'
 import Rate from '../example/rate'
 import Form from '../example/form'
 import Table from '../example/table'
+import Tag from '../example/tag'
+import Message from '../components/message.util';
 
 Vue.use(Router)
+// 额外工具
+Vue.prototype.$message = Message;
 
 export default new Router({
   routes: [
@@ -83,6 +87,10 @@ export default new Router({
     {
       path: '/table',
       component: Table,
+    },
+    {
+      path: '/tag',
+      component: Tag,
     },
   ],
 })
