@@ -11,7 +11,6 @@
   }
 }
 
-
 @mixin angleAnimation() {
   input {
     & + span.suffix > i {
@@ -50,3 +49,14 @@
   }
 }
 
+@mixin fadeIn() {
+  .fade-in-enter, .fade-in-leave-active, .fade-in-linear-enter, .fade-in-linear-leave, .fade-in-linear-leave-active, .fade-in-linear-enter, .fade-in-linear-leave, .fade-in-linear-leave-active {
+    opacity: 0;
+    transform: translateY( -100%);
+  }
+
+  .fade-in-enter-active, .fade-in-leave-active {
+    -webkit-transition: all .3s cubic-bezier(.55, 0, .1, 1);
+    transition: all .3s cubic-bezier(.55, 0, .1, 1)
+  }
+}

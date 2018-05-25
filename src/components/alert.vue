@@ -33,7 +33,7 @@ export default {
         warning: 'icon-warning-circle',
         error: 'icon-close-circle',
       },
-      isShow: true,
+      visible: true,
     };
   },
   props: {
@@ -54,7 +54,7 @@ export default {
   methods: {
     close() {
       if (!this.closeable) {
-        this.isShow = !this.isShow;
+        this.visible = !this.visible;
         this.$emit('close', event);
       }
     },

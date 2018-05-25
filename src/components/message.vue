@@ -1,6 +1,7 @@
 <template>
-  <div class="yu-message" :class="[customClass,]" role="alert">
-    <div class="message" :class="[type,{show:isShow},{center:center}]">
+  <transition name="fade-in">
+    <div v-show="visible" class="yu-message"
+         :class="[type,{center:center}, customClass]">
       <i class="icon iconfont"
          :class="[iconClass,]"
          v-if="iconClass"></i>
@@ -13,69 +14,67 @@
          v-if="showClose"
          @click="close"></i>
     </div>
-
-    <div class="message-btn" @click="click">
-      <slot/>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
 export default {
   name: 'YuMessage',
-  props: {
-    defaultMessage: String,
-    iconClass: String,
-    type: {
-      type: String,
-      default: 'info',
-    },
-    duration: {
-      type: Number,
-      default: 3,
-    },
-    customClass: String,
-    dangerouslyUseHTMLString: Boolean,
-    center: Boolean,
-    showClose: Boolean,
-  },
+  props: {},
   data() {
     return {
+      visible: false,
+      message: '',
+      iconClass: '',
+      customClass: '',
+      dangerouslyUseHTMLString: false,
+      center: false,
+      showClose: false,
+      timer: null,
+      closed: false,
+      type: 'info',
+      duration: 3000,
       icons: {
         success: 'icon-check-circle',
         info: 'icon-information',
         warning: 'icon-warning-circle',
-        error: 'icon-close-circle',
+        danger: 'icon-close-circle',
+        primary: 'icon-information',
       },
-      isShow: false,
-      message: this.defaultMessage || '',
     }
+  },
+  watch: {
+    closed(closed) {
+      if (closed) {
+        this.$el.addEventListener('transitionend', this.destroyElement);
+      }
+    },
   },
   mounted() {
     if (this.dangerouslyUseHTMLString) {
       this.$refs.content.innerHTML = this.message
     }
-    setTimeout(() => {
-      this.isShow = false;
-    }, this.duration * 1000)
-  },
-  created() {
-    setTimeout(() => {
-      this.isShow = false;
-    }, this.duration * 1000)
+    this.startTimer();
   },
   methods: {
-    click() {
-      this.isShow = !this.isShow;
-      if (this.duration !== 0) {
-        setTimeout(() => {
-          this.isShow = false;
-        }, this.duration * 1000)
-      }
+    close() {
+      this.visible = false;
+      this.closed = true;
+      this.$emit('close', event);
     },
-    close(event) {
-      this.isShow = !this.isShow;
-      this.$emit('click', event);
+    destroyElement() {
+      this.$el.removeEventListener('transitionend', this.destroyElement);
+      this.$destroy(true);
+      this.$el.parentNode.removeChild(this.$el);
+    },
+    startTimer() {
+      if (this.duration > 0) {
+        this.timer = setTimeout(() => {
+          if (!this.closed) {
+            this.close();
+          }
+        }, this.duration);
+      }
     },
   },
 }
@@ -83,76 +82,42 @@ export default {
 
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";
+  @import "../assets/css/animation";
   @import "../assets/css/function";
 
+  @include fadeIn();
   .yu-message {
-    display: inline-block;
-    .message {
-      padding: 10px 20px;
-      min-width: 330px;
-      border-radius: 5px;
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      top: -200px;
-      margin-top: 20px;
-      z-index: 999;
-      transition: all 0.3s linear;
-      box-sizing: border-box;
-      .icon {
-        font-size: $huge;
-        margin-right: 5px;
-      }
-      .content {
-        display: inline-block;
-      }
-      .close {
-        float: right;
-        cursor: pointer;
-      }
-      /*默认样式*/
-      background-color: lighten($info, 35);
-      color: $info;
-      border: 1px solid lighten($info, 30);
+    font-family: $font-family;
+    padding: 10px 20px;
+    width: 300px;
+    border-radius: 5px;
+
+    position: fixed;
+    left: calc(50% - 150px);
+    top: 20px;
+    z-index: 999;
+    box-sizing: border-box;
+
+    .icon {
+      font-size: $huge;
+      margin-right: 5px;
     }
-    .message-btn {
+    .content {
       display: inline-block;
     }
-  }
-
-  .message.show {
-    top: 0;
-  }
-
-  /*成功*/
-  .message.success {
-    background-color: lighten($success, 40);
-    color: $success;
-    border: 1px solid $success;
-  }
-
-  // 警告
-  .message.warning {
-    background-color: lighten($warning, 35);
-    color: $warning;
-    border: 1px solid lighten($warning, 30);
-  }
-
-  // 错误
-  .message.error {
-    background-color: lighten($danger, 25);
-    color: $danger;
-    border: 1px solid lighten($danger, 30);
-  }
-
-  // 信息
-  .message.info {
+    .close {
+      float: right;
+      cursor: pointer;
+    }
+    /*默认样式*/
     background-color: lighten($info, 35);
     color: $info;
-    border: 1px solid lighten($info, 35);
-  }
+    border: 1px solid lighten($info, 30);
 
-  .message.center {
-    text-align: center;
+    @include generalAllColorMessage();
+
+    &.center {
+      text-align: center;
+    }
   }
 </style>

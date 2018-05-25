@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      isShow: true,
+      visible: true,
       closeIcon: true,
     }
   },

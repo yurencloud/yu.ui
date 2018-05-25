@@ -1,196 +1,121 @@
 <template>
-  <div class="yu-table"
-       :class="[{stripe:stripe,border:border,status:status,'fix-heade':height,'fix-column':width,},]"
-       :style="[{height:height,width:width,}]"
-        >
-    <table :style="[{height:height,width:width}]" border="0" cellspacing="0" cellpadding="0">
-      <tr class="yu-tr"
-          v-for="(item,index) in data"
-          :class="['tr-'+index,item.type,]"
-          v-bind:key="index">
-        <td class="yu-td" v-for="(value,ind) in item"
-            v-bind:key="ind"
-            v-if="!(ind === 'type')"
-            :style="[{width:widths? widths[ind] :''}]"
-        >
-          <div v-if="(typeof value) === 'string'">{{value}}</div>
-          <div v-else >
-            <span v-for="v in value" :key="v">{{v}}</span>
-          </div>
+  <table class="yu-table" :class="[{celled: celled,}]" :style="{width:width}">
+    <thead v-if="thead">
+      <tr>
+        <th v-bind:key="i" v-for="(item, i) in thead" :style="{width: columnWidth ? columnWidth[i] : 'auto'}">
+          <div class="cell">{{item}}</div>
+        </th>
+        <th v-if="fixedHead" width="20px"></th>
+      </tr>
+    </thead>
+    <tbody v-if="tbody" :class="[{stripe:stripe}]">
+      <tr v-bind:key="i" v-for="(data, i) in tbody" :class="[status[i]]">
+        <td v-bind:key="index" v-for="(value, key, index) in data" :style="{width: columnWidth ? columnWidth[index] : 'auto'}">
+          <div class="cell">{{value}}</div>
         </td>
       </tr>
-    </table>
-  </div>
+    </tbody>
+    <tfoot v-if="tfoot">
+      <tr>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
 </template>
 
 <script>
 export default {
   name: 'YuTable',
   data() {
-    return {
-    }
+    return {}
   },
   props: {
-    widths: Object,
-    data: Object,
+    thead: Array,
+    tbody: Array,
+    tfoot: Array,
     stripe: Boolean,
-    border: Boolean,
-    status: Boolean,
-    height: String,
+    celled: Boolean,
+    fixedHead: Boolean,
     width: String,
+    columnWidth: Array, // ['200px','20%']
+    status: {
+      type: Object,
+      default() {
+        return {}
+      },
+    }, // { 1: 'success', 23: 'danger'}
   },
-
 }
 </script>
 
 <style lang="scss" type="text/scss" scoped>
   @import "../assets/css/varible";
   @import "../assets/css/function";
-  .yu-table{
-    display: inline-block;
-    border-left: none;
-    table{
-      border-collapse:collapse;
-      overflow: auto;
-      tr{
-        &:first-child{
-          td{
-            box-sizing: border-box;
-            div{
-              font-weight: 800;
-              color: lighten($info,5);
-              box-sizing: border-box;
-            }
-          }
-          background-color: #fff;
-        }
-        &:hover:not(.tr-0){
-          background-color: lighten($info,39);
-        }
-        td{
-          padding: 12px;
-          border-bottom: 1px solid lighten($info,30);
+
+  .yu-table {
+    border-collapse: collapse;
+    thead {
+      tr {
+        th {
+          color: $dark-text;
           box-sizing: border-box;
-          div{
-            display: inline-block;
-            color: darken($info,15);
-            font-size: $normal;
-            span{
-              margin-left: 10px;
-            }
+          padding: 14px 0;
+          border-bottom: 1px solid $border;
+          .cell {
+            padding: 0 8px;
+            text-align: left;
           }
         }
       }
     }
-  }
-  /*有斑马纹*/
-  .stripe.yu-table{
-    table{
-      tr{
-        &:nth-child(2n+1):not(.tr-0){
-          background-color: lighten($info,39);
+    tbody {
+      // 条纹
+      &.stripe {
+        tr:nth-child(2n) {
+          background-color: $trBackground;
+          &:hover {
+            background-color: $background;
+          }
         }
       }
-    }
-  }
-  /*有边框*/
-  .border.yu-table{
-    table{
-      border: 1px solid lighten($info,30);
-      tr{
-        td{
-          border-right: 1px solid lighten($info,30);
-        }
-      }
-    }
-  }
-  /*不同状态的tr*/
-  .status.yu-table{
-    table{
-      tr.warning{
-        background-color: lighten($warning,40);
-        &:hover:not(.tr-0){
-          background-color: lighten($info,39);
-        }
-      }
-    }
-  }
-  .status.yu-table{
-    table{
-      tr.success{
-        background-color: lighten($success,45);
-        &:hover:not(.tr-0){
-          background-color: lighten($info,39);
-        }
-      }
-    }
-  }
-  .status.yu-table{
-    table{
-      tr.danger{
-        background-color: lighten($danger,27);
-        &:hover:not(.tr-0){
-          background-color: lighten($info,39);
-        }
-      }
-    }
-  }
-  .status.yu-table{
-    table{
-      tr.info{
-        background-color: lighten($info,37);
-        &:hover:not(.tr-0){
-          background-color: lighten($info,39);
-        }
-      }
-    }
-  }
-  /*表头固定*/
-  .yu-table.fix-heade{
-    position: relative;
-    table{
-      overflow: auto;
-      display: block;
-      padding-top: 40px;
-      tr{
-        &:first-child{
-          position: absolute;
-          top:1px;
-        }
-        div{
+
+      tr {
+        td {
+          color: $text;
           box-sizing: border-box;
-        }
-      }
-    }
-  }
-  .yu-table.fix-column{
-    position: relative;
-    table{
-      overflow: auto;
-      display: block;
-      box-sizing: border-box;
-      border-top: none;
-      padding-left: 175px;
-      tr{
-        td{
-          background-color: #fff;
-          div{
-            width: 150px;
-            box-sizing: border-box;
-          }
-          &:first-child{
-            position: absolute;
-            left: 0;
-            border-left: 1px solid lighten($info,30);
-            border-bottom: none;
-            border-top: 1px solid lighten($info,30);
+          padding: 14px 0;
+          border-bottom: 1px solid $border;
+          .cell {
+            padding: 0 8px;
           }
         }
-        &:first-child{
-        border-top:1px solid lighten($info,30) ;
-      }
+        transition: background-color .4s;
+        &.primary {
+          background-color: lighten($primary, 35);
+        }
+        &.success {
+          background-color: lighten($success, 47);
+        }
+        &.danger {
+          background-color: lighten($danger, 27);
+        }
+        &.warning {
+          background-color: lighten($warning, 42);
+        }
+        &.info {
+          background-color: lighten($info, 38);
+        }
+        &:hover {
+          background-color: $background;
+        }
       }
     }
 
+    &.celled {
+      td, th {
+        border-right: 1px solid $border;
+      }
+      border: 1px solid $border;
+    }
   }
 </style>

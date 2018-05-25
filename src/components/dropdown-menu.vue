@@ -1,5 +1,5 @@
 <template>
-    <div class="yu-dropdown-menu" v-if="rootDrop.isShow">
+    <div class="yu-dropdown-menu" v-if="rootDrop.visible">
       <div class="dropdown-angle"></div>
       <ul class="menu-ul">
         <slot/>

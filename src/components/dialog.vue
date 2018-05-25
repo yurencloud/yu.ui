@@ -24,7 +24,7 @@ export default {
   name: 'YuDialog',
   data() {
     return {
-      isShow: false,
+      visible: false,
     }
   },
   props: {
@@ -46,8 +46,8 @@ export default {
   },
   methods: {
     change() {
-      this.isShow = !this.isShow;
-      this.lockScroll = this.isShow;
+      this.visible = !this.visible;
+      this.lockScroll = this.visible;
       if (this.lockScroll) {
         document.getElementsByTagName('body')[0].classList.add('lock');
       } else if (!this.lockScroll) {

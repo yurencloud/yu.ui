@@ -16,7 +16,7 @@ export default {
   name: 'YuDropDown',
   data() {
     return {
-      isShow: false,
+      visible: false,
     }
   },
   provide() {
@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     command(event) {
-      this.isShow = !this.isShow;
+      this.visible = !this.visible;
       const target = event.target;
       if (target.tagName === 'LI' && (target.className.indexOf('disabled') === -1)) {
         const comm = target.getAttribute('command');
@@ -35,7 +35,7 @@ export default {
       }
     },
     visibleChange() {
-      this.$emit('visibleChange', this.isShow);
+      this.$emit('visibleChange', this.visible);
     },
   },
 }

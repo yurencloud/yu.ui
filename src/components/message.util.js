@@ -23,12 +23,9 @@ const Message = function (options) {
   if (typeof options === 'string') {
     options = {
       message: options,
-
-      isShow: true,
     };
   }
 
-  options.isShow = true;
 
   const id = `message_${seed++}`;
 
@@ -48,7 +45,7 @@ const Message = function (options) {
   return instance.vm;
 };
 
-['success', 'warning', 'info', 'error'].forEach((type) => {
+['success', 'warning', 'info', 'danger', 'primary'].forEach((type) => {
   Message[type] = (options) => {
     if (typeof options === 'string') {
       options = {

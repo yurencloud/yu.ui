@@ -25,7 +25,7 @@ export default {
     return {
       display: false,
       top: true,
-      isShow: false,
+      visible: false,
       isLight: false,
     };
   },
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     over() {
-      this.isShow = !this.isShow;
+      this.visible = !this.visible;
     },
   },
   beforeMount() {

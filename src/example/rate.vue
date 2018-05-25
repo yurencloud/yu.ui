@@ -30,9 +30,6 @@ export default {
   components: {
     YuRate,
   },
-  mounted() {
-    this.$message({ message: 'hello' });
-  },
 };
 </script>
 <style lang="scss" type="text/scss">

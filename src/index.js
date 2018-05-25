@@ -48,21 +48,13 @@ import YuTag from './components/tag';
 import YuTable from './components/table';
 import YuPagination from './components/pagination';
 import YuPopover from './components/popover';
+import MessageUtil from './components/message.util';
 
-// 在Vue全局安装一些快捷方法
-function install(Vue, opts = {}) {
-  // Vue.prototype.$message = Message;
-}
-
-if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
-}
 
 const version = '1.1.2';
 
-const components = {
+const components = [
   version,
-  install,
   YuToolTip,
   YuDialog,
   YuButton,
@@ -113,6 +105,19 @@ const components = {
   YuTable,
   YuPagination,
   YuPopover,
+]
+
+// 在Vue全局安装一些快捷方法
+function install(Vue, opts = {}) {
+  components.forEach((component) => {
+    Vue.component(component.name, component);
+  });
+
+  Vue.prototype.$message = MessageUtil;
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue);
 }
 
 export default components;

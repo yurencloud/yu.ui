@@ -16,11 +16,12 @@ import Rate from '../example/rate'
 import Form from '../example/form'
 import Table from '../example/table'
 import Tag from '../example/tag'
-import Message from '../components/message.util';
+import Message from '../example/message'
+import MessageUtil from '../components/message.util';
 
 Vue.use(Router)
 // 额外工具
-Vue.prototype.$message = Message;
+Vue.prototype.$message = MessageUtil;
 
 export default new Router({
   routes: [
@@ -91,6 +92,10 @@ export default new Router({
     {
       path: '/tag',
       component: Tag,
+    },
+    {
+      path: '/message',
+      component: Message,
     },
   ],
 })

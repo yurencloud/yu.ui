@@ -76,7 +76,7 @@ export default {
   },
   data() {
     return {
-      isShow: false,
+      visible: false,
       messageShow: false,
       typeItems: {
         error: {
@@ -126,7 +126,7 @@ export default {
   },
   methods: {
     onclick() {
-      this.isShow = !this.isShow;
+      this.visible = !this.visible;
       if (this.lockScroll) {
         document.querySelector('body').classList.add('lock-scroll');
       }
@@ -151,7 +151,7 @@ export default {
       this.$emit('cancle', event);
     },
     change() {
-      this.isShow = !this.isShow;
+      this.visible = !this.visible;
       this.isActive = !this.isActive;
       document.querySelector('body').classList.remove('lock-scroll');
       setTimeout(() => {
