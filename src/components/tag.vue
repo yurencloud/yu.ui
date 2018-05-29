@@ -1,10 +1,12 @@
 <template>
   <transition :name="disableTransitions ? '' : 'fade'">
     <div class="yu-tag"
-         :class="[type,size,{hit:!hit}]"
-         v-if="isShow"
+         :class="[type,size,{clearBorder:clearBorder}]"
+         v-if="visible"
          :style="{backgroundColor:color}">
+      <span>
       <slot/>
+      </span>
       <i class="iconfont"
          v-if="closable"
          :class="[{'icon-close':closable,'icon-close-circle':!closeIcon}]"
@@ -22,8 +24,11 @@ export default {
   props: {
     type: String,
     closable: Boolean,
-    size: String,
-    hit: Boolean,
+    size: {
+      type: String,
+      default: 'middle',
+    },
+    clearBorder: Boolean,
     disableTransitions: Boolean,
     color: String,
   },
@@ -38,6 +43,7 @@ export default {
       this.closeIcon = !this.closeIcon;
     },
     handleClose(event) {
+      this.visible = !this.visible;
       this.$emit('close', event);
     },
   },
@@ -47,74 +53,39 @@ export default {
 <style lang="scss" type="text/scss" scoped>
   @import "../assets/css/varible";
   @import "../assets/css/function";
-  .yu-tag{
-     padding:0 7px;
+  @import "../assets/css/animation";
+
+  @include fade()
+  .yu-tag {
+    padding: 0 8px;
     border: $primary;
-    background-color: lighten($primary,33);
+    background-color: lighten($primary, 33);
     display: inline-block;
     height: 32px;
-    line-height: 30px;
-    font-size: $tiny;
+    line-height: 32px;
+    font-size: $normal;
     color: $primary;
     border-radius: 4px;
     box-sizing: border-box;
-    border: 1px solid lighten($primary,20);
+    border: 1px solid lighten($primary, 20);
     white-space: nowrap;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    i{
+    margin-right: 8px;
+    margin-bottom: 12px;
+    i {
       font-size: $normal;
       margin-left: 3px;
       cursor: pointer;
     }
   }
+
   /*不同主题的*/
-  .yu-tag.info{
-    border: $info;
-    background-color: lighten($info,35);
-    color: $info;
-    border: 1px solid lighten($info,20);
-  }
-  .yu-tag.success{
-    border: $success;
-    background-color: lighten($success,40);
-    color: $success;
-    border: 1px solid lighten($success,30);
-  }
-  .yu-tag.warning{
-    border: $warning;
-    background-color: lighten($warning,40);
-    color: $warning;
-    border: 1px solid lighten($warning,30);
-  }
-  .yu-tag.error{
-    border: $danger;
-    background-color: lighten($danger,27);
-    color: $danger;
-    border: 1px solid lighten($danger,20);
-  }
+  @include generalAllColorTag()
+
   /*不同尺寸的*/
-  .yu-tag.medium{
-    height: 28px;
-    line-height: 26px;
-  }
-  .yu-tag.small{
-    height: 24px;
-    line-height: 22px;
-  }
-  .yu-tag.mini{
-    height: 20px;
-    line-height: 18px;
-  }
+  @include generalAllSizeTag()
+
   /*边框*/
-  .yu-tag.hit{
+  .yu-tag.clearBorder {
     border: none;
-  }
-  /*过渡*/
-  .fade-enter, .fade-leave-active {
-    opacity: 0;
-  }
-  .fade-enter-active, .fade-leave-active{
-    transition: opacity .2s linear;
   }
 </style>

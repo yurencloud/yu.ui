@@ -1,32 +1,34 @@
 <template>
   <div class="yu-pagination"
        :class="{background:background}">
-      <div class="yu-head" id="pagination-head">
-        <span style="margin-right: 10px" v-if="showTotal">总共{{total}}条数据</span>
-          <yu-select
-            @selected="getChange"
-            size="mini"
-            text="10条每页"
-            overflow
-            v-if="changeSize">
-            <yu-option
-              v-for="item in showSize"
-              :label="item.label"
-              :value="item.value"/>
-          </yu-select>
-      </div>
+    <div class="yu-head" id="pagination-head">
+      <span style="margin-right: 10px" v-if="showTotal">总共{{total}}条数据</span>
+      <yu-select
+        @selected="getChange"
+        size="small"
+        overflow
+        width="100px"
+        v-if="changeSize">
+        <yu-option
+          v-bind:key="index"
+          v-for="(item,index) in showSize"
+          :label="item.label"
+          :value="item.value"/>
+      </yu-select>
+    </div>
     <ul class="yu-paging">
       <!-- prev -->
       <li
         :class="['paging-item', 'paging-item--prev', {'paging-item--disabled' : index === 1}]"
         @click="prev">
         <i class="iconfont icon-angle-left" v-if="!prevText"></i>
-       <span> {{prevText}}</span>
+        <span> {{prevText}}</span>
       </li>
       <li
         :class="['paging-item', 'paging-item--first', {'paging-item--disabled' : index === 1}]"
         @click="first"
-        v-if="showPrevMore">1</li>
+        v-if="showPrevMore">1
+      </li>
 
       <li
         :class="['paging-item', 'paging-item--more']"
@@ -52,14 +54,14 @@
         @mouseenter="nextToggle"
         @mouseleave="nextToggle"
         @click="nextMore"
-        >
+      >
         <span v-if="nextChange">...</span>
         <i class="iconfont icon-angle-double-right" v-else></i>
       </li>
       <!--last-->
-      <li  :class="['paging-item', 'paging-item--last', {'paging-item--disabled' : index === pages}]"
-           @click="last"
-           v-if="shownextMore">
+      <li :class="['paging-item', 'paging-item--last', {'paging-item--disabled' : index === pages}]"
+          @click="last"
+          v-if="shownextMore">
         {{pages}}
       </li>
       <!-- next -->
@@ -71,7 +73,7 @@
       </li>
     </ul>
     <div class="pagination-go" v-if="goTo">
-     前往<input type="text" :value="index" @keyup.enter="goto()">页
+      前往<input type="text" :value="index" @keyup.enter="goto()">页
     </div>
   </div>
 </template>
@@ -113,7 +115,6 @@ export default {
     showSize: {
       type: Array,
       default: () => [],
-
     },
   },
   data() {
@@ -203,14 +204,14 @@ export default {
         //  结束值
         end: current + _deviation,
       };
-      //  开始值小于1 时
+        //  开始值小于1 时
       if (deviation.start < 1) {
-        deviation.end = deviation.end + (1 - deviation.start);
+        deviation.end += (1 - deviation.start);
         deviation.start = 1;
       }
       //  结束值大于总页数时
       if (deviation.end > pageCount) {
-        deviation.start = deviation.start - (deviation.end - pageCount);
+        deviation.start -= (deviation.end - pageCount);
         deviation.end = pageCount;
       }
       if (deviation.start < 1) deviation.start = 1;
@@ -237,16 +238,18 @@ export default {
 }
 </script>
 
-<style lang="scss" type="text/scss"  scoped>
+<style lang="scss" type="text/scss" scoped>
   @import "../assets/css/varible";
   @import "../assets/css/function";
-  .yu-pagination{
-    .yu-paging{
+
+  .yu-pagination {
+    .yu-paging {
       display: inline-block;
       padding: 0;
       list-style: none;
       user-select: none;
-      .paging-item{
+      font-weight: bold;
+      .paging-item {
         display: inline;
         font-size: $normal;
         position: relative;
@@ -254,15 +257,16 @@ export default {
         text-decoration: none;
         cursor: pointer;
         color: $dark-text;
-        &:hover{
-          color:  $primary;
+        transition: all .2s;
+        &:hover {
+          color: $primary;
         }
         &.paging-item--disabled,
-        &.paging-item--more{
+        &.paging-item--more {
           background-color: #fff;
           color: $light-text;
         }
-        &.paging-item--disabled{
+        &.paging-item--disabled {
           cursor: not-allowed;
           opacity: .75;
         }
@@ -271,54 +275,56 @@ export default {
           cursor: default;
         }
         /*选中*/
-        &.paging-item--current{
+        &.paging-item--current {
           color: $primary;
         }
       }
     }
-    #pagination-head.yu-head{
+    #pagination-head.yu-head {
       display: inline-block;
-      .yu-input span.suffix{
+      .yu-input span.suffix {
         line-height: 32px;
       }
-      .yu-input span.clearable i{
+      .yu-input span.clearable i {
         line-height: 32px;
       }
-      .yu-input input{
+      .yu-input input {
         height: 32px;
         width: 130px;
       }
     }
-    .pagination-go{
+    .pagination-go {
       display: inline-block;
-      input{
+      color: $text;
+      input {
         margin: 0 10px;
         width: 48px;
         height: 28px;
         border-radius: 5px;
-        border: 1px solid $info;
+        border: 1px solid $border;
         padding-left: 9px;
         box-sizing: border-box;
         outline: none;
-        &:focus{
+        transition: border .4s;
+        &:focus {
           border-radius: 5px;
           border: 1px solid $primary;
         }
       }
     }
   }
+
   /*带有背景的*/
-  .yu-pagination.background{
-    .yu-paging{
-      .paging-item{
-        background-color: lighten($info,37);
+  .yu-pagination.background {
+    .yu-paging {
+      .paging-item {
+        background-color: lighten($info, 37);
         margin-right: 10px;
         border-radius: 3px;
-        &:hover{
-          background-color: $primary;
-          color: white;
+        &:hover {
+          color: $primary;
         }
-        &.paging-item--current{
+        &.paging-item--current {
           background-color: $primary;
           color: white;
         }

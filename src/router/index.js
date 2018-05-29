@@ -17,6 +17,9 @@ import Form from '../example/form'
 import Table from '../example/table'
 import Tag from '../example/tag'
 import Message from '../example/message'
+import Progress from '../example/progress'
+import Pagination from '../example/pagination'
+import Badge from '../example/badge'
 import MessageUtil from '../components/message.util';
 
 Vue.use(Router)
@@ -96,6 +99,18 @@ export default new Router({
     {
       path: '/message',
       component: Message,
+    },
+    {
+      path: '/progress',
+      component: Progress,
+    },
+    {
+      path: '/pagination',
+      component: Pagination,
+    },
+    {
+      path: '/badge',
+      component: Badge,
     },
   ],
 })

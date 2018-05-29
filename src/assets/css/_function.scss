@@ -154,6 +154,39 @@
   }
 }
 
+@mixin generalAllColorTag() {
+  @each $type in $types {
+    $color: map-get($colors, $type);
+    &.#{$type} {
+      border: $color;
+      @if $type == 'danger' {
+        background-color:lighten($color, 25)
+      }
+      @else {
+        background-color:lighten($color, 35)
+      };
+      color: $color;
+      border: 1px solid lighten($color, 20);
+    }
+  }
+}
+
+
+@mixin generalAllSizeTag() {
+  @each $size in $sizes {
+    &.#{$size} {
+      $height: map-get($size-map, $size);
+      height: $height;
+      line-height: $height;
+      @if $height > $small-height {
+        font-size: $normal
+      } @else {
+        font-size: $tiny
+      }
+    }
+  }
+}
+
 
 
 

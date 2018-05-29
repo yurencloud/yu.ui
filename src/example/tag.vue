@@ -3,35 +3,30 @@
     <h2>YU.UI</h2>
     <div class="title">tag 标签</div>
     <div class="sub-title">普通用法</div>
-    <yu-tag>标签一</yu-tag>
-    <yu-tag type="info">标签一</yu-tag>
-    <yu-tag type="success">标签一</yu-tag>
-    <yu-tag type="warning">标签一</yu-tag>
-    <yu-tag type="error">标签一</yu-tag>
-    <div class="sub-title" style="margin-top: 100px">tag----标签---可关闭</div>
-    <yu-tag closable>标签一</yu-tag>
-    <yu-tag closable type="info">标签一</yu-tag>
-    <yu-tag closable type="success">标签一</yu-tag>
-    <yu-tag closable type="warning">标签一</yu-tag>
-    <yu-tag closable type="error">标签一</yu-tag>
-    <div class="sub-title" style="margin-top: 100px">tag----标签---不同尺寸的</div>
-    <yu-tag closable>标签一</yu-tag>
-    <yu-tag closable type="info" size="medium">标签一</yu-tag>
-    <yu-tag closable type="success" size="small">标签一</yu-tag>
-    <yu-tag closable type="warning" size="mini">标签一</yu-tag>
-    <yu-tag closable type="error">标签一</yu-tag>
-    <div class="sub-title" style="margin-top: 100px">tag----标签---没有边框的</div>
-    <yu-tag closable hit>标签一</yu-tag>
-    <yu-tag closable hit type="info" size="medium">标签一</yu-tag>
-    <yu-tag closable hit type="success" size="small">标签一</yu-tag>
-    <yu-tag closable hit type="warning" size="mini">标签一</yu-tag>
-    <yu-tag closable hit type="error" @close="handleClose">标签一</yu-tag>
-    <div class="sub-title" style="margin-top: 100px">tag----标签---关闭时出现动画----可删除</div>
-    <yu-tag v-bind:key="index" v-for="(index, item) in tags"
-            closable
-            :disable-transitions="false"
-            @close="Close(item)">{{item}}</yu-tag>
-    <yu-tag closable hit type="error" @close="handleClose" colo="pink">标签一</yu-tag>
+    <yu-tag>标签</yu-tag>
+
+    <div class="sub-title">可关闭</div>
+    <yu-tag closable>标签</yu-tag>
+
+    <div class="sub-title">不同尺寸</div>
+    <yu-tag closable size="normal">标签</yu-tag>
+    <yu-tag closable size="medium">标签</yu-tag>
+    <yu-tag closable size="small">标签</yu-tag>
+    <yu-tag closable size="mini">标签</yu-tag>
+
+    <div class="sub-title">去除边框</div>
+    <yu-tag closable clearBorder>标签</yu-tag>
+
+    <div class="sub-title">不同颜色</div>
+    <yu-tag closable type="primary">标签</yu-tag>
+    <yu-tag closable type="info">标签</yu-tag>
+    <yu-tag closable type="success">标签</yu-tag>
+    <yu-tag closable type="warning">标签</yu-tag>
+    <yu-tag closable type="danger">标签</yu-tag>
+
+    <div class="sub-title">去除动画</div>
+    <yu-tag disableTransitions>标签</yu-tag>
+    <yu-tag closable clearBorder type="danger" @close="handleClose" colo="pink">标签</yu-tag>
 
     <div style="margin-bottom: 400px"></div>
   </div>
@@ -40,7 +35,16 @@
 import YuTag from '../components/tag';
 
 export default {
-  methods: {},
+  data() {
+    return {
+      tags: ['标签', '标签二', '标签三'],
+    }
+  },
+  methods: {
+    handleClose() {
+      alert('哈哈哈哈哈哈')
+    },
+  },
   components: {
     YuTag,
   },

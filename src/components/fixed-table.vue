@@ -1,10 +1,17 @@
 <template>
   <div class="yu-fixed-table">
     <div v-if="fixedHead">
-      <yu-table :thead="thead" :column-width="columnWidth" :width="width" :stripe="stripe" :celled="celled" fixedHead/>
+      <yu-table :thead="thead" :column-width="columnWidth" :width="width" :celled="celled" fixedHead>
+        <slot name="thead"/>
+      </yu-table>
       <div class="fixed-box" style="" :style="{height: height, width:width}">
-        <yu-table :tbody="tbody" :column-width="columnWidth"  :stripe="stripe" :celled="celled" :status="status"/>
+        <yu-table :tbody="tbody" :column-width="columnWidth"  :stripe="stripe" :celled="celled" :status="status">
+          <slot name="tbody" />
+        </yu-table>
       </div>
+      <yu-table :tfoot="tfoot" :column-width="columnWidth" :width="width" :celled="celled" fixedFoot>
+        <slot name="tfoot" />
+      </yu-table>
     </div>
   </div>
 </template>
@@ -23,6 +30,7 @@ export default {
       default: '300px',
     },
     fixedHead: Boolean,
+    fixedFoot: Boolean,
     thead: Array,
     tbody: Array,
     tfoot: Array,
@@ -53,6 +61,7 @@ export default {
       overflow-x: hidden;
       width: 900px;
       border-bottom: 1px solid $border;
+      border-top: 1px solid $border;
     }
     .yu-table{
       tbody{
