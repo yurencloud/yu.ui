@@ -51,7 +51,7 @@ import YuPopover from './components/popover';
 import MessageUtil from './components/message.util';
 
 
-const version = '1.1.2';
+const version = '1.2.0';
 
 const components = [
   version,
