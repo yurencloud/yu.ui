@@ -1,69 +1,57 @@
 <template>
- <div class="yu-message-box">
-   <!--弹出框-->
+  <div class="yu-message-box" v-show="visible">
+    <!--弹出框-->
     <div class="message-dialog"
-         v-show="isShow"
          :class='[{center:center},customClass]'
     >
-      <div class="dialog-box"
-      >
-        <div class="message-title">{{title}} <i class="iconfont icon-close" @click="cancle" v-if="!showClose" id="message-icon"></i></div>
-        <!--文字-->
-        <div class="message-text" v-if="!isInput">
-          <i :class="['iconfont',typeItems[type].icon]"
-             v-if="type"
-             :style="{color:typeItems[type].color}"
-          ></i>
-          <div :class="{margin:type}">{{message}}</div>
-        </div>
-        <!--input框-->
-        <div class="message-input" v-else>
-          <div class="input-title">{{message}}</div>
-          <input :type="inputType ? inputType : 'text'" class="input" :placeholder="inputValue? inputValue :''">
-          <!--验证错误-->
-          <div class="verification-result"
-                v-if="!result"
-                ref="input">
-            {{inputErrorMessage}}
+        <div class="dialog-box" v-show="visible">
+          <div class="message-title">{{title}} <i class="iconfont icon-close" @click="cancel" v-if="showClose"
+                                                  id="message-icon"></i></div>
+          <!--文字-->
+          <div class="message-text" v-if="!isInput">
+            <i :class="['iconfont',typeItems[type].icon]"
+               v-if="type"
+               :style="{color:typeItems[type].color}"
+            ></i>
+            <div :class="{margin:type}">{{message}}</div>
+          </div>
+          <!--input框-->
+          <div class="message-input" v-else>
+            <div class="input-title">{{message}}</div>
+            <input :type="inputType ? inputType : 'text'" class="input" :placeholder="inputValue? inputValue :''">
+            <!--验证错误-->
+            <div class="verification-result"
+                 v-if="!result"
+                 ref="input">
+              {{inputErrorMessage}}
+            </div>
+          </div>
+          <div class="message-btn">
+            <!--确认和取消按钮-->
+            <div class="message-cancle"
+                 :class="[cancelButtonClass,]"
+                 @click="cancel">
+              <yu-button size="medium"
+                         v-if="showCancelButton"
+              >
+                {{cancelButtonText}}
+              </yu-button>
+            </div>
+            <div class="message-confirm"
+                 :class="[confirmButtonClass,]"
+                 @click="confirm">
+              <yu-button
+                type="primary"
+                size="medium"
+                v-if="showConfirmButton"
+              >
+                {{confirmButtonText}}
+              </yu-button>
+            </div>
           </div>
         </div>
-        <div class="message-btn">
-          <!--确认和取消按钮-->
-          <div class="message-cancle"
-               :class="[cancelButtonClass,]"
-               @click="cancle">
-            <yu-button size="small"
-                       v-if="showCancelButton"
-            >
-              {{cancelButtonText}}
-            </yu-button>
-          </div>
-          <div class="message-confirm"
-               :class="[confirmButtonClass,]"
-                @click="confirm">
-            <yu-button
-              type="primary"
-              size="small"
-              v-if="showConfirmButton"
-            >
-              {{confirmButtonText}}
-            </yu-button>
-          </div>
-        </div>
-      </div>
     </div>
-   <!--消息提示-->
-    <div class="message-popover"
-         v-if="messagePopver"
-         :class="[messagePopver.messagePopverType,{active:isActive},]"
-    >
-      <i :class="['iconfont',typeItems[messagePopver.messagePopverType] ? typeItems[messagePopver.messagePopverType].icon : '',]"></i>
-      <span>{{messagePopver.messagePopverText + (value ? value : '')|| ''}}</span>
-    </div>
-   <div class="message-trigger" @click="onclick">
-     <slot/>
-   </div>
- </div>
+  </div>
 </template>
 
 <script>
@@ -77,6 +65,7 @@ export default {
   data() {
     return {
       visible: false,
+      isActive: false,
       messageShow: false,
       typeItems: {
         error: {
@@ -96,33 +85,28 @@ export default {
           color: '#67C23A',
         },
       },
-      messagePopver: {},
-      icon: String,
-      isActive: false,
+      icon: '',
       result: true,
-      value: String,
+      value: '',
+      confirmButtonText: '确认',
+      showConfirmButton: true,
+      cancelButtonText: '取消',
+      showCancelButton: false,
+      message: '',
+      title: '',
+      isInput: false,
+      inputErrorMessage: '',
+      inputPattern: null,
+      center: false,
+      showClose: true,
+      lockScroll: true,
+      inputValue: '',
+      cancelButtonClass: '',
+      confirmButtonClass: '',
+      inputType: 'text',
+      type: '',
+      customClass: '',
     }
-  },
-  props: {
-    confirmButtonText: String,
-    showConfirmButton: Boolean,
-    cancelButtonText: String,
-    showCancelButton: Boolean,
-    message: String,
-    title: String,
-    event: null,
-    isInput: Boolean,
-    inputErrorMessage: String,
-    inputPattern: null,
-    center: Boolean,
-    showClose: Boolean,
-    lockScroll: Boolean,
-    inputValue: String,
-    cancelButtonClass: String,
-    confirmButtonClass: String,
-    inputType: String,
-    type: String,
-    customClass: String,
   },
   methods: {
     onclick() {
@@ -132,68 +116,52 @@ export default {
       }
     },
     confirm(event) {
-      this.event ? this.messagePopver = this.event.confirm() : '';
-      if (this.isInput) {
-        this.value = document.querySelector('.yu-message-box input').value;
-        this.result = this.inputPattern.test(this.value);
-        this.result ? this.change() : '';
-      }else{
-        this.value = '';
-        this.result ? this.change() : '';
-      }
-      document.querySelector('.yu-message-box input').value = '';
       this.$emit('confirm', event);
     },
-    cancle(event) {
-      this.event ? this.messagePopver = this.event.cancle() : '';
-      this.value = '';
-      this.change();
-      this.$emit('cancle', event);
-    },
-    change() {
-      this.visible = !this.visible;
-      this.isActive = !this.isActive;
-      document.querySelector('body').classList.remove('lock-scroll');
-      setTimeout(() => {
-        this.isActive = !this.isActive;
-      }, 2000);
+    cancel(event) {
+      this.visible = false;
+      this.$emit('cancel', event);
     },
   },
-
-
 }
 </script>
 
 <style lang="scss" type="text/scss" scoped>
   @import "../assets/css/varible";
   @import "../assets/css/function";
-  .yu-message-box{
+  @import "../assets/css/animation";
+
+  @include fadeIn();
+  @include zoomInTop();
+  .yu-message-box {
     display: inline-block;
-    .message-dialog{
+    font-family: $font-family;
+    .message-dialog {
       position: fixed;
       z-index: 999;
       width: 100%;
       height: 100%;
       top: 0;
       left: 0;
-      transition: all .3s linear;
-      background-color: rgba(0,0,0,.3);
-      .dialog-box{
+      transition: all 3s;
+      background-color: rgba(0, 0, 0, .3);
+      .dialog-box {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         background-color: #fff;
         box-sizing: border-box;
-        padding: 10px 20px;
+        padding: 12px 20px;
         border-radius: 5px;
         width: 420px;
         overflow: hidden;
         border: 1px solid $light-border;
-        .message-title{
+        .message-title {
           font-size: $huge;
           position: relative;
-          i{
+          height: 26px;
+          i {
             position: absolute;
             top: 0;
             right: 0;
@@ -202,26 +170,27 @@ export default {
             font-size: $huge;
           }
         }
-        .message-text{
+        .message-text {
           margin: 15px 0;
           vertical-align: center;
           position: relative;
-          i{
+          font-size: 18px;
+          i {
             font-size: 24px;
             color: $warning;
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
           }
-          div{
+          div {
             display: inline-block;
-            &.margin{
+            &.margin {
               margin-left: 35px;
             }
           }
         }
-        .message-input{
-          input{
+        .message-input {
+          input {
             width: 100%;
             outline: none;
             border: 1px solid $dark-border;
@@ -230,73 +199,45 @@ export default {
             border-radius: 5px;
             box-sizing: border-box;
             padding: 0 20px;
-            &:focus{
+            &:focus {
               border: 1px solid $primary;
             }
           }
-          .input-title{
+          .input-title {
             margin-top: 10px;
             font-size: $normal;
             color: $light-text;
           }
-          .verification-result{
+          .verification-result {
             font-size: $normal;
             color: $danger;
           }
         }
-        .message-btn{
+        .message-btn {
           text-align: right;
         }
-        .message-cancle{
+        .message-cancle {
           display: inline-block;
         }
-        .message-confirm{
+        .message-confirm {
           display: inline-block;
         }
       }
     }
-    .message-popover{
-      padding: 10px 20px;
-      min-width: 330px;
-      border-radius: 5px;
-      position: fixed;
-      left: 50%;
-      transform: translateX(-50%);
-      top: -200px;
-      margin-top: 20px;
-      z-index: 999;
-      transition: all 0.3s linear;
-      box-sizing: border-box;
-      font-size: $normal;
-      i{
-        font-size: $big;
-      }
-    }
-    .message-popover.active{
-      top: 0;
-    }
-    .message-popover.success{
-      background-color: lighten($success,35);
-      color: $success;
-    }
-    .message-popover.info{
-      background-color: lighten($info,35);
-      color: $info;
-    }
-    .message-trigger{
+    .message-trigger {
       cursor: pointer;
       color: $primary;
     }
-    .message-dialog.center{
+    .message-dialog.center {
       text-align: center;
-      .message-btn{
+      .message-btn {
         display: inline-block;
       }
     }
   }
 </style>
 <style>
-  .lock-scroll{
+  .lock-scroll {
     height: 100%;
     overflow: hidden;
   }

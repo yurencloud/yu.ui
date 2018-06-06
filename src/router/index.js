@@ -20,11 +20,20 @@ import Message from '../example/message'
 import Progress from '../example/progress'
 import Pagination from '../example/pagination'
 import Badge from '../example/badge'
-import MessageUtil from '../components/message.util';
+import Alert from '../example/alert'
+import Notification from '../example/notification'
+import Loading from '../example/loading'
+import MessageBox from '../example/message-box'
+import MessageUtil from '../components/message.util'
+import NotificationUtil from '../components/notification.util'
+import AlertUtil from '../components/alert.util'
 
 Vue.use(Router)
 // 额外工具
 Vue.prototype.$message = MessageUtil;
+Vue.prototype.$notify = NotificationUtil;
+Vue.prototype.$notify = NotificationUtil;
+Vue.prototype.$alert = AlertUtil;
 
 export default new Router({
   routes: [
@@ -111,6 +120,22 @@ export default new Router({
     {
       path: '/badge',
       component: Badge,
+    },
+    {
+      path: '/alert',
+      component: Alert,
+    },
+    {
+      path: '/notification',
+      component: Notification,
+    },
+    {
+      path: '/loading',
+      component: Loading,
+    },
+    {
+      path: '/message-box',
+      component: MessageBox,
     },
   ],
 })

@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Main from './message';
+import Main from './message-box';
 
-const MessageConstructor = Vue.extend(Main);
+const MessageBoxConstructor = Vue.extend(Main);
 
 let instance;
 const instances = [];
@@ -18,7 +18,8 @@ function isVNode(node) {
   return node !== null && typeof node === 'object' && hasOwn(node, 'componentOptions');
 }
 
-const Message = (options) => {
+// 第一个参数可以是字符串或者对象，第二个参数必定是标题
+const Alert = (options, title) => {
   options = options || {};
   if (typeof options === 'string') {
     options = {
@@ -26,9 +27,13 @@ const Message = (options) => {
     };
   }
 
-  const id = `message_${seed++}`;
+  if (title != null) {
+    options.title = title;
+  }
 
-  instance = new MessageConstructor({
+  const id = `alert_${seed++}`;
+
+  instance = new MessageBoxConstructor({
     data: options,
   });
   instance.id = id;
@@ -45,20 +50,20 @@ const Message = (options) => {
 };
 
 ['success', 'warning', 'info', 'danger', 'primary'].forEach((type) => {
-  Message[type] = (options) => {
+  Alert[type] = (options) => {
     if (typeof options === 'string') {
       options = {
         message: options,
       };
     }
     options.type = type;
-    return Message(options);
+    return Alert(options);
   };
 });
 
-Message.close = (id) => {
+Alert.close = (id) => {
   for (let i = 0, len = instances.length; i < len; i++) {
-    if (`message_${id}` === instances[i].id) {
+    if (`alert_${id}` === instances[i].id) {
       instances[i].close();
       instances.splice(i, 1);
       break;
@@ -66,10 +71,10 @@ Message.close = (id) => {
   }
 };
 
-Message.closeAll = () => {
+Alert.closeAll = () => {
   for (let i = instances.length - 1; i >= 0; i--) {
     instances[i].close();
   }
 };
 
-export default Message;
+export default Alert

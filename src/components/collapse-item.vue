@@ -16,7 +16,7 @@ export default {
   name: 'YuCollapseItem',
   data() {
     return {
-      isActive: true,
+      visible: true,
     }
   },
   props: {
@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     toggle(index) {
-      this.isActive = !this.isActive;
+      this.visible = !this.visible;
       console.log(index);
     },
   },

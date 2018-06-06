@@ -25,6 +25,13 @@
     <yu-button @click="click6">点击</yu-button>
 
 
+    <div class="sub-title">关闭指定序号的消息</div>
+    <yu-button @click="click11">点击</yu-button>
+
+    <div class="sub-title">关闭所有消息</div>
+    <yu-button @click="click12">点击</yu-button>
+
+
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -63,6 +70,12 @@ export default {
     },
     click10() {
       this.$message.info('消息');
+    },
+    click11() {
+      this.$message.close(1)
+    },
+    click12() {
+      this.$message.closeAll()
     },
   },
   components: {

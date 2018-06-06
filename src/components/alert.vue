@@ -1,7 +1,7 @@
 <template>
   <div class="yu-alert"
        :class="[type,{center:center},{description:description}]"
-       v-show="isShow">
+       v-show="visible">
        <!-- icon -->
     <i class="icon iconfont"
        v-if='showIcon'
@@ -66,7 +66,7 @@ export default {
 @import "../assets/css/varible";
 @import "../assets/css/function";
 .yu-alert {
-  padding: 5px 20px;
+  padding: 8px 16px;
   border-radius: 5px;
   width: 100%;
   font-size: $normal;
@@ -80,7 +80,7 @@ export default {
   .alert-close {
     position: absolute;
     right: 10px;
-    top: 6px;
+    top: 8px;
     cursor: pointer;
   }
   .alert-text {
@@ -114,13 +114,17 @@ export default {
 // 辅助性文字
 .yu-alert.description {
   .icon {
-    font-size: 26px;
+    font-size: 30px;
+    vertical-align: middle;
   }
   .alert-text {
+    vertical-align: middle;
     .alert-title {
       font-size: $normal;
+      font-weight: bold;
     }
     .alert-auxiliary {
+      padding-top: 6px;
       font-size: $small;
     }
   }

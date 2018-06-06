@@ -49,6 +49,7 @@ import YuTable from './components/table';
 import YuPagination from './components/pagination';
 import YuPopover from './components/popover';
 import MessageUtil from './components/message.util';
+import NotificationUtil from './components/notification.util';
 
 
 const version = '1.2.0';
@@ -114,6 +115,7 @@ function install(Vue, opts = {}) {
   });
 
   Vue.prototype.$message = MessageUtil;
+  Vue.prototype.$notify = NotificationUtil;
 }
 
 if (typeof window !== 'undefined' && window.Vue) {

@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Main from './message';
+import Main from './notification';
 
-const MessageConstructor = Vue.extend(Main);
+const NotificationConstructor = Vue.extend(Main);
 
 let instance;
 const instances = [];
@@ -18,24 +18,20 @@ function isVNode(node) {
   return node !== null && typeof node === 'object' && hasOwn(node, 'componentOptions');
 }
 
-const Message = (options) => {
-  options = options || {};
-  if (typeof options === 'string') {
-    options = {
-      message: options,
-    };
+const Notification = (options) => {
+  if (typeof options !== 'object') {
+    console.error('options must be an object')
+    return
   }
+  options = options || {};
 
-  const id = `message_${seed++}`;
+  const id = `notification_${seed++}`;
 
-  instance = new MessageConstructor({
+  instance = new NotificationConstructor({
     data: options,
   });
   instance.id = id;
-  if (isVNode(instance.message)) {
-    instance.$slots.default = [instance.message];
-    instance.message = null;
-  }
+
   instance.vm = instance.$mount();
   document.body.appendChild(instance.vm.$el);
   instance.vm.visible = true;
@@ -45,20 +41,15 @@ const Message = (options) => {
 };
 
 ['success', 'warning', 'info', 'danger', 'primary'].forEach((type) => {
-  Message[type] = (options) => {
-    if (typeof options === 'string') {
-      options = {
-        message: options,
-      };
-    }
+  Notification[type] = (options) => {
     options.type = type;
-    return Message(options);
+    return Notification(options);
   };
 });
 
-Message.close = (id) => {
+Notification.close = (id) => {
   for (let i = 0, len = instances.length; i < len; i++) {
-    if (`message_${id}` === instances[i].id) {
+    if (`notification_${id}` === instances[i].id) {
       instances[i].close();
       instances.splice(i, 1);
       break;
@@ -66,10 +57,10 @@ Message.close = (id) => {
   }
 };
 
-Message.closeAll = () => {
+Notification.closeAll = () => {
   for (let i = instances.length - 1; i >= 0; i--) {
     instances[i].close();
   }
 };
 
-export default Message;
+export default Notification;
