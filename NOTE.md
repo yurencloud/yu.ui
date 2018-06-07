@@ -109,3 +109,20 @@ this.$options.methods.changeValue.bind(this)()
     login: 'hubot',
   })
 ~~~
+
+## 8.组件是没有v-model属性的，要自行定义
+定义的方式一：
+如果是input类型的，使用
+```
+@input
+this.$emit('input', value)
+```
+如果是其他类型的，使用
+```
+  model: {
+    prop: 'value', // 如果用了，就能双向同步，不用，感觉是单向同步
+    event: 'change',
+  },
+  
+  this.$emit('change', value)
+```

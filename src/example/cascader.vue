@@ -23,6 +23,10 @@
     <div class="sub-title">动态加载</div>
     <yu-cascader ref="cascader" :cascader="fetchCascader" @fetch="cascaderFetch" remote/>
 
+    <div class="sub-title">v-model</div>
+    <yu-cascader v-model="value" :cascader="cascader"/>
+    <div>{{value}}</div>
+
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -32,6 +36,7 @@ import YuCascader from '../components/cascader';
 export default {
   data() {
     return {
+      value: '',
       cascader: [{
         value: 'zhinan',
         label: '指南',

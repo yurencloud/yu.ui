@@ -4,7 +4,7 @@
          :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
     <span class="checkbox">
       <input type="checkbox"
-             ref="input"
+             :checked="checked"
              :name="name"
              :value="value">
     </span>
@@ -18,8 +18,12 @@ export default {
   data() {
     return {
       value: this.label,
-      isChecked: this.checked,
-    };
+      checkedStatus: this.checked,
+    }
+  },
+  model: {
+    prop: 'checked',
+    event: 'input',
   },
   props: {
     checked: Boolean,
@@ -32,18 +36,35 @@ export default {
     handleClick() {
       // 如果禁用，直接返回
       if (this.disabled) return;
-      this.isChecked = !this.isChecked;
-      this.$emit('change', this.value, this.name, this.isChecked);
+      this.$emit('change', this.value, this.name, !this.checked);
       this.$emit('click');
       if (this.$parent.isCheckboxs) {
-        if (this.value === undefined) return;
-        this.$parent.handleChange(this.value, this.isChecked);
+        this.checkedStatus = !this.checkedStatus
+        this.$emit('input', this.checkedStatus);
+        this.$parent.handleChange(this.value, this.checkedStatus);
         return;
       }
       if (this.$parent.isField) {
-        this.$parent.handleChange({ value: this.isChecked ? this.value : '', name: this.name });
+        this.$parent.handleChange({ value: !this.checked ? this.value : '', name: this.name });
       }
+      this.$emit('input', !this.checked);
     },
+    syncChecked() {
+      this.checkedStatus = (this.$parent.value.indexOf(this.label) > -1);
+    },
+  },
+  computed: {
+    isChecked() {
+      if (this.$parent.isCheckboxs) {
+        return this.checkedStatus
+      }
+      return this.checked;
+    },
+  },
+  mounted() {
+    if (this.$parent.isCheckboxs) {
+      this.checkedStatus = (this.$parent.value.indexOf(this.label) > -1);
+    }
   },
 };
 </script>

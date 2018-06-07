@@ -27,6 +27,8 @@ import MessageBox from '../example/message-box'
 import MessageUtil from '../components/message.util'
 import NotificationUtil from '../components/notification.util'
 import AlertUtil from '../components/alert.util'
+import ConfirmUtil from '../components/confirm.util'
+import PromptUtil from '../components/prompt.util'
 
 Vue.use(Router)
 // 额外工具
@@ -34,6 +36,8 @@ Vue.prototype.$message = MessageUtil;
 Vue.prototype.$notify = NotificationUtil;
 Vue.prototype.$notify = NotificationUtil;
 Vue.prototype.$alert = AlertUtil;
+Vue.prototype.$confirm = ConfirmUtil;
+Vue.prototype.$prompt = PromptUtil;
 
 export default new Router({
   routes: [

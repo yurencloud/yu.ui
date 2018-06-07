@@ -5,10 +5,10 @@
          :class='[{center:center},customClass]'
     >
         <div class="dialog-box" v-show="visible">
-          <div class="message-title">{{title}} <i class="iconfont icon-close" @click="cancel" v-if="showClose"
+          <div class="message-title">{{title}} <i class="iconfont icon-close" @click="cancelEvent" v-if="showClose"
                                                   id="message-icon"></i></div>
           <!--文字-->
-          <div class="message-text" v-if="!isInput">
+          <div class="message-text" >
             <i :class="['iconfont',typeItems[type].icon]"
                v-if="type"
                :style="{color:typeItems[type].color}"
@@ -16,37 +16,47 @@
             <div :class="{margin:type}">{{message}}</div>
           </div>
           <!--input框-->
-          <div class="message-input" v-else>
-            <div class="input-title">{{message}}</div>
-            <input :type="inputType ? inputType : 'text'" class="input" :placeholder="inputValue? inputValue :''">
+          <div class="message-input" v-if="isInput">
+            <yu-input :type="inputOptions.type"
+                      :placeholder="inputOptions.placeholder"
+                      :disabled="inputOptions.disabled"
+                      :readonly="inputOptions.readonly"
+                      v-model="value"
+                      :name="name"
+                      :autofocus="inputOptions.autofocus"
+                      @click="inputOptions.handleClick"
+                      @blur="inputOptions.handleBlur"
+                      @focus="inputOptions.handleFocus"
+                      @change="inputOptions.handleChange"
+                      @keyup="inputOptions.handleKeyup"
+                      :width="inputOptions.width"
+                      :cols="inputOptions.cols"
+                      :rows="inputOptions.rows"
+                      :size="inputOptions.size"
+                      :remote="inputOptions.remote"
+                      :options="inputOptions.options"
+                      :class="[{prefix:inputOptions.prefix},{suffix:inputOptions.suffix}]"
+                      :style="{width:inputOptions.width}"
+
+            />
             <!--验证错误-->
             <div class="verification-result"
-                 v-if="!result"
+                 v-if="!validateResult"
                  ref="input">
               {{inputErrorMessage}}
             </div>
           </div>
           <div class="message-btn">
             <!--确认和取消按钮-->
-            <div class="message-cancle"
+            <div class="message-cancel"
                  :class="[cancelButtonClass,]"
-                 @click="cancel">
-              <yu-button size="medium"
-                         v-if="showCancelButton"
-              >
-                {{cancelButtonText}}
-              </yu-button>
+                 @click="cancelEvent">
+              <yu-button size="medium" v-if="showCancelButton">{{cancelButtonText}}</yu-button>
             </div>
             <div class="message-confirm"
                  :class="[confirmButtonClass,]"
-                 @click="confirm">
-              <yu-button
-                type="primary"
-                size="medium"
-                v-if="showConfirmButton"
-              >
-                {{confirmButtonText}}
-              </yu-button>
+                 @click="confirmEvent">
+              <yu-button type="primary" size="medium" v-if="showConfirmButton">{{confirmButtonText}}</yu-button>
             </div>
           </div>
         </div>
@@ -56,11 +66,13 @@
 
 <script>
 import YuButton from './button';
+import YuInput from './input';
 
 export default {
   name: 'YuMessageBox',
   components: {
     YuButton,
+    YuInput,
   },
   data() {
     return {
@@ -86,8 +98,9 @@ export default {
         },
       },
       icon: '',
-      result: true,
       value: '',
+      name: '',
+      validateResult: true,
       confirmButtonText: '确认',
       showConfirmButton: true,
       cancelButtonText: '取消',
@@ -97,30 +110,67 @@ export default {
       isInput: false,
       inputErrorMessage: '',
       inputPattern: null,
+      inputOptions: {
+        value: '',
+        type: 'input',
+        placeholder: '请输入',
+        autofocus: true,
+        width: '100%',
+        handleClick: () => {},
+        handleBlur: () => {},
+        handleFocus: () => {},
+        handleChange: (value, name) => {
+          this.value = value;
+          this.name = name;
+        },
+        handleKeyup: () => {},
+      },
       center: false,
       showClose: true,
       lockScroll: true,
       inputValue: '',
       cancelButtonClass: '',
       confirmButtonClass: '',
-      inputType: 'text',
       type: '',
       customClass: '',
+      confirm: null,
+      cancel: null,
     }
   },
   methods: {
-    onclick() {
-      this.visible = !this.visible;
-      if (this.lockScroll) {
-        document.querySelector('body').classList.add('lock-scroll');
+    confirmEvent() {
+      console.log(1);
+      // 如果是prompt，又有验证规则，则确认时就验证
+      const the = this;
+      if (this.isInput) {
+        if (this.inputPattern != null) {
+          this.validateResult = this.inputPattern.test(the.value);
+          console.log(this.value);
+          console.log(this.validateResult);
+          if (!this.validateResult) {
+            return;
+          }
+        }
+      }
+
+      this.$destroy(true);
+      this.$el.parentNode.removeChild(this.$el);
+      if (this.confirm != null) {
+        this.confirm(this.value)
       }
     },
-    confirm(event) {
-      this.$emit('confirm', event);
-    },
-    cancel(event) {
+    cancelEvent() {
       this.visible = false;
-      this.$emit('cancel', event);
+      this.$destroy(true);
+      this.$el.parentNode.removeChild(this.$el);
+      if (this.cancel != null) {
+        this.cancel()
+      }
+    },
+    close() {
+      this.visible = false;
+      this.$destroy(true);
+      this.$el.parentNode.removeChild(this.$el);
     },
   },
 }
@@ -168,6 +218,9 @@ export default {
             cursor: pointer;
             color: $light-text;
             font-size: $huge;
+            &:hover{
+              color: $primary;
+            }
           }
         }
         .message-text {
@@ -190,6 +243,7 @@ export default {
           }
         }
         .message-input {
+          margin-bottom: 40px;
           input {
             width: 100%;
             outline: none;
@@ -216,7 +270,7 @@ export default {
         .message-btn {
           text-align: right;
         }
-        .message-cancle {
+        .message-cancel {
           display: inline-block;
         }
         .message-confirm {

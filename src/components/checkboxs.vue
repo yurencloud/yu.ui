@@ -6,7 +6,8 @@
                  ignore
                  :class="[{isChecked:isChecked}]"
                  @click="selectAllClick"
-    >全选</yu-checkbox>
+    >全选
+    </yu-checkbox>
     <slot/>
   </div>
 </template>
@@ -19,10 +20,19 @@ export default {
   data() {
     return {
       isChecked: false,
-      value: [],
     }
   },
+  model: {
+    prop: 'value',
+    event: 'change',
+  },
   props: {
+    value: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
     name: String,
     isCheckboxs: {
       type: Boolean,
@@ -53,30 +63,37 @@ export default {
           }
         }
       });
+
       // 提交至表单
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: this.value.toString() });
       }
+
+      this.$emit('change', this.value)
     },
     handleChange(value, isChecked) {
+      const values = this.value.slice(0);
       if (isChecked) {
-        this.value.push(value);
+        values.push(value);
       } else {
-        this.value.splice(this.value.indexOf(value), 1);
+        values.splice(values.indexOf(value), 1);
       }
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: this.value.toString() });
       }
+      this.$emit('change', values)
     },
   },
-  mounted() {
-    this.$children.forEach((item, index) => {
-      if (index > 0 && item.isChecked) {
-        this.value.push(item.value);
-      }
-    });
-  },
-};
+    watch: {
+      value() {
+        // 同步子checkbox
+        this.$children.forEach((item)=>{
+          item.syncChecked()
+        })
+      },
+    },
+}
+;
 </script>
 <style lang="scss" scoped type="text/scss">
   .selectAll {

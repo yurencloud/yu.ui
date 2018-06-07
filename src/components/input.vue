@@ -11,14 +11,16 @@
       type="text"
       :placeholder="placeholder"
       :disabled="disabled"
-      v-model="value"
+      :value="value"
       :readonly="readonly"
       :name="name"
+      :autofocus="autofocus"
       @click="handleClick"
       @blur="handleBlur"
       @focus="handleFocus"
       @change="handleChange"
       @keyup="handleKeyup"
+      @input="handleInput"
       :class="[{prefix:prefix},{suffix:suffix},{append:$slots.append},{prepend:$slots.prepend}]"
       :style="{width:width}">
 
@@ -33,7 +35,6 @@
     <textarea
       v-if="type==='textarea'"
       :name="name"
-      id=""
       :cols="cols"
       :rows="rows"
       :placeholder="placeholder"
@@ -42,7 +43,8 @@
       @focus="handleFocus"
       @change="handleChange"
       @keyup="handleKeyup"
-      v-model="value"
+      @input="handleInput"
+      :value="value"
       :style="{width:width}"
       :readonly="readonly"
     ></textarea>
@@ -92,6 +94,7 @@ export default {
     prefix: String,
     suffix: String,
     name: String,
+    autofocus: Boolean,
     size: {
       type: String,
       default: 'normal',
@@ -151,6 +154,11 @@ export default {
         this.$parent.handleChange({ name: this.name, value: this.value });
       }
       this.$emit('change', this.value, this.name);
+    },
+    // 实现v-model
+    handleInput(event) {
+      this.value = event.target.value
+      this.$emit('input', this.value)
     },
     changeValue(value) {
       this.value = value;

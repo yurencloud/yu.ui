@@ -59,6 +59,8 @@
 </template>
 
 <script>
+  /* eslint-disable guard-for-in,guard-for-in */
+
 import YuInput from './input';
 import YuLoading from './loading';
 
@@ -72,7 +74,12 @@ export default {
       secondCascader: [],
       thirdCascader: [],
       value: this.defaultValue || {},
+      valueArray: [],
     }
+  },
+  model: {
+    prop: 'valueArray',
+    event: 'change',
   },
   props: {
     cascader: Array,
@@ -148,6 +155,7 @@ export default {
     },
     changeValue() {
       const value = this.value;
+      const valueArray = [];
 
       let text = '';
       if (this.short) {
@@ -160,8 +168,17 @@ export default {
       if (!this.changeOnSelect) {
         this.visible = false;
       }
+
+      for (const key in value) {
+        valueArray.push(value[key].value)
+      }
+
+      this.valueArray = valueArray;
+
+      this.$emit('change', valueArray)
+
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: text });
+        this.$parent.handleChange({ name: this.name, value: valueArray });
       }
     },
     activeOption($event) {

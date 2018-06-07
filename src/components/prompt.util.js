@@ -18,8 +18,8 @@ function isVNode(node) {
   return node !== null && typeof node === 'object' && hasOwn(node, 'componentOptions');
 }
 
-
-const Alert = (message, title, options) => {
+// 第一个参数可以是字符串或者对象，第二个参数必定是标题
+const Prompt = (message, title, options) => {
   options = options || {};
   options.message = message;
 
@@ -27,7 +27,7 @@ const Alert = (message, title, options) => {
     options.title = title;
   }
 
-  const id = `alert_${seed++}`;
+  const id = `prompt_${seed++}`;
 
   instance = new MessageBoxConstructor({
     data: options,
@@ -40,13 +40,15 @@ const Alert = (message, title, options) => {
   instance.vm = instance.$mount();
   document.body.appendChild(instance.vm.$el);
   instance.vm.visible = true;
+  instance.vm.showCancelButton = true;
+  instance.vm.isInput = true;
   instance.dom = instance.vm.$el;
   instances.push(instance);
   return instance.vm;
 };
 
 ['success', 'warning', 'info', 'danger', 'primary'].forEach((type) => {
-  Alert[type] = (message, title, options) => {
+  Prompt[type] = (message, title, options) => {
     options = options || {};
     options.message = message;
 
@@ -55,13 +57,13 @@ const Alert = (message, title, options) => {
     }
 
     options.type = type;
-    return Alert(message, title, options);
+    return Prompt(message, title, options);
   };
 });
 
-Alert.close = (id) => {
+Prompt.close = (id) => {
   for (let i = 0, len = instances.length; i < len; i++) {
-    if (`alert_${id}` === instances[i].id) {
+    if (`prompt_${id}` === instances[i].id) {
       instances[i].close();
       instances.splice(i, 1);
       break;
@@ -69,10 +71,10 @@ Alert.close = (id) => {
   }
 };
 
-Alert.closeAll = () => {
+Prompt.closeAll = () => {
   for (let i = instances.length - 1; i >= 0; i--) {
     instances[i].close();
   }
 };
 
-export default Alert
+export default Prompt
