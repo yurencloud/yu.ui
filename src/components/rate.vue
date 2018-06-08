@@ -1,10 +1,13 @@
 <template>
-  <div class="yu-rate" @mouseout="handleMouseout" @click="handleClick($event)" >
-    <i data-value="1" class="iconfont" :class="[value>=1?'icon-star':'icon-star-o']" @mouseover="changeValue(1)"></i>
-    <i data-value="2" class="iconfont" :class="[value>=2?'icon-star':'icon-star-o']" @mouseover="changeValue(2)"></i>
-    <i data-value="3" class="iconfont" :class="[value>=3?'icon-star':'icon-star-o']" @mouseover="changeValue(3)"></i>
-    <i data-value="4" class="iconfont" :class="[value>=4?'icon-star':'icon-star-o']" @mouseover="changeValue(4)"></i>
-    <i data-value="5" class="iconfont" :class="[value==5?'icon-star':'icon-star-o']" @mouseover="changeValue(5)"></i>
+  <div class="yu-rate" @mouseout="handleMouseout"  >
+    <i v-for="item in options"
+       :data-value="item.value"
+       v-bind:key="item.value"
+       class="iconfont"
+       :class="[item.status?item.activeIcon:item.inactiveIcon]"
+       @mouseover="handleMouseover(item.value)"
+       @click="handleClick(item.value)"
+    ></i>
     <span v-if="labeled">{{label[value-1]}}</span>
     <input type="text" :name="name" :value="value" style="display: none">
   </div>
@@ -15,14 +18,30 @@ export default {
   name: 'YuRate',
   data() {
     return {
-      value: this.defaultValue || 0,
-      selectValue: 0,
+      currentValue: 0,
+      isMouseover: false,
     };
+  },
+  model: {
+    prop: 'value',
+    event: 'input',
   },
   props: {
     value: {
       type: Number,
       default: 0,
+    },
+    options: {
+      type: Array,
+      default(){
+        return [
+          {value: 1, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
+          {value: 2, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
+          {value: 3, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
+          {value: 4, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
+          {value: 5, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
+        ]
+      }
     },
     readOnly: Boolean,
     name: String,
@@ -33,25 +52,42 @@ export default {
     },
   },
   methods: {
-    handleClick($event) {
+    handleClick(value) {
       if (this.readOnly) return;
-      const value = $event.target.getAttribute('data-value');
-      this.selectValue = value;
-      this.value = value;
+      this.$emit('input', value)
     },
     handleMouseout() {
       if (this.readOnly) return;
-      this.value = this.selectValue;
+      this.currentValue = 0;
+      this.isMouseover = false;
     },
-    changeValue(value) {
+    handleMouseover(value) {
       if (this.readOnly) return;
-      this.value = value;
-
+      this.isMouseover = true;
+      this.currentValue = value;
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: this.value });
       }
     },
   },
+  watch: {
+    value(value){
+      this.options.map((item,index)=>{
+         item.status = index < value ;
+      })
+    },
+    currentValue(value){
+      if(this.isMouseover){
+        this.options.map((item,index)=>{
+          item.status = index < value ;
+        })
+      }else{
+        this.options.map((item,index)=>{
+          item.status = index < this.value ;
+        })
+      }
+    }
+  }
 };
 </script>
 

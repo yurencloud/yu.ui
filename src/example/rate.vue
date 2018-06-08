@@ -2,8 +2,8 @@
   <div id="container" style="margin: 30px">
     <h2>YU.UI</h2>
     <div class="title">等级</div>
-    <div class="sub-title">普通用法</div>
-    <yu-rate/>
+    <div class="sub-title" >普通用法</div>
+    <yu-rate v-model="value1"/>
 
     <div class="sub-title">显示label</div>
     <yu-rate labeled/>
@@ -23,6 +23,7 @@ import YuRate from '../components/rate';
 export default {
   data() {
     return {
+      value1: 0,
       label2: ['极差2', '失望2', '一般2', '满意2', '惊喜2'],
     }
   },

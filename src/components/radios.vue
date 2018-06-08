@@ -30,10 +30,7 @@ export default {
   watch: {
     value(value){
       for(let i = 0; i< this.$children.length; i++){
-        if(this.$children[i].value === value){
-          this.$children[i].checkedStatus = true;
-          break;
-        }
+          this.$children[i].checkedStatus = this.$children[i].value === value;
       }
     }
   }
