@@ -21,16 +21,28 @@
     <yu-progress type="circle" stroke-height="10px" status="exception" :percentage="50"/>
     <yu-progress type="circle" stroke-height="10px" :percentage="100"/>
 
+    <div class="sub-title">v-model</div>
+    <yu-progress type="line" stroke-height="10px" :percentage="value"/>
+
+    <yu-counter v-model="value" :step="10" />
+
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
 <script>
 import YuProgress from '../components/progress';
+import YuCounter from '../components/counter';
 
 export default {
+  data() {
+    return {
+      value: 50,
+    }
+  },
   methods: {},
   components: {
     YuProgress,
+    YuCounter,
   },
 };
 </script>

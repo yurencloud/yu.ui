@@ -34,11 +34,11 @@
       <yu-checkbox @change="checkboxChange" label="2" >西瓜</yu-checkbox>
       <yu-checkbox @change="checkboxChange" label="3" @input="inputhand" >桃子</yu-checkbox>
     </yu-checkboxs>
-    <yu-button @click="handleClick">改变value</yu-button>
+    <yu-button @click="handleClick" style="margin-top: 20px;">改变value</yu-button>
     <div style="padding:20px 0;">{{value}}</div>
 
     <yu-checkbox v-model="value2" label="2">香蕉</yu-checkbox>
-    <yu-button @click="value2=!value2">改变value</yu-button>
+    <yu-button @click="value2=!value2" style="display: block;margin-top: 20px;">改变value</yu-button>
     <div style="padding:20px 0;">{{value2}}</div>
   </div>
 </template>

@@ -13,12 +13,14 @@
       :width="width"
       :size="size"
       @clear="clear"
+     :value="label"
     />
     <transition name="zoom-in-top">
       <div class="options" :class="[{overflow:overflow}]" v-show="visible">
         <slot/>
       </div>
       <!--选中选项显示-->
+    </transition>
       <div class="selected" v-if="showSelects && selects.length>0">
         <yu-tag closable
                 v-for="item in selects"
@@ -29,7 +31,6 @@
           {{item.label}}
         </yu-tag>
       </div>
-    </transition>
   </div>
 </template>
 
@@ -42,12 +43,16 @@ export default {
   data() {
     return {
       visible: false,
-      value: '',
       label: '',
       selects: [],
     };
   },
+  model: {
+    prop: 'value',
+    event: 'selected',
+  },
   props: {
+    value: [Array, String, Number],
     overflow: Boolean,
     placeholder: {
       type: String,
@@ -69,7 +74,7 @@ export default {
 
   methods: {
     clear() {
-      this.value = '';
+      this.$emit('selected', null)
       this.label = '';
       this.selects = [];
 
@@ -85,33 +90,26 @@ export default {
       if (!this.visible) event.target.blur();
     },
     handleSelect(option) {
-      const labels = [];
-      const values = [];
       if (this.multi) {
-        this.selects.push(option);
-        this.selects.forEach((item) => {
-          values.push(item.value);
-          labels.push(item.label);
-        })
+        if (this.value != null) {
+          const value = this.value.splice(0)
+          value.push(option.value)
+          this.$emit('selected', value)
+        } else {
+          const value = []
+          value.push(option.value)
+          this.$emit('selected', value)
+        }
+      } else {
+        this.$emit('selected', option.value)
       }
-      this.$refs.input.value = this.multi ? labels.toString() : option.label;
       this.$refs.input.$el.children[0].blur();
-      this.value = option.value;
-      this.label = option.label;
       this.visible = false;
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.multi ? values.toString() : this.value });
-      }
-      this.$emit('selected', this.value);
     },
     handleBlur(event) {
       this.visible = false;
       if (this.$parent.isField) {
-        const values = [];
-        this.selects.forEach((item) => {
-          values.push(item.value);
-        })
-        this.$parent.handleBlur({ name: this.name, value: this.multi ? values.toString() : this.value });
+        this.$parent.handleBlur({ name: this.name, value: this.value.toString() });
       }
       this.$emit('blur', event);
     },
@@ -123,8 +121,8 @@ export default {
         values.push(item.value);
         labels.push(item.label);
       })
-      this.$refs.input.value = labels.toString();
       this.$refs.input.$el.children[0].blur();
+      this.label = labels.toString()
       this.$children.forEach((item) => {
         if (item.value === option.value) {
           item.hide = false;
@@ -138,7 +136,38 @@ export default {
       this.cancelSelect({ value: item.value })
     },
   },
-
+  watch: {
+    value(value) {
+      const the = this;
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.multi ? value.toString() : value });
+      }
+      if (this.multi) {
+        const selects = [];
+        const label = [];
+        if (this.value != null) {
+          this.$children.forEach((item) => {
+            if (the.value.indexOf(item.value) > -1) {
+              selects.push({
+                value: item.value,
+                label: item.label,
+              })
+              label.push(item.label)
+            }
+          })
+        }
+        this.selects = selects
+        this.label = label.toString()
+      } else {
+        for (let i = 0; i < this.$children.length; i++) {
+          if (value === this.$children[i].value) {
+            this.label = this.$children[i].label;
+            break;
+          }
+        }
+      }
+    },
+  },
   components: {
     YuInput,
     YuTag,

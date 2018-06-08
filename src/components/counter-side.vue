@@ -4,10 +4,11 @@
       :size="size"
       ref='input'
       :name="name"
-      :defaultValue='value+valueUnit'
       :disabled="disabled"
       @change="handleChange"
+      @inptu="handleInput"
       @blur="handleBlur"
+      :value="value"
     />
     <div :class="[size]">
       <button
@@ -29,16 +30,22 @@
 <script>
 import YuInput from '../components/input';
 
+const calc = require('calculatorjs');
+
 export default {
   name: 'YuCounterSide',
   data() {
     return {
-      value: this.min || this.step,
+      currentValue: this.min || this.value,
       disabledAdd: false,
       disabledSubtract: this.min !== null || false,
     };
   },
   props: {
+    value: {
+      type: Number,
+      default: 0,
+    },
     name: String,
     size: String,
     width: String,
@@ -65,44 +72,54 @@ export default {
   },
   methods: {
     handleSubtract() {
-      this.value -= this.step;
-      this.$refs.input.changeValue(this.value + this.valueUnit);
+      this.currentValue = calc.sub(this.value, this.step);
     },
     handleAdd() {
-      this.value += this.step;
-      this.$refs.input.changeValue(this.value + this.valueUnit);
+      this.currentValue = calc.add(this.value, this.step);
     },
-    handleChange(value) {
-      this.value = parseInt(value, 0);
-      this.$emit('change', value, name);
+    handleChange(value, name) {
+      let fixed = 0;
+      if (this.step.toString().indexOf('.') > -1) {
+        fixed = this.step.toString().split('.')[1].length;
+      }
+      this.currentValue = Number(value).toFixed(fixed);
+      this.$emit('change', this.currentValue, name);
+    },
+    handleInput(value, name) {
+      let fixed = 0;
+      if (this.step.toString().indexOf('.') > -1) {
+        fixed = this.step.toString().split('.')[1].length;
+      }
+      this.currentValue = Number(value).toFixed(fixed);
+      this.$emit('change', this.currentValue, name);
     },
     handleBlur(event) {
       this.$emit('blur', event);
     },
   },
   watch: {
-    value() {
+    currentValue(value) {
       if (this.max !== null) {
-        if (this.value >= this.max) {
-          this.value = this.max;
-          this.$refs.input.changeValue(this.value + this.valueUnit);
+        if (value >= this.max) {
+          this.$emit('input', this.max)
           this.disabledAdd = true;
           return;
         }
         this.disabledAdd = false;
       }
       if (this.min !== null) {
-        if (this.value <= this.min) {
-          this.value = this.min;
-          this.$refs.input.changeValue(this.value + this.valueUnit);
+        if (value <= this.min) {
+          this.$emit('input', this.min)
           this.disabledSubtract = true;
         } else {
           this.disabledSubtract = false;
         }
       }
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value });
       }
+
+      this.$emit('input', value)
     },
   },
   components: {

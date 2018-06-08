@@ -12,6 +12,7 @@
               :disabled="disabled"
               :width="width"
               :size="size"
+              :value="value"
               :placeholder="placeholder"/>
     <!--选择日期-->
     <transition name="zoom-in-top">
@@ -133,14 +134,19 @@ export default {
       years: [],
       year: 0,
       month: 0,
-      value: '',
+      currentValue: '',
       visible: false,
       placeholder: '',
       yearStart: 0,
       active: this.type,
     }
   },
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
   props: {
+    value: String,
     disabled: Boolean,
     width: String,
     size: String,
@@ -157,20 +163,20 @@ export default {
   },
   methods: {
     handleClear() {
-      this.value = '';
+      this.currentValue = '';
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value: this.currentValue });
       }
     },
     handleBlur(event) {
       if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value });
+        this.$parent.handleBlur({ name: this.name, value: this.currentValue });
       }
       this.$emit('blur', event);
     },
     handleChange(value, name) {
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value });
       }
       this.$emit('change', value, name);
     },
@@ -235,8 +241,7 @@ export default {
         group[i] = tds.slice(7 * (i - 1), 7 * i);
       }
       this.days = group;
-      this.$refs.input.changeValue('');
-      this.value = '';
+      this.currentValue = '';
     },
     getMonths() {
       const tds = [];
@@ -255,7 +260,7 @@ export default {
         group[i] = tds.slice(4 * (i - 1), 4 * i);
       }
       this.months = group;
-      this.value = '';
+      this.currentValue = '';
     },
     getYears() {
       const tds = [];
@@ -275,7 +280,7 @@ export default {
         group[i] = tds.slice(4 * (i - 1), 4 * i);
       }
       this.years = group;
-      this.value = '';
+      this.currentValue = '';
     },
     selectDay(day) {
       if (day.disabled) {
@@ -291,7 +296,7 @@ export default {
         })
       });
       day.active = true;
-      this.value = day.value;
+      this.currentValue = day.value;
       this.visible = false;
       if (this.$parent.isField) {
         this.$parent.handleBlur({ name: this.name, value: this.value });
@@ -308,16 +313,16 @@ export default {
         })
       });
       month.active = true;
-      this.value = month.value;
+      this.currentValue = month.value;
       if (this.type !== 'month') {
-        this.month = parseInt(this.value.substr(5, 2), 0);
+        this.month = parseInt(this.currentValue.substr(5, 2), 0);
         this.active = 'day';
         this.getByActive();
       } else {
         this.visible = false;
       }
       if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value });
+        this.$parent.handleBlur({ name: this.name, value: this.currentValue });
       }
     },
     selectYear(year) {
@@ -331,16 +336,16 @@ export default {
         })
       });
       year.active = true;
-      this.value = year.value;
+      this.currentValue = year.value;
       if (this.type !== 'year') {
-        this.year = this.value;
+        this.year = this.currentValue;
         this.active = 'month';
         this.getByActive();
       } else {
         this.visible = false;
       }
       if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value });
+        this.$parent.handleBlur({ name: this.name, value: this.currentValue });
       }
     },
     getByActive() {
@@ -378,8 +383,8 @@ export default {
     this.getByActive();
   },
   watch: {
-    value(value) {
-      this.$refs.input.changeValue(value);
+    currentValue(value) {
+      this.$emit('input', value)
     },
   },
   components: {

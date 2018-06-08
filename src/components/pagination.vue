@@ -73,7 +73,7 @@
       </li>
     </ul>
     <div class="pagination-go" v-if="goTo">
-      前往<input type="text" :value="index" @keyup.enter="goto()">页
+      前往<input type="text" :value="index" @keyup.enter="goto()" >页
     </div>
   </div>
 </template>

@@ -77,7 +77,7 @@ export default {
   name: 'YuInput',
   data() {
     return {
-      value: this.defaultValue || '',
+      currentValue: this.value || '',
       search: false,
       optionsFilter: [],
       activeNumber: -1,
@@ -103,9 +103,7 @@ export default {
     options: Array,
     overflow: Boolean,
     remote: Boolean,
-    defaultValue: {
-      type: [String, Number],
-    },
+    value: [String, Number],
     type: {
       type: String,
       default: 'input',
@@ -124,7 +122,7 @@ export default {
   },
   methods: {
     clear() {
-      this.value = '';
+      this.currentValue = '';
       this.$emit('clear');
     },
     handleClick(event) {
@@ -155,13 +153,12 @@ export default {
       }
       this.$emit('change', this.value, this.name);
     },
-    // 实现v-model
     handleInput(event) {
-      this.value = event.target.value
-      this.$emit('input', this.value)
+      this.$emit('input', event.target.value)
     },
+
     changeValue(value) {
-      this.value = value;
+      this.currentValue = value;
     },
 
     handleKeyup(event) {
@@ -183,12 +180,13 @@ export default {
       if (event.keyCode === 13) {
         if (this.activeNumber >= 0 && this.activeNumber < len) {
           const select = this.$refs.option[this.activeNumber];
-          this.value = select.label;
+          this.currentValue = select.label;
           this.select = select.value;
           this.search = false;
         }
       }
 
+      // remote true是远程，false是本地
       if (!this.remote && event.keyCode !== 38 && event.keyCode !== 40 && event.keyCode !== 13) {
         // 判断是不是远程获取输入提示选项
         if (this.value.trim().length !== 0) {
@@ -196,7 +194,7 @@ export default {
             item.hide = item.label.indexOf(this.value) <= -1;
           })
         } else {
-          this.value = '';
+          this.currentValue = '';
           this.select = '';
           this.$refs.option.forEach((item) => {
             item.hide = false;
@@ -213,14 +211,17 @@ export default {
       }
     },
     handleSelect({ label, value }) {
-      this.value = label;
+      this.currentValue = label;
       this.select = value;
       this.search = false;
     },
   },
   watch: {
-    options(value) {
+    options() {
       this.loading = false
+    },
+    currentValue(currentValue) {
+      this.$emit('input', currentValue)
     },
     value(value) {
       this.loading = true;

@@ -84,14 +84,14 @@ export default {
       this.$emit('change', values)
     },
   },
-    watch: {
-      value() {
-        // 同步子checkbox
-        this.$children.forEach((item)=>{
-          item.syncChecked()
-        })
-      },
+  watch: {
+    value() {
+      // 同步子checkbox
+      this.$children.forEach((item) => {
+        item.syncChecked()
+      })
     },
+  },
 }
 ;
 </script>

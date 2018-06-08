@@ -2,7 +2,12 @@
   <div class="yu-progress" :class="type">
     <div class="line-warp" v-if="type==='line'" :class="{'inside':textInside}">
       <div class="line-progress"
-           :style="[{height:strokeHeight,background:bgcolor,width:`${percentage}%`,lineHeight:strokeHeight,}]"
+           :style="[{
+           height:strokeHeight,
+           background:bgcolor,
+           width:`${percentage}%`,
+           lineHeight:strokeHeight,
+           }]"
       >
         <span v-if="textInside && showText" style="color:#fff">{{`${percentage}%`}}</span>
       </div>
@@ -13,7 +18,9 @@
           <span v-if="!(percentage===100) && !status">{{`${percentage}%`}}</span>
           <span v-else>
             <i class="iconfont"
-               :class="[{'icon-check':status==='success' || percentage===100},{'icon-close':status==='exception'}]"
+               :class="[
+               {'icon-check':status==='success' || percentage===100},
+               {'icon-close':status==='exception'}]"
                :style="{color:bgcolor}"></i>
           </span>
 
@@ -48,7 +55,7 @@ export default {
       type: String,
       default: '#409EFF',
     },
-    percentage: Number,
+    percentage: [Number, String],
     status: String,
     textInside: Boolean,
     showText: {
@@ -64,6 +71,10 @@ export default {
       },
       bgc: String,
     }
+  },
+  model:{
+    prop: 'percentage',
+    event: 'input',
   },
   mounted() {
     if (this.type === 'circle') {

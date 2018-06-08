@@ -7,12 +7,12 @@
 <script>
 export default {
   name: 'YuRadios',
-  data() {
-    return {
-      value: '',
-    }
+  model: {
+    prop: 'value',
+    event: 'input'
   },
   props: {
+    value: String,
     isRadios: {
       type: Boolean,
       default: true,
@@ -21,15 +21,21 @@ export default {
   },
   methods: {
     handleChange(value, isChecked) {
-      if (isChecked) {
-        this.value = value;
-      } else {
-        this.value = '';
-      }
+      this.$emit('input', isChecked ? value : '')
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value: isChecked ? value : '' });
       }
     },
   },
+  watch: {
+    value(value){
+      for(let i = 0; i< this.$children.length; i++){
+        if(this.$children[i].value === value){
+          this.$children[i].checkedStatus = true;
+          break;
+        }
+      }
+    }
+  }
 };
 </script>

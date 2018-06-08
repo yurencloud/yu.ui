@@ -20,7 +20,7 @@ export default {
     };
   },
   props: {
-    defaultValue: {
+    value: {
       type: Number,
       default: 0,
     },

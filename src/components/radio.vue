@@ -1,7 +1,7 @@
 <template>
   <label class="yu-radio" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
   <span class="radio">
-    <input type="radio" :name="name" :value="value" >
+    <input type="radio" :name="name" :value="value" :checked="checked">
   </span>
     <span><slot/></span>
   </label>
@@ -13,9 +13,13 @@ export default {
   name: 'YuRadio',
   data() {
     return {
-      isChecked: this.checked,
       value: this.label,
+      checkedStatus: this.checked,
     };
+  },
+  model: {
+    prop: 'checked',
+    event: 'input',
   },
   props: {
     checked: Boolean,
@@ -29,26 +33,36 @@ export default {
       // 如果禁用，直接返回
       if (this.disabled) return;
       // 如果是单选组，则重置全部
+      // 开关当前单选
+      let isChecked = !this.checked;
+
       if (this.$parent.isRadios) {
-        this.$parent.$children.forEach((item) => {
-          if (item.label !== this.label) {
-            item.isChecked = false
-          }
+        this.$parent.$children.forEach((item)=>{
+          item.checkedStatus = false;
         });
+        this.checkedStatus = !this.checkedStatus;
+        isChecked = this.checkedStatus
       }
 
-      // 开关当前单选
-      this.isChecked = !this.isChecked;
-      this.$emit('change', this.label, this.isChecked, this.name);
+      this.$emit('change', this.label, isChecked, this.name);
+      this.$emit('input', isChecked);
 
       if (this.$parent.isRadios) {
-        this.$parent.handleChange(this.value, this.isChecked);
+        this.$parent.handleChange(this.value, isChecked);
       }
 
       if (this.$parent.isField) {
-        this.$parent.handleChange(this.name, this.isChecked ? this.value : '');
+        this.$parent.handleChange(this.name, isChecked ? this.value : '');
       }
     },
+  },
+  computed:{
+    isChecked(){
+      if(this.$parent.isRadios){
+        return this.checkedStatus
+      }
+      return this.checked
+    }
   },
 };
 </script>

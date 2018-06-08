@@ -7,7 +7,7 @@
       :name="name"
       suffix="icon-angle-down"
       @click="handleClick"
-      v-model="value"
+      :value="value"
       :size="size"
       :width="width"
       :disabled="disabled"
@@ -85,7 +85,7 @@ export default {
     cascader: Array,
     hover: Boolean,
     short: Boolean,
-    defaultValue: Object, // 元素要有对应的active属性
+    value: Object, // 元素要有对应的active属性
     changeOnSelect: Boolean,
     remote: Boolean, // 远程加载数据
     name: String,

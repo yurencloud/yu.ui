@@ -3,44 +3,44 @@
     <h2>YU.UI</h2>
     <div class="title">输入框</div>
     <div class="sub-title">基础用法</div>
-    <yu-input placeholder="请输入用户名" @change="inputChange"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" v-model="value3"/>
     <div class="sub-title">禁用状态</div>
-    <yu-input placeholder="请输入用户名" disabled/>
+    <yu-input placeholder="请输入用户名" disabled v-model="value3"/>
     <div class="sub-title">可清空</div>
-    <yu-input placeholder="请输入用户名" clearable/>
+    <yu-input placeholder="请输入用户名" clearable v-model="value3"/>
     <div class="sub-title">图标</div>
-    <yu-input placeholder="请输入用户名" prefix="icon-user"/>
+    <yu-input placeholder="请输入用户名" prefix="icon-user" v-model="value3"/>
     <yu-input placeholder="请输入用户名" prefix="icon-user" size="small"/>
     <yu-input placeholder="请输入用户名" suffix="icon-user"/>
     <yu-input placeholder="请输入用户名" suffix="icon-user" size="small"/>
     <div class="sub-title">长文本输入</div>
-    <yu-input placeholder="请输入用户名" type="textarea"/>
+    <yu-input placeholder="请输入用户名" type="textarea" v-model="value3"/>
     <div class="sub-title">组合</div>
-    <yu-input placeholder="请输入用户名">
+    <yu-input placeholder="请输入用户名" v-model="value3">
       <yu-button class="append" slot="append">.com</yu-button>
     </yu-input>
-    <yu-input placeholder="请输入用户名">
+    <yu-input placeholder="请输入用户名" v-model="value3">
       <yu-button type="primary" class="append" slot="append">.com</yu-button>
     </yu-input>
-    <yu-input placeholder="请输入用户名">
+    <yu-input placeholder="请输入用户名" v-model="value3">
       <yu-button type="danger" class="append" slot="append">.com</yu-button>
     </yu-input>
-    <yu-input placeholder="请输入用户名" size="small">
+    <yu-input placeholder="请输入用户名" size="small" v-model="value3">
       <yu-button class="append" slot="append" size="small">.com</yu-button>
     </yu-input>
-    <yu-input placeholder="请输入用户名">
+    <yu-input placeholder="请输入用户名" v-model="value3">
       <yu-button class="prepend" slot="prepend">https://</yu-button>
     </yu-input>
-    <yu-input placeholder="请输入用户名" size="small">
+    <yu-input placeholder="请输入用户名" size="small" v-model="value3">
       <yu-button class="prepend" slot="prepend" size="small">https://</yu-button>
     </yu-input>
-    <yu-input placeholder="请输入用户名">
+    <yu-input placeholder="请输入用户名" v-model="value3">
       <yu-select class="append" slot="append" width="100px">
         <yu-option label="猫" value="1"/>
         <yu-option label="狗" value="2"/>
       </yu-select>
     </yu-input>
-    <yu-input placeholder="请输入用户名">
+    <yu-input placeholder="请输入用户名" v-model="value3">
       <yu-select class="prepend" slot="prepend" width="100px">
         <yu-option label="猫" value="1"/>
         <yu-option label="狗" value="2"/>
@@ -48,20 +48,13 @@
     </yu-input>
 
     <div class="sub-title">不同尺寸</div>
-    <yu-input placeholder="请输入用户名" @change="inputChange" prefix="icon-user"/>
-    <yu-input placeholder="请输入用户名" @change="inputChange" size="medium" prefix="icon-user"/>
-    <yu-input placeholder="请输入用户名" @change="inputChange" size="small" prefix="icon-user"/>
-    <yu-input placeholder="请输入用户名" @change="inputChange" size="mini" prefix="icon-user"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" prefix="icon-user" v-model="value3"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" size="medium" prefix="icon-user" v-model="value3"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" size="small" prefix="icon-user" v-model="value3"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" size="mini" prefix="icon-user" v-model="value3"/>
     <div class="sub-title">控制长度</div>
-    <yu-input placeholder="请输入用户名" @change="inputChange" width="50%"/>
-    <div class="sub-title">输入提示(本地搜索)</div>
-    <yu-input
-      overflow
-      @fetch="handleFetch"
-      placeholder="请输入搜索内容"
-      :options="locals"
-    >
-    </yu-input>
+    <yu-input placeholder="请输入用户名" @change="inputChange" width="50%" v-model="value3"/>
+
     <div class="sub-title">输入提示(远程搜索)</div>
     <yu-input
       overflow
@@ -69,8 +62,24 @@
       @fetch="handleFetch"
       placeholder="请输入搜索内容"
       :options="options"
+      v-model="value3"
     >
     </yu-input>
+
+    <div class="sub-title">v-model</div>
+    <yu-input v-model="value3" placeholder="请输入用户名" />
+    <yu-button @click="changeValue">改变value</yu-button>
+    {{value3}}
+    <div class="sub-title">输入提示(本地搜索)</div>
+    <yu-input
+      overflow
+      @fetch="handleFetch"
+      placeholder="请输入搜索内容"
+      :options="locals"
+      v-model="value3"
+    >
+    </yu-input>
+
 
     <div style="margin-bottom: 400px"></div>
   </div>
@@ -84,6 +93,7 @@ import YuOption from '../components/option';
 export default {
   data() {
     return {
+      value3: '电视',
       locals: [
         { value: 1, label: '电视' },
         { value: 2, label: '电脑' },
@@ -95,6 +105,9 @@ export default {
     }
   },
   methods: {
+    changeValue() {
+      this.value3='改变'
+    },
     inputChange(value) {
       console.log(value)
     },

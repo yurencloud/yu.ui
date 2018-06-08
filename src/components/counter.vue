@@ -10,12 +10,13 @@
       :size="size"
       ref='input'
       :name="name"
-      :defaultValue='value+valueUnit'
       :disabled="disabled"
       class="counter"
       @change="handleChange"
       @blur="handleBlur"
+      @input="handleInput"
       :width="width"
+      :value="value"
     />
     <yu-button
       :size="size"
@@ -30,16 +31,24 @@
 import YuInput from '../components/input';
 import YuButton from '../components/button';
 
+const calc = require('calculatorjs');
+
 export default {
   name: 'YuCounter',
   data() {
     return {
-      value: this.min || this.step,
+      currentValue: this.min || this.value,
       disabledAdd: false,
       disabledSubtract: this.min !== null || false,
+      fixed: 0, // 小数点位数
     };
   },
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
   props: {
+    value: [Number, String],
     name: String,
     size: String,
     width: String,
@@ -59,23 +68,29 @@ export default {
       type: Number,
       default: null,
     }, // 包含
-    valueUnit: {
-      type: String,
-      default: '',
-    },
   },
   methods: {
     handleSubtract() {
-      this.value -= this.step;
-      this.$refs.input.changeValue(this.value + this.valueUnit);
+      this.currentValue = calc.sub(this.value, this.step);
     },
     handleAdd() {
-      this.value += this.step;
-      this.$refs.input.changeValue(this.value + this.valueUnit);
+      this.currentValue = calc.add(this.value, this.step);
     },
     handleChange(value, name) {
-      this.value = parseInt(value, 0);
-      this.$emit('change', value, name);
+      let fixed = 0;
+      if (this.step.toString().indexOf('.') > -1) {
+        fixed = this.step.toString().split('.')[1].length;
+      }
+      this.currentValue = Number(value).toFixed(fixed);
+      this.$emit('change', this.currentValue, name);
+    },
+    handleInput(value, name) {
+      let fixed = 0;
+      if (this.step.toString().indexOf('.') > -1) {
+        fixed = this.step.toString().split('.')[1].length;
+      }
+      this.currentValue = Number(value).toFixed(fixed);
+      this.$emit('change', this.currentValue, name);
     },
     handleBlur(event) {
       if (this.$parent.isField) {
@@ -85,28 +100,28 @@ export default {
     },
   },
   watch: {
-    value() {
+    currentValue(value) {
       if (this.max !== null) {
-        if (this.value >= this.max) {
-          this.value = this.max;
-          this.$refs.input.changeValue(this.value + this.valueUnit);
+        if (value >= this.max) {
+          this.$emit('input', this.max)
           this.disabledAdd = true;
           return;
         }
         this.disabledAdd = false;
       }
       if (this.min !== null) {
-        if (this.value <= this.min) {
-          this.value = this.min;
-          this.$refs.input.changeValue(this.value + this.valueUnit);
+        if (value <= this.min) {
+          this.$emit('input', this.min)
           this.disabledSubtract = true;
         } else {
           this.disabledSubtract = false;
         }
       }
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value });
       }
+
+      this.$emit('input', value)
     },
   },
   components: {

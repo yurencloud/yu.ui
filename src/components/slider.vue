@@ -63,7 +63,7 @@ export default {
       type: Number,
       default: 400,
     },
-    defaultValue: {
+    value: {
       type: Number,
     },
     point: Boolean,

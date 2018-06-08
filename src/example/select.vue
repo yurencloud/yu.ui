@@ -43,7 +43,7 @@
     </yu-select>
 
     <div class="sub-title">显示多选选项</div>
-    <yu-select placeholder="请选择动物" overflow multi showSelects>
+    <yu-select placeholder="请选择动物" overflow multi showSelects v-model="value2">
       <yu-option label="猫" value="1"/>
       <yu-option label="狗" value="2" disabled/>
       <yu-option label="狗" value="3"/>
@@ -92,18 +92,39 @@
       </yu-option>
     </yu-select>
 
+    <div class="sub-title">v-model</div>
+    <yu-select placeholder="请选择动物" v-model="value">
+      <yu-option label="猫" value="1"/>
+      <yu-option label="狗" value="2"/>
+    </yu-select>
+    <yu-button @click="onClick">点击</yu-button>
+    {{ value }}
+
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
 <script>
 import YuSelect from '../components/select';
 import YuOption from '../components/option';
+import YuButton from '../components/button';
 
 export default {
-  methods: {},
+  data() {
+    return {
+      value: '',
+      value2: [],
+    }
+  },
+  methods: {
+    onClick() {
+      this.value = '1'
+    },
+  },
+
   components: {
     YuSelect,
     YuOption,
+    YuButton,
   },
 };
 </script>

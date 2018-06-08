@@ -4,7 +4,7 @@
     <div class="title">单选框</div>
 
     <div class="sub-title">基础选项</div>
-    <yu-radios>
+    <yu-radios v-model="value2">
       <yu-radio @change="radioChange" checked label="1">苹果</yu-radio>
       <yu-radio @change="radioChange" label="2">香蕉</yu-radio>
       <yu-radio @change="radioChange" label="3">桃子</yu-radio>
@@ -20,7 +20,7 @@
     </yu-radios>
 
     <div class="sub-title">可以多选</div>
-    <yu-radio>手机</yu-radio>
+    <yu-radio v-model="value1">手机</yu-radio>
     <yu-radio>电脑</yu-radio>
 
 
@@ -28,24 +28,30 @@
   </div>
 </template>
 <script>
-import YuButton from '../components/button';
-import YuButtons from '../components/buttons';
-import YuRadio from '../components/radio';
-import YuRadios from '../components/radios';
+  import YuButton from '../components/button';
+  import YuButtons from '../components/buttons';
+  import YuRadio from '../components/radio';
+  import YuRadios from '../components/radios';
 
-export default {
-  methods: {
-    radioChange(value) {
-      console.log(value)
+  export default {
+    data() {
+      return {
+        value1: true,
+        value2: ''
+      }
     },
-  },
-  components: {
-    YuButton,
-    YuButtons,
-    YuRadio,
-    YuRadios,
-  },
-};
+    methods: {
+      radioChange(value) {
+        console.log(value)
+      },
+    },
+    components: {
+      YuButton,
+      YuButtons,
+      YuRadio,
+      YuRadios,
+    },
+  };
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";
