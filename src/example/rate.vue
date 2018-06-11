@@ -14,6 +14,7 @@
     <div class="sub-title">设置默认值，并只读</div>
     <yu-rate readOnly :defaultValue="3"/>
 
+
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>

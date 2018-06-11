@@ -24,6 +24,7 @@ import Alert from '../example/alert'
 import Notification from '../example/notification'
 import Loading from '../example/loading'
 import MessageBox from '../example/message-box'
+import ScrollSelect from '../example/scroll-select'
 import MessageUtil from '../components/message.util'
 import NotificationUtil from '../components/notification.util'
 import AlertUtil from '../components/alert.util'
@@ -140,6 +141,10 @@ export default new Router({
     {
       path: '/message-box',
       component: MessageBox,
+    },
+    {
+      path: '/scroll-select',
+      component: ScrollSelect,
     },
   ],
 })

@@ -10,10 +10,13 @@
               @blur="handleBlur"
               @change="handleChange"
               @clear="handleClear"
+              @input="handleInput"
               ref="input"
               :width="width"
               :disabled="disabled"
               :size="size"
+              :value="value"
+              autocomplete="off"
     />
     <yu-scroll-select
       :split="':'"
@@ -37,11 +40,16 @@ export default {
   name: 'YuTimePicker',
   data() {
     return {
-      value: '',
+      currentValue: '',
       sixty: [],
     }
   },
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
   props: {
+    value: String,
     disabled: Boolean,
     width: String,
     type: {
@@ -79,24 +87,27 @@ export default {
   },
   methods: {
     handleClear() {
-      this.value = '';
+      this.currentValue = '';
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value: this.currentValue });
       }
     },
     handleBlur(event) {
-      this.value = this.$refs.input.value;
+      this.currentValue = this.$refs.input.value;
       if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value });
+        this.$parent.handleBlur({ name: this.name, value: this.currentValue });
       }
       this.$emit('blur', event);
     },
     handleChange(value, name) {
-      this.value = this.$refs.input.value;
+      this.currentValue = value;
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value: this.currentValue });
       }
       this.$emit('change', value, name)
+    },
+    handleInput(value) {
+      this.currentValue = value;
     },
     getMinute(time) {
       const arr = time.split(':');
@@ -153,6 +164,13 @@ export default {
     }
     this.sixty = sixty;
   },
+  watch: {
+    currentValue(value){
+      this.$emit('input', value)
+    }
+
+  },
+
   components: {
     YuInput,
     YuScrollSelect,

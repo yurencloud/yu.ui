@@ -4,7 +4,7 @@
     <div class="title">Switch开关</div>
     <div class="sub-title">普通用法</div>
     <yu-switch on/>
-    <yu-switch/>
+    <yu-switch v-model="value1"/>
 
     <div class="sub-title">其他颜色(开有多种颜色，关只有一种颜色)</div>
     <yu-switch on type="danger"/>
@@ -24,6 +24,8 @@
     <yu-switch on activeLabel="开灯" inactiveLabel="关灯"/>
     <yu-switch inactiveLabel="关灯" activeLabel="开灯">></yu-switch>
 
+    {{value1}}
+
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -31,6 +33,11 @@
 import YuSwitch from '../components/switch';
 
 export default {
+  data() {
+    return {
+      value1: true,
+    }
+  },
   methods: {},
   components: {
     YuSwitch,

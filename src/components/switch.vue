@@ -2,7 +2,7 @@
   <div class="yu-switch" @click="handleClick" :class="[{disabled:disabled}]">
      <input type="checkbox" :disabled="disabled" :name="name" v-model="checked" :value="value">
      <span v-if="!after">{{checked?(activeLabel||label):(inactiveLabel||label)}}</span>
-     <span class="switch" v-if="visible" :class="[{on:checked},type,{disabled:disabled}]">
+     <span class="switch" v-if="visible" :class="[{on:isChecked},type,{disabled:disabled}]">
       <span class="circle"></span>
     </span>
     <span v-if="after">{{checked?(activeLabel||label):(inactiveLabel||label)}}</span>
@@ -16,21 +16,20 @@ export default {
   data() {
     return {
       visible: true,
-      value: this.checked ? this.activeValue : this.inactiveValue,
-      checked: this.on || false,
     };
   },
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
   props: {
+    value: [Number, String, Boolean],
     activeValue: {
       type: [Number, String, Boolean],
       default: true,
     },
     inactiveValue: {
       type: [Number, String, Boolean],
-      default: false,
-    },
-    on: {
-      type: Boolean,
       default: false,
     },
     label: String,
@@ -47,13 +46,32 @@ export default {
   methods: {
     handleClick() {
       if (this.disabled) return;
-      this.checked = !this.checked;
-      this.value = this.checked ? this.activeValue : this.inactiveValue;
-      this.$emit('click', this.value)
+      const value = !this.isChecked ? this.activeValue : this.inactiveValue;
+      this.$emit('click', value)
+      this.$emit('input', value)
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value });
       }
     },
+  },
+  computed: {
+    isChecked() {
+      return this.value === this.activeValue
+    }
+  },
+  watch:{
+    value(value){
+      this.$emit('input', value)
+    }
+  },
+  mounted() {
+    if(this.activeValue === this.value){
+      this.checked = true
+    }
+
+    if(this.inactiveValue === this.value){
+      this.checked = false
+    }
   },
 };
 </script>

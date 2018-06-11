@@ -3,7 +3,7 @@
     <h2>YU.UI</h2>
     <div class="title">时间选择器</div>
     <div class="sub-title">普通用法</div>
-    <yu-time-picker/>
+    <yu-time-picker v-model="value1"/>
 
     <div class="sub-title">设置时间段和步长</div>
     <yu-time-picker :optionParam="time"/>
@@ -16,6 +16,8 @@
 
     <div class="sub-title">远程加载</div>
     <div>同滚动时间列表选择</div>
+
+    {{value1}}
 
     <div style="margin-bottom: 400px"></div>
   </div>
@@ -43,6 +45,7 @@ export default {
         start: '09:00:00',
         end: '18:00:00',
       },
+      value1: '',
     }
   },
   methods: {},

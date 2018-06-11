@@ -21,6 +21,7 @@
       @change="handleChange"
       @keyup="handleKeyup"
       @input="handleInput"
+      :autocomplete="autocomplete"
       :class="[{prefix:prefix},{suffix:suffix},{append:$slots.append},{prepend:$slots.prepend}]"
       :style="{width:width}">
 
@@ -116,6 +117,10 @@ export default {
       type: Number,
       default: 4,
     },
+    autocomplete: {
+      type: String,
+      default: 'on',
+    }
   },
   created() {
     this.$on('handleSelect', this.handleSelect)

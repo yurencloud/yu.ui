@@ -13,6 +13,7 @@
       @clear="handleClear"
       :width="width"
       :size="size"
+      :value="value"
     />
     <transition name="zoom-in-top">
     <div class="container"
@@ -70,7 +71,7 @@ export default {
   data() {
     return {
       visible: false,
-      value: '',
+      currentValue: '',
       label: '',
       selects: [],
       firstActive: 0,
@@ -82,7 +83,12 @@ export default {
       scrollTop: 0,
     };
   },
+  model:{
+    prop: 'value',
+    event: 'input',
+  },
   props: {
+    value: String,
     remote: Boolean,
     disabled: Boolean,
     options: Array,
@@ -99,7 +105,7 @@ export default {
 
   methods: {
     handleClear() {
-      this.value = '';
+      this.$emit('input', '')
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: '' });
       }
@@ -184,7 +190,7 @@ export default {
       }
       this.$refs.input.value = option.label;
       this.$refs.input.$el.children[0].blur();
-      this.value = option.value;
+      this.$emit('input', option.value)
       this.label = option.label;
       this.visible = false;
     },
@@ -214,16 +220,11 @@ export default {
       if (third.label) {
         value += (this.split + third.label);
       }
-      this.value = value;
+      this.$emit('input', value)
       this.visible = false;
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value: value });
       }
-    },
-  },
-  watch: {
-    value(value) {
-      this.$refs.input.changeValue(value);
     },
   },
   components: {
