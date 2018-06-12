@@ -26,8 +26,10 @@
       :options="cascader"
       @firstFetch="firstFetch"
       @secondFetch="secondFetch"
+      @input="handleInput"
       :placeholder="placeholder"
       :disabled="disabled"
+      :value="value"
     />
   </div>
 </template>

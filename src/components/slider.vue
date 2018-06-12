@@ -42,7 +42,15 @@ export default {
       offset: null,
     };
   },
+  model: {
+    prop: 'value',
+    event: 'input',
+  },
   props: {
+    value: {
+      type: Number,
+      default: 0,
+    },
     disabled: Boolean,
     min: {
       type: Number,
@@ -62,9 +70,6 @@ export default {
     width: {
       type: Number,
       default: 400,
-    },
-    value: {
-      type: Number,
     },
     point: Boolean,
     name: String,
@@ -127,9 +132,6 @@ export default {
     },
   },
   computed: {
-    value() {
-      return Math.floor(this.total * this.move / 100);
-    },
     range() {
       const range = [];
       if (!this.step) return range;
@@ -141,11 +143,17 @@ export default {
     },
   },
   watch: {
-    value(value) {
+    move(move) {
+      const value =  Math.floor(this.total * move / 100)
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value });
       }
+      this.$emit('input',value)
     },
+    // TODO::这里可能会有循环bug
+    value(value) {
+      this.move = value / this.total * 100
+    }
   },
 };
 </script>

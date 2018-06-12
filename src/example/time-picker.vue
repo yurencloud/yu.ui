@@ -12,7 +12,7 @@
     <yu-time-picker :optionParam="time2"/>
 
     <div class="sub-title">滚动时间列表选择</div>
-    <yu-time-picker type="scroll" :selectParam="selectParam"/>
+    <yu-time-picker type="scroll" :selectParam="selectParam" v-model="value1"/>
 
     <div class="sub-title">远程加载</div>
     <div>同滚动时间列表选择</div>

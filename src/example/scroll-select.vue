@@ -1,8 +1,8 @@
 <template>
   <div id="container" style="margin: 30px">
     <h2>YU.UI</h2>
-    <yu-scroll-select :options="cascader" placeholder="请选择"/>
-
+    <yu-scroll-select :options="cascader" placeholder="请选择" v-model="value"/>
+    {{value}}
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -12,6 +12,7 @@
   export default {
     data() {
       return {
+        value: '',
         cascader: [{
           value: 'zhinan',
           label: '指南',

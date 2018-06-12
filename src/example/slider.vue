@@ -3,7 +3,7 @@
     <h2>YU.UI</h2>
     <div class="title">slider滑块</div>
     <div class="sub-title">普通用法</div>
-    <yu-slider/>
+    <yu-slider v-model="value2"/>
 
     <div class="sub-title">显示计量单位，元，%等</div>
     <yu-slider value-unit="元"/>
@@ -30,6 +30,8 @@
     <div class="sub-title">最大值最小值</div>
     <yu-slider :min=50 :max=80 :default-value="50"/>
 
+    {{value2}}
+
     <div style="margin-bottom: 400px"></div>
   </div>
 </template>
@@ -37,7 +39,13 @@
 import YuSlider from '../components/slider';
 
 export default {
-  methods: {},
+  data(){
+    return {
+      value2: 0
+    }
+  },
+  methods: {
+  },
   components: {
     YuSlider,
   },
