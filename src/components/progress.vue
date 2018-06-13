@@ -72,29 +72,29 @@ export default {
       bgc: String,
     }
   },
-  model:{
+  model: {
     prop: 'percentage',
     event: 'input',
   },
   mounted() {
     if (this.type === 'circle') {
       this.$nextTick(() => {
-        const demo2 = this.$refs.bar;
-        const circleLength = Math.floor(2 * Math.PI * demo2.getAttribute('r'));
-        demo2.setAttribute('stroke-dasharray', `${circleLength * (this.percentage / 100)},10000`);
+        const demo2 = this.$refs.bar
+        const circleLength = Math.floor(2 * Math.PI * demo2.getAttribute('r'))
+        demo2.setAttribute('stroke-dasharray', `${circleLength * (this.percentage / 100)},10000`)
       })
     }
   },
   computed: {
     bgcolor() {
       if (this.status) {
-        this.bgc = this.statusMap[this.status];
+        this.bgc = this.statusMap[this.status]
       } else if (this.percentage === 100) {
-        this.bgc = '#67C23A';
+        this.bgc = '#67C23A'
       } else {
-        this.bgc = this.color;
+        this.bgc = this.color
       }
-      return this.bgc;
+      return this.bgc
     },
   },
 }

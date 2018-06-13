@@ -26,16 +26,16 @@ export default {
   },
   methods: {
     command(event) {
-      this.visible = !this.visible;
-      const target = event.target;
+      this.visible = !this.visible
+      const target = event.target
       if (target.tagName === 'LI' && (target.className.indexOf('disabled') === -1)) {
-        const comm = target.getAttribute('command');
-        this.$emit('command', comm);
-        this.visibleChange();
+        const comm = target.getAttribute('command')
+        this.$emit('command', comm)
+        this.visibleChange()
       }
     },
     visibleChange() {
-      this.$emit('visibleChange', this.visible);
+      this.$emit('visibleChange', this.visible)
     },
   },
 }

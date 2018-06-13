@@ -35,22 +35,22 @@ export default {
   methods: {
     handleClick() {
       // 如果禁用，直接返回
-      if (this.disabled) return;
-      this.$emit('change', this.value, this.name, !this.checked);
-      this.$emit('click');
+      if (this.disabled) return
+      this.$emit('change', this.value, this.name, !this.checked)
+      this.$emit('click')
       if (this.$parent.isCheckboxs) {
         this.checkedStatus = !this.checkedStatus
-        this.$emit('input', this.checkedStatus);
-        this.$parent.handleChange(this.value, this.checkedStatus);
-        return;
+        this.$emit('input', this.checkedStatus)
+        this.$parent.handleChange(this.value, this.checkedStatus)
+        return
       }
       if (this.$parent.isField) {
-        this.$parent.handleChange({ value: !this.checked ? this.value : '', name: this.name });
+        this.$parent.handleChange({ value: !this.checked ? this.value : '', name: this.name })
       }
-      this.$emit('input', !this.checked);
+      this.$emit('input', !this.checked)
     },
     syncChecked() {
-      this.checkedStatus = (this.$parent.value.indexOf(this.label) > -1);
+      this.checkedStatus = (this.$parent.value.indexOf(this.label) > -1)
     },
   },
   computed: {
@@ -58,15 +58,15 @@ export default {
       if (this.$parent.isCheckboxs) {
         return this.checkedStatus
       }
-      return this.checked;
+      return this.checked
     },
   },
   mounted() {
     if (this.$parent.isCheckboxs) {
-      this.checkedStatus = (this.$parent.value.indexOf(this.label) > -1);
+      this.checkedStatus = (this.$parent.value.indexOf(this.label) > -1)
     }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped type="text/scss">

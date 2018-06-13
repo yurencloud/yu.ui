@@ -30,14 +30,14 @@ export default {
   },
   methods: {
     handleClick(event) {
-      this.$emit('click', event);
+      this.$emit('click', event)
     },
   },
   mounted() {
     if (Number(this.value)) {
       if (this.max < Number(this.value)) {
-        this.valueData = this.max;
-        this.addShow = true;
+        this.valueData = this.max
+        this.addShow = true
       }
     }
   },
@@ -45,8 +45,8 @@ export default {
     valueData(valueData) {
       if (Number(valueData)) {
         if (this.max < Number(valueData)) {
-          this.addShow = true;
-          this.valueData = this.max;
+          this.addShow = true
+          this.valueData = this.max
         }
       }
     },

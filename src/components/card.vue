@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import YuButton from './button';
+import YuButton from './button'
 
 export default {
   name: 'YuCard',

@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import YuRate from '../components/rate';
+import YuRate from '../components/rate'
 
 export default {
   data() {
@@ -32,7 +32,7 @@ export default {
   components: {
     YuRate,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

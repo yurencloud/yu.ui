@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import YuButton from './button';
+import YuButton from './button'
 
 export default {
   name: 'YuDialog',
@@ -46,25 +46,25 @@ export default {
   },
   methods: {
     change() {
-      this.visible = !this.visible;
-      this.lockScroll = this.visible;
+      this.visible = !this.visible
+      this.lockScroll = this.visible
       if (this.lockScroll) {
-        document.getElementsByTagName('body')[0].classList.add('lock');
+        document.getElementsByTagName('body')[0].classList.add('lock')
       } else if (!this.lockScroll) {
-        document.getElementsByTagName('body')[0].classList.remove('lock');
+        document.getElementsByTagName('body')[0].classList.remove('lock')
       }
     },
     close(event) {
-      this.change();
+      this.change()
       this.$emit('cancle', event)
     },
     confirm(event) {
-      this.change();
+      this.change()
       this.$emit('confirm', event)
     },
   },
   mounted() {
-    this.$refs.content.innerHTML = this.content;
+    this.$refs.content.innerHTML = this.content
   },
   components: {
     YuButton,

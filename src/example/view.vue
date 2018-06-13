@@ -616,41 +616,41 @@
 </template>
 
 <script>
-import 'whatwg-fetch';
-import YuButton from '../components/button';
-import YuButtons from '../components/buttons';
-import YuInput from '../components/input';
-import YuOption from '../components/option';
-import YuRadio from '../components/radio';
-import YuRadios from '../components/radios';
-import YuSelect from '../components/select';
-import YuCounter from '../components/counter';
-import YuCheckbox from '../components/checkbox';
-import YuDialog from '../components/dialog';
-import YuToolTip from '../components/tooltip';
-import YuCard from '../components/card';
-import YuCarousel from '../components/carousel';
-import YuCollapseItem from '../components/collapse-item';
-import YuCollapse from '../components/collapse';
-import YuMenuItem from '../components/menu-item';
-import YuCheckboxs from '../components/checkboxs';
-import YuLoading from '../components/loading';
-import YuCounterSide from '../components/counter-side';
-import YuCascader from '../components/cascader';
-import YuSwitch from '../components/switch';
-import YuDropDown from '../components/dropdown';
-import YuDropdownMenu from '../components/dropdown-menu';
-import YuDropdownItem from '../components/dropdown-item';
-import YuBreadcrumb from '../components/breadcrumb';
-import YuBreadcrumbItem from '../components/breadcrumb-item';
-import YuSlider from '../components/slider';
-import YuTimePicker from '../components/time-picker';
-import YuScrollSelect from '../components/scroll-select';
-import YuDatePicker from '../components/date-picker';
-import YuUpload from '../components/upload';
-import YuRate from '../components/rate';
-import YuForm from '../components/form';
-import YuField from '../components/field';
+import 'whatwg-fetch'
+import YuButton from '../components/button'
+import YuButtons from '../components/buttons'
+import YuInput from '../components/input'
+import YuOption from '../components/option'
+import YuRadio from '../components/radio'
+import YuRadios from '../components/radios'
+import YuSelect from '../components/select'
+import YuCounter from '../components/counter'
+import YuCheckbox from '../components/checkbox'
+import YuDialog from '../components/dialog'
+import YuToolTip from '../components/tooltip'
+import YuCard from '../components/card'
+import YuCarousel from '../components/carousel'
+import YuCollapseItem from '../components/collapse-item'
+import YuCollapse from '../components/collapse'
+import YuMenuItem from '../components/menu-item'
+import YuCheckboxs from '../components/checkboxs'
+import YuLoading from '../components/loading'
+import YuCounterSide from '../components/counter-side'
+import YuCascader from '../components/cascader'
+import YuSwitch from '../components/switch'
+import YuDropDown from '../components/dropdown'
+import YuDropdownMenu from '../components/dropdown-menu'
+import YuDropdownItem from '../components/dropdown-item'
+import YuBreadcrumb from '../components/breadcrumb'
+import YuBreadcrumbItem from '../components/breadcrumb-item'
+import YuSlider from '../components/slider'
+import YuTimePicker from '../components/time-picker'
+import YuScrollSelect from '../components/scroll-select'
+import YuDatePicker from '../components/date-picker'
+import YuUpload from '../components/upload'
+import YuRate from '../components/rate'
+import YuForm from '../components/form'
+import YuField from '../components/field'
 // import {YuButton} from '../index';
 
 export default {
@@ -971,25 +971,25 @@ export default {
       console.log(value)
     },
     handleFetch(value) {
-      const the = this;
+      const the = this
       fetch(`/api/restaurants/${value}`)
         .then((response) => {
           response.text().then((data) => {
-            data = JSON.parse(data);
-            the.options = [];
-            const temp = [];
+            data = JSON.parse(data)
+            the.options = []
+            const temp = []
             data.forEach((item) => {
               temp.push({ value: item.id, label: item.value })
-            });
-            the.options = temp;
-          });
+            })
+            the.options = temp
+          })
         }, (error) => {
-          console.log(error.message);
+          console.log(error.message)
         })
     },
     cascaderFetch(item) {
-      const the = this;
-      const query = {};
+      const the = this
+      const query = {}
       if (item.pid === 0) {
         query.pid = item.id
         fetch('/api/fetch/cascader', {
@@ -1001,15 +1001,15 @@ export default {
         })
           .then((response) => {
             response.text().then((data) => {
-              data = JSON.parse(data);
-              const temp = [];
+              data = JSON.parse(data)
+              const temp = []
               data.forEach((i) => {
                 temp.push({ value: i.id, label: i.name, ...i })
               })
-              the.$refs.cascader.secondCascader = temp;
-            });
+              the.$refs.cascader.secondCascader = temp
+            })
           }, (error) => {
-            console.log(error.message);
+            console.log(error.message)
           })
       } else {
         query.pid = item.id
@@ -1023,20 +1023,20 @@ export default {
         })
           .then((response) => {
             response.text().then((data) => {
-              data = JSON.parse(data);
-              const temp = [];
+              data = JSON.parse(data)
+              const temp = []
               data.forEach((i) => {
                 temp.push({ value: i.id, label: i.name, ...i })
               })
-              the.$refs.cascader.thirdCascader = temp;
-            });
+              the.$refs.cascader.thirdCascader = temp
+            })
           }, (error) => {
-            console.log(error.message);
+            console.log(error.message)
           })
       }
     },
-    success(data){
-      console.log('表单接收成功',data);
+    success(data) {
+      console.log('表单接收成功', data)
     },
   },
   components: {
@@ -1076,25 +1076,25 @@ export default {
     YuField,
   },
   mounted() {
-    const the = this;
+    const the = this
     fetch('/api/fetch/cascader', {
       method: 'POST',
     })
       .then((response) => {
         response.text().then((data) => {
-          data = JSON.parse(data);
-          the.fetchCascader = [];
-          const temp = [];
+          data = JSON.parse(data)
+          the.fetchCascader = []
+          const temp = []
           data.forEach((item) => {
             temp.push({ value: item.id, label: item.name, ...item })
           })
-          the.fetchCascader = temp;
-        });
+          the.fetchCascader = temp
+        })
       }, (error) => {
-        console.log(error.message);
-      });
+        console.log(error.message)
+      })
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

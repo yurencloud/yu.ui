@@ -22,8 +22,8 @@
   </div>
 </template>
 <script>
-import YuMessageBox from '../components/message-box';
-import YuButton from '../components/button';
+import YuMessageBox from '../components/message-box'
+import YuButton from '../components/button'
 
 export default {
   data() {
@@ -75,7 +75,7 @@ export default {
     YuMessageBox,
     YuButton,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

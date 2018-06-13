@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import YuPagination from '../components/pagination';
+import YuPagination from '../components/pagination'
 
 export default {
   data() {
@@ -50,14 +50,14 @@ export default {
     }
   },
   methods: {
-    showPage(page){
+    showPage(page) {
       console.log(page)
     },
   },
   components: {
     YuPagination,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

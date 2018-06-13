@@ -534,57 +534,57 @@
 </template>
 
 <script>
-import 'whatwg-fetch';
-import YuButton from '../components/button';
-import YuSteps from '../components/steps';
-import YuStep from '../components/step';
-import YuToolTip from '../components/tooltip';
-import YuTabs from '../components/tabs';
-import YuTabsItem from '../components/tabs-item';
-import YuTabsNav from '../components/tabs-nav';
-import YuCarousel from '../components/carousel';
-import YuCarouselItem from '../components/carousel-item';
-import YuNotification from '../components/notification';
-import YuAlert from '../components/alert';
-import YuMessage from '../components/message';
-import YuMessageBox from '../components/message-box';
-import YuBadge from '../components/badge';
-import YuProgress from '../components/progress';
-import YuTag from '../components/tag';
-import YuTable from '../components/table';
-import YuPagination from '../components/pagination';
-import YuPopover from '../components/popover';
-import YuDropDown from '../components/dropdown';
-import YuDropdownItem from '../components/dropdown-item';
-import YuDropdownMenu from '../components/dropdown-menu';
-import YuMenuItem from '../components/menu-item';
-import YuDialog from '../components/dialog';
-import YuButtons from '../components/buttons';
-import YuInput from '../components/input';
-import YuOption from '../components/option';
-import YuRadio from '../components/radio';
-import YuRadios from '../components/radios';
-import YuSelect from '../components/select';
-import YuCounter from '../components/counter';
-import YuCheckbox from '../components/checkbox';
-import YuCard from '../components/card';
-import YuCollapseItem from '../components/collapse-item';
-import YuCollapse from '../components/collapse';
-import YuCheckboxs from '../components/checkboxs';
-import YuLoading from '../components/loading';
-import YuCounterSide from '../components/counter-side';
-import YuCascader from '../components/cascader';
-import YuSwitch from '../components/switch';
-import YuBreadcrumb from '../components/breadcrumb';
-import YuBreadcrumbItem from '../components/breadcrumb-item';
-import YuSlider from '../components/slider';
-import YuTimePicker from '../components/time-picker';
-import YuScrollSelect from '../components/scroll-select';
-import YuDatePicker from '../components/date-picker';
-import YuUpload from '../components/upload';
-import YuRate from '../components/rate';
-import YuForm from '../components/form';
-import YuField from '../components/field';
+import 'whatwg-fetch'
+import YuButton from '../components/button'
+import YuSteps from '../components/steps'
+import YuStep from '../components/step'
+import YuToolTip from '../components/tooltip'
+import YuTabs from '../components/tabs'
+import YuTabsItem from '../components/tabs-item'
+import YuTabsNav from '../components/tabs-nav'
+import YuCarousel from '../components/carousel'
+import YuCarouselItem from '../components/carousel-item'
+import YuNotification from '../components/notification'
+import YuAlert from '../components/alert'
+import YuMessage from '../components/message'
+import YuMessageBox from '../components/message-box'
+import YuBadge from '../components/badge'
+import YuProgress from '../components/progress'
+import YuTag from '../components/tag'
+import YuTable from '../components/table'
+import YuPagination from '../components/pagination'
+import YuPopover from '../components/popover'
+import YuDropDown from '../components/dropdown'
+import YuDropdownItem from '../components/dropdown-item'
+import YuDropdownMenu from '../components/dropdown-menu'
+import YuMenuItem from '../components/menu-item'
+import YuDialog from '../components/dialog'
+import YuButtons from '../components/buttons'
+import YuInput from '../components/input'
+import YuOption from '../components/option'
+import YuRadio from '../components/radio'
+import YuRadios from '../components/radios'
+import YuSelect from '../components/select'
+import YuCounter from '../components/counter'
+import YuCheckbox from '../components/checkbox'
+import YuCard from '../components/card'
+import YuCollapseItem from '../components/collapse-item'
+import YuCollapse from '../components/collapse'
+import YuCheckboxs from '../components/checkboxs'
+import YuLoading from '../components/loading'
+import YuCounterSide from '../components/counter-side'
+import YuCascader from '../components/cascader'
+import YuSwitch from '../components/switch'
+import YuBreadcrumb from '../components/breadcrumb'
+import YuBreadcrumbItem from '../components/breadcrumb-item'
+import YuSlider from '../components/slider'
+import YuTimePicker from '../components/time-picker'
+import YuScrollSelect from '../components/scroll-select'
+import YuDatePicker from '../components/date-picker'
+import YuUpload from '../components/upload'
+import YuRate from '../components/rate'
+import YuForm from '../components/form'
+import YuField from '../components/field'
 
 
 export default {
@@ -592,7 +592,7 @@ export default {
   directives: {
     popover: {
       inserted(el, binding) {
-        console.log(binding.arg);
+        console.log(binding.arg)
       },
     },
   },
@@ -638,33 +638,25 @@ export default {
         }, // 4
       ],
       messageBoxEvent: {
-        confirm: () => {
-          return {
-            messagePopverType: 'success',
-            messagePopverText: '您输入得邮箱地址为:',
-          }
-        },
-        cancle: () => {
-          return {
-            messagePopverType: 'info',
-            messagePopverText: '已取消删除',
-          }
-        },
+        confirm: () => ({
+          messagePopverType: 'success',
+          messagePopverText: '您输入得邮箱地址为:',
+        }),
+        cancle: () => ({
+          messagePopverType: 'info',
+          messagePopverText: '已取消删除',
+        }),
 
       },
       messageBox: {
-        confirm: () => {
-          return {
-            messagePopverType: 'success',
-            messagePopverText: '删除成功',
-          }
-        },
-        cancle: () => {
-          return {
-            messagePopverType: 'info',
-            messagePopverText: '已取消删除',
-          }
-        },
+        confirm: () => ({
+          messagePopverType: 'success',
+          messagePopverText: '删除成功',
+        }),
+        cancle: () => ({
+          messagePopverType: 'info',
+          messagePopverText: '已取消删除',
+        }),
       },
       tags: ['标签一', '标签二', '标签三'],
       // widths: {
@@ -837,37 +829,37 @@ export default {
           value: 400,
         },
       ],
-    };
+    }
   },
   methods: {
     next() {
-      this.active1 += 1;
-      if (this.active1 >= 5) this.active1 = 0;
+      this.active1 += 1
+      if (this.active1 >= 5) this.active1 = 0
     },
     base() {
-      this.active2 += 1;
-      if (this.active2 >= 3) this.active2 = 0;
+      this.active2 += 1
+      if (this.active2 >= 3) this.active2 = 0
     },
     alert() {
-      alert(99);
+      alert(99)
     },
     handleClose() {
       alert('哈哈哈哈哈哈')
     },
     Close(tag) {
-      this.tags.splice(this.tags.indexOf(tag), 1);
+      this.tags.splice(this.tags.indexOf(tag), 1)
     },
     setCurrent() {
-      alert(999);
+      alert(999)
     },
     currentpage(current) {
-      this.current = current;
+      this.current = current
     },
     slectTwo(num) {
-      this.Items[num].type = 'info';
+      this.Items[num].type = 'info'
     },
     cancleSelect(num) {
-      this.Items[num].type = '';
+      this.Items[num].type = ''
     },
   },
   mounted() {
@@ -924,7 +916,7 @@ export default {
     YuForm,
     YuField,
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

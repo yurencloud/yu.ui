@@ -25,6 +25,14 @@ import Notification from '../example/notification'
 import Loading from '../example/loading'
 import MessageBox from '../example/message-box'
 import ScrollSelect from '../example/scroll-select'
+import Breadcrumb from '../example/breadcrumb'
+import Steps from '../example/steps'
+import Dialog from '../example/dialog'
+import Tooltip from '../example/tooltip'
+import Popover from '../example/popover'
+import Card from '../example/card'
+import Carousel from '../example/carousel'
+import Collapse from '../example/collapse'
 import MessageUtil from '../components/message.util'
 import NotificationUtil from '../components/notification.util'
 import AlertUtil from '../components/alert.util'
@@ -33,12 +41,12 @@ import PromptUtil from '../components/prompt.util'
 
 Vue.use(Router)
 // 额外工具
-Vue.prototype.$message = MessageUtil;
-Vue.prototype.$notify = NotificationUtil;
-Vue.prototype.$notify = NotificationUtil;
-Vue.prototype.$alert = AlertUtil;
-Vue.prototype.$confirm = ConfirmUtil;
-Vue.prototype.$prompt = PromptUtil;
+Vue.prototype.$message = MessageUtil
+Vue.prototype.$notify = NotificationUtil
+Vue.prototype.$notify = NotificationUtil
+Vue.prototype.$alert = AlertUtil
+Vue.prototype.$confirm = ConfirmUtil
+Vue.prototype.$prompt = PromptUtil
 
 export default new Router({
   routes: [
@@ -145,6 +153,38 @@ export default new Router({
     {
       path: '/scroll-select',
       component: ScrollSelect,
+    },
+    {
+      path: '/breadcrumb',
+      component: Breadcrumb,
+    },
+    {
+      path: '/steps',
+      component: Steps,
+    },
+    {
+      path: '/dialog',
+      component: Dialog,
+    },
+    {
+      path: '/tooltip',
+      component: Tooltip,
+    },
+    {
+      path: '/popover',
+      component: Popover,
+    },
+    {
+      path: '/card',
+      component: Card,
+    },
+    {
+      path: '/carousel',
+      component: Carousel,
+    },
+    {
+      path: '/collapse',
+      component: Collapse,
     },
   ],
 })

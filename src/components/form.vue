@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import 'whatwg-fetch';
+import 'whatwg-fetch'
 
 export default {
   name: 'YuForm',
@@ -39,28 +39,28 @@ export default {
   },
   methods: {
     setValues(value) {
-      this.values[value.name] = value.value;
+      this.values[value.name] = value.value
     },
     getValue(name) {
-      return this.values[name];
+      return this.values[name]
     },
     getValues() {
-      return this.values;
+      return this.values
     },
     hasValue(name) {
-      return this.values.hasOwnProperty(name) && this.getValue(name).trim().length > 0;
+      return this.values.hasOwnProperty(name) && this.getValue(name).trim().length > 0
     },
     submit() {
-      const the = this;
-      let error = false;
+      const the = this
+      let error = false
       this.$children.forEach((item) => {
         if (item.isField) {
-          item.handleSubmit();
+          item.handleSubmit()
         }
-        if (item.error) error = true;
+        if (item.error) error = true
       })
 
-      if (error) return;
+      if (error) return
 
       // // 发送原生表单
       // if (this.native) {
@@ -88,30 +88,30 @@ export default {
 
       // 发送GET
       if (this.method.toUpperCase() === 'GET') {
-        let query = '';
+        let query = ''
         for (const key in this.values) {
           if (this.values.hasOwnProperty(key)) {
-            query += `${key}=${this.values[key]}&`;
+            query += `${key}=${this.values[key]}&`
           }
         }
 
         if (!this.action) {
-          throw new Error('Undefined YuForm`s action!');
+          throw new Error('Undefined YuForm`s action!')
         }
 
-        const question = this.action.indexOf('?') > -1 ? '' : '?';
-        console.log(question);
+        const question = this.action.indexOf('?') > -1 ? '' : '?'
+        console.log(question)
         fetch(this.action + question + query.substr(0, query.length - 1), {
           method: 'GET',
         })
           .then((response) => {
             response.text().then((data) => {
-              the.$emit('success', data);
-            });
+              the.$emit('success', data)
+            })
           }, (error) => {
-            the.$emit('error', error);
-            console.log(error.message);
-          });
+            the.$emit('error', error)
+            console.log(error.message)
+          })
       }
 
       // 发送POST
@@ -125,16 +125,16 @@ export default {
         })
           .then((response) => {
             response.text().then((data) => {
-              the.$emit('success', data);
-            });
+              the.$emit('success', data)
+            })
           }, (error) => {
-            the.$emit('error', error);
-            console.log(error.message);
-          });
+            the.$emit('error', error)
+            console.log(error.message)
+          })
       }
     },
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

@@ -23,8 +23,8 @@
   </div>
 </template>
 <script>
-import YuDatePicker from '../components/date-picker';
-import YuButton from '../components/button';
+import YuDatePicker from '../components/date-picker'
+import YuButton from '../components/button'
 
 export default {
   data() {
@@ -41,7 +41,7 @@ export default {
     YuDatePicker,
     YuButton,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

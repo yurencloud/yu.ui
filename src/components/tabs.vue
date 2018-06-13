@@ -19,8 +19,9 @@
 </template>
 
 <script>
-import YuTabsItem from './tabs-item';
-import YuTabsNav from './tabs-nav';
+import YuTabsItem from './tabs-item'
+import YuTabsNav from './tabs-nav'
+
 export default {
   name: 'YuTabs',
   provide() {
@@ -47,43 +48,42 @@ export default {
   },
   methods: {
     active(e) {
-      let len = e.target.parentNode.children.length;
+      let len = e.target.parentNode.children.length
       if (this.addable) {
         len = e.target.parentNode.children.length - 1
       }
       for (let i = 0; i < len - 1; i++) {
-        e.target.parentNode.children[i].index = i;
-        e.target.parentNode.children[i].classList.remove('active');
-        this.$refs.tabitem.children[i].classList.remove('active');
+        e.target.parentNode.children[i].index = i
+        e.target.parentNode.children[i].classList.remove('active')
+        this.$refs.tabitem.children[i].classList.remove('active')
       }
-      const line = this.$refs.line;
+      const line = this.$refs.line
       if (this.tabPosition === 'left' || this.tabPosition === 'right') {
-        line.style.top = `${e.target.index * 40}px`;
+        line.style.top = `${e.target.index * 40}px`
       } else if (this.tabPosition === 'bottom' || !this.tabPosition) {
-        line.style.left = `${e.target.index * 100}px`;
+        line.style.left = `${e.target.index * 100}px`
       }
-      this.$refs.tabitem.children[e.target.index].classList.add('active');
+      this.$refs.tabitem.children[e.target.index].classList.add('active')
       if (this.tabPosition) {
         setTimeout(() => {
-          e.target.classList.add('active');
-        }, 300);
+          e.target.classList.add('active')
+        }, 300)
       } else {
-        e.target.classList.add('active');
+        e.target.classList.add('active')
       }
       this.$nextTick(() => {
-        console.log(document.getElementsByClassName('tabs-nav')[0].children[0].style);
+        console.log(document.getElementsByClassName('tabs-nav')[0].children[0].style)
       })
-      this.$emit('click', e);
+      this.$emit('click', e)
     },
     addItem(e) {
-      e.stopPropagation();
+      e.stopPropagation()
     //  todo  添加 New tabs
     },
   },
   mounted() {
-    this.$children[0].$el.classList.add('active');
-    this.$children[this.$children.length / 2].$el.classList.add('active');
-
+    this.$children[0].$el.classList.add('active')
+    this.$children[this.$children.length / 2].$el.classList.add('active')
   },
 }
 </script>

@@ -85,9 +85,9 @@
   </div>
 </template>
 <script>
-import YuTable from '../components/table';
-import YuButton from '../components/button';
-import YuFixedTable from '../components/fixed-table';
+import YuTable from '../components/table'
+import YuButton from '../components/button'
+import YuFixedTable from '../components/fixed-table'
 
 export default {
   data() {
@@ -221,23 +221,23 @@ export default {
       this.sorted *= -1
     },
     compare(obj1, obj2) {
-      const val1 = obj1.date;
-      const val2 = obj2.date;
+      const val1 = obj1.date
+      const val2 = obj2.date
       if (val1 < val2) {
-        return -1 * this.sorted;
+        return -1 * this.sorted
       } else if (val1 > val2) {
-        return this.sorted;
+        return this.sorted
       }
-      return 0;
+      return 0
     },
   },
   computed: {
     tbody3() {
       this.tbody11.forEach((item) => {
-        item.deleted = '删除';
-        item.update = '修改';
+        item.deleted = '删除'
+        item.update = '修改'
       })
-      return this.tbody11;
+      return this.tbody11
     },
   },
   components: {
@@ -245,7 +245,7 @@ export default {
     YuFixedTable,
     YuButton,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

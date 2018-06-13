@@ -30,8 +30,8 @@
   </div>
 </template>
 <script>
-import YuProgress from '../components/progress';
-import YuCounter from '../components/counter';
+import YuProgress from '../components/progress'
+import YuCounter from '../components/counter'
 
 export default {
   data() {
@@ -44,7 +44,7 @@ export default {
     YuProgress,
     YuCounter,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

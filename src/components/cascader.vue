@@ -59,10 +59,10 @@
 </template>
 
 <script>
-  /* eslint-disable guard-for-in,guard-for-in */
+/* eslint-disable guard-for-in,guard-for-in */
 
-import YuInput from './input';
-import YuLoading from './loading';
+import YuInput from './input'
+import YuLoading from './loading'
 
 export default {
   name: 'YuCascader',
@@ -103,89 +103,89 @@ export default {
   },
   methods: {
     handleClick() {
-      this.visible = !this.visible;
+      this.visible = !this.visible
     },
     firstClick(item, $event) {
-      if (item.disabled) return;
-      this.thirdActive = false;
-      this.activeOption($event);
-      this.value.first = item;
+      if (item.disabled) return
+      this.thirdActive = false
+      this.activeOption($event)
+      this.value.first = item
       if (item.children) {
         if (this.remote) {
           this.secondCascader = []
-          this.$emit('fetch', item);
+          this.$emit('fetch', item)
         } else {
-          this.secondCascader = item.children;
+          this.secondCascader = item.children
         }
-        this.secondActive = true;
+        this.secondActive = true
       } else {
-        delete this.value.second;
-        delete this.value.third;
-        this.changeValue();
+        delete this.value.second
+        delete this.value.third
+        this.changeValue()
       }
       if (this.changeOnSelect) {
-        this.changeValue();
+        this.changeValue()
       }
     },
     secondClick(item, $event) {
-      if (item.disabled) return;
-      this.activeOption($event);
-      this.value.second = item;
+      if (item.disabled) return
+      this.activeOption($event)
+      this.value.second = item
       if (item.children) {
         if (this.remote) {
           this.thirdCascader = []
-          this.$emit('fetch', item);
+          this.$emit('fetch', item)
         } else {
-          this.thirdCascader = item.children;
+          this.thirdCascader = item.children
         }
-        this.thirdActive = true;
+        this.thirdActive = true
       } else {
-        delete this.value.third;
-        this.changeValue();
+        delete this.value.third
+        this.changeValue()
       }
       if (this.changeOnSelect) {
-        this.changeValue();
+        this.changeValue()
       }
     },
     thirdClick(item, $event) {
-      if (item.disabled) return;
-      this.activeOption($event);
-      this.value.third = item;
-      this.changeValue();
+      if (item.disabled) return
+      this.activeOption($event)
+      this.value.third = item
+      this.changeValue()
     },
     changeValue() {
-      const value = this.value;
-      const valueArray = [];
+      const value = this.value
+      const valueArray = []
 
-      let text = '';
+      let text = ''
       if (this.short) {
-        const temp = value.third || value.second || value.first;
-        text = temp.label;
+        const temp = value.third || value.second || value.first
+        text = temp.label
       } else {
-        text = value.first.label + (value.second ? `/${value.second.label}` : '') + (value.third ? `/${value.third.label}` : '');
+        text = value.first.label + (value.second ? `/${value.second.label}` : '') + (value.third ? `/${value.third.label}` : '')
       }
-      this.$refs.input.changeValue(text);
+      this.$refs.input.changeValue(text)
       if (!this.changeOnSelect) {
-        this.visible = false;
+        this.visible = false
       }
 
       for (const key in value) {
         valueArray.push(value[key].value)
       }
 
-      this.valueArray = valueArray;
+      this.valueArray = valueArray
 
       this.$emit('change', valueArray)
 
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: valueArray });
+        this.$parent.handleChange({ name: this.name, value: valueArray })
       }
     },
     activeOption($event) {
       $event.target.parentNode.childNodes.forEach((i) => {
-        if (i.classList) i.classList.remove('active');
+        if (i.classList) i.classList.remove('active')
       })
-      $event.target.classList.add('active');
+      $event.target.classList.add('active')
     },
   },
   mounted() {
@@ -194,22 +194,22 @@ export default {
     }
   },
   created() {
-    const body = document.body;
-    const the = this;
+    const body = document.body
+    const the = this
     if (this.$parent.isField) {
-      this.$parent.fixCascader = true;
+      this.$parent.fixCascader = true
     }
     body.addEventListener('click', (e) => {
       if (e.currentTarget.tagName === 'BODY'
         && e.target.tagName !== 'INPUT'
         && e.target.className.indexOf('option') === -1
       ) {
-        the.visible = false;
+        the.visible = false
       }
-    }, false);
+    }, false)
   },
 
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

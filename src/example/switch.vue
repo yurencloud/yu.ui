@@ -30,7 +30,7 @@
   </div>
 </template>
 <script>
-import YuSwitch from '../components/switch';
+import YuSwitch from '../components/switch'
 
 export default {
   data() {
@@ -42,7 +42,7 @@ export default {
   components: {
     YuSwitch,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

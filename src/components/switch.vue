@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       visible: true,
-    };
+    }
   },
   model: {
     prop: 'value',
@@ -45,35 +45,35 @@ export default {
   },
   methods: {
     handleClick() {
-      if (this.disabled) return;
-      const value = !this.isChecked ? this.activeValue : this.inactiveValue;
+      if (this.disabled) return
+      const value = !this.isChecked ? this.activeValue : this.inactiveValue
       this.$emit('click', value)
       this.$emit('input', value)
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value });
+        this.$parent.handleChange({ name: this.name, value })
       }
     },
   },
   computed: {
     isChecked() {
       return this.value === this.activeValue
-    }
+    },
   },
-  watch:{
-    value(value){
+  watch: {
+    value(value) {
       this.$emit('input', value)
-    }
+    },
   },
   mounted() {
-    if(this.activeValue === this.value){
+    if (this.activeValue === this.value) {
       this.checked = true
     }
 
-    if(this.inactiveValue === this.value){
+    if (this.inactiveValue === this.value) {
       this.checked = false
     }
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

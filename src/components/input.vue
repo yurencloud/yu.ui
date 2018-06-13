@@ -70,9 +70,9 @@
 </template>
 
 <script>
-import YuButton from './button';
-import YuOption from './option';
-import YuLoading from './loading';
+import YuButton from './button'
+import YuOption from './option'
+import YuLoading from './loading'
 
 export default {
   name: 'YuInput',
@@ -85,7 +85,7 @@ export default {
       hover: false,
       select: '',
       loading: false,
-    };
+    }
   },
   props: {
     placeholder: String,
@@ -120,74 +120,74 @@ export default {
     autocomplete: {
       type: String,
       default: 'on',
-    }
+    },
   },
   created() {
     this.$on('handleSelect', this.handleSelect)
   },
   methods: {
     clear() {
-      this.currentValue = '';
-      this.$emit('clear');
+      this.currentValue = ''
+      this.$emit('clear')
     },
     handleClick(event) {
-      this.$emit('click', event);
+      this.$emit('click', event)
     },
     handleBlur(event) {
       if (this.options) {
-        this.search = false;
+        this.search = false
       }
       if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value });
+        this.$parent.handleBlur({ name: this.name, value: this.value })
       }
-      this.$emit('blur', event);
+      this.$emit('blur', event)
     },
     handleFocus(event) {
       if (this.options) {
-        this.search = true;
+        this.search = true
       }
       if (this.remote) {
-        this.loading = true;
-        this.$emit('fetch', this.value);
+        this.loading = true
+        this.$emit('fetch', this.value)
       }
-      this.$emit('focus', event);
+      this.$emit('focus', event)
     },
     handleChange() {
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value: this.value })
       }
-      this.$emit('change', this.value, this.name);
+      this.$emit('change', this.value, this.name)
     },
     handleInput(event) {
       this.$emit('input', event.target.value)
     },
 
     changeValue(value) {
-      this.currentValue = value;
+      this.currentValue = value
     },
 
     handleKeyup(event) {
       if (!this.options) {
-        return;
+        return
       }
-      const len = this.options.length;
+      const len = this.options.length
       // Down键事件
       if (event.keyCode === 40 && this.activeNumber < len - 1) {
-        this.activeNumber += 1;
+        this.activeNumber += 1
       }
 
       // Up键事件
       if (event.keyCode === 38 && this.activeNumber > 0) {
-        this.activeNumber -= 1;
+        this.activeNumber -= 1
       }
 
       // 按Enter键
       if (event.keyCode === 13) {
         if (this.activeNumber >= 0 && this.activeNumber < len) {
-          const select = this.$refs.option[this.activeNumber];
-          this.currentValue = select.label;
-          this.select = select.value;
-          this.search = false;
+          const select = this.$refs.option[this.activeNumber]
+          this.currentValue = select.label
+          this.select = select.value
+          this.search = false
         }
       }
 
@@ -196,29 +196,29 @@ export default {
         // 判断是不是远程获取输入提示选项
         if (this.value.trim().length !== 0) {
           this.$refs.option.forEach((item) => {
-            item.hide = item.label.indexOf(this.value) <= -1;
+            item.hide = item.label.indexOf(this.value) <= -1
           })
         } else {
-          this.currentValue = '';
-          this.select = '';
+          this.currentValue = ''
+          this.select = ''
           this.$refs.option.forEach((item) => {
-            item.hide = false;
-            item.active = false;
+            item.hide = false
+            item.active = false
           })
         }
-        this.loading = false;
+        this.loading = false
       }
       if (this.activeNumber >= 0) {
         this.$refs.option.forEach((item) => {
           item.active = false
-        });
-        this.$refs.option[this.activeNumber].active = true;
+        })
+        this.$refs.option[this.activeNumber].active = true
       }
     },
     handleSelect({ label, value }) {
-      this.currentValue = label;
-      this.select = value;
-      this.search = false;
+      this.currentValue = label
+      this.select = value
+      this.search = false
     },
   },
   watch: {
@@ -229,9 +229,9 @@ export default {
       this.$emit('input', currentValue)
     },
     value(value) {
-      this.loading = true;
+      this.loading = true
       if (this.remote) {
-        this.$emit('fetch', value);
+        this.$emit('fetch', value)
       }
     },
   },
@@ -240,7 +240,7 @@ export default {
     YuOption,
     YuLoading,
   },
-};
+}
 </script>
 
 <style lang="scss" scoped type="text/scss">

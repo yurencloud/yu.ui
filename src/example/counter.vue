@@ -32,9 +32,9 @@
   </div>
 </template>
 <script>
-import YuCounter from '../components/counter';
-import YuCounterSide from '../components/counter-side';
-import YuButton from '../components/button';
+import YuCounter from '../components/counter'
+import YuCounterSide from '../components/counter-side'
+import YuButton from '../components/button'
 
 export default {
   data() {
@@ -58,7 +58,7 @@ export default {
     YuCounterSide,
     YuButton,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

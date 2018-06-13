@@ -34,7 +34,7 @@ export default {
         error: 'icon-close-circle',
       },
       visible: true,
-    };
+    }
   },
   props: {
     title: String,
@@ -54,12 +54,12 @@ export default {
   methods: {
     close() {
       if (!this.closeable) {
-        this.visible = !this.visible;
-        this.$emit('close', event);
+        this.visible = !this.visible
+        this.$emit('close', event)
       }
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss" type="text/scss">

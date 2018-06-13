@@ -20,7 +20,7 @@ export default {
     return {
       currentValue: 0,
       isMouseover: false,
-    };
+    }
   },
   model: {
     prop: 'value',
@@ -33,15 +33,15 @@ export default {
     },
     options: {
       type: Array,
-      default(){
+      default() {
         return [
-          {value: 1, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
-          {value: 2, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
-          {value: 3, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
-          {value: 4, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
-          {value: 5, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false},
+          { value: 1, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false },
+          { value: 2, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false },
+          { value: 3, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false },
+          { value: 4, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false },
+          { value: 5, activeIcon: 'icon-star', inactiveIcon: 'icon-star-o', status: false },
         ]
-      }
+      },
     },
     readOnly: Boolean,
     name: String,
@@ -53,42 +53,42 @@ export default {
   },
   methods: {
     handleClick(value) {
-      if (this.readOnly) return;
+      if (this.readOnly) return
       this.$emit('input', value)
     },
     handleMouseout() {
-      if (this.readOnly) return;
-      this.currentValue = 0;
-      this.isMouseover = false;
+      if (this.readOnly) return
+      this.currentValue = 0
+      this.isMouseover = false
     },
     handleMouseover(value) {
-      if (this.readOnly) return;
-      this.isMouseover = true;
-      this.currentValue = value;
+      if (this.readOnly) return
+      this.isMouseover = true
+      this.currentValue = value
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value });
+        this.$parent.handleChange({ name: this.name, value: this.value })
       }
     },
   },
   watch: {
-    value(value){
-      this.options.map((item,index)=>{
-         item.status = index < value ;
+    value(value) {
+      this.options.map((item, index) => {
+        item.status = index < value
       })
     },
-    currentValue(value){
-      if(this.isMouseover){
-        this.options.map((item,index)=>{
-          item.status = index < value ;
+    currentValue(value) {
+      if (this.isMouseover) {
+        this.options.map((item, index) => {
+          item.status = index < value
         })
-      }else{
-        this.options.map((item,index)=>{
-          item.status = index < this.value ;
+      } else {
+        this.options.map((item, index) => {
+          item.status = index < this.value
         })
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped type="text/scss">

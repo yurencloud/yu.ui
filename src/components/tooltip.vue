@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import YuButton from './button';
+import YuButton from './button'
 
 export default {
   name: 'YuToolTip',
@@ -27,7 +27,7 @@ export default {
       top: true,
       visible: false,
       isLight: false,
-    };
+    }
   },
   props: {
     content: String,
@@ -43,13 +43,13 @@ export default {
   },
   methods: {
     over() {
-      this.visible = !this.visible;
+      this.visible = !this.visible
     },
   },
   beforeMount() {
     if (this.effect === 'light') {
-      this.isLight = true;
-      this.top = false;
+      this.isLight = true
+      this.top = false
     }
   },
 }

@@ -1,11 +1,16 @@
 <template>
-  <label class="yu-radio" @click.prevent="handleClick" :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
+  <label class="yu-radio"
+         @click.prevent="handleClick"
+         :class="[
+           {checked:isChecked},
+           {disabled:disabled},
+           {vertical:vertical}
+         ]">
   <span class="radio">
     <input type="radio" :name="name" :value="value" :checked="checked">
   </span>
     <span><slot/></span>
   </label>
-
 </template>
 
 <script>
@@ -15,7 +20,7 @@ export default {
     return {
       value: this.label,
       checkedStatus: this.checked,
-    };
+    }
   },
   model: {
     prop: 'checked',
@@ -30,41 +35,38 @@ export default {
   },
   methods: {
     handleClick() {
-      // 如果禁用，直接返回
-      if (this.disabled) return;
-      // 如果是单选组，则重置全部
-      // 开关当前单选
-      let isChecked = !this.checked;
+      if (this.disabled) return
+      let isChecked = !this.checked
 
+      // 如果是单选组，则重置全部
       if (this.$parent.isRadios) {
-        this.$parent.$children.forEach((item)=>{
-          item.checkedStatus = false;
-        });
-        this.checkedStatus = !this.checkedStatus;
+        this.$parent.$children.forEach((item) => {
+          item.checkedStatus = false
+        })
+        this.checkedStatus = !this.checkedStatus
         isChecked = this.checkedStatus
       }
 
-      this.$emit('change', this.label, isChecked, this.name);
-      this.$emit('input', isChecked);
-
       if (this.$parent.isRadios) {
-        this.$parent.handleChange(this.value, isChecked);
+        this.$parent.handleChange(this.value, isChecked)
       }
 
-      if (this.$parent.isField) {
-        this.$parent.handleChange(this.name, isChecked ? this.value : '');
-      }
+      this.$emit('change', this.label, isChecked, this.name)
+      this.$emit('input', isChecked)
     },
   },
-  computed:{
-    isChecked(){
-      if(this.$parent.isRadios){
+  computed: {
+    isChecked() {
+      if (this.$parent.isRadios) {
         return this.checkedStatus
       }
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.checked ? this.value : '' })
+      }
       return this.checked
-    }
+    },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped type="text/scss">

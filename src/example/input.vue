@@ -85,10 +85,10 @@
   </div>
 </template>
 <script>
-import YuButton from '../components/button';
-import YuInput from '../components/input';
-import YuSelect from '../components/select';
-import YuOption from '../components/option';
+import YuButton from '../components/button'
+import YuInput from '../components/input'
+import YuSelect from '../components/select'
+import YuOption from '../components/option'
 
 export default {
   data() {
@@ -106,26 +106,26 @@ export default {
   },
   methods: {
     changeValue() {
-      this.value3='改变'
+      this.value3 = '改变'
     },
     inputChange(value) {
       console.log(value)
     },
     handleFetch(value) {
-      const the = this;
+      const the = this
       fetch(`/api/restaurants/${value}`)
         .then((response) => {
           response.text().then((data) => {
-            data = JSON.parse(data);
-            the.options = [];
-            const temp = [];
+            data = JSON.parse(data)
+            the.options = []
+            const temp = []
             data.forEach((item) => {
               temp.push({ value: item.id, label: item.value })
-            });
-            the.options = temp;
-          });
+            })
+            the.options = temp
+          })
         }, (error) => {
-          console.log(error.message);
+          console.log(error.message)
         })
     },
   },
@@ -135,7 +135,7 @@ export default {
     YuSelect,
     YuOption,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import YuAlert from '../components/alert';
+import YuAlert from '../components/alert'
 
 export default {
   methods: {
@@ -52,7 +52,7 @@ export default {
   components: {
     YuAlert,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

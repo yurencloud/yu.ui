@@ -104,9 +104,9 @@
   </div>
 </template>
 <script>
-import YuSelect from '../components/select';
-import YuOption from '../components/option';
-import YuButton from '../components/button';
+import YuSelect from '../components/select'
+import YuOption from '../components/option'
+import YuButton from '../components/button'
 
 export default {
   data() {
@@ -126,7 +126,7 @@ export default {
     YuOption,
     YuButton,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

@@ -36,40 +36,40 @@
   </div>
 </template>
 <script>
-import YuMessage from '../components/message';
-import YuButton from '../components/button';
+import YuMessage from '../components/message'
+import YuButton from '../components/button'
 
 export default {
   methods: {
     click1() {
-      this.$message('hello world');
+      this.$message('hello world')
     },
     click2() {
-      this.$message({ message: 'hello world', iconClass: 'icon-apple1', type: 'success' });
+      this.$message({ message: 'hello world', iconClass: 'icon-apple1', type: 'success' })
     },
     click3() {
-      this.$message({ message: '<h1>哈哈哈哈</h1>', type: 'success', dangerouslyUseHTMLString: true });
+      this.$message({ message: '<h1>哈哈哈哈</h1>', type: 'success', dangerouslyUseHTMLString: true })
     },
     click4() {
-      this.$message({ message: '居中', center: true });
+      this.$message({ message: '居中', center: true })
     },
     click5() {
-      this.$message({ message: '消息', type: 'warning' });
+      this.$message({ message: '消息', type: 'warning' })
     },
     click6() {
-      this.$message({ message: '可关闭', showClose: true });
+      this.$message({ message: '可关闭', showClose: true })
     },
     click7() {
-      this.$message.success('消息');
+      this.$message.success('消息')
     },
     click8() {
-      this.$message.danger('消息');
+      this.$message.danger('消息')
     },
     click9() {
-      this.$message.primary('消息');
+      this.$message.primary('消息')
     },
     click10() {
-      this.$message.info('消息');
+      this.$message.info('消息')
     },
     click11() {
       this.$message.close(1)
@@ -82,7 +82,7 @@ export default {
     YuMessage,
     YuButton,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

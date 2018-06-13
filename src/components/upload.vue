@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import 'whatwg-fetch';
-import YuButton from './button';
-import YuMessage from './message';
+import 'whatwg-fetch'
+import YuButton from './button'
+import YuMessage from './message'
 
 export default {
   name: 'YuUpload',
@@ -78,65 +78,65 @@ export default {
       this.$emit('handleClose', item)
     },
     handleChange($event) {
-      const the = this;
-      const formData = new FormData();
-      this.files = $event.target.files;
-      console.log(this.files);
+      const the = this
+      const formData = new FormData()
+      this.files = $event.target.files
+      console.log(this.files)
 
       // 最大上传数量
       if (this.max && this.files.length() > this.max) {
-        return;
+        return
       }
 
       // 添加icon的class
       if (this.multiIcon) {
         for (let i = 0; i < this.files.length; i++) {
-          const suffix = this.files[i].name.substr(this.files[i].name.lastIndexOf('.'));
-          this.files[i].className = this.getFileIcon(suffix);
+          const suffix = this.files[i].name.substr(this.files[i].name.lastIndexOf('.'))
+          this.files[i].className = this.getFileIcon(suffix)
         }
       }
 
       if (this.multiple) {
-        const files = $event.target.files;
+        const files = $event.target.files
         for (let i = 0; i < files.length; i++) {
-          formData.append(`${this.name}[]`, files[i]);
+          formData.append(`${this.name}[]`, files[i])
         }
       } else {
-        formData.append(this.name, $event.target.files[0]);
+        formData.append(this.name, $event.target.files[0])
       }
 
       // 额外参数
       if (this.data) {
-        const data = this.data;
+        const data = this.data
         Object.keys(data).forEach((key) => {
           formData.append(key, data[key])
-        });
+        })
       }
 
       if (this.previewList) {
         for (let i = 0; i < this.files.length; i++) {
-          this.files[i].url = this.getObjectURL(this.files[i]);
+          this.files[i].url = this.getObjectURL(this.files[i])
         }
       }
 
       if (this.maxSize) {
-        let size = 0;
+        let size = 0
         for (let i = 0; i < this.files.length; i++) {
-          size += parseInt(this.files[i].size, 0);
+          size += parseInt(this.files[i].size, 0)
         }
         if (size > this.maxSize) {
-          alert(`文件最大支持${parseInt(this.maxSize / 1024, 2)}KB`);
-          return;
+          alert(`文件最大支持${parseInt(this.maxSize / 1024, 2)}KB`)
+          return
         }
       }
 
       if (this.type === 'image') {
-        this.visible = false;
-        this.preview = this.getObjectURL(this.files[0]);
+        this.visible = false
+        this.preview = this.getObjectURL(this.files[0])
       }
 
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.files });
+        this.$parent.handleChange({ name: this.name, value: this.files })
       }
 
       fetch(this.url, {
@@ -146,27 +146,27 @@ export default {
       })
         .then((response) => {
           response.text().then((data) => {
-            data = JSON.parse(data);
-            console.log(data);
+            data = JSON.parse(data)
+            console.log(data)
             // 返回对象data中要有status属性表明上传成功或失败
             if (parseInt(data.status, 0) === 1) {
-              the.status = '上传成功.';
-              the.$emit('success', data);
+              the.status = '上传成功.'
+              the.$emit('success', data)
             } else {
-              the.status = '上传失败!';
-              the.$emit('error', data);
+              the.status = '上传失败!'
+              the.$emit('error', data)
             }
-          });
+          })
         }, (error) => {
-          console.log(error.message);
-          the.$emit('error', error);
+          console.log(error.message)
+          the.$emit('error', error)
         })
     },
     handleClick() {
-      this.$refs.input.click();
+      this.$refs.input.click()
     },
     getObjectURL(file) {
-      let url = null;
+      let url = null
       if (window.createObjectURL !== undefined) {
         url = window.createObjectURL(file)
       } else if (window.URL !== undefined) {
@@ -177,51 +177,51 @@ export default {
       return url
     },
     getFileIcon(suffix) {
-      let className;
+      let className
       switch (suffix) {
         case '.doc':
         case '.docx':
-          className = 'icon-f-word blue';
-          break;
+          className = 'icon-f-word blue'
+          break
         case '.pdf':
-          className = 'icon-f-pdf red';
-          break;
+          className = 'icon-f-pdf red'
+          break
         case '.txt':
-          className = 'icon-f-text';
-          break;
+          className = 'icon-f-text'
+          break
         case '.xls':
         case '.xlsx':
-          className = 'icon-f-excel green';
-          break;
+          className = 'icon-f-excel green'
+          break
         case '.ppt':
         case '.pptx':
-          className = 'icon-f-powerpoint orange';
-          break;
+          className = 'icon-f-powerpoint orange'
+          break
         case '.zip':
         case '.rar':
         case '.tar':
-          className = 'icon-f-archive violet';
-          break;
+          className = 'icon-f-archive violet'
+          break
         case '.mp3':
         case '.wav':
-          className = 'icon-f-audio purple';
-          break;
+          className = 'icon-f-audio purple'
+          break
         case '.jpg':
         case '.png':
         case '.jpeg':
         case '.bmp':
         case '.gif':
         case '.svg':
-          className = 'icon-f-image teal';
-          break;
+          className = 'icon-f-image teal'
+          break
         default:
-          className = 'icon-f-file';
-          break;
+          className = 'icon-f-file'
+          break
       }
-      return className;
+      return className
     },
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

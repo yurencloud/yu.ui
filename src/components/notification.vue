@@ -74,58 +74,58 @@ export default {
       icon: String,
       color: String,
       closed: false,
-    };
+    }
   },
   methods: {
     close() {
-      this.visible = false;
-      this.closed = true;
-      this.$emit('close', event);
+      this.visible = false
+      this.closed = true
+      this.$emit('close', event)
     },
     onclick() {
-      this.visible = true;
+      this.visible = true
       if (this.duration) {
         setTimeout(() => {
-          this.visible = false;
-        }, this.duration);
+          this.visible = false
+        }, this.duration)
       }
     },
     destroyElement() {
-      this.$el.removeEventListener('transitionend', this.destroyElement);
-      this.$destroy(true);
-      this.$el.parentNode.removeChild(this.$el);
+      this.$el.removeEventListener('transitionend', this.destroyElement)
+      this.$destroy(true)
+      this.$el.parentNode.removeChild(this.$el)
     },
     startTimer() {
       if (this.duration > 0) {
         this.timer = setTimeout(() => {
           if (!this.closed) {
-            this.close();
+            this.close()
           }
-        }, this.duration);
+        }, this.duration)
       }
     },
   },
   watch: {
     closed(closed) {
       if (closed) {
-        this.$el.addEventListener('transitionend', this.destroyElement);
+        this.$el.addEventListener('transitionend', this.destroyElement)
       }
     },
     type(type) {
       if (type) {
-        this.icon = this.typeItem[this.type].icon;
-        this.color = this.typeItem[this.type].color;
-        this.iconClass = '';
+        this.icon = this.typeItem[this.type].icon
+        this.color = this.typeItem[this.type].color
+        this.iconClass = ''
       } else {
-        this.icon = '';
-        this.color = '#409EFF';
+        this.icon = ''
+        this.color = '#409EFF'
       }
     },
   },
   mounted() {
-    this.startTimer();
+    this.startTimer()
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss" scoped>

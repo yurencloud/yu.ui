@@ -23,8 +23,8 @@
   </div>
 </template>
 <script>
-import YuTimePicker from '../components/time-picker';
-import YuScrollSelect from '../components/scroll-select';
+import YuTimePicker from '../components/time-picker'
+import YuScrollSelect from '../components/scroll-select'
 
 export default {
   data() {
@@ -53,7 +53,7 @@ export default {
     YuTimePicker,
     YuScrollSelect,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

@@ -43,8 +43,8 @@
   </div>
 </template>
 <script>
-import YuUpload from '../components/upload';
-import YuButton from '../components/button';
+import YuUpload from '../components/upload'
+import YuButton from '../components/button'
 
 export default {
   methods: {},
@@ -52,7 +52,7 @@ export default {
     YuUpload,
     YuButton,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

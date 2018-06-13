@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-import YuCarouselItem from './carousel-item';
+import YuCarouselItem from './carousel-item'
 
 export default {
   name: 'YuCarousel',
@@ -42,181 +42,180 @@ export default {
   mounted() {
     //  动画函数
     function animate(element, target, num) {
-      num = num || 10;
-      clearInterval(element.timer);
-      element.timer = setInterval( () => {
-        let leader = element.offsetLeft;
-        let step = target > leader ? num : -num;
-        if (Math.abs(target - leader) >= Math.abs(step)) {
-          leader += step;
-          element.style.left = leader + "px";
-        } else {
-          clearInterval(element.timer);
-          element.style.left = target + "px";
-        }
-      }, 15);
-    }
-    function animate1(element, obj, fn){
-      clearInterval(element.timer);
+      num = num || 10
+      clearInterval(element.timer)
       element.timer = setInterval(() => {
-        let flag = true;
-        for(let k in obj) {
-          let style = k;
-          let target = obj[k];
+        let leader = element.offsetLeft
+        const step = target > leader ? num : -num
+        if (Math.abs(target - leader) >= Math.abs(step)) {
+          leader += step
+          element.style.left = `${leader}px`
+        } else {
+          clearInterval(element.timer)
+          element.style.left = `${target}px`
+        }
+      }, 15)
+    }
+    function animate1(element, obj, fn) {
+      clearInterval(element.timer)
+      element.timer = setInterval(() => {
+        let flag = true
+        for (const k in obj) {
+          const style = k
+          let target = obj[k]
           if (k === 'opacity') {
-            let leader = getStyle(element, style);
-            leader = parseFloat(leader) || 0;
-            leader *= 1000;
-            target *= 1000;
-            let step = (target - leader)/10;
-            step = step>0?Math.ceil(step):Math.floor(step);
-            leader += step;
-            element.style[style] = leader / 1000;
+            let leader = getStyle(element, style)
+            leader = parseFloat(leader) || 0
+            leader *= 1000
+            target *= 1000
+            let step = (target - leader) / 10
+            step = step > 0 ? Math.ceil(step) : Math.floor(step)
+            leader += step
+            element.style[style] = leader / 1000
             if (leader !== target) {
-              flag = false;
+              flag = false
             }
           } else if (k === 'zIndex') {
-            element.style.zIndex = target;
+            element.style.zIndex = target
           } else {
-            let leader = getStyle(element, style);
-            leader = parseInt(leader) || 0;
-            let step = (target - leader) / 10;
-            step = step > 0 ? Math.ceil(step) : Math.floor(step);
-            leader += step;
-            element.style[style] = `${leader}px`;
+            let leader = getStyle(element, style)
+            leader = parseInt(leader) || 0
+            let step = (target - leader) / 10
+            step = step > 0 ? Math.ceil(step) : Math.floor(step)
+            leader += step
+            element.style[style] = `${leader}px`
             if (leader !== target) {
-              flag = false;
+              flag = false
             }
           }
         }
         if (flag) {
-          clearInterval(element.timer);
-          fn && fn();
+          clearInterval(element.timer)
+          fn && fn()
         }
-      }, 15);
+      }, 15)
     }
     function getStyle(element, style) {
       if ('getComputedStyle' in window) {
-        return window.getComputedStyle(element, null)[style];
-      } else {
-        return element.currentStyle[style];
+        return window.getComputedStyle(element, null)[style]
       }
+      return element.currentStyle[style]
     }
-    let lines = null;
-    const carousel = this.$refs.carousel;
-    const ul = carousel.children[0];
-    const leftArrow = this.$refs.left;
-    const rightArrow = this.$refs.right;
-    const imgs = ul.children;
-    const imgWidth = carousel.offsetWidth;
-    let lock = true;
-    const arr = this.position;
-    let count = 0;
-    let timer = null;
+    let lines = null
+    const carousel = this.$refs.carousel
+    const ul = carousel.children[0]
+    const leftArrow = this.$refs.left
+    const rightArrow = this.$refs.right
+    const imgs = ul.children
+    const imgWidth = carousel.offsetWidth
+    let lock = true
+    const arr = this.position
+    let count = 0
+    let timer = null
     if (!this.type) {
       this.$nextTick(() => {
-        lines = this.$refs.lines.children;
-        lines[0].className = 'now';
+        lines = this.$refs.lines.children
+        lines[0].className = 'now'
         // 小圆点
         for (let i = 0; i < lines.length; i++) {
-          lines[i].index = i;
+          lines[i].index = i
           lines[i].addEventListener('click', () => {
             for (let j = 0; j < lines.length; j++) {
-              lines[j].className = '';
+              lines[j].className = ''
             }
-            lines[this.index].className = 'now';
-            animate(ul, -this.index * imgWidth, 50);
+            lines[this.index].className = 'now'
+            animate(ul, -this.index * imgWidth, 50)
           })
         }
-      });
+      })
     }
-    this.lastSrc = this.$children[0].src;
-    this.items = this.$children.length - 1;
-    this.$refs.warp.style.width = `${this.$children.length}00%`;
+    this.lastSrc = this.$children[0].src
+    this.items = this.$children.length - 1
+    this.$refs.warp.style.width = `${this.$children.length}00%`
     // const list = document.querySelectorAll('.yu-img-warp li');
-    const list = this.$refs.warp.children;
+    const list = this.$refs.warp.children
     for (let i = 0; i < list.length; i++) {
-      list[i].style.width = `${(1 / this.$children.length) * 100}%`;
+      list[i].style.width = `${(1 / this.$children.length) * 100}%`
     }
     //  轮播图
     if (this.type) {
       for (let i = 0; i < imgs.length; i++) {
-        animate1(imgs[i], arr[i]);
+        animate1(imgs[i], arr[i])
       }
     }
     rightArrow.addEventListener('click', () => {
       //  普通轮播图
       if (this.type) {
         if (lock) {
-          lock = false;
-          arr.unshift(arr.pop());
-          for (let i = 0; i < imgs.length; i ++) {
+          lock = false
+          arr.unshift(arr.pop())
+          for (let i = 0; i < imgs.length; i++) {
             animate1(imgs[i], arr[i], () => {
-              lock = true;
+              lock = true
             })
           }
         }
       } else {
         if (count >= imgs.length - 1) {
-          ul.style.left = 0;
+          ul.style.left = 0
           count = 0
         }
-        count += 1;
-        animate(ul, -count * imgWidth, 50);
+        count += 1
+        animate(ul, -count * imgWidth, 50)
         for (let i = 0; i < lines.length; i++) {
-          lines[i].className = '';
+          lines[i].className = ''
         }
         if (count >= imgs.length - 1) {
-          lines[0].className = 'now';
+          lines[0].className = 'now'
         } else {
-          lines[count].className = 'now';
+          lines[count].className = 'now'
         }
       }
-    });
+    })
     //  左箭头
     leftArrow.addEventListener('click', () => {
       if (this.type) {
         if (lock) {
-          lock = false;
-          arr.push(arr.shift());
+          lock = false
+          arr.push(arr.shift())
           for (let i = 0; i < imgs.length; i++) {
             animate1(imgs[i], arr[i], () => {
-              lock = true;
+              lock = true
             })
           }
         }
       } else {
         //  普通轮播图
         if (count <= 0) {
-          count = imgs.length - 1;
-          ul.style.left = `${-count * imgWidth}px`;
+          count = imgs.length - 1
+          ul.style.left = `${-count * imgWidth}px`
         }
-        count -= 1;
-        animate(ul, -count * imgWidth, 50);
+        count -= 1
+        animate(ul, -count * imgWidth, 50)
 
         for (let i = 0; i < lines.length; i++) {
-          lines[i].className = '';
+          lines[i].className = ''
         }
-        lines[count].className = 'now';
+        lines[count].className = 'now'
       }
-    });
+    })
     //  line
 
     //  自动播放
-    let that = this;
+    const that = this
     function auto() {
       timer = setInterval(() => {
-        rightArrow.click();
-      }, that.interval);
+        rightArrow.click()
+      }, that.interval)
     }
     if (this.autoplay) {
-      auto();
+      auto()
       carousel.onmouseover = () => {
-        clearInterval(timer);
-      };
+        clearInterval(timer)
+      }
       carousel.onmouseout = () => {
-        clearInterval(timer);
-        auto();
+        clearInterval(timer)
+        auto()
       }
     }
   },

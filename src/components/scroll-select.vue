@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import YuInput from './input';
+import YuInput from './input'
 
 export default {
   name: 'YuScrollSelect',
@@ -81,9 +81,9 @@ export default {
       thirdActive: 0,
       fix: false,
       scrollTop: 0,
-    };
+    }
   },
-  model:{
+  model: {
     prop: 'value',
     event: 'input',
   },
@@ -107,123 +107,123 @@ export default {
     handleClear() {
       this.$emit('input', '')
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: '' });
+        this.$parent.handleChange({ name: this.name, value: '' })
       }
     },
     handleMouseover() {
-      this.scrollTop = document.getElementsByTagName('html')[0].scrollTop;
-      document.addEventListener('scroll', this.stopScroll);
+      this.scrollTop = document.getElementsByTagName('html')[0].scrollTop
+      document.addEventListener('scroll', this.stopScroll)
     },
     handleMouseleave() {
-      document.removeEventListener('scroll', this.stopScroll);
+      document.removeEventListener('scroll', this.stopScroll)
     },
     stopScroll(e) {
-      e.target.scrollingElement.scrollTop = this.scrollTop;
+      e.target.scrollingElement.scrollTop = this.scrollTop
     },
     firstScroll($event) {
-      if (this.fix) return;
-      this.fix = true;
+      if (this.fix) return
+      this.fix = true
       setTimeout(() => {
-        this.firstActive = parseInt($event.target.scrollTop / 40, 0);
-        $event.target.scrollTop = this.firstActive * 40;
-        const second = this.options[this.firstActive];
+        this.firstActive = parseInt($event.target.scrollTop / 40, 0)
+        $event.target.scrollTop = this.firstActive * 40
+        const second = this.options[this.firstActive]
 
         if (second.disabled) {
-          this.fix = false;
+          this.fix = false
         } else {
-          this.fix = false;
+          this.fix = false
           if (this.remote) {
-            this.$emit('firstFetch', second);
-            return;
+            this.$emit('firstFetch', second)
+            return
           }
-          this.secondOptions = second.children;
+          this.secondOptions = second.children
         }
-      }, 800);
+      }, 800)
     },
     firstClick(index, $event) {
-      this.firstActive = index;
-      $event.target.parentNode.parentNode.scrollTop = index * 40;
+      this.firstActive = index
+      $event.target.parentNode.parentNode.scrollTop = index * 40
     },
     secondScroll($event) {
-      if (this.fix) return;
-      this.fix = true;
+      if (this.fix) return
+      this.fix = true
       setTimeout(() => {
-        this.secondActive = parseInt($event.target.scrollTop / 40, 0);
-        $event.target.scrollTop = this.secondActive * 40;
-        const third = this.secondOptions[this.secondActive];
+        this.secondActive = parseInt($event.target.scrollTop / 40, 0)
+        $event.target.scrollTop = this.secondActive * 40
+        const third = this.secondOptions[this.secondActive]
         if (third.disabled) {
-          this.fix = false;
+          this.fix = false
         } else {
-          this.fix = false;
+          this.fix = false
           if (this.remote) {
-            this.$emit('secondFetch', third);
-            return;
+            this.$emit('secondFetch', third)
+            return
           }
-          this.thirdOptions = third.children;
+          this.thirdOptions = third.children
         }
       }, 800)
     },
     secondClick(index, $event) {
-      this.secondActive = index;
-      $event.target.parentNode.parentNode.scrollTop = index * 40;
+      this.secondActive = index
+      $event.target.parentNode.parentNode.scrollTop = index * 40
     },
     thirdScroll($event) {
-      if (this.fix) return;
-      const the = this;
-      this.fix = true;
+      if (this.fix) return
+      const the = this
+      this.fix = true
       setTimeout(() => {
-        this.thirdActive = parseInt($event.target.scrollTop / 40, 0);
-        $event.target.scrollTop = this.thirdActive * 40;
-        the.fix = false;
-      }, 800);
+        this.thirdActive = parseInt($event.target.scrollTop / 40, 0)
+        $event.target.scrollTop = this.thirdActive * 40
+        the.fix = false
+      }, 800)
     },
     thirdClick(index, $event) {
-      this.thirdActive = index;
-      $event.target.parentNode.parentNode.scrollTop = index * 40;
+      this.thirdActive = index
+      $event.target.parentNode.parentNode.scrollTop = index * 40
     },
     handleClick() {
-      this.visible = !this.visible;
+      this.visible = !this.visible
     },
     handleSelect(option) {
       if (this.multi) {
-        this.selects.push(option);
+        this.selects.push(option)
       }
-      this.$refs.input.value = option.label;
-      this.$refs.input.$el.children[0].blur();
+      this.$refs.input.value = option.label
+      this.$refs.input.$el.children[0].blur()
       this.$emit('input', option.value)
-      this.label = option.label;
-      this.visible = false;
+      this.label = option.label
+      this.visible = false
     },
     cancelSelect(option) {
       this.selects.splice(this.selects.findIndex(item => item.value === option.value), 1)
       this.$children.forEach((item) => {
         if (item.value === option.value) {
-          item.hide = false;
+          item.hide = false
         }
-      });
+      })
     },
     handleCancel() {
-      this.visible = false;
+      this.visible = false
     },
     handleConfirm() {
-      const first = this.options[this.firstActive];
-      const second = this.secondOptions ? this.secondOptions[this.secondActive] : {};
-      const third = this.thirdOptions ? this.thirdOptions[this.thirdActive] : {};
+      const first = this.options[this.firstActive]
+      const second = this.secondOptions ? this.secondOptions[this.secondActive] : {}
+      const third = this.thirdOptions ? this.thirdOptions[this.thirdActive] : {}
       if (first.disabled || second.disabled || third.disabled) {
-        alert('不可以选择无效选项');
-        return;
+        alert('不可以选择无效选项')
+        return
       }
-      let value = first.label;
+      let value = first.label
       if (second.label) {
-        value += (this.split + second.label);
+        value += (this.split + second.label)
       }
       if (third.label) {
-        value += (this.split + third.label);
+        value += (this.split + third.label)
       }
       this.$emit('input', value)
-      this.visible = false;
+      this.visible = false
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: value });
+        this.$parent.handleChange({ name: this.name, value })
       }
     },
   },
@@ -231,7 +231,7 @@ export default {
     YuInput,
   },
 
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

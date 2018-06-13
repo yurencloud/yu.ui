@@ -46,7 +46,7 @@ export default {
   watch: {
     closed(closed) {
       if (closed) {
-        this.$el.addEventListener('transitionend', this.destroyElement);
+        this.$el.addEventListener('transitionend', this.destroyElement)
       }
     },
   },
@@ -54,26 +54,26 @@ export default {
     if (this.dangerouslyUseHTMLString) {
       this.$refs.content.innerHTML = this.message
     }
-    this.startTimer();
+    this.startTimer()
   },
   methods: {
     close() {
-      this.visible = false;
-      this.closed = true;
-      this.$emit('close', event);
+      this.visible = false
+      this.closed = true
+      this.$emit('close', event)
     },
     destroyElement() {
-      this.$el.removeEventListener('transitionend', this.destroyElement);
-      this.$destroy(true);
-      this.$el.parentNode.removeChild(this.$el);
+      this.$el.removeEventListener('transitionend', this.destroyElement)
+      this.$destroy(true)
+      this.$el.parentNode.removeChild(this.$el)
     },
     startTimer() {
       if (this.duration > 0) {
         this.timer = setTimeout(() => {
           if (!this.closed) {
-            this.close();
+            this.close()
           }
-        }, this.duration);
+        }, this.duration)
       }
     },
   },

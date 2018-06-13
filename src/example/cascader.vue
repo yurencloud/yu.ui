@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-import YuCascader from '../components/cascader';
+import YuCascader from '../components/cascader'
 
 export default {
   data() {
@@ -261,8 +261,8 @@ export default {
   },
   methods: {
     cascaderFetch(item) {
-      const the = this;
-      const query = {};
+      const the = this
+      const query = {}
       if (item.pid === 0) {
         query.pid = item.id
         fetch('/api/fetch/cascader', {
@@ -274,15 +274,15 @@ export default {
         })
           .then((response) => {
             response.text().then((data) => {
-              data = JSON.parse(data);
-              const temp = [];
+              data = JSON.parse(data)
+              const temp = []
               data.forEach((i) => {
                 temp.push({ value: i.id, label: i.name, ...i })
               })
-              the.$refs.cascader.secondCascader = temp;
-            });
+              the.$refs.cascader.secondCascader = temp
+            })
           }, (error) => {
-            console.log(error.message);
+            console.log(error.message)
           })
       } else {
         query.pid = item.id
@@ -296,15 +296,15 @@ export default {
         })
           .then((response) => {
             response.text().then((data) => {
-              data = JSON.parse(data);
-              const temp = [];
+              data = JSON.parse(data)
+              const temp = []
               data.forEach((i) => {
                 temp.push({ value: i.id, label: i.name, ...i })
               })
-              the.$refs.cascader.thirdCascader = temp;
-            });
+              the.$refs.cascader.thirdCascader = temp
+            })
           }, (error) => {
-            console.log(error.message);
+            console.log(error.message)
           })
       }
     },
@@ -313,25 +313,25 @@ export default {
     YuCascader,
   },
   mounted() {
-    const the = this;
+    const the = this
     fetch('/api/fetch/cascader', {
       method: 'POST',
     })
       .then((response) => {
         response.text().then((data) => {
-          data = JSON.parse(data);
-          the.fetchCascader = [];
-          const temp = [];
+          data = JSON.parse(data)
+          the.fetchCascader = []
+          const temp = []
           data.forEach((item) => {
             temp.push({ value: item.id, label: item.name, ...item })
           })
-          the.fetchCascader = temp;
-        });
+          the.fetchCascader = temp
+        })
       }, (error) => {
-        console.log(error.message);
-      });
+        console.log(error.message)
+      })
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

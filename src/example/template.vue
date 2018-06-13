@@ -7,14 +7,14 @@
   </div>
 </template>
 <script>
-import YuSwitch from '../components/switch';
+import YuSwitch from '../components/switch'
 
 export default {
   methods: {},
   components: {
     YuSwitch,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import YuInput from './input';
-import YuTag from './tag';
+import YuInput from './input'
+import YuTag from './tag'
 
 export default {
   name: 'YuSelect',
@@ -45,7 +45,7 @@ export default {
       visible: false,
       label: '',
       selects: [],
-    };
+    }
   },
   model: {
     prop: 'value',
@@ -68,26 +68,26 @@ export default {
     tagType: String,
   },
   created() {
-    this.$on('handleSelect', this.handleSelect);
+    this.$on('handleSelect', this.handleSelect)
     this.$on('cancelSelect', this.cancelSelect)
   },
 
   methods: {
     clear() {
       this.$emit('selected', null)
-      this.label = '';
-      this.selects = [];
+      this.label = ''
+      this.selects = []
 
       this.$children.forEach((item) => {
-        item.hide = false;
-      });
+        item.hide = false
+      })
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: '' });
+        this.$parent.handleChange({ name: this.name, value: '' })
       }
     },
     handleClick(event) {
-      this.visible = !this.visible;
-      if (!this.visible) event.target.blur();
+      this.visible = !this.visible
+      if (!this.visible) event.target.blur()
     },
     handleSelect(option) {
       if (this.multi) {
@@ -103,33 +103,33 @@ export default {
       } else {
         this.$emit('selected', option.value)
       }
-      this.$refs.input.$el.children[0].blur();
-      this.visible = false;
+      this.$refs.input.$el.children[0].blur()
+      this.visible = false
     },
     handleBlur(event) {
-      this.visible = false;
+      this.visible = false
       if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value.toString() });
+        this.$parent.handleBlur({ name: this.name, value: this.value.toString() })
       }
-      this.$emit('blur', event);
+      this.$emit('blur', event)
     },
     cancelSelect(option) {
-      const labels = [];
-      const values = [];
-      this.selects.splice(this.selects.findIndex(item => item.value === option.value), 1);
+      const labels = []
+      const values = []
+      this.selects.splice(this.selects.findIndex(item => item.value === option.value), 1)
       this.selects.forEach((item) => {
-        values.push(item.value);
-        labels.push(item.label);
+        values.push(item.value)
+        labels.push(item.label)
       })
-      this.$refs.input.$el.children[0].blur();
+      this.$refs.input.$el.children[0].blur()
       this.label = labels.toString()
       this.$children.forEach((item) => {
         if (item.value === option.value) {
-          item.hide = false;
+          item.hide = false
         }
       })
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: values.toString() });
+        this.$parent.handleChange({ name: this.name, value: values.toString() })
       }
     },
     handleCloseTag(item) {
@@ -138,13 +138,13 @@ export default {
   },
   watch: {
     value(value) {
-      const the = this;
+      const the = this
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.multi ? value.toString() : value });
+        this.$parent.handleChange({ name: this.name, value: this.multi ? value.toString() : value })
       }
       if (this.multi) {
-        const selects = [];
-        const label = [];
+        const selects = []
+        const label = []
         if (this.value != null) {
           this.$children.forEach((item) => {
             if (the.value.indexOf(item.value) > -1) {
@@ -161,8 +161,8 @@ export default {
       } else {
         for (let i = 0; i < this.$children.length; i++) {
           if (value === this.$children[i].value) {
-            this.label = this.$children[i].label;
-            break;
+            this.label = this.$children[i].label
+            break
           }
         }
       }
@@ -172,7 +172,7 @@ export default {
     YuInput,
     YuTag,
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

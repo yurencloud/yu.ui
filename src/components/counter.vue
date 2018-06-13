@@ -28,10 +28,10 @@
 </template>
 
 <script>
-import YuInput from '../components/input';
-import YuButton from '../components/button';
+import YuInput from '../components/input'
+import YuButton from '../components/button'
 
-const calc = require('calculatorjs');
+const calc = require('calculatorjs')
 
 export default {
   name: 'YuCounter',
@@ -41,7 +41,7 @@ export default {
       disabledAdd: false,
       disabledSubtract: this.min !== null || false,
       fixed: 0, // 小数点位数
-    };
+    }
   },
   model: {
     prop: 'value',
@@ -71,30 +71,30 @@ export default {
   },
   methods: {
     handleSubtract() {
-      this.currentValue = calc.sub(this.value, this.step);
+      this.currentValue = calc.sub(this.value, this.step)
     },
     handleAdd() {
-      this.currentValue = calc.add(this.value, this.step);
+      this.currentValue = calc.add(this.value, this.step)
     },
     handleChange(value, name) {
-      let fixed = 0;
+      let fixed = 0
       if (this.step.toString().indexOf('.') > -1) {
-        fixed = this.step.toString().split('.')[1].length;
+        fixed = this.step.toString().split('.')[1].length
       }
-      this.currentValue = Number(value).toFixed(fixed);
-      this.$emit('change', this.currentValue, name);
+      this.currentValue = Number(value).toFixed(fixed)
+      this.$emit('change', this.currentValue, name)
     },
     handleInput(value, name) {
-      let fixed = 0;
+      let fixed = 0
       if (this.step.toString().indexOf('.') > -1) {
-        fixed = this.step.toString().split('.')[1].length;
+        fixed = this.step.toString().split('.')[1].length
       }
-      this.currentValue = Number(value).toFixed(fixed);
-      this.$emit('change', this.currentValue, name);
+      this.currentValue = Number(value).toFixed(fixed)
+      this.$emit('change', this.currentValue, name)
     },
     handleBlur(event) {
       if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value });
+        this.$parent.handleBlur({ name: this.name, value: this.value })
       }
       this.$emit('blur', event)
     },
@@ -104,21 +104,21 @@ export default {
       if (this.max !== null) {
         if (value >= this.max) {
           this.$emit('input', this.max)
-          this.disabledAdd = true;
-          return;
+          this.disabledAdd = true
+          return
         }
-        this.disabledAdd = false;
+        this.disabledAdd = false
       }
       if (this.min !== null) {
         if (value <= this.min) {
           this.$emit('input', this.min)
-          this.disabledSubtract = true;
+          this.disabledSubtract = true
         } else {
-          this.disabledSubtract = false;
+          this.disabledSubtract = false
         }
       }
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value });
+        this.$parent.handleChange({ name: this.name, value })
       }
 
       this.$emit('input', value)
@@ -128,7 +128,7 @@ export default {
     YuInput,
     YuButton,
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

@@ -173,41 +173,41 @@
   </div>
 </template>
 <script>
-import 'whatwg-fetch';
-import YuButton from '../components/button';
-import YuButtons from '../components/buttons';
-import YuInput from '../components/input';
-import YuOption from '../components/option';
-import YuRadio from '../components/radio';
-import YuRadios from '../components/radios';
-import YuSelect from '../components/select';
-import YuCounter from '../components/counter';
-import YuCheckbox from '../components/checkbox';
-import YuDialog from '../components/dialog';
-import YuToolTip from '../components/tooltip';
-import YuCard from '../components/card';
-import YuCarousel from '../components/carousel';
-import YuCollapseItem from '../components/collapse-item';
-import YuCollapse from '../components/collapse';
-import YuMenuItem from '../components/menu-item';
-import YuCheckboxs from '../components/checkboxs';
-import YuLoading from '../components/loading';
-import YuCounterSide from '../components/counter-side';
-import YuCascader from '../components/cascader';
-import YuSwitch from '../components/switch';
-import YuDropDown from '../components/dropdown';
-import YuDropdownMenu from '../components/dropdown-menu';
-import YuDropdownItem from '../components/dropdown-item';
-import YuBreadcrumb from '../components/breadcrumb';
-import YuBreadcrumbItem from '../components/breadcrumb-item';
-import YuSlider from '../components/slider';
-import YuTimePicker from '../components/time-picker';
-import YuScrollSelect from '../components/scroll-select';
-import YuDatePicker from '../components/date-picker';
-import YuUpload from '../components/upload';
-import YuRate from '../components/rate';
-import YuForm from '../components/form';
-import YuField from '../components/field';
+import 'whatwg-fetch'
+import YuButton from '../components/button'
+import YuButtons from '../components/buttons'
+import YuInput from '../components/input'
+import YuOption from '../components/option'
+import YuRadio from '../components/radio'
+import YuRadios from '../components/radios'
+import YuSelect from '../components/select'
+import YuCounter from '../components/counter'
+import YuCheckbox from '../components/checkbox'
+import YuDialog from '../components/dialog'
+import YuToolTip from '../components/tooltip'
+import YuCard from '../components/card'
+import YuCarousel from '../components/carousel'
+import YuCollapseItem from '../components/collapse-item'
+import YuCollapse from '../components/collapse'
+import YuMenuItem from '../components/menu-item'
+import YuCheckboxs from '../components/checkboxs'
+import YuLoading from '../components/loading'
+import YuCounterSide from '../components/counter-side'
+import YuCascader from '../components/cascader'
+import YuSwitch from '../components/switch'
+import YuDropDown from '../components/dropdown'
+import YuDropdownMenu from '../components/dropdown-menu'
+import YuDropdownItem from '../components/dropdown-item'
+import YuBreadcrumb from '../components/breadcrumb'
+import YuBreadcrumbItem from '../components/breadcrumb-item'
+import YuSlider from '../components/slider'
+import YuTimePicker from '../components/time-picker'
+import YuScrollSelect from '../components/scroll-select'
+import YuDatePicker from '../components/date-picker'
+import YuUpload from '../components/upload'
+import YuRate from '../components/rate'
+import YuForm from '../components/form'
+import YuField from '../components/field'
 
 export default {
   data() {
@@ -515,8 +515,8 @@ export default {
     }
   },
   methods: {
-    success(data){
-      console.log('表单接收成功',data);
+    success(data) {
+      console.log('表单接收成功', data)
     },
   },
   components: {
@@ -555,7 +555,7 @@ export default {
     YuForm,
     YuField,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

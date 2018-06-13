@@ -32,7 +32,7 @@
   </div>
 </template>
 <script>
-import YuTag from '../components/tag';
+import YuTag from '../components/tag'
 
 export default {
   data() {
@@ -48,7 +48,7 @@ export default {
   components: {
     YuTag,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

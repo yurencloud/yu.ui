@@ -12,7 +12,7 @@ export default {
     return {
       active: false,
       hide: false,
-    };
+    }
   },
   props: {
     label: String,
@@ -24,19 +24,19 @@ export default {
   methods: {
     handleClick() {
       if (this.disabled) {
-        return;
+        return
       }
       if (this.$parent.multi) {
-        this.hide = true;
+        this.hide = true
       }
-      this.$parent.$emit('handleSelect', { label: this.label, value: this.value });
+      this.$parent.$emit('handleSelect', { label: this.label, value: this.value })
       this.$parent.$children.forEach((item) => {
-        item.active = false;
+        item.active = false
       })
-      this.active = true;
+      this.active = true
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped type="text/scss">

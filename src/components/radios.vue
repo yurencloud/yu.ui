@@ -9,7 +9,7 @@ export default {
   name: 'YuRadios',
   model: {
     prop: 'value',
-    event: 'input'
+    event: 'input',
   },
   props: {
     value: String,
@@ -18,21 +18,29 @@ export default {
       default: true,
     },
     name: String,
+    vertical: Boolean,
   },
   methods: {
     handleChange(value, isChecked) {
       this.$emit('input', isChecked ? value : '')
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: isChecked ? value : '' });
-      }
     },
   },
   watch: {
-    value(value){
-      for(let i = 0; i< this.$children.length; i++){
-          this.$children[i].checkedStatus = this.$children[i].value === value;
+    value(value) {
+      for (let i = 0; i < this.$children.length; i++) {
+        this.$children[i].checkedStatus = this.$children[i].value === value
+      }
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: isChecked ? value : '' })
+      }
+    },
+  },
+  mounted() {
+    if (this.vertical) {
+      for (let i = 0; i < this.$children.length; i++) {
+        this.$children[i].vertical = true
       }
     }
-  }
-};
+  },
+}
 </script>

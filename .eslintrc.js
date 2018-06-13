@@ -40,7 +40,7 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'max-len': 'off',
-    'semi': 'off',
+    'semi': [2, "never"],
     'linebreak-style': ["off", "windows"],
     'no-console': 'off',
     'no-underscore-dangle': 'off',

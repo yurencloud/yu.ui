@@ -40,7 +40,7 @@ export default {
       move: this.defaultValue ? this.defaultValue / this.total * 100 : 0,
       press: false,
       offset: null,
-    };
+    }
   },
   model: {
     prop: 'value',
@@ -84,78 +84,78 @@ export default {
   },
   methods: {
     handleMousedown($event) {
-      if (this.disabled) return;
-      this.press = true;
-      this.setOffset($event, 'circle');
+      if (this.disabled) return
+      this.press = true
+      this.setOffset($event, 'circle')
       window.addEventListener('mouseup', this.handleMouseup)
-      window.addEventListener('mousemove', this.handleMousemove);
+      window.addEventListener('mousemove', this.handleMousemove)
     },
     handleMousemove($event) {
       if (this.press) {
-        let move = Math.ceil(($event.clientX - this.offset) / this.width * 100);
+        let move = Math.ceil(($event.clientX - this.offset) / this.width * 100)
         if (this.step) {
           if (this.range.indexOf(move) > -1) {
             if (move) {
               if (move < this.min) move = this.min
             }
             if (move > this.max) move = this.max
-            this.move = move;
+            this.move = move
           }
         } else {
           if (move) {
             if (move < this.min) move = this.min
           }
           if (move > this.max) move = this.max
-          this.move = move;
+          this.move = move
         }
       }
     },
     handleMouseup() {
-      this.press = false;
-      window.removeEventListener('mousemove', this.handleMousemove);
-      window.removeEventListener('mouseup', this.handleMouseup);
+      this.press = false
+      window.removeEventListener('mousemove', this.handleMousemove)
+      window.removeEventListener('mouseup', this.handleMouseup)
     },
     handlePointClick(item) {
-      if (this.press) return;
-      this.move = item;
+      if (this.press) return
+      this.move = item
     },
     handleBarClick($event) {
-      if (this.disabled) return;
-      if (this.point) return;
-      this.setOffset($event, 'bar');
-      this.move = Math.ceil(($event.clientX - this.offset) / this.width * 100);
+      if (this.disabled) return
+      if (this.point) return
+      this.setOffset($event, 'bar')
+      this.move = Math.ceil(($event.clientX - this.offset) / this.width * 100)
     },
     setOffset($event, type) {
-      if (this.offset) return;
-      if (type === 'bar') this.offset = $event.currentTarget.offsetLeft;
-      if (type === 'circle') this.offset = $event.pageX - (this.defaultValue ? this.defaultValue / this.total * this.width : 0);
+      if (this.offset) return
+      if (type === 'bar') this.offset = $event.currentTarget.offsetLeft
+      if (type === 'circle') this.offset = $event.pageX - (this.defaultValue ? this.defaultValue / this.total * this.width : 0)
     },
   },
   computed: {
     range() {
-      const range = [];
-      if (!this.step) return range;
-      const length = Math.ceil(this.total / this.step);
+      const range = []
+      if (!this.step) return range
+      const length = Math.ceil(this.total / this.step)
       for (let i = 0; i < length + 1; i++) {
-        range[i] = i * this.step;
+        range[i] = i * this.step
       }
-      return range;
+      return range
     },
   },
   watch: {
     move(move) {
-      const value =  Math.floor(this.total * move / 100)
+      const value = Math.floor(this.total * move / 100)
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value });
+        this.$parent.handleChange({ name: this.name, value })
       }
-      this.$emit('input',value)
+      this.$emit('input', value)
     },
     // TODO::这里可能会有循环bug
     value(value) {
       this.move = value / this.total * 100
-    }
+    },
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

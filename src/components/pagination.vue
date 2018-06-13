@@ -80,8 +80,8 @@
 
 <script>
 
-import YuSelect from './select';
-import YuOption from './option';
+import YuSelect from './select'
+import YuOption from './option'
 
 export default {
   name: 'YuPagination',
@@ -136,100 +136,100 @@ export default {
   },
   methods: {
     getChange(value) {
-      this.limit = Number(value);
+      this.limit = Number(value)
     },
     prev() {
       if (this.index > 1) {
-        this.go(this.index - 1);
+        this.go(this.index - 1)
       }
     },
     next() {
       if (this.index < this.total / this.pageSize) {
-        this.go(this.index + 1);
+        this.go(this.index + 1)
       }
     },
     first() {
       if (this.index !== 1) {
-        this.go(1);
+        this.go(1)
       }
     },
     last() {
       if (this.index !== this.pages) {
-        this.go(this.pages);
+        this.go(this.pages)
       }
     },
     nextMore() {
       if (this.index < this.total / this.pageSize) {
-        this.go(this.index + 5);
+        this.go(this.index + 5)
       }
     },
     prevMore() {
       if (this.index > 1) {
-        this.go(this.index - 5);
+        this.go(this.index - 5)
       }
     },
     go(page) {
       if (this.index !== page) {
-        this.index = page;
+        this.index = page
       }
     },
     revToggle() {
-      this.prevChange = !this.prevChange;
+      this.prevChange = !this.prevChange
     },
     nextToggle() {
-      this.nextChange = !this.nextChange;
+      this.nextChange = !this.nextChange
     },
     goto() {
-      this.index = Number(document.querySelector('.pagination-go input').value);
+      this.index = Number(document.querySelector('.pagination-go input').value)
     },
   },
   computed: {
     pages() {
-      return Math.ceil(this.size / this.limit);
+      return Math.ceil(this.size / this.limit)
     },
     //  计算页码
     pagers() {
       if (this.index > this.pages) {
-        this.index = 1;
+        this.index = 1
       }
-      const arr = [];
-      const perPages = this.perPages;
-      const pageCount = this.pages;
-      const current = this.index;
+      const arr = []
+      const perPages = this.perPages
+      const pageCount = this.pages
+      const current = this.index
       //  偏移
-      const _deviation = (perPages - 1) / 2;
+      const _deviation = (perPages - 1) / 2
       const deviation = {
         // 开始值
         start: current - _deviation,
         //  结束值
         end: current + _deviation,
-      };
-        //  开始值小于1 时
+      }
+      //  开始值小于1 时
       if (deviation.start < 1) {
-        deviation.end += (1 - deviation.start);
-        deviation.start = 1;
+        deviation.end += (1 - deviation.start)
+        deviation.start = 1
       }
       //  结束值大于总页数时
       if (deviation.end > pageCount) {
-        deviation.start -= (deviation.end - pageCount);
-        deviation.end = pageCount;
+        deviation.start -= (deviation.end - pageCount)
+        deviation.end = pageCount
       }
-      if (deviation.start < 1) deviation.start = 1;
-      this.showPrevMore = (deviation.start > 1);
-      this.shownextMore = (deviation.end < pageCount);
+      if (deviation.start < 1) deviation.start = 1
+      this.showPrevMore = (deviation.start > 1)
+      this.shownextMore = (deviation.end < pageCount)
       for (let i = deviation.start; i <= deviation.end; i++) {
-        arr.push(i);
+        arr.push(i)
       }
-      this.$emit('change', this.index);
-      return arr;
+      this.$emit('change', this.index)
+      return arr
     },
   },
   watch: {
     pageIndex(val) {
-      this.index = val || 1;
+      this.index = val || 1
     },
     pageSize(val) {
-      this.limit = val || 10;
+      this.limit = val || 10
     },
     total(val) {
       this.size = val || 1

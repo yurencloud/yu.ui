@@ -65,8 +65,8 @@
 </template>
 
 <script>
-import YuButton from './button';
-import YuInput from './input';
+import YuButton from './button'
+import YuInput from './input'
 
 export default {
   name: 'YuMessageBox',
@@ -120,8 +120,8 @@ export default {
         handleBlur: () => {},
         handleFocus: () => {},
         handleChange: (value, name) => {
-          this.value = value;
-          this.name = name;
+          this.value = value
+          this.name = name
         },
         handleKeyup: () => {},
       },
@@ -139,38 +139,38 @@ export default {
   },
   methods: {
     confirmEvent() {
-      console.log(1);
+      console.log(1)
       // 如果是prompt，又有验证规则，则确认时就验证
-      const the = this;
+      const the = this
       if (this.isInput) {
         if (this.inputPattern != null) {
-          this.validateResult = this.inputPattern.test(the.value);
-          console.log(this.value);
-          console.log(this.validateResult);
+          this.validateResult = this.inputPattern.test(the.value)
+          console.log(this.value)
+          console.log(this.validateResult)
           if (!this.validateResult) {
-            return;
+            return
           }
         }
       }
 
-      this.$destroy(true);
-      this.$el.parentNode.removeChild(this.$el);
+      this.$destroy(true)
+      this.$el.parentNode.removeChild(this.$el)
       if (this.confirm != null) {
         this.confirm(this.value)
       }
     },
     cancelEvent() {
-      this.visible = false;
-      this.$destroy(true);
-      this.$el.parentNode.removeChild(this.$el);
+      this.visible = false
+      this.$destroy(true)
+      this.$el.parentNode.removeChild(this.$el)
       if (this.cancel != null) {
         this.cancel()
       }
     },
     close() {
-      this.visible = false;
-      this.$destroy(true);
-      this.$el.parentNode.removeChild(this.$el);
+      this.visible = false
+      this.$destroy(true)
+      this.$el.parentNode.removeChild(this.$el)
     },
   },
 }

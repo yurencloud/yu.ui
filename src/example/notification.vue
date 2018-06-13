@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import YuButton from '../components/button';
+import YuButton from '../components/button'
 
 export default {
   methods: {
@@ -22,7 +22,7 @@ export default {
   components: {
     YuButton,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

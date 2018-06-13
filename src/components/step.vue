@@ -52,10 +52,10 @@ export default {
     status: String,
   },
   mounted() {
-    this.$el.nextElementSibling ? this.lastLine = true : this.lastLine = false;
-    this.conduct = !this.$el.previousElementSibling;
+    this.$el.nextElementSibling ? this.lastLine = true : this.lastLine = false
+    this.conduct = !this.$el.previousElementSibling
     if (this.rootSteps.simple) {
-      this.lastLine = false;
+      this.lastLine = false
     }
   },
 }

@@ -36,12 +36,12 @@
   </div>
 </template>
 <script>
-import YuSlider from '../components/slider';
+import YuSlider from '../components/slider'
 
 export default {
-  data(){
+  data() {
     return {
-      value2: 0
+      value2: 0,
     }
   },
   methods: {
@@ -49,7 +49,7 @@ export default {
   components: {
     YuSlider,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

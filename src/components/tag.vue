@@ -40,11 +40,11 @@ export default {
   },
   methods: {
     toggle() {
-      this.closeIcon = !this.closeIcon;
+      this.closeIcon = !this.closeIcon
     },
     handleClose(event) {
-      this.visible = !this.visible;
-      this.$emit('close', event);
+      this.visible = !this.visible
+      this.$emit('close', event)
     },
   },
 }

@@ -4,7 +4,14 @@
     class="yu-button"
     :autofocus="autofocus"
     :type="nativeType"
-    :class="[type, size, {disabled:disabled},shape, {plain:plain}, {loading:loading}]" >
+    :class="[
+              type,
+              size,
+              {disabled:disabled},
+              shape,
+              {plain:plain},
+              {loading:loading}
+            ]" >
     <i v-if="icon" class="iconfont" v-bind:class="[icon]"></i>
     <i v-if="loading" class="iconfont icon-loading loading"></i>
     <slot/>
@@ -29,28 +36,19 @@ export default {
       type: String,
       default: 'normal',
     },
-    nativeType: {
+    nativeType: { // 原生属性button / submit / reset
       type: String,
       default: 'button',
     },
-    submit: Boolean,
   },
   methods: {
     handleClick(event) {
       if (!this.disabled) {
-        this.$emit('click', event);
-        this.checked = !this.checked;
-        if (this.submit) {
-          if (this.$parent.isForm) {
-            this.$parent.submit()
-          } else if (this.$parent.$parent.isForm) {
-            this.$parent.$parent.submit()
-          }
-        }
+        this.$emit('click', event)
       }
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped type="text/scss">
@@ -60,7 +58,7 @@ export default {
   .yu-button {
     // 基础属性
     padding: 0 20px;
-    border-radius: 4px;
+    border-radius: $radius;
     text-align: center;
     margin-right: 8px;
     margin-bottom: 12px;

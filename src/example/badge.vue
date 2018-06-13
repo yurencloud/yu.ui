@@ -25,8 +25,8 @@
   </div>
 </template>
 <script>
-import YuBadge from '../components/badge';
-import YuButton from '../components/button';
+import YuBadge from '../components/badge'
+import YuButton from '../components/button'
 
 export default {
   methods: {},
@@ -34,7 +34,7 @@ export default {
     YuBadge,
     YuButton,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

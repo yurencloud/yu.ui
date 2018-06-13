@@ -111,8 +111,8 @@
   </div>
 </template>
 <script>
-import YuButton from '../components/button';
-import YuButtons from '../components/buttons';
+import YuButton from '../components/button'
+import YuButtons from '../components/buttons'
 
 export default {
   methods: {},
@@ -120,7 +120,7 @@ export default {
     YuButton,
     YuButtons,
   },
-};
+}
 </script>
 <style lang="scss" type="text/scss">
   @import "../assets/css/varible";

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import YuTable from './table';
+import YuTable from './table'
 
 export default {
   name: 'YuFixedTable',

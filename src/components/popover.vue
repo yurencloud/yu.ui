@@ -51,10 +51,10 @@ export default {
   },
   methods: {
     change() {
-      this.showContent = !this.showContent;
+      this.showContent = !this.showContent
       if (this.isDisappear) {
         setTimeout(() => {
-          this.showContent = !this.showContent;
+          this.showContent = !this.showContent
         }, this.delay * 1000)
       }
     },

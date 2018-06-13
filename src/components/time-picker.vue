@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import YuInput from './input';
-import YuScrollSelect from './scroll-select';
+import YuInput from './input'
+import YuScrollSelect from './scroll-select'
 
 export default {
   name: 'YuTimePicker',
@@ -89,37 +89,37 @@ export default {
   },
   methods: {
     handleClear() {
-      this.currentValue = '';
+      this.currentValue = ''
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.currentValue });
+        this.$parent.handleChange({ name: this.name, value: this.currentValue })
       }
     },
     handleBlur(event) {
-      this.currentValue = this.$refs.input.value;
+      this.currentValue = this.$refs.input.value
       if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.currentValue });
+        this.$parent.handleBlur({ name: this.name, value: this.currentValue })
       }
-      this.$emit('blur', event);
+      this.$emit('blur', event)
     },
     handleChange(value, name) {
-      this.currentValue = value;
+      this.currentValue = value
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.currentValue });
+        this.$parent.handleChange({ name: this.name, value: this.currentValue })
       }
       this.$emit('change', value, name)
     },
     handleInput(value) {
-      this.currentValue = value;
+      this.currentValue = value
     },
     getMinute(time) {
-      const arr = time.split(':');
-      return (parseInt(arr[0], 0) * 60) + parseInt(arr[1], 0);
+      const arr = time.split(':')
+      return (parseInt(arr[0], 0) * 60) + parseInt(arr[1], 0)
     },
     firstFetch() {
-      this.$refs.scroll.secondCascader = this.sixty;
+      this.$refs.scroll.secondCascader = this.sixty
     },
     secondFetch() {
-      this.$refs.scroll.thirdCascader = this.sixty;
+      this.$refs.scroll.thirdCascader = this.sixty
     },
   },
   computed: {
@@ -130,46 +130,46 @@ export default {
       const endMinute = this.getMinute(this.optionParam.end)
       const min = this.getMinute(this.optionParam.minTime || '00:00') // 设置最大值，最小值
       const max = this.getMinute(this.optionParam.maxTime || '24:00')
-      const options = [];
-      let i = startMinute;
+      const options = []
+      let i = startMinute
       while (i < endMinute) {
-        let hours = Math.floor(i / 60);
-        hours < 10 ? hours = `0${hours}` : hours = hours.toString();
-        let minutes = i % 60;
-        minutes < 10 ? minutes = `0${minutes}` : minutes = minutes.toString();
-        const result = `${hours}:${minutes}`;
+        let hours = Math.floor(i / 60)
+        hours < 10 ? hours = `0${hours}` : hours = hours.toString()
+        let minutes = i % 60
+        minutes < 10 ? minutes = `0${minutes}` : minutes = minutes.toString()
+        const result = `${hours}:${minutes}`
         options.push({ value: result, label: result, disabled: i < min || i > max })
-        i += stepMinute;
+        i += stepMinute
       }
-      return options;
+      return options
     },
     cascader() {
-      const cascader = [];
+      const cascader = []
       // 造小时
       for (let i = 0; i < 24; i++) {
-        let time = '';
-        i < 10 ? time = `0${i}` : time = i.toString();
+        let time = ''
+        i < 10 ? time = `0${i}` : time = i.toString()
         cascader.push({ value: time, label: time })
       }
-      cascader[0].children = this.sixty;
-      cascader[0].children[0].children = this.sixty;
-      return cascader;
+      cascader[0].children = this.sixty
+      cascader[0].children[0].children = this.sixty
+      return cascader
     },
   },
   created() {
-    const sixty = [];
+    const sixty = []
     // 造分钟和秒
     for (let i = 0; i < 60; i++) {
-      let time = '';
-      i < 10 ? time = `0${i}` : time = i.toString();
+      let time = ''
+      i < 10 ? time = `0${i}` : time = i.toString()
       sixty.push({ value: time, label: time })
     }
-    this.sixty = sixty;
+    this.sixty = sixty
   },
   watch: {
-    currentValue(value){
+    currentValue(value) {
       this.$emit('input', value)
-    }
+    },
 
   },
 
@@ -177,7 +177,7 @@ export default {
     YuInput,
     YuScrollSelect,
   },
-};
+}
 </script>
 
 <style lang="scss" type="text/scss">

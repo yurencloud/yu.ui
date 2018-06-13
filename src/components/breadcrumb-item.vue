@@ -26,17 +26,17 @@ export default {
   },
   methods: {
     go(event) {
-      const self = this;
+      const self = this
       if (this.to) {
-        self.$router.history.replace(this.to);
+        self.$router.history.replace(this.to)
       }
       this.$emit('click', event)
     },
   },
   mounted() {
-    this.separator = this.rootBreadcrumb.separator;
-    this.len = this.separator.length;
-    this.next = Boolean(this.$el.nextElementSibling);
+    this.separator = this.rootBreadcrumb.separator
+    this.len = this.separator.length
+    this.next = Boolean(this.$el.nextElementSibling)
   },
 }
 </script>
