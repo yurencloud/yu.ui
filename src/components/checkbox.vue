@@ -1,7 +1,11 @@
 <template>
   <label class="yu-checkbox"
          @click.prevent="handleClick"
-         :class="[{checked:isChecked},{disabled:disabled},{vertical:vertical}]">
+         :class="[
+                  {checked:isChecked},
+                  {disabled:disabled},
+                  {vertical:vertical}
+                  ]">
     <span class="checkbox">
       <input type="checkbox"
              :checked="checked"
@@ -34,7 +38,6 @@ export default {
   },
   methods: {
     handleClick() {
-      // 如果禁用，直接返回
       if (this.disabled) return
       this.$emit('change', this.value, this.name, !this.checked)
       this.$emit('click')
@@ -43,9 +46,6 @@ export default {
         this.$emit('input', this.checkedStatus)
         this.$parent.handleChange(this.value, this.checkedStatus)
         return
-      }
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ value: !this.checked ? this.value : '', name: this.name })
       }
       this.$emit('input', !this.checked)
     },
@@ -57,6 +57,10 @@ export default {
     isChecked() {
       if (this.$parent.isCheckboxs) {
         return this.checkedStatus
+      }
+      // 注意，提交表单时，是提交value，而双向绑定的是checked
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ value: this.checked ? this.value : '', name: this.name })
       }
       return this.checked
     },

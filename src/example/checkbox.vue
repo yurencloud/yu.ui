@@ -28,6 +28,9 @@
       <yu-checkbox  vertical label="3">桃子</yu-checkbox>
     </yu-checkboxs>
 
+    <div class="sub-title">作为单选,返回 true/false</div>
+    <yu-checkbox label="3" v-model="value6">桃子</yu-checkbox>
+
     <div class="sub-title">v-model</div>
 
     <div>{{value1}}</div>
@@ -35,6 +38,7 @@
     <div>{{value3}}</div>
     <div>{{value4}}</div>
     <div>{{value5}}</div>
+    <div>{{value6}}</div>
   </div>
 </template>
 <script>
@@ -51,6 +55,7 @@ export default {
       value3: [],
       value4: [],
       value5: [],
+      value6: false,
     }
   },
   components: {

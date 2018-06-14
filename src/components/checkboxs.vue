@@ -3,10 +3,10 @@
     <label class="yu-checkbox selectAll"
            v-show="showControl"
            @click="selectAllClick"
-           :class="[{checked:isChecked}]">
+           :class="[controlStatus]">
     <span class="checkbox">
     </span>
-      <span>全选</span>
+      <span>{{controlLabel}}</span>
     </label>
 
     <slot/>
@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       isChecked: false,
+      controlStatus: 'none', // none 未选择，part 部分选择， all 全部选择
     }
   },
   model: {
@@ -43,6 +44,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    controlLabel: {
+      type: String,
+      default: '全选',
+    },
   },
   components: {
     YuCheckbox,
@@ -51,26 +56,17 @@ export default {
     // 负责全选
     selectAllClick() {
       const the = this
-      // 重置
-      this.value = []
-      this.isChecked = !this.isChecked
-      this.$children.forEach((item, index) => {
-        item.isChecked = this.isChecked
-        if (index > 0) {
-          if (this.isChecked) {
-            the.value.push(item.value)
-          } else {
-            the.value.splice(the.value.indexOf(item.value), 1)
-          }
+      const value = []
+      const isChecked = this.controlStatus === 'none'
+      this.$children.forEach((item) => {
+        item.checkedStatus = isChecked
+        if (isChecked) {
+          value.push(item.value)
+        } else {
+          value.splice(the.value.indexOf(item.value), 1)
         }
       })
-
-      // 提交至表单
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value.toString() })
-      }
-
-      this.$emit('change', this.value)
+      this.$emit('change', value)
     },
     handleChange(value, isChecked) {
       const values = this.value.slice(0)
@@ -79,18 +75,38 @@ export default {
       } else {
         values.splice(values.indexOf(value), 1)
       }
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value.toString() })
-      }
       this.$emit('change', values)
     },
   },
   watch: {
-    value() {
+    value(value) {
       // 同步子checkbox
       this.$children.forEach((item) => {
         item.syncChecked()
       })
+
+      if (value.length > 0) {
+        if (this.value.length === this.$children.length) {
+          this.controlStatus = 'all'
+        } else {
+          this.controlStatus = 'part'
+        }
+      } else {
+        this.controlStatus = 'none'
+      }
+
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value.toString() })
+      }
+    },
+    mounted() {
+      if (this.value.length > 0) {
+        if (this.value.length === this.$children.length) {
+          this.controlStatus = 'all'
+        } else {
+          this.controlStatus = 'part'
+        }
+      }
     },
   },
 }
@@ -119,12 +135,36 @@ export default {
         border: 1px solid $primary;
       }
     }
-    &.vertical{
-      display: block!important;
+    &.vertical {
+      display: block !important;
     }
-    &.checked{
+    &.part {
       .checkbox {
-
+        position: relative;
+        border: 1px solid $primary;
+        border-radius: 2px;
+        background-color: $primary;
+        & + span {
+          color: $primary;
+        }
+        &:after {
+          content: '\00a0';
+          display: inline-block;
+          border: 2px solid #fff;
+          border-top-width: 0;
+          border-right-width: 0;
+          border-left-width: 0;
+          width: 10px;
+          height: 5px;
+          -webkit-transform: rotate(180deg);
+          position: absolute;
+          top: 6px;
+          left: 1px;
+        }
+      }
+    }
+    &.all {
+      .checkbox {
         position: relative;
         border: 1px solid $primary;
         border-radius: 2px;

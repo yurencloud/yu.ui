@@ -22,7 +22,12 @@
       @keyup="handleKeyup"
       @input="handleInput"
       :autocomplete="autocomplete"
-      :class="[{prefix:prefix},{suffix:suffix},{append:$slots.append},{prepend:$slots.prepend}]"
+      :class="[
+                {prefix:prefix},
+                {suffix:suffix},
+                {append:$slots.append},
+                {prepend:$slots.prepend}
+              ]"
       :style="{width:width}">
 
     <!--后置图标-->
@@ -87,6 +92,10 @@ export default {
       loading: false,
     }
   },
+  model: {
+    prop: 'value',
+    model: 'input',
+  },
   props: {
     placeholder: String,
     disabled: Boolean,
@@ -128,6 +137,7 @@ export default {
   methods: {
     clear() {
       this.currentValue = ''
+      this.$emit('input', '')
       this.$emit('clear')
     },
     handleClick(event) {
@@ -233,6 +243,9 @@ export default {
       if (this.remote) {
         this.$emit('fetch', value)
       }
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value: this.value })
+      }
     },
   },
   components: {
@@ -272,7 +285,7 @@ export default {
         font-weight: lighter;
       }
       border: 1px solid $border;
-      border-radius: 4px;
+      border-radius: $radius;
       &:hover {
         border: 1px solid $lighter-text;
       }

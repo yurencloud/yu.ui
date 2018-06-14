@@ -82,7 +82,7 @@ export default {
       display: none;
     }
     .radio {
-      transition: border .2s;
+      transition: border .1s;
       margin-right: 6px;
       margin-bottom: -1px;
       display: inline-block;
