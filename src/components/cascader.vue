@@ -7,9 +7,9 @@
       :name="name"
       suffix="icon-angle-down"
       @click="handleClick"
-      :value="value"
       :size="size"
       :width="width"
+      :value="valueText"
       :disabled="disabled"
     />
     <transition name="zoom-in-top">
@@ -19,9 +19,9 @@
              :key="item.value"
              :value="item.value"
              v-for="item in cascader"
-             :class="[{disabled:item.disabled},{active:item.acitve}]"
-             @click="firstClick(item, $event)"
-             @mouseover="hover&&item.children?firstClick(item, $event):''"
+             :class="[{disabled:item.disabled},{active:value.indexOf(item.value)>-1}]"
+             @click="firstClick(item)"
+             @mouseover="hover&&item.children?firstClick(item):''"
         >
           {{item.label}}
           <i v-if="item.children" class="iconfont icon-angle-right"></i>
@@ -32,10 +32,10 @@
         <div class="option"
              :key="item.value"
              :value="item.value"
-             :class="[{active:item.acitve}]"
+             :class="[{disabled:item.disabled}, {active:value.indexOf(item.value)>-1}]"
              v-for="item in secondCascader"
-             @click="secondClick(item, $event)"
-             @mouseover="hover&&item.children?secondClick(item, $event):''"
+             @click="secondClick(item)"
+             @mouseover="hover&&item.children?secondClick(item):''"
         >
           {{item.label}}
           <i v-if="item.children" class="iconfont icon-angle-right"></i>
@@ -46,9 +46,9 @@
         <div class="option"
              :key="item.value"
              :value="item.value"
-             :class="[{active:item.acitve}]"
+             :class="[{disabled:item.disabled}, {active:value.indexOf(item.value)>-1}]"
              v-for="item in thirdCascader"
-             @click="thirdClick(item, $event)"
+             @click="thirdClick(item)"
         >
           {{item.label}}
         </div>
@@ -73,19 +73,19 @@ export default {
       thirdActive: false,
       secondCascader: [],
       thirdCascader: [],
-      value: this.defaultValue || {},
-      valueArray: [],
+      valueObject: {},
+      valueText: '',
     }
   },
   model: {
-    prop: 'valueArray',
+    prop: 'value',
     event: 'change',
   },
   props: {
+    value: Array,
     cascader: Array,
     hover: Boolean,
     short: Boolean,
-    value: Object, // 元素要有对应的active属性
     changeOnSelect: Boolean,
     remote: Boolean, // 远程加载数据
     name: String,
@@ -105,11 +105,10 @@ export default {
     handleClick() {
       this.visible = !this.visible
     },
-    firstClick(item, $event) {
+    firstClick(item) {
       if (item.disabled) return
       this.thirdActive = false
-      this.activeOption($event)
-      this.value.first = item
+      this.valueObject.first = item
       if (item.children) {
         if (this.remote) {
           this.secondCascader = []
@@ -119,18 +118,17 @@ export default {
         }
         this.secondActive = true
       } else {
-        delete this.value.second
-        delete this.value.third
+        delete this.valueObject.second
+        delete this.valueObject.third
         this.changeValue()
       }
       if (this.changeOnSelect) {
         this.changeValue()
       }
     },
-    secondClick(item, $event) {
+    secondClick(item) {
       if (item.disabled) return
-      this.activeOption($event)
-      this.value.second = item
+      this.valueObject.second = item
       if (item.children) {
         if (this.remote) {
           this.thirdCascader = []
@@ -140,21 +138,20 @@ export default {
         }
         this.thirdActive = true
       } else {
-        delete this.value.third
+        delete this.valueObject.third
         this.changeValue()
       }
       if (this.changeOnSelect) {
         this.changeValue()
       }
     },
-    thirdClick(item, $event) {
+    thirdClick(item) {
       if (item.disabled) return
-      this.activeOption($event)
-      this.value.third = item
+      this.valueObject.third = item
       this.changeValue()
     },
     changeValue() {
-      const value = this.value
+      const value = this.valueObject
       const valueArray = []
 
       let text = ''
@@ -164,7 +161,7 @@ export default {
       } else {
         text = value.first.label + (value.second ? `/${value.second.label}` : '') + (value.third ? `/${value.third.label}` : '')
       }
-      this.$refs.input.changeValue(text)
+      this.valueText = text
       if (!this.changeOnSelect) {
         this.visible = false
       }
@@ -173,29 +170,127 @@ export default {
         valueArray.push(value[key].value)
       }
 
-      this.valueArray = valueArray
-
       this.$emit('change', valueArray)
 
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: valueArray })
+        this.$parent.handleChange({ name: this.name, value: valueArray.toString() })
       }
     },
-    activeOption($event) {
-      $event.target.parentNode.childNodes.forEach((i) => {
-        if (i.classList) i.classList.remove('active')
-      })
-      $event.target.classList.add('active')
+    syncValue(value) {
+      const len = value.length
+      switch (len) {
+        case 1:
+          // 激活节点一
+          for (let i = 0; i < this.cascader.length; i++) {
+            if (this.cascader[i].value === value[0]) {
+              this.valueObject.first = this.cascader[i]
+              if (this.remote) {
+                this.secondCascader = []
+                this.$emit('fetch', this.cascader[i])
+              } else {
+                this.secondCascader = this.cascader[i].children
+              }
+              this.secondActive = true
+              this.thirdActive = false
+              break
+            }
+          }
+          this.changeValue()
+          break
+        case 2:
+          // 激活节点一
+          for (let i = 0; i < this.cascader.length; i++) {
+            if (this.cascader[i].value === value[0]) {
+              this.valueObject.first = this.cascader[i]
+              if (this.remote) {
+                this.secondCascader = []
+                this.$emit('fetch', this.cascader[i])
+              } else {
+                this.secondCascader = this.cascader[i].children
+              }
+              this.secondActive = true
+              this.thirdActive = false
+              // 激活节点二
+              const children = this.secondCascader
+              for (let j = 0; j < children.length; j++) {
+                if (children[j].value === value[1]) {
+                  this.valueObject.second = children[j]
+                  if (this.remote) {
+                    this.thirdCascader = []
+                    this.$emit('fetch', children[j])
+                  } else {
+                    this.thirdCascader = children[j].children
+                  }
+                  this.thirdActive = true
+                  break
+                }
+              }
+              break
+            }
+          }
+          this.changeValue()
+          break
+        case 3:
+          // 激活节点一
+          for (let i = 0; i < this.cascader.length; i++) {
+            if (this.cascader[i].value === value[0]) {
+              this.valueObject.first = this.cascader[i]
+              if (this.remote) {
+                this.secondCascader = []
+                this.$emit('fetch', this.cascader[i])
+              } else {
+                this.secondCascader = this.cascader[i].children
+              }
+              this.secondActive = true
+              this.thirdActive = false
+              // 激活节点二
+              const children = this.secondCascader
+              console.log(this.secondCascader)
+
+              for (let j = 0; j < children.length; j++) {
+                if (children[j].value === value[1]) {
+                  this.valueObject.second = children[j]
+                  if (this.remote) {
+                    this.thirdCascader = []
+                    this.$emit('fetch', children[j])
+                  } else {
+                    this.thirdCascader = children[j].children
+                  }
+                  this.thirdActive = true
+                  // 激活节点三
+                  const children2 = this.thirdCascader
+                  for (let k = 0; k < children2.length; k++) {
+                    if (children2[k].value === value[2]) {
+                      this.valueObject.third = children2[k]
+                      break
+                    }
+                  }
+                  break
+                }
+              }
+              break
+            }
+          }
+          this.changeValue()
+          break
+        default:
+          break
+      }
     },
   },
   mounted() {
-    if (this.defaultValue) {
-      this.$options.methods.changeValue.bind(this)()
+    if (this.cascader.length === 0) {
+      return
+    }
+    this.syncValue(this.value)
+  },
+  watch: {
+    cascader() {
+      this.syncValue(this.value)
     }
   },
   created() {
     const body = document.body
-    const the = this
     if (this.$parent.isField) {
       this.$parent.fixCascader = true
     }
@@ -204,7 +299,7 @@ export default {
         && e.target.tagName !== 'INPUT'
         && e.target.className.indexOf('option') === -1
       ) {
-        the.visible = false
+        this.visible = false
       }
     }, false)
   },

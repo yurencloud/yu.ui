@@ -2,10 +2,11 @@
   <label class="yu-checkbox"
          @click.prevent="handleClick"
          :class="[
-                  {checked:isChecked},
-                  {disabled:disabled},
-                  {vertical:vertical}
-                  ]">
+                    {checked:isChecked},
+                    {disabled:disabled},
+                    {vertical:vertical}
+                 ]"
+  >
     <span class="checkbox">
       <input type="checkbox"
              :checked="checked"

@@ -131,6 +131,7 @@ export default {
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value: values.toString() })
       }
+      this.$emit('selected', values)
     },
     handleCloseTag(item) {
       this.cancelSelect({ value: item.value })

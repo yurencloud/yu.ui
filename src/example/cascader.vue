@@ -3,29 +3,39 @@
     <h2>YU.UI</h2>
     <div class="title">级联选择</div>
     <div class="sub-title">普通用法</div>
-    <yu-cascader :cascader="cascader"/>
+    <yu-cascader :cascader="cascader" v-model="value1"/>
 
     <div class="sub-title">hover触发</div>
-    <yu-cascader :cascader="cascader" hover/>
+    <yu-cascader :cascader="cascader" hover v-model="value2"/>
 
     <div class="sub-title">有禁用选项</div>
-    <yu-cascader :cascader="cascader"/>
+    <yu-cascader :cascader="cascader" v-model="value3"/>
 
     <div class="sub-title">结果仅显示最后一项</div>
-    <yu-cascader :cascader="cascader" short/>
+    <yu-cascader :cascader="cascader" short v-model="value4"/>
 
     <div class="sub-title">默认值</div>
-    <yu-cascader :cascader="cascader" :defaultValue="defaultValue"/>
+    <yu-cascader :cascader="cascader" :defaultValue="defaultValue" v-model="value5"/>
 
     <div class="sub-title">选择即改变</div>
-    <yu-cascader :cascader="cascader" changeOnSelect/>
+    <yu-cascader :cascader="cascader" changeOnSelect v-model="value6"/>
 
     <div class="sub-title">动态加载</div>
-    <yu-cascader ref="cascader" :cascader="fetchCascader" @fetch="cascaderFetch" remote/>
+    <!--<yu-cascader ref="cascader" :cascader="fetchCascader" @fetch="cascaderFetch" remote v-model="value7"/>-->
+
+    <div class="sub-title">动态加载</div>
+    <yu-cascader ref="cascader" :cascader="fetchCascader" @fetch="cascaderFetch" remote v-model="value8"/>
 
     <div class="sub-title">v-model</div>
-    <yu-cascader v-model="value" :cascader="cascader"/>
-    <div>{{value}}</div>
+    <div>{{value1}}</div>
+    <div>{{value2}}</div>
+    <div>{{value3}}</div>
+    <div>{{value4}}</div>
+    <div>{{value5}}</div>
+    <div>{{value6}}</div>
+    <div>{{value7}}</div>
+    <div>{{value8}}</div>
+
 
     <div style="margin-bottom: 400px"></div>
   </div>
@@ -36,7 +46,14 @@ import YuCascader from '../components/cascader'
 export default {
   data() {
     return {
-      value: '',
+      value1: ['zhinan', 'shejiyuanze', 'fankui'],
+      value2: [],
+      value3: [],
+      value4: [],
+      value5: [],
+      value6: [],
+      value7: [],
+      value8: [],
       cascader: [{
         value: 'zhinan',
         label: '指南',
