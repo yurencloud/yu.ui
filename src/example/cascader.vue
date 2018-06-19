@@ -23,10 +23,10 @@
     <div class="sub-title">动态加载</div>
     <!--<yu-cascader ref="cascader" :cascader="fetchCascader" @fetch="cascaderFetch" remote v-model="value7"/>-->
 
-    <div class="sub-title">动态加载</div>
-    <yu-cascader ref="cascader" :cascader="fetchCascader" @fetch="cascaderFetch" remote v-model="value8"/>
+    <div class="sub-title">动态加载默认值（要自定义default-value-text）</div>
+    <yu-cascader ref="cascader" :cascader="fetchCascader" @fetch="cascaderFetch" remote v-model="value8" default-value-text="前端/js/js-1"/>
 
-    <div class="sub-title">v-model</div>
+    <div class="sub-title">v-model(在初始化后，只能单向输出)</div>
     <div>{{value1}}</div>
     <div>{{value2}}</div>
     <div>{{value3}}</div>
@@ -53,7 +53,7 @@ export default {
       value5: [],
       value6: [],
       value7: [],
-      value8: [],
+      value8: [1, 3, 7],
       cascader: [{
         value: 'zhinan',
         label: '指南',

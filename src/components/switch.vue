@@ -1,11 +1,21 @@
 <template>
-  <div class="yu-switch" @click="handleClick" :class="[{disabled:disabled}]">
-     <input type="checkbox" :disabled="disabled" :name="name" v-model="checked" :value="value">
-     <span v-if="!after">{{checked?(activeLabel||label):(inactiveLabel||label)}}</span>
-     <span class="switch" v-if="visible" :class="[{on:isChecked},type,{disabled:disabled}]">
+  <div class="yu-switch"
+       @click="handleClick"
+       :class="[{disabled:disabled}]">
+     <input type="checkbox"
+            :disabled="disabled"
+            :name="name"
+            :value="value">
+     <span v-if="!after">
+       {{isChecked?(activeLabel||label):(inactiveLabel||label)}}
+     </span>
+     <span class="switch"
+           :class="[{on:isChecked},type,{disabled:disabled}]">
       <span class="circle"></span>
     </span>
-    <span v-if="after">{{checked?(activeLabel||label):(inactiveLabel||label)}}</span>
+    <span v-if="after">
+      {{isChecked?(activeLabel||label):(inactiveLabel||label)}}
+    </span>
   </div>
 
 </template>
@@ -13,11 +23,6 @@
 <script>
 export default {
   name: 'YuSwitch',
-  data() {
-    return {
-      visible: true,
-    }
-  },
   model: {
     prop: 'value',
     event: 'input',
@@ -49,9 +54,6 @@ export default {
       const value = !this.isChecked ? this.activeValue : this.inactiveValue
       this.$emit('click', value)
       this.$emit('input', value)
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value })
-      }
     },
   },
   computed: {
@@ -62,16 +64,10 @@ export default {
   watch: {
     value(value) {
       this.$emit('input', value)
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value })
+      }
     },
-  },
-  mounted() {
-    if (this.activeValue === this.value) {
-      this.checked = true
-    }
-
-    if (this.inactiveValue === this.value) {
-      this.checked = false
-    }
   },
 }
 </script>
@@ -109,7 +105,7 @@ export default {
       box-sizing: border-box;
 
       .circle {
-        vertical-align: middle;
+        margin-top: 1px;
         box-sizing: border-box;
         display: inline-block;
         width: 16px;

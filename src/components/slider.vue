@@ -155,6 +155,12 @@ export default {
       this.move = value / this.total * 100
     },
   },
+  mounted() {
+
+    if (this.value !== 0) {
+      this.move = this.value / this.total * 100
+    }
+  },
 }
 </script>
 
