@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Index from '../example/index'
 import Button from '../example/button'
 import Radio from '../example/radio'
 import Checkbox from '../example/checkbox'
@@ -52,7 +53,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: Button,
+      component: Index,
     },
     {
       path: '/button',
