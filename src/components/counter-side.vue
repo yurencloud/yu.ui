@@ -115,11 +115,11 @@ export default {
           this.disabledSubtract = false
         }
       }
+      this.$emit('input', value)
+
       if (this.$parent.isField) {
         this.$parent.handleChange({ name: this.name, value })
       }
-
-      this.$emit('input', value)
     },
   },
   components: {

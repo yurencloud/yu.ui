@@ -16,8 +16,11 @@
     <yu-date-picker max-date="2018-05-15" v-model="value5"/>
 
     <div class="sub-title">v-model</div>
-    <yu-button @click="value1='2018-03-03'">点击</yu-button>
-    {{value1}}
+    <div>{{value1}}</div>
+    <div>{{value2}}</div>
+    <div>{{value3}}</div>
+    <div>{{value4}}</div>
+    <div>{{value5}}</div>
 
     <div style="margin-bottom: 400px"></div>
   </div>

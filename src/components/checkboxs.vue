@@ -86,26 +86,18 @@ export default {
       })
 
       if (value.length > 0) {
-        if (this.value.length === this.$children.length) {
-          this.controlStatus = 'all'
-        } else {
-          this.controlStatus = 'part'
-        }
+        this.controlStatus = this.value.length === this.$children.length ? 'all' : 'part'
       } else {
         this.controlStatus = 'none'
       }
 
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value.toString() })
+        this.$parent.setValue({ name: this.name, value: this.value })
       }
     },
     mounted() {
       if (this.value.length > 0) {
-        if (this.value.length === this.$children.length) {
-          this.controlStatus = 'all'
-        } else {
-          this.controlStatus = 'part'
-        }
+        this.controlStatus = this.value.length === this.$children.length ? 'all' : 'part'
       }
     },
   },

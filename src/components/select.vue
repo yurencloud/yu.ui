@@ -81,9 +81,7 @@ export default {
       this.$children.forEach((item) => {
         item.hide = false
       })
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: '' })
-      }
+      this.$emit('clear')
     },
     handleClick(event) {
       this.visible = !this.visible
@@ -108,9 +106,6 @@ export default {
     },
     handleBlur(event) {
       this.visible = false
-      if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value.toString() })
-      }
       this.$emit('blur', event)
     },
     cancelSelect(option) {
@@ -128,9 +123,6 @@ export default {
           item.hide = false
         }
       })
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: values.toString() })
-      }
       this.$emit('selected', values)
     },
     handleCloseTag(item) {
@@ -140,9 +132,7 @@ export default {
   watch: {
     value(value) {
       const the = this
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.multi ? value.toString() : value })
-      }
+
       if (this.multi) {
         const selects = []
         const label = []
@@ -166,6 +156,9 @@ export default {
             break
           }
         }
+      }
+      if (this.$parent.isField) {
+        this.$parent.setValue({ name: this.name, value: this.multi ? value.toString() : value })
       }
     },
   },

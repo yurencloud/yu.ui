@@ -6,18 +6,20 @@
     <yu-time-picker v-model="value1"/>
 
     <div class="sub-title">设置时间段和步长</div>
-    <yu-time-picker :optionParam="time"/>
+    <yu-time-picker :optionParam="time" v-model="value2"/>
 
     <div class="sub-title">设置时间最大值和最小值</div>
-    <yu-time-picker :optionParam="time2"/>
+    <yu-time-picker :optionParam="time2" v-model="value3"/>
 
     <div class="sub-title">滚动时间列表选择</div>
-    <yu-time-picker type="scroll" :selectParam="selectParam" v-model="value1"/>
+    <yu-time-picker type="scroll" :selectParam="selectParam" v-model="value4"/>
 
-    <div class="sub-title">远程加载</div>
-    <div>同滚动时间列表选择</div>
+    <div class="sub-title">v-model</div>
+    <div>{{value1}}</div>
+    <div>{{value2}}</div>
+    <div>{{value3}}</div>
+    <div>{{value4}}</div>
 
-    {{value1}}
 
     <div style="margin-bottom: 400px"></div>
   </div>
@@ -46,6 +48,9 @@ export default {
         end: '18:00:00',
       },
       value1: '',
+      value2: '',
+      value3: '',
+      value4: '',
     }
   },
   methods: {},

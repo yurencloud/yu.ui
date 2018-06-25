@@ -7,7 +7,13 @@
          :class="{cascader: fixCascader}"
          :style="{width:fieldWidth}"
     >
-      <slot/>
+      <slot
+        @blur="handleEvent('blur')"
+        @change="handleEvent('change')"
+        @input="handleEvent('input')"
+        @focus="handleEvent('focus')"
+        @clear="handleEvent('clear')"
+      />
       <span v-if="!list&&error" class="errorMessage">
         {{messages[0]}}
       </span>
@@ -88,24 +94,16 @@ export default {
     },
   },
   methods: {
-    handleSubmit() {
-      this.trigger = 'submit'
-      if (!this.$parent.rules) return
-      this.validateByRules(this.$parent.rules, this.value)
-    },
-    handleChange(value) {
+    setValue(value) {
+      // 更新自己的value，并更新父组件form的values
       this.value = value
       this.$parent.setValues(value)
-      if (!this.$parent.rules) return
-      this.trigger = 'change'
-      this.validateByRules(this.$parent.rules, value)
     },
-    handleBlur(value) {
-      this.value = value
-      this.$parent.setValues(value)
-      if (!this.$parent.rules) return
-      this.trigger = 'blur'
-      this.validateByRules(this.$parent.rules, value)
+    handleEvent(eventName) {
+      if (this.$parent.rules) {
+        this.trigger = eventName
+        this.validateByRules(this.$parent.rules, this.value)
+      }
     },
     validateByRules(rules, value) {
       const the = this

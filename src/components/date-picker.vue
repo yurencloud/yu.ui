@@ -336,7 +336,7 @@ export default {
         })
       })
       year.active = true
-      this.currentValue = year.value
+      this.currentValue = year.value.toString()
       if (this.type !== 'year') {
         this.year = this.currentValue
         this.active = 'month'

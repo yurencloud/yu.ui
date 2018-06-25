@@ -93,9 +93,6 @@ export default {
       this.$emit('change', this.currentValue, name)
     },
     handleBlur(event) {
-      if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value })
-      }
       this.$emit('blur', event)
     },
   },
@@ -117,11 +114,11 @@ export default {
           this.disabledSubtract = false
         }
       }
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value })
-      }
-
       this.$emit('input', value)
+
+      if (this.$parent.isField) {
+        this.$parent.setValue({ name: this.name, value })
+      }
     },
   },
   components: {

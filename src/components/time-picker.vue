@@ -90,9 +90,6 @@ export default {
   methods: {
     handleClear() {
       this.currentValue = ''
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.currentValue })
-      }
     },
     handleBlur(event) {
       this.currentValue = this.$refs.input.value
@@ -168,9 +165,11 @@ export default {
   },
   watch: {
     currentValue(value) {
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value })
+      }
       this.$emit('input', value)
     },
-
   },
 
   components: {

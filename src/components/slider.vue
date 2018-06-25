@@ -2,7 +2,9 @@
   <div class="yu-slider"
        :class="[{disabled:disabled}]"
   >
-    <div class="bottom-bar" @click="handleBarClick($event)" :style="{width:width+'px'}">
+    <div class="bottom-bar"
+         @click="handleBarClick($event)"
+         :style="{width:width+'px'}">
       <div class="top-bar" :style="{width: move+'%'}">
         <span class="point"
               v-if="point"
@@ -37,7 +39,7 @@ export default {
   data() {
     return {
       // 向左移动百分比
-      move: this.defaultValue ? this.defaultValue / this.total * 100 : 0,
+      move: this.value ? this.value / this.total * 100 : 0,
       press: false,
       offset: null,
     }
@@ -128,7 +130,7 @@ export default {
     setOffset($event, type) {
       if (this.offset) return
       if (type === 'bar') this.offset = $event.currentTarget.offsetLeft
-      if (type === 'circle') this.offset = $event.pageX - (this.defaultValue ? this.defaultValue / this.total * this.width : 0)
+      if (type === 'circle') this.offset = $event.pageX - (this.value ? this.value / this.total * this.width : 0)
     },
   },
   computed: {
@@ -145,20 +147,23 @@ export default {
   watch: {
     move(move) {
       const value = Math.floor(this.total * move / 100)
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value })
-      }
       this.$emit('input', value)
     },
     // TODO::这里可能会有循环bug
     value(value) {
       this.move = value / this.total * 100
+      if (this.$parent.isField) {
+        this.$parent.handleChange({ name: this.name, value })
+      }
     },
   },
   mounted() {
-
     if (this.value !== 0) {
       this.move = this.value / this.total * 100
+    }
+
+    if (this.min !== 0) {
+      this.move = this.min / this.total * 100
     }
   },
 }
@@ -175,7 +180,7 @@ export default {
         .top-bar {
           background-color: lighten($info, 20);
           .circle {
-            border-color: lighten($info, 20);t
+            border-color: lighten($info, 20);
             &.hover {
               width: 16px;
               height: 16px;

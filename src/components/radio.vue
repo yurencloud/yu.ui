@@ -61,7 +61,7 @@ export default {
         return this.checkedStatus
       }
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.checked ? this.value : '' })
+        this.$parent.setValue({ name: this.name, value: this.checked ? this.value : '' })
       }
       return this.checked
     },
