@@ -175,7 +175,7 @@ export default {
         .top-bar {
           background-color: lighten($info, 20);
           .circle {
-            border-color: lighten($info, 20);
+            border-color: lighten($info, 20);t
             &.hover {
               width: 16px;
               height: 16px;
