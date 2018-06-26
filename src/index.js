@@ -50,9 +50,12 @@ import YuPagination from './components/pagination'
 import YuPopover from './components/popover'
 import MessageUtil from './components/message.util'
 import NotificationUtil from './components/notification.util'
+import AlertUtil from './components/alert.util'
+import ConfirmUtil from './components/confirm.util'
+import PromptUtil from './components/prompt.util'
 
 
-const version = '1.2.0'
+const version = '2.0.1'
 
 const components = [
   version,
@@ -113,9 +116,12 @@ function install(Vue, opts = {}) {
   components.forEach((component) => {
     Vue.component(component.name, component)
   })
-
   Vue.prototype.$message = MessageUtil
   Vue.prototype.$notify = NotificationUtil
+  Vue.prototype.$notify = NotificationUtil
+  Vue.prototype.$alert = AlertUtil
+  Vue.prototype.$confirm = ConfirmUtil
+  Vue.prototype.$prompt = PromptUtil
 }
 
 if (typeof window !== 'undefined' && window.Vue) {

@@ -164,20 +164,12 @@ export default {
   methods: {
     handleClear() {
       this.currentValue = ''
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.currentValue })
-      }
+      this.$emit('clear')
     },
     handleBlur(event) {
-      if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.currentValue })
-      }
       this.$emit('blur', event)
     },
     handleChange(value, name) {
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value })
-      }
       this.$emit('change', value, name)
     },
     handleClick() {
@@ -298,9 +290,7 @@ export default {
       day.active = true
       this.currentValue = day.value
       this.visible = false
-      if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.value })
-      }
+      this.$emit('blur')
     },
     selectMonth(month) {
       if (month.disabled) {
@@ -321,9 +311,7 @@ export default {
       } else {
         this.visible = false
       }
-      if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.currentValue })
-      }
+      this.$emit('blur')
     },
     selectYear(year) {
       if (year.disabled) {
@@ -344,9 +332,7 @@ export default {
       } else {
         this.visible = false
       }
-      if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.currentValue })
-      }
+      this.$emit('blur')
     },
     getByActive() {
       if (this.active === 'day') {
@@ -385,6 +371,11 @@ export default {
   watch: {
     currentValue(value) {
       this.$emit('input', value)
+    },
+    value(value) {
+      if (this.$parent.isField) {
+        this.$parent.setValue({ name: this.name, value })
+      }
     },
   },
   components: {

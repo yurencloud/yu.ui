@@ -31,7 +31,7 @@ export default {
         this.$children[i].checkedStatus = this.$children[i].value === value
       }
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value })
+        this.$parent.setValue({ name: this.name, value })
       }
     },
   },

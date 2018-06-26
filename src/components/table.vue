@@ -91,7 +91,7 @@ export default {
     thead {
       tr {
         th {
-          color: $dark-text;
+          color: $text;
           box-sizing: border-box;
           padding: 14px 0;
           border-bottom: 1px solid $border;

@@ -65,9 +65,6 @@ export default {
       if (this.readOnly) return
       this.isMouseover = true
       this.currentValue = value
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.value })
-      }
     },
   },
   watch: {
@@ -75,6 +72,9 @@ export default {
       this.options.map((item, index) => {
         item.status = index < value
       })
+      if (this.$parent.isField) {
+        this.$parent.setValue({ name: this.name, value })
+      }
     },
     currentValue(value) {
       if (this.isMouseover) {
@@ -87,6 +87,11 @@ export default {
         })
       }
     },
+  },
+  mounted() {
+    if (this.value !== 0) {
+      this.currentValue = this.value
+    }
   },
 }
 </script>

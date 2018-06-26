@@ -8,14 +8,22 @@
            :multiple="multiple"
            :accept="accept"
     >
-    <yu-button type="primary" v-if="type==='button'" @click="handleClick">
+    <yu-button
+      type="primary"
+      v-if="type==='button'"
+      @click="handleClick">
       <slot/>
     </yu-button>
-    <div ref="image" v-if="type==='image'" class="imageUpload" @click="handleClick">
+    <div ref="image"
+         v-if="type==='image'"
+         class="imageUpload"
+         @click="handleClick">
       <i class="iconfont icon-add" v-show="visible"></i>
       <img v-if="preview" :src="preview" alt="preview">
     </div>
-    <div v-if="type==='defined'" class="defined" @click="handleClick">
+    <div v-if="type==='defined'"
+         class="defined"
+         @click="handleClick">
       <slot/>
     </div>
     <ul v-if="list &&　files.length>0">
@@ -125,7 +133,7 @@ export default {
           size += parseInt(this.files[i].size, 0)
         }
         if (size > this.maxSize) {
-          alert(`文件最大支持${parseInt(this.maxSize / 1024, 2)}KB`)
+          this.$alert(`文件最大支持${parseInt(this.maxSize / 1024, 2)}KB`)
           return
         }
       }
@@ -136,7 +144,7 @@ export default {
       }
 
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.files })
+        this.$parent.setValue({ name: this.name, value: this.files })
       }
 
       fetch(this.url, {

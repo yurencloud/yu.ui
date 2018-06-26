@@ -13,6 +13,7 @@
         @input="handleEvent('input')"
         @focus="handleEvent('focus')"
         @clear="handleEvent('clear')"
+        @selected="handleEvent('selected')"
       />
       <span v-if="!list&&error" class="errorMessage">
         {{messages[0]}}

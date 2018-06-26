@@ -72,7 +72,7 @@ export default {
       margin-bottom: 20px;
       .icon{
         display: inline-block;
-        padding: 5px;
+        padding: 2px 4px;
         width: 30px;
         height: 30px;
         box-sizing: border-box;
@@ -169,6 +169,8 @@ export default {
       }
       .description{
         padding: 5px 10px 5px 0;
+        font-size: $small;
+        color: $light-text;
       }
       .success-text{
         color: $success;

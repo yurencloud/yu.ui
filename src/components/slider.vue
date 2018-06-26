@@ -153,7 +153,7 @@ export default {
     value(value) {
       this.move = value / this.total * 100
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value })
+        this.$parent.setValue({ name: this.name, value })
       }
     },
   },

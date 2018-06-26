@@ -34,6 +34,8 @@ import Popover from '../example/popover'
 import Card from '../example/card'
 import Carousel from '../example/carousel'
 import Collapse from '../example/collapse'
+import View from '../example/view'
+import View2 from '../example/view2'
 import MessageUtil from '../components/message.util'
 import NotificationUtil from '../components/notification.util'
 import AlertUtil from '../components/alert.util'
@@ -54,6 +56,14 @@ export default new Router({
     {
       path: '/',
       component: Index,
+    },
+    {
+      path: '/view',
+      component: View,
+    },
+    {
+      path: '/view2',
+      component: View2,
     },
     {
       path: '/button',

@@ -107,7 +107,7 @@ export default {
     handleClear() {
       this.$emit('input', '')
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: '' })
+        this.$parent.setValue({ name: this.name, value: '' })
       }
     },
     handleMouseover() {
@@ -223,7 +223,7 @@ export default {
       this.$emit('input', value)
       this.visible = false
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value })
+        this.$parent.setValue({ name: this.name, value })
       }
     },
   },

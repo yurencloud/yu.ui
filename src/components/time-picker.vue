@@ -93,15 +93,12 @@ export default {
     },
     handleBlur(event) {
       this.currentValue = this.$refs.input.value
-      if (this.$parent.isField) {
-        this.$parent.handleBlur({ name: this.name, value: this.currentValue })
-      }
       this.$emit('blur', event)
     },
     handleChange(value, name) {
       this.currentValue = value
       if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value: this.currentValue })
+        this.$parent.setValue({ name: this.name, value: this.currentValue })
       }
       this.$emit('change', value, name)
     },
@@ -165,10 +162,12 @@ export default {
   },
   watch: {
     currentValue(value) {
-      if (this.$parent.isField) {
-        this.$parent.handleChange({ name: this.name, value })
-      }
       this.$emit('input', value)
+    },
+    value(value) {
+      if (this.$parent.isField) {
+        this.$parent.setValue({ name: this.name, value })
+      }
     },
   },
 
@@ -178,7 +177,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" type="text/scss">
-  @import "../assets/css/varible";
-</style>

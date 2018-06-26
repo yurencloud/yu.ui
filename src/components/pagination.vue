@@ -256,7 +256,7 @@ export default {
         padding: 6px 12px;
         text-decoration: none;
         cursor: pointer;
-        color: $dark-text;
+        color: $text;
         transition: all .2s;
         &:hover {
           color: $primary;
@@ -300,12 +300,13 @@ export default {
         margin: 0 10px;
         width: 48px;
         height: 28px;
-        border-radius: 5px;
+        border-radius: $radius;
         border: 1px solid $border;
         padding-left: 9px;
         box-sizing: border-box;
         outline: none;
         transition: border .4s;
+        font-size: $normal;
         &:focus {
           border-radius: 5px;
           border: 1px solid $primary;
