@@ -16,11 +16,6 @@ import 'whatwg-fetch'
 
 export default {
   name: 'YuForm',
-  data() {
-    return {
-      values: {},
-    }
-  },
   props: {
     inline: Boolean,
     rules: Object,
@@ -36,20 +31,9 @@ export default {
     },
     native: Boolean,
     enctype: String,
+    value: Object,
   },
   methods: {
-    setValues(value) {
-      this.values[value.name] = value.value
-    },
-    getValue(name) {
-      return this.values[name]
-    },
-    getValues() {
-      return this.values
-    },
-    hasValue(name) {
-      return this.values.hasOwnProperty(name) && this.getValue(name).trim().length > 0
-    },
     submit() {
       const the = this
       let error = false
@@ -66,9 +50,9 @@ export default {
       // if (this.native) {
       //   console.log(the.$refs.form);
       //   const formData = new FormData();
-      //   for (const key in this.values) {
-      //     if (this.values.hasOwnProperty(key)) {
-      //       formData.append(key, this.values[key]);
+      //   for (const key in this.value) {
+      //     if (this.value.hasOwnProperty(key)) {
+      //       formData.append(key, this.value[key]);
       //     }
       //   }
       //   console.log(123);
@@ -89,9 +73,9 @@ export default {
       // 发送GET
       if (this.method.toUpperCase() === 'GET') {
         let query = ''
-        for (const key in this.values) {
-          if (this.values.hasOwnProperty(key)) {
-            query += `${key}=${this.values[key]}&`
+        for (const key in this.value) {
+          if (this.value.hasOwnProperty(key)) {
+            query += `${key}=${this.value[key]}&`
           }
         }
 
@@ -121,7 +105,7 @@ export default {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(this.values),
+          body: JSON.stringify(this.value),
         })
           .then((response) => {
             response.text().then((data) => {

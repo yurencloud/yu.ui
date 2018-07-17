@@ -106,9 +106,6 @@ export default {
   methods: {
     handleClear() {
       this.$emit('input', '')
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value: '' })
-      }
     },
     handleMouseover() {
       this.scrollTop = document.getElementsByTagName('html')[0].scrollTop
@@ -222,9 +219,6 @@ export default {
       }
       this.$emit('input', value)
       this.visible = false
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value })
-      }
     },
   },
   components: {

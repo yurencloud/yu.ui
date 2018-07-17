@@ -72,9 +72,6 @@ export default {
       this.options.map((item, index) => {
         item.status = index < value
       })
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value })
-      }
     },
     currentValue(value) {
       if (this.isMouseover) {

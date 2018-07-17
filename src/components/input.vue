@@ -147,6 +147,7 @@ export default {
       if (this.options) {
         this.search = false
       }
+      console.log("input blur")
       this.$emit('blur', event)
     },
     handleFocus(event) {
@@ -236,9 +237,6 @@ export default {
       this.loading = true
       if (this.remote) {
         this.$emit('fetch', value)
-      }
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value: this.value })
       }
     },
   },

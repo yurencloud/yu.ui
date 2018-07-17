@@ -35,7 +35,6 @@ export default {
   name: 'YuField',
   data() {
     return {
-      // {name:age,value:23}
       value: {},
       error: false,
       messages: [],
@@ -95,14 +94,11 @@ export default {
     },
   },
   methods: {
-    setValue(value) {
-      // 更新自己的value，并更新父组件form的values
-      this.value = value
-      this.$parent.setValues(value)
-    },
     handleEvent(eventName) {
+      console.log(eventName)
       if (this.$parent.rules) {
         this.trigger = eventName
+        console.log(eventName)
         this.validateByRules(this.$parent.rules, this.value)
       }
     },

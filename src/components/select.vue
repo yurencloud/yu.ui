@@ -157,9 +157,6 @@ export default {
           }
         }
       }
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value: this.multi ? value.toString() : value })
-      }
     },
   },
   components: {

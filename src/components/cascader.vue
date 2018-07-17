@@ -176,10 +176,6 @@ export default {
       }
 
       this.$emit('change', valueArray)
-
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value: valueArray })
-      }
     },
     syncValue(value) {
       if (this.remote) return

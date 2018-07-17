@@ -142,10 +142,6 @@ export default {
         this.preview = this.getObjectURL(this.files[0])
       }
 
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value: this.files })
-      }
-
       fetch(this.url, {
         method: 'POST',
         body: formData,

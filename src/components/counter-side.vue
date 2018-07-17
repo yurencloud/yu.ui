@@ -116,10 +116,6 @@ export default {
         }
       }
       this.$emit('input', value)
-
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value })
-      }
     },
   },
   components: {

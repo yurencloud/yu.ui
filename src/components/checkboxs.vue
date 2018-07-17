@@ -90,10 +90,6 @@ export default {
       } else {
         this.controlStatus = 'none'
       }
-
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value: this.value })
-      }
     },
     mounted() {
       if (this.value.length > 0) {

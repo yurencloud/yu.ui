@@ -60,9 +60,6 @@ export default {
       if (this.$parent.isRadios) {
         return this.checkedStatus
       }
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value: this.checked ? this.value : '' })
-      }
       return this.checked
     },
   },

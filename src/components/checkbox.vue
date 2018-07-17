@@ -59,10 +59,6 @@ export default {
       if (this.$parent.isCheckboxs) {
         return this.checkedStatus
       }
-      // 注意，提交表单时，是提交value，而双向绑定的是checked
-      if (this.$parent.isField) {
-        this.$parent.setValue({ value: this.checked ? this.value : '', name: this.name })
-      }
       return this.checked
     },
   },

@@ -3,12 +3,12 @@
     <h2>YU.UI</h2>
     <div class="title">表单</div>
     <div class="sub-title">典型表单</div>
-    <yu-form>
+    <yu-form v-model="form1">
       <yu-field label="活动名称">
-        <yu-input/>
+        <yu-input name="activity" v-model="form1.activity"/>
       </yu-field>
       <yu-field label="活动动物">
-        <yu-select placeholder="请选择动物" overflow>
+        <yu-select placeholder="请选择动物" overflow name="animal" v-model="form1.animal">
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
           <yu-option label="狗" value="3"/>
@@ -18,22 +18,24 @@
       </yu-field>
       <br>
       <yu-field label="即时配送">
-        <yu-switch label="确认"/>
+        <yu-switch label="确认" name="confirm" v-model="form1.confirm"/>
       </yu-field>
       <yu-field label="活动性质">
-        <yu-checkbox  checked label="1">苹果</yu-checkbox>
-        <yu-checkbox  label="2">西瓜</yu-checkbox>
-        <yu-checkbox  label="3">桃子</yu-checkbox>
+        <yu-checkboxs name="fruit" v-model="form1.fruit">
+          <yu-checkbox label="1">苹果</yu-checkbox>
+          <yu-checkbox label="2">西瓜</yu-checkbox>
+          <yu-checkbox label="3">桃子</yu-checkbox>
+        </yu-checkboxs>
       </yu-field>
       <yu-field label="特殊资源">
-        <yu-radios>
-          <yu-radio  checked label="1">苹果</yu-radio>
-          <yu-radio  label="2">香蕉</yu-radio>
-          <yu-radio  label="3">桃子</yu-radio>
+        <yu-radios name="fruit2" v-model="form1.fruit2">
+          <yu-radio label="1">苹果</yu-radio>
+          <yu-radio label="2">香蕉</yu-radio>
+          <yu-radio label="3">桃子</yu-radio>
         </yu-radios>
       </yu-field>
       <yu-field label="活动形式">
-        <yu-input type="textarea" />
+        <yu-input type="textarea" name="type" v-model="form1.type"/>
       </yu-field>
       <yu-field>
         <yu-button type="primary">提交</yu-button>
@@ -76,18 +78,18 @@
     </yu-form>
 
     <div class="sub-title">表单验证</div>
-    <yu-form :rules="rules" width="600px">
-      <yu-field label="活动名称" >
-        <yu-input name="activeName"/>
+    <yu-form :rules="rules" width="600px" v-model="form2">
+      <yu-field label="活动名称">
+        <yu-input name="activeName" v-model="form2.activity1"/>
       </yu-field>
-      <yu-field label="活动名称2" >
-        <yu-input name="activeName2"/>
+      <yu-field label="活动名称2">
+        <yu-input name="activeName2" v-model="form2.activity2"/>
       </yu-field>
-      <yu-field label="活动名称3" >
-        <yu-input name="activeName3"/>
+      <yu-field label="活动名称3">
+        <yu-input name="activeName3" v-model="form2.activity3"/>
       </yu-field>
-      <yu-field label="活动动物" >
-        <yu-select name="animal" placeholder="请选择动物" overflow>
+      <yu-field label="活动动物">
+        <yu-select name="animal" placeholder="请选择动物" overflow v-model="form2.animal1">
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
           <yu-option label="狗" value="3"/>
@@ -95,8 +97,8 @@
           <yu-option label="狗" value="5"/>
         </yu-select>
       </yu-field>
-      <yu-field label="活动动物" >
-        <yu-select name="animal" placeholder="请选择动物" overflow multi>
+      <yu-field label="活动动物">
+        <yu-select name="animal" placeholder="请选择动物" overflow multi v-model="form2.animal1">
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
           <yu-option label="狗" value="3"/>
@@ -104,48 +106,48 @@
           <yu-option label="狗" value="5"/>
         </yu-select>
       </yu-field>
-      <yu-field label="选择日期"  inline >
-        <yu-date-picker name="date"/>
+      <yu-field label="选择日期" inline >
+        <yu-date-picker name="date" v-model="form2.date1"/>
       </yu-field>
-      <yu-field  no-label inline>
-        <yu-time-picker name="time"/>
+      <yu-field no-label inline>
+        <yu-time-picker name="time" v-model="form2.date2"/>
       </yu-field>
-      <yu-field label="即时配送" >
-        <yu-switch name="confirm" label="确认"/>
+      <yu-field label="即时配送">
+        <yu-switch name="confirm" label="确认" v-model="form2.confirm"/>
       </yu-field>
-      <yu-field label="活动性质" >
+      <yu-field label="活动性质">
         <yu-checkboxs name="fruit" select-all>
-          <yu-checkbox  checked label="1">苹果</yu-checkbox>
-          <yu-checkbox   label="2">西瓜</yu-checkbox>
-          <yu-checkbox  label="3">桃子</yu-checkbox>
+          <yu-checkbox label="1">苹果</yu-checkbox>
+          <yu-checkbox label="2">西瓜</yu-checkbox>
+          <yu-checkbox label="3">桃子</yu-checkbox>
         </yu-checkboxs>
       </yu-field>
-      <yu-field label="特殊资源" >
+      <yu-field label="特殊资源">
         <yu-radios name="fruit2">
-          <yu-radio checked label="1">苹果</yu-radio>
+          <yu-radio label="1">苹果</yu-radio>
           <yu-radio label="2">香蕉</yu-radio>
           <yu-radio label="3">桃子</yu-radio>
         </yu-radios>
       </yu-field>
-      <yu-field label="活动形式" >
-        <yu-input name="xin" type="textarea" />
+      <yu-field label="活动形式">
+        <yu-input name="xin" type="textarea"/>
       </yu-field>
-      <yu-field label="等级" >
+      <yu-field label="等级">
         <yu-rate name="rate"/>
       </yu-field>
-      <yu-field label="上传文件" >
-        <yu-upload url="/api/upload" type="image" />
+      <yu-field label="上传文件">
+        <yu-upload url="/api/upload" type="image"/>
       </yu-field>
-      <yu-field label="滚动列表" >
+      <yu-field label="滚动列表">
         <yu-scroll-select name="list" :options="cascader" placeholder="请选择"/>
       </yu-field>
-      <yu-field label="范围选择" >
+      <yu-field label="范围选择">
         <yu-slider name="range"/>
       </yu-field>
-      <yu-field label="级联选择" >
-        <yu-cascader name="cascader" :cascader="cascader"/>
-      </yu-field>
-      <yu-field label="计数器" >
+      <!--<yu-field label="级联选择">-->
+        <!--<yu-cascader name="cascader" :cascader="cascader"/>-->
+      <!--</yu-field>-->
+      <yu-field label="计数器">
         <yu-counter name="counter"/>
       </yu-field>
 
@@ -156,11 +158,11 @@
 
     <div class="sub-title">表单提交</div>
     <yu-form :rules="rules" action="/api/fruits" width="600px" method="POST" @success="success">
-      <yu-field label="水果id" >
+      <yu-field label="水果id">
         <yu-input name="id"/>
       </yu-field>
 
-      <yu-field label="水果名称" >
+      <yu-field label="水果名称">
         <yu-input name="fruit"/>
       </yu-field>
 
@@ -212,9 +214,30 @@ import YuField from '../components/field'
 export default {
   data() {
     return {
+      form1: {
+        activity: '',
+        animal: null,
+        confirm: false,
+        fruit: [],
+        fruit2: '',
+        type: '',
+      },
+      form2: {
+        activity1: '',
+        activity2: '',
+        activity3: '',
+        animal1: null,
+        animal2: null,
+        date1: '',
+        date2: '',
+        confirm: false,
+        fruit: [],
+        fruit2: '',
+        type: '',
+      },
       rules: {
-        activeName: [
-          // { prop: 'required', value: true, trigger: 'blur', name: '活动名称' },
+        activity1: [
+          { prop: 'required', value: true, trigger: 'blur', name: '活动名称' },
           // { prop: 'min', value: 4, trigger: 'blur', name: '活动名称' },
           { prop: 'min', value: 7, trigger: 'blur', name: '活动名称' },
           // { prop: 'email', trigger: 'blur', name: '活动名称' },

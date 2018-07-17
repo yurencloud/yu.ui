@@ -372,11 +372,6 @@ export default {
     currentValue(value) {
       this.$emit('input', value)
     },
-    value(value) {
-      if (this.$parent.isField) {
-        this.$parent.setValue({ name: this.name, value })
-      }
-    },
   },
   components: {
     YuInput,
