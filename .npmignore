@@ -1,0 +1,8 @@
+build
+config
+src/example
+src/router
+src/static
+src/App.vue
+src/main.js
+static

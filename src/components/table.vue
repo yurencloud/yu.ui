@@ -51,7 +51,6 @@ export default {
   },
   methods: {
     handleClick(key, value, data) {
-      console.log(key, value, data)
       this.$emit('click', key, value, data)
     },
   },

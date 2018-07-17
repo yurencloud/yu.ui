@@ -12,9 +12,6 @@ export default {
   inject: ['rootTabs'],
   methods: {
   },
-  mounted() {
-    // console.log(this.rootTabs)
-  },
 }
 </script>
 

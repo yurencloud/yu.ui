@@ -29,7 +29,6 @@ export default {
   methods: {
     toggle(index) {
       this.visible = !this.visible
-      console.log(index)
     },
   },
 }

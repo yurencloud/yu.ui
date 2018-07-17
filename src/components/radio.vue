@@ -20,6 +20,7 @@ export default {
     return {
       value: this.label,
       checkedStatus: this.checked,
+      vertical: false,
     }
   },
   model: {
@@ -30,7 +31,6 @@ export default {
     checked: Boolean,
     disabled: Boolean,
     label: String,
-    vertical: Boolean,
     name: String,
   },
   methods: {

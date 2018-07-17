@@ -139,14 +139,11 @@ export default {
   },
   methods: {
     confirmEvent() {
-      console.log(1)
       // 如果是prompt，又有验证规则，则确认时就验证
       const the = this
       if (this.isInput) {
         if (this.inputPattern != null) {
           this.validateResult = this.inputPattern.test(the.value)
-          console.log(this.value)
-          console.log(this.validateResult)
           if (!this.validateResult) {
             return
           }

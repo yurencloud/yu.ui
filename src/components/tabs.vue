@@ -71,9 +71,6 @@ export default {
       } else {
         e.target.classList.add('active')
       }
-      this.$nextTick(() => {
-        console.log(document.getElementsByClassName('tabs-nav')[0].children[0].style)
-      })
       this.$emit('click', e)
     },
     addItem(e) {

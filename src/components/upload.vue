@@ -89,7 +89,6 @@ export default {
       const the = this
       const formData = new FormData()
       this.files = $event.target.files
-      console.log(this.files)
 
       // 最大上传数量
       if (this.max && this.files.length() > this.max) {
@@ -166,7 +165,6 @@ export default {
             }
           })
         }, (error) => {
-          console.log(error.message)
           the.$emit('error', error)
         })
     },
