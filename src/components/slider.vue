@@ -152,6 +152,9 @@ export default {
     // TODO::这里可能会有循环bug
     value(value) {
       this.move = value / this.total * 100
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value })
+      }
     },
   },
   mounted() {

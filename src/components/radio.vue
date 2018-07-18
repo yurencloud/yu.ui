@@ -53,6 +53,9 @@ export default {
 
       this.$emit('change', this.label, isChecked, this.name)
       this.$emit('input', isChecked)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value: isChecked })
+      }
     },
   },
   computed: {

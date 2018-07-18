@@ -82,6 +82,9 @@ export default {
         item.hide = false
       })
       this.$emit('clear')
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('clear', { name: this.name, value: null })
+      }
     },
     handleClick(event) {
       this.visible = !this.visible
@@ -103,6 +106,9 @@ export default {
       }
       this.$refs.input.$el.children[0].blur()
       this.visible = false
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('selected', { name: this.name, value: this.value })
+      }
     },
     handleBlur(event) {
       this.visible = false

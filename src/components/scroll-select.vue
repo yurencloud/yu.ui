@@ -106,6 +106,9 @@ export default {
   methods: {
     handleClear() {
       this.$emit('input', '')
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('clear', { name: this.name, value: '' })
+      }
     },
     handleMouseover() {
       this.scrollTop = document.getElementsByTagName('html')[0].scrollTop
@@ -207,7 +210,7 @@ export default {
       const second = this.secondOptions ? this.secondOptions[this.secondActive] : {}
       const third = this.thirdOptions ? this.thirdOptions[this.thirdActive] : {}
       if (first.disabled || second.disabled || third.disabled) {
-        alert('不可以选择无效选项')
+        this.$alert('不可以选择无效选项')
         return
       }
       let value = first.label
@@ -219,6 +222,9 @@ export default {
       }
       this.$emit('input', value)
       this.visible = false
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value })
+      }
     },
   },
   components: {

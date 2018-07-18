@@ -67,6 +67,9 @@ export default {
         }
       })
       this.$emit('change', value)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value: this.value })
+      }
     },
     handleChange(value, isChecked) {
       const values = this.value.slice(0)
@@ -76,6 +79,9 @@ export default {
         values.splice(values.indexOf(value), 1)
       }
       this.$emit('change', values)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value: this.value })
+      }
     },
   },
   watch: {

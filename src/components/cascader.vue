@@ -176,6 +176,9 @@ export default {
       }
 
       this.$emit('change', valueArray)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value: this.value })
+      }
     },
     syncValue(value) {
       if (this.remote) return

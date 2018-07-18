@@ -30,6 +30,9 @@ export default {
       for (let i = 0; i < this.$children.length; i++) {
         this.$children[i].checkedStatus = this.$children[i].value === value
       }
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value })
+      }
     },
   },
   mounted() {

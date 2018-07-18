@@ -116,6 +116,9 @@ export default {
         }
       }
       this.$emit('input', value)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value })
+      }
     },
   },
   components: {

@@ -139,6 +139,9 @@ export default {
       this.currentValue = ''
       this.$emit('input', '')
       this.$emit('clear')
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('clear', { name: this.name, value: this.value })
+      }
     },
     handleClick(event) {
       this.$emit('click', event)
@@ -147,8 +150,10 @@ export default {
       if (this.options) {
         this.search = false
       }
-      console.log("input blur")
       this.$emit('blur', event)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('blur', { name: this.name, value: this.value })
+      }
     },
     handleFocus(event) {
       if (this.options) {
@@ -159,12 +164,21 @@ export default {
         this.$emit('fetch', this.value)
       }
       this.$emit('focus', event)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('focus', { name: this.name, value: this.value })
+      }
     },
     handleChange() {
       this.$emit('change', this.value, this.name)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value: this.value })
+      }
     },
     handleInput(event) {
       this.$emit('input', event.target.value)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('input', { name: this.name, value: this.value })
+      }
     },
 
     changeValue(value) {

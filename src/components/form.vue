@@ -16,6 +16,7 @@ import 'whatwg-fetch'
 
 export default {
   name: 'YuForm',
+  componentName: 'YuForm',
   props: {
     inline: Boolean,
     rules: Object,
@@ -37,6 +38,7 @@ export default {
     submit() {
       const the = this
       let error = false
+      // 触发每个field的submit检查，如果出错则不提交表单
       this.$children.forEach((item) => {
         if (item.isField) {
           item.handleSubmit()

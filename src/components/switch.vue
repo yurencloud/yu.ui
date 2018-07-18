@@ -54,6 +54,9 @@ export default {
       const value = !this.isChecked ? this.activeValue : this.inactiveValue
       this.$emit('click', value)
       this.$emit('input', value)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value })
+      }
     },
   },
   computed: {

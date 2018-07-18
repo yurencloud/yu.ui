@@ -90,14 +90,23 @@ export default {
   methods: {
     handleClear() {
       this.currentValue = ''
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('clear', { name: this.name, value: '' })
+      }
     },
     handleBlur(event) {
       this.currentValue = this.$refs.input.value
       this.$emit('blur', event)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('blur', { name: this.name, value: this.currentValue })
+      }
     },
     handleChange(value, name) {
       this.currentValue = value
       this.$emit('change', value, name)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value: this.currentValue })
+      }
     },
     handleInput(value) {
       this.currentValue = value
@@ -160,6 +169,9 @@ export default {
   watch: {
     currentValue(value) {
       this.$emit('input', value)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value })
+      }
     },
   },
   components: {

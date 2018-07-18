@@ -3,7 +3,7 @@
     <h2>YU.UI</h2>
     <div class="title">表单</div>
     <div class="sub-title">典型表单</div>
-    <yu-form v-model="form1">
+    <yu-form>
       <yu-field label="活动名称">
         <yu-input name="activity" v-model="form1.activity"/>
       </yu-field>
@@ -80,10 +80,10 @@
     <div class="sub-title">表单验证</div>
     <yu-form :rules="rules" width="600px" v-model="form2">
       <yu-field label="活动名称">
-        <yu-input name="activeName" v-model="form2.activity1"/>
+        <yu-input name="activity1" v-model="form2.activity1"/>
       </yu-field>
       <yu-field label="活动名称2">
-        <yu-input name="activeName2" v-model="form2.activity2"/>
+        <yu-input name="activeName2" v-model="form2.activity2" clearable/>
       </yu-field>
       <yu-field label="活动名称3">
         <yu-input name="activeName3" v-model="form2.activity3"/>
@@ -98,7 +98,7 @@
         </yu-select>
       </yu-field>
       <yu-field label="活动动物">
-        <yu-select name="animal" placeholder="请选择动物" overflow multi v-model="form2.animal1">
+        <yu-select name="animal" placeholder="请选择动物" overflow multi v-model="form2.animal2">
           <yu-option label="猫" value="1"/>
           <yu-option label="狗" value="2" disabled/>
           <yu-option label="狗" value="3"/>
@@ -123,17 +123,17 @@
         </yu-checkboxs>
       </yu-field>
       <yu-field label="特殊资源">
-        <yu-radios name="fruit2">
+        <yu-radios name="fruit2" v-model="form2.fruit2">
           <yu-radio label="1">苹果</yu-radio>
           <yu-radio label="2">香蕉</yu-radio>
           <yu-radio label="3">桃子</yu-radio>
         </yu-radios>
       </yu-field>
       <yu-field label="活动形式">
-        <yu-input name="xin" type="textarea"/>
+        <yu-input name="type" type="textarea" v-model="form2.type"/>
       </yu-field>
       <yu-field label="等级">
-        <yu-rate name="rate"/>
+        <yu-rate name="rate" v-model="form2.rate"/>
       </yu-field>
       <yu-field label="上传文件">
         <yu-upload url="/api/upload" type="image"/>
@@ -148,7 +148,7 @@
         <!--<yu-cascader name="cascader" :cascader="cascader"/>-->
       <!--</yu-field>-->
       <yu-field label="计数器">
-        <yu-counter name="counter"/>
+        <yu-counter name="counter" v-model="form2.counter"/>
       </yu-field>
 
       <yu-button type="primary">提交</yu-button>
@@ -227,13 +227,15 @@ export default {
         activity2: '',
         activity3: '',
         animal1: null,
-        animal2: null,
+        animal2: [],
         date1: '',
         date2: '',
         confirm: false,
         fruit: [],
         fruit2: '',
         type: '',
+        rate: 0,
+        counter: 0,
       },
       rules: {
         activity1: [

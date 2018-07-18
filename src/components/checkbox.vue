@@ -49,6 +49,9 @@ export default {
         return
       }
       this.$emit('input', !this.checked)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value: this.checked })
+      }
     },
     syncChecked() {
       this.checkedStatus = (this.$parent.value.indexOf(this.label) > -1)

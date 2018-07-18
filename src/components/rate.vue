@@ -55,6 +55,9 @@ export default {
     handleClick(value) {
       if (this.readOnly) return
       this.$emit('input', value)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value })
+      }
     },
     handleMouseout() {
       if (this.readOnly) return

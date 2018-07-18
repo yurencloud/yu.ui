@@ -430,7 +430,8 @@
     <yu-tag closable hit type="warning" size="mini">标签一</yu-tag>
     <yu-tag closable hit type="error" @close="handleClose">标签一</yu-tag>
     <div class="sub-title" style="margin-top: 100px">tag----标签---关闭时出现动画----可删除</div>
-    <yu-tag v-for="item in tags"
+    <yu-tag v-for="(item, index) in tags"
+            v-bind:key="index"
            closable
            :disable-transitions="false"
            @close="Close(item)">{{item}}</yu-tag>
@@ -841,16 +842,16 @@ export default {
       if (this.active2 >= 3) this.active2 = 0
     },
     alert() {
-      alert(99)
+      console.log(99)
     },
     handleClose() {
-      alert('哈哈哈哈哈哈')
+      console.log('哈哈哈哈哈哈')
     },
     Close(tag) {
       this.tags.splice(this.tags.indexOf(tag), 1)
     },
     setCurrent() {
-      alert(999)
+      console.log(999)
     },
     currentpage(current) {
       this.current = current

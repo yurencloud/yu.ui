@@ -7,14 +7,7 @@
          :class="{cascader: fixCascader}"
          :style="{width:fieldWidth}"
     >
-      <slot
-        @blur="handleEvent('blur')"
-        @change="handleEvent('change')"
-        @input="handleEvent('input')"
-        @focus="handleEvent('focus')"
-        @clear="handleEvent('clear')"
-        @selected="handleEvent('selected')"
-      />
+      <slot/>
       <span v-if="!list&&error" class="errorMessage">
         {{messages[0]}}
       </span>
@@ -94,8 +87,9 @@ export default {
     },
   },
   methods: {
-    handleEvent(eventName) {
-      console.log(eventName)
+    handleEvent(eventName, value) {
+      this.value = value
+      console.log(value)
       if (this.$parent.rules) {
         this.trigger = eventName
         console.log(eventName)

@@ -165,12 +165,21 @@ export default {
     handleClear() {
       this.currentValue = ''
       this.$emit('clear')
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('clear', { name: this.name, value: '' })
+      }
     },
     handleBlur(event) {
       this.$emit('blur', event)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('blur', { name: this.name, value: this.value })
+      }
     },
     handleChange(value, name) {
       this.$emit('change', value, name)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value: this.value })
+      }
     },
     handleClick() {
       this.visible = !this.visible
@@ -371,6 +380,9 @@ export default {
   watch: {
     currentValue(value) {
       this.$emit('input', value)
+      if (this.$parent.isField) {
+        this.$parent.handleEvent('change', { name: this.name, value })
+      }
     },
   },
   components: {
