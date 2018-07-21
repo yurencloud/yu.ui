@@ -33,7 +33,6 @@
     <a href="/#/popover">popover</a>
     <a href="/#/card">card</a>
     <a href="/#/collapse">collapse</a>
-    <a href="/#/carousel">carousel</a>
 
     <div style="margin-bottom: 400px"></div>
   </div>

@@ -31,8 +31,6 @@ import Steps from '../example/steps'
 import Dialog from '../example/dialog'
 import Tooltip from '../example/tooltip'
 import Popover from '../example/popover'
-import Card from '../example/card'
-import Carousel from '../example/carousel'
 import Collapse from '../example/collapse'
 import View from '../example/view'
 import View2 from '../example/view2'
@@ -184,14 +182,6 @@ export default new Router({
     {
       path: '/popover',
       component: Popover,
-    },
-    {
-      path: '/card',
-      component: Card,
-    },
-    {
-      path: '/carousel',
-      component: Carousel,
     },
     {
       path: '/collapse',

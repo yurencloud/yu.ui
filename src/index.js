@@ -9,8 +9,6 @@ import YuCounter from './components/counter'
 import YuCheckbox from './components/checkbox'
 import YuDialog from './components/dialog'
 import YuToolTip from './components/tooltip'
-import YuCard from './components/card'
-import YuCarousel from './components/carousel'
 import YuCollapseItem from './components/collapse-item'
 import YuCollapse from './components/collapse'
 import YuMenuItem from './components/menu-item'
@@ -37,7 +35,6 @@ import YuStep from './components/step'
 import YuTabs from './components/tabs'
 import YuTabsItem from './components/tabs-item'
 import YuTabsNav from './components/tabs-nav'
-import YuCarouselItem from './components/carousel-item'
 import YuNotification from './components/notification'
 import YuAlert from './components/alert'
 import YuMessage from './components/message'
@@ -55,7 +52,7 @@ import ConfirmUtil from './components/confirm.util'
 import PromptUtil from './components/prompt.util'
 
 
-const version = '2.0.3'
+const version = '2.0.8'
 
 const components = [
   version,
@@ -70,8 +67,6 @@ const components = [
   YuSelect,
   YuCounter,
   YuCheckbox,
-  YuCard,
-  YuCarousel,
   YuCollapseItem,
   YuCollapse,
   YuMenuItem,
@@ -98,7 +93,6 @@ const components = [
   YuTabs,
   YuTabsItem,
   YuTabsNav,
-  YuCarouselItem,
   YuNotification,
   YuAlert,
   YuMessage,
@@ -144,8 +138,6 @@ export {
   YuSelect,
   YuCounter,
   YuCheckbox,
-  YuCard,
-  YuCarousel,
   YuCollapseItem,
   YuCollapse,
   YuMenuItem,
@@ -172,7 +164,6 @@ export {
   YuTabs,
   YuTabsItem,
   YuTabsNav,
-  YuCarouselItem,
   YuNotification,
   YuAlert,
   YuMessage,

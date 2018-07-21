@@ -63,7 +63,10 @@ export default {
     fixedHead: Boolean,
     fixedFoot: Boolean,
     order: Array, // 自定义排序
-    width: String,
+    width: {
+      type: String,
+      default: '100%',
+    },
     clickable: {
       type: Array,
       default() {

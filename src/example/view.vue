@@ -628,8 +628,6 @@ import YuCounter from '../components/counter'
 import YuCheckbox from '../components/checkbox'
 import YuDialog from '../components/dialog'
 import YuToolTip from '../components/tooltip'
-import YuCard from '../components/card'
-import YuCarousel from '../components/carousel'
 import YuCollapseItem from '../components/collapse-item'
 import YuCollapse from '../components/collapse'
 import YuMenuItem from '../components/menu-item'
@@ -1051,7 +1049,6 @@ export default {
     YuSelect,
     YuCounter,
     YuCheckbox,
-    YuCard,
     YuCarousel,
     YuCollapseItem,
     YuCollapse,
