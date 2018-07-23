@@ -111,11 +111,15 @@ export default {
       }
     },
     handleMouseover() {
-      this.scrollTop = document.getElementsByTagName('html')[0].scrollTop
-      document.addEventListener('scroll', this.stopScroll)
+      if (process.browser) {
+        this.scrollTop = document.getElementsByTagName('html')[0].scrollTop
+        document.addEventListener('scroll', this.stopScroll)
+      }
     },
     handleMouseleave() {
-      document.removeEventListener('scroll', this.stopScroll)
+      if (process.browser) {
+        document.removeEventListener('scroll', this.stopScroll)
+      }
     },
     stopScroll(e) {
       e.target.scrollingElement.scrollTop = this.scrollTop

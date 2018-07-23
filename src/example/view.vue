@@ -1049,7 +1049,6 @@ export default {
     YuSelect,
     YuCounter,
     YuCheckbox,
-    YuCarousel,
     YuCollapseItem,
     YuCollapse,
     YuMenuItem,

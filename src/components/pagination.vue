@@ -180,7 +180,9 @@ export default {
       this.nextChange = !this.nextChange
     },
     goto() {
-      this.index = Number(document.querySelector('.pagination-go input').value)
+      if (process.browser) {
+        this.index = Number(document.querySelector('.pagination-go input').value)
+      }
     },
   },
   computed: {

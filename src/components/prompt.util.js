@@ -38,7 +38,9 @@ const Prompt = (message, title, options) => {
     instance.message = null
   }
   instance.vm = instance.$mount()
-  document.body.appendChild(instance.vm.$el)
+  if (process.browser) {
+    document.body.appendChild(instance.vm.$el)
+  }
   instance.vm.visible = true
   instance.vm.showCancelButton = true
   instance.vm.isInput = true

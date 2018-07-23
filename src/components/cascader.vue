@@ -12,47 +12,47 @@
       :disabled="disabled"
     />
     <transition name="zoom-in-top">
-    <div v-if="cascader" class="options" v-show="visible">
-      <div class="cascader first">
-        <div class="option"
-             :key="item.value"
-             :value="item.value"
-             v-for="(item, index) in cascader"
-             :class="[{disabled:item.disabled},{active:index === firstActive}]"
-             @click="firstClick(item, index)"
-             @mouseover="hover&&item.children?firstClick(item, index):''"
-        >
-          {{item.label}}
-          <i v-if="item.children" class="iconfont icon-angle-right"></i>
+      <div v-if="cascader" class="options" v-show="visible">
+        <div class="cascader first">
+          <div class="option"
+               :key="item.value"
+               :value="item.value"
+               v-for="(item, index) in cascader"
+               :class="[{disabled:item.disabled},{active:index === firstActive}]"
+               @click="firstClick(item, index)"
+               @mouseover="hover&&item.children?firstClick(item, index):''"
+          >
+            {{item.label}}
+            <i v-if="item.children" class="iconfont icon-angle-right"></i>
+          </div>
+        </div>
+        <div class="cascader second" v-if="secondActive>-2">
+          <yu-loading :loading="secondCascader.length===0 && remote">加载中...</yu-loading>
+          <div class="option"
+               :key="item.value"
+               :value="item.value"
+               :class="[{disabled:item.disabled}, {active:index === secondActive}]"
+               v-for="(item, index) in secondCascader"
+               @click="secondClick(item, index)"
+               @mouseover="hover&&item.children?secondClick(item, index):''"
+          >
+            {{item.label}}
+            <i v-if="item.children" class="iconfont icon-angle-right"></i>
+          </div>
+        </div>
+        <div class="cascader third" v-if="thirdActive>-2">
+          <yu-loading :loading="thirdCascader.length===0 && remote">加载中...</yu-loading>
+          <div class="option"
+               :key="item.value"
+               :value="item.value"
+               :class="[{disabled:item.disabled}, {active:index === thirdActive}]"
+               v-for="(item, index) in thirdCascader"
+               @click="thirdClick(item, index)"
+          >
+            {{item.label}}
+          </div>
         </div>
       </div>
-      <div class="cascader second" v-if="secondActive>-2">
-        <yu-loading :loading="secondCascader.length===0 && remote">加载中...</yu-loading>
-        <div class="option"
-             :key="item.value"
-             :value="item.value"
-             :class="[{disabled:item.disabled}, {active:index === secondActive}]"
-             v-for="(item, index) in secondCascader"
-             @click="secondClick(item, index)"
-             @mouseover="hover&&item.children?secondClick(item, index):''"
-        >
-          {{item.label}}
-          <i v-if="item.children" class="iconfont icon-angle-right"></i>
-        </div>
-      </div>
-      <div class="cascader third" v-if="thirdActive>-2">
-        <yu-loading :loading="thirdCascader.length===0 && remote">加载中...</yu-loading>
-        <div class="option"
-             :key="item.value"
-             :value="item.value"
-             :class="[{disabled:item.disabled}, {active:index === thirdActive}]"
-             v-for="(item, index) in thirdCascader"
-             @click="thirdClick(item, index)"
-        >
-          {{item.label}}
-        </div>
-      </div>
-    </div>
     </transition>
   </div>
 </template>
@@ -273,18 +273,21 @@ export default {
     },
   },
   created() {
-    const body = document.body
     if (this.$parent.isField) {
       this.$parent.fixCascader = true
     }
-    body.addEventListener('click', (e) => {
-      if (e.currentTarget.tagName === 'BODY'
-        && e.target.tagName !== 'INPUT'
-        && e.target.className.indexOf('option') === -1
-      ) {
-        this.visible = false
-      }
-    }, false)
+
+    if (process.browser) {
+      const body = document.body
+      body.addEventListener('click', (e) => {
+        if (e.currentTarget.tagName === 'BODY'
+            && e.target.tagName !== 'INPUT'
+            && e.target.className.indexOf('option') === -1
+        ) {
+          this.visible = false
+        }
+      }, false)
+    }
   },
 
 }
@@ -294,7 +297,7 @@ export default {
   @import "../assets/css/varible";
   @import "../assets/css/animation";
 
-  .yu-cascader{
+  .yu-cascader {
     @include angleAnimation();
 
     @include zoomInTop();
@@ -316,14 +319,14 @@ export default {
       /* 可以设置不同的进入和离开动画 */
       /* 设置持续时间和动画函数 */
 
-      div.cascader{
+      div.cascader {
         min-width: 160px;
         height: 200px;
-        overflow-y:auto;
+        overflow-y: auto;
         display: inline-block;
         border-left: 1px solid $border;
         margin-right: -1px;
-        &:first-child{
+        &:first-child {
           border-left: none;
         }
         &::-webkit-scrollbar {
@@ -333,33 +336,33 @@ export default {
           border-radius: 2px;
           background-color: $border;
         }
-        &:last-child{
+        &:last-child {
           padding-right: 1px;
         }
       }
-      .option{
+      .option {
         font-size: $normal;
-        padding:8px 8px;
-        &:hover:not(.disabled){
+        padding: 8px 8px;
+        &:hover:not(.disabled) {
           background-color: $background;
         }
-        &.active{
+        &.active {
           background-color: $background;
           font-weight: bold;
           color: $primary;
         }
-        &.hide{
+        &.hide {
           display: none;
         }
-        &.disabled{
-          color:$lighter-text
+        &.disabled {
+          color: $lighter-text
         }
-        i{
+        i {
           float: right;
-          color:$lighter-text;
+          color: $lighter-text;
         }
       }
-      .yu-loading{
+      .yu-loading {
         padding-top: 8px;
       }
     }

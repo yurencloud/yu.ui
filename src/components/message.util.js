@@ -37,7 +37,9 @@ const Message = (options) => {
     instance.message = null
   }
   instance.vm = instance.$mount()
-  document.body.appendChild(instance.vm.$el)
+  if (process.browser) {
+    document.body.appendChild(instance.vm.$el)
+  }
   instance.vm.visible = true
   instance.dom = instance.vm.$el
   instances.push(instance)

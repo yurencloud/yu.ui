@@ -849,8 +849,6 @@ export default {
     YuTabs,
     YuTabsNav,
     YuTabsItem,
-    YuCarousel,
-    YuCarouselItem,
     YuNotification,
     YuAlert,
     YuDialog,

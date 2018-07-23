@@ -48,10 +48,12 @@ export default {
     change() {
       this.visible = !this.visible
       this.lockScroll = this.visible
-      if (this.lockScroll) {
-        document.getElementsByTagName('body')[0].classList.add('lock')
-      } else if (!this.lockScroll) {
-        document.getElementsByTagName('body')[0].classList.remove('lock')
+      if (process.browser) {
+        if (this.lockScroll) {
+          document.getElementsByTagName('body')[0].classList.add('lock')
+        } else if (!this.lockScroll) {
+          document.getElementsByTagName('body')[0].classList.remove('lock')
+        }
       }
     },
     close(event) {
