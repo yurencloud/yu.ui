@@ -92,7 +92,7 @@ export default {
       border: 1px solid $dark-border;
       border-radius: 50%;
       background-color: #fff;
-      &:hover {
+      &:hover:not(.disabled) {
         border: 1px solid $primary;
       }
     }
