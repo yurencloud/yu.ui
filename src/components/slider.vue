@@ -208,6 +208,7 @@ export default {
 
         .circle {
           .tooltip {
+            box-sizing: content-box;
             position: absolute;
             top: -36px;
             height: 20px;
