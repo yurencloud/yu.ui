@@ -3,9 +3,9 @@
     <div class="content">
           <div class="top">
             <span>{{title}}</span>
-            <i class="iconfont icon-angle-down" :class="{rotate:isActive}"></i>
+            <i class="iconfont icon-angle-down" :class="{rotate:visible}"></i>
           </div>
-        <div class="bottom" :class="{show:!isActive,trans:accordion}">
+        <div class="bottom" :class="{show:!visible,trans:accordion}">
           <slot/>
         </div>
       </div>
@@ -27,7 +27,7 @@ export default {
     },
   },
   methods: {
-    toggle(index) {
+    toggle() {
       this.visible = !this.visible
     },
   },
@@ -68,7 +68,7 @@ export default {
       i{
         float: right;
         cursor: pointer;
-        transition: all .2s linear;
+        transition: all .2s ease;
       }
       i.rotate{
         transform: rotate(-180deg);

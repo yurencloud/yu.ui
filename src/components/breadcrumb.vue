@@ -13,7 +13,11 @@ export default {
     }
   },
   props: {
-    separator: String,
+    separator: {
+      type: String,
+      default: '/',
+    },
+    iconSeparator: String,
   },
 }
 </script>

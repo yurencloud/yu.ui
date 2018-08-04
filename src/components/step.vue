@@ -70,6 +70,9 @@ export default {
     overflow: hidden;
     .head {
       margin-bottom: 20px;
+      .status{
+        text-align: center;
+      }
       .icon{
         display: inline-block;
         padding: 2px 4px;
@@ -80,9 +83,6 @@ export default {
         color: $light-text;
         border-radius: 50%;
         border: 2px solid $light-text;
-      }
-      .step{
-        margin-left: 3px;
       }
       .have-icon{
        i{

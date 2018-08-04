@@ -4,10 +4,10 @@
     <div class="yu-head" id="pagination-head">
       <span style="margin-right: 10px" v-if="showTotal">总共{{total}}条数据</span>
       <yu-select
-        @selected="getChange"
         size="small"
         overflow
         width="100px"
+        v-model="limit"
         v-if="changeSize">
         <yu-option
           v-bind:key="index"
@@ -135,9 +135,6 @@ export default {
     YuOption,
   },
   methods: {
-    getChange(value) {
-      this.limit = Number(value)
-    },
     prev() {
       if (this.index > 1) {
         this.go(this.index - 1)
@@ -187,6 +184,9 @@ export default {
   },
   computed: {
     pages() {
+      if (!this.limit) {
+        return 10
+      }
       return Math.ceil(this.size / this.limit)
     },
     //  计算页码

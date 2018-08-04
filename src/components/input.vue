@@ -287,7 +287,7 @@ export default {
       box-sizing: border-box;
 
       &::placeholder {
-        color: $dark-border;
+        color: $lighter-text;
         font-weight: lighter;
       }
       border: 1px solid $border;

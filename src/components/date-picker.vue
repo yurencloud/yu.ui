@@ -125,7 +125,7 @@
 import YuInput from './input'
 
 export default {
-  name: 'YuTimePicker',
+  name: 'YuDatePicker',
   data() {
     return {
       sixty: [],

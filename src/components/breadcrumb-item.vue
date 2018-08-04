@@ -4,7 +4,7 @@
       <slot/>
     </span>
     <span v-if="next" class="point">
-      <i class="iconfont" v-if="len > 1" :class="[separator]"></i>
+      <i class="iconfont" v-if="iconSeparator" :class="[iconSeparator]"></i>
     <span v-else >{{separator}}</span>
     </span>
   </span>
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       separator: '/',
-      len: Number,
+      iconSeparator: null,
       next: '',
     }
   },
@@ -35,7 +35,7 @@ export default {
   },
   mounted() {
     this.separator = this.rootBreadcrumb.separator
-    this.len = this.separator.length
+    this.iconSeparator = this.rootBreadcrumb.iconSeparator
     this.next = Boolean(this.$el.nextElementSibling)
   },
 }
@@ -46,12 +46,12 @@ export default {
   @import "../assets/css/function";
   .yu-breadcrumb-item{
     display: inline-block;
-   font-size: $large;
-    font-weight: 800;
+    font-size: $large;
     cursor: pointer;
     .point{
       color: $light-text;
       font-weight: 500;
+      padding: 0 8px;
     }
   }
   .last{
