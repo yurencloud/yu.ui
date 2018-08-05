@@ -1,15 +1,15 @@
 <template>
   <div class="yu-dialog">
     <div class="dialog-content" ref="content" @click="change"></div>
-    <div class="dialog" :class="{'center':center}" v-if="isShow">
-      <div class="dialog-inner">
+    <div class="dialog" :class="{'center':center}" v-if="visible">
+      <div class="dialog-inner" :class="[size]">
         <div class="inner">
           <div class="dialog-title">{{title}}<i class="iconfont icon-close" @click="change"></i></div>
           <div class="inner-content" v-if="inner">{{inner}}</div>
           <div class="inner-other" v-else><slot/></div>
         </div>
         <div class="dialog-btn">
-          <yu-button size="medium" v-if="showCancle" @click="close($event)">{{cancleText}}</yu-button>
+          <yu-button size="medium" v-if="showClose" @click="close($event)">{{closeText}}</yu-button>
           <yu-button type="primary" size="medium" v-if="showConfirm" @click="confirm($event)">{{confirmText}}</yu-button>
         </div>
       </div>
@@ -32,9 +32,9 @@ export default {
     content: String,
     title: String,
     inner: String,
-    showCancle: Boolean,
+    showClose: Boolean,
     showConfirm: Boolean,
-    cancleText: {
+    closeText: {
       type: String,
       default: '取消',
     },
@@ -43,22 +43,26 @@ export default {
       default: '确认',
     },
     center: Boolean,
+    size: {
+      type: String,
+      default: 'normal', // small, normal, large, full
+    },
   },
   methods: {
     change() {
       this.visible = !this.visible
-      this.lockScroll = this.visible
+      const classList = document.getElementsByTagName('body')[0].classList
       if (process.browser) {
-        if (this.lockScroll) {
-          document.getElementsByTagName('body')[0].classList.add('lock')
-        } else if (!this.lockScroll) {
-          document.getElementsByTagName('body')[0].classList.remove('lock')
+        if (this.visible && this.lockScroll) {
+          classList.add('lock')
+        } else {
+          classList.remove('lock')
         }
       }
     },
     close(event) {
       this.change()
-      this.$emit('cancle', event)
+      this.$emit('close', event)
     },
     confirm(event) {
       this.change()
@@ -91,14 +95,35 @@ export default {
       left: 0;
       z-index: 99999;
       .dialog-inner{
-        width: 30%;
+        position: absolute;
+        transform: translate(-50%,-50%);
+        &.small{
+          width: 15%;
+          top: 50%;
+          left: 50%;
+        }
+        &.normal{
+          width: 30%;
+          top: 50%;
+          left: 50%;
+        }
+        &.large{
+          width: 50%;
+          top: 50%;
+          left: 50%;
+        }
+        &.full{
+          width: 100%;
+          top: 0;
+          left: 50%;
+          margin: 0;
+          box-sizing: border-box;
+          transform: translate(-50%,0);
+        }
         padding: 20px;
         background-color: #fff;
         opacity: 1;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
+
         .inner{
           .dialog-title{
             margin-bottom: 10px;
@@ -114,6 +139,8 @@ export default {
         .dialog-btn{
           float: right;
         }
+
+
       }
     }
   }

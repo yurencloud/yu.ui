@@ -1,15 +1,15 @@
 <template>
   <div class="yu-fixed-table">
-    <div v-if="fixedHead">
-      <yu-table :thead="thead" :column-width="columnWidth" :width="width" :celled="celled" fixedHead>
+    <div>
+      <yu-table :thead="thead" :column-width="columnWidth" :width="width" :celled="celled" fixedHead @click="handleClick">
         <slot name="thead"/>
       </yu-table>
       <div class="fixed-box" style="" :style="{height: height, width:width}">
-        <yu-table :tbody="tbody" :column-width="columnWidth"  :stripe="stripe" :celled="celled" :status="status">
+        <yu-table :tbody="tbody" :column-width="columnWidth"  :stripe="stripe" :celled="celled" :status="status" @click="handleClick">
           <slot name="tbody" />
         </yu-table>
       </div>
-      <yu-table :tfoot="tfoot" :column-width="columnWidth" :width="width" :celled="celled" fixedFoot>
+      <yu-table :tfoot="tfoot" :column-width="columnWidth" :width="width" :celled="celled" fixedFoot @click="handleClick">
         <slot name="tfoot" />
       </yu-table>
     </div>
@@ -44,6 +44,12 @@ export default {
         return {}
       },
     }, // { 1: 'success', 23: 'danger'}
+  },
+  methods: {
+    // 传递click事件
+    handleClick(key, value, data) {
+      this.$emit('click', key, value, data)
+    },
   },
   components: {
     YuTable,

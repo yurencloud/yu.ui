@@ -43,6 +43,7 @@ import YuBadge from './components/badge'
 import YuProgress from './components/progress'
 import YuTag from './components/tag'
 import YuTable from './components/table'
+import YuFixedTable from './components/fixed-table'
 import YuPagination from './components/pagination'
 import YuPopover from './components/popover'
 import MessageUtil from './components/message.util'
@@ -52,7 +53,7 @@ import ConfirmUtil from './components/confirm.util'
 import PromptUtil from './components/prompt.util'
 
 
-const version = '2.0.17'
+const version = '2.0.25'
 
 const components = [
   YuToolTip,
@@ -100,6 +101,7 @@ const components = [
   YuProgress,
   YuTag,
   YuTable,
+  YuFixedTable,
   YuPagination,
   YuPopover,
 ]
@@ -171,6 +173,7 @@ export {
   YuProgress,
   YuTag,
   YuTable,
+  YuFixedTable,
   YuPagination,
   YuPopover,
 }

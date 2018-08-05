@@ -19,11 +19,13 @@ export default {
   @import "../assets/css/varible";
   @import "../assets/css/function";
 .yu-tabs-nav{
+  transition: background-color .4s, color .4s;
   list-style: none;
   display: inline-block;
-  padding: 10px 20px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 14px;
   text-align: center;
-  box-sizing: border-box;
   color: $light-text;
   cursor: pointer;
   i{

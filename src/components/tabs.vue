@@ -5,12 +5,12 @@
     <ul class="tabs-nav"
         @click="active"
     >
-     <slot name="nav"/>
+      <slot name="nav"/>
       <i class="iconfont icon-add-circle-o"
-        v-if="addable"
-        @click="addItem"
+         v-if="addable"
+         @click="addItem"
          id="icon"></i>
-      <i class="line-left" ref="line"></i>
+      <i class="line" ref="line"></i>
     </ul>
     <div class="tabs-item clearfix" ref="tabitem">
       <slot name="item"/>
@@ -40,10 +40,16 @@ export default {
   },
   props: {
     width: String,
-    type: String,
+    type: {
+      type: String,
+      default: 'default',
+    },
     addable: false,
     closeable: false,
-    tabPosition: String,
+    tabPosition: {
+      type: String,
+      default: 'top',
+    },
     tabItemHeight: String,
   },
   methods: {
@@ -58,13 +64,14 @@ export default {
         this.$refs.tabitem.children[i].classList.remove('active')
       }
       const line = this.$refs.line
+      const currentIndex = e.target.index
       if (this.tabPosition === 'left' || this.tabPosition === 'right') {
-        line.style.top = `${e.target.index * 40}px`
-      } else if (this.tabPosition === 'bottom' || !this.tabPosition) {
-        line.style.left = `${e.target.index * 100}px`
+        line.style.top = `${currentIndex * 40}px`
+      } else if (this.tabPosition === 'bottom' || this.tabPosition === 'top') {
+        line.style.left = `${e.target.offsetLeft}px`
       }
-      this.$refs.tabitem.children[e.target.index].classList.add('active')
-      if (this.tabPosition) {
+      this.$refs.tabitem.children[currentIndex].classList.add('active')
+      if (this.type === 'default') {
         setTimeout(() => {
           e.target.classList.add('active')
         }, 300)
@@ -75,7 +82,7 @@ export default {
     },
     addItem(e) {
       e.stopPropagation()
-    //  todo  添加 New tabs
+      //  todo  添加 New tabs
     },
   },
   mounted() {
@@ -88,121 +95,124 @@ export default {
 <style lang="scss" type="text/scss" scoped>
   @import "../assets/css/varible";
   @import "../assets/css/function";
-.yu-tabs{
-  .tabs-nav{
-    padding: 0;
-    width: 100%;
-    border-bottom:1px solid #ddd;
-    box-sizing: border-box;
-    position: relative;
-    i{
-      display: inline-block;
-      float: right;
-      margin: 10px 20px;
-      font-size: $huge;
-    }
-    .line-left{
-      display: block;
-      height: 3px;
-      width: 100px;
-      background-color: $primary;
-      position: absolute;
-      transition: all .3s linear;
-      bottom: 0;
-      margin: 0;
-    }
-    li{
-      border-bottom: 3px solid #fff;
-    }
-    li.active{
-      border-bottom: 3px solid $primary;
-    }
-  }
-  .tabs-item{
-    position: relative;
-    padding: 10px 20px;
-  }
-}
 
-.clearfix:after{
-  content:'';
-  clear:both;
-  overflow:hidden;
-  height:0;
-  display: block;
-  *zoom:1;
-}
-  /*card 卡片风格*/
-.yu-tabs.card{
-  .tabs-nav{
-    height: 43px;
-    border-left: none;
-    border-right: none;
-    li{
-      background-color: #fff;
-      border-right: 1px solid #ddd;
-      border-top: 1px solid #ddd;
+  .yu-tabs {
+    font-size: $normal;
+    .tabs-nav {
+      padding: 0;
+      width: 100%;
       border-bottom: 1px solid #ddd;
-      &:first-child{
-        border-left: 1px solid #ddd;
-        border-top-left-radius: 3px;
+      box-sizing: border-box;
+      position: relative;
+      i {
+        display: inline-block;
+        float: right;
+        margin: 10px 20px;
+        font-size: $huge;
       }
-      &:last-child{
-        border-top-right-radius: 3px;
+      .line {
+        display: block;
+        height: 3px;
+        width: 84px;
+        background-color: $primary;
+        position: absolute;
+        transition: all .3s linear;
+        bottom: 0;
+        margin: 0;
+      }
+      li {
+        border-bottom: 3px solid #fff;
+      }
+      li.active {
+        border-bottom: 3px solid $primary;
       }
     }
-
-    li.active{
-      border-bottom: 1px solid #fff;
-      color: $primary;
-    }
-    li{
-      border-bottom: none;
-    }
-    .line-left{
-      display: none;
+    .tabs-item {
+      position: relative;
+      padding: 10px 20px;
     }
   }
-}
-  /*border-card */
-  .yu-tabs.border-card{
-    box-shadow: $box-shadow;
-    .tabs-nav{
-      height: 43px;
-      background-color: lighten($info,35);
-      border: 1px solid $dark-border;
+
+  .clearfix:after {
+    content: '';
+    clear: both;
+    overflow: hidden;
+    height: 0;
+    display: block;
+    *zoom: 1;
+  }
+
+  /*card 卡片风格*/
+  .yu-tabs.card {
+    .tabs-nav {
+      height: 40px;
       border-left: none;
       border-right: none;
-      li{
-        border-bottom: none;
+      li {
+        background-color: #fff;
+        border-right: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        &:first-child {
+          border-left: 1px solid #ddd;
+          border-top-left-radius: 3px;
+        }
+        &:last-child {
+          border-top-right-radius: 3px;
+        }
       }
-      .line-left{
+
+      li.active {
+        border-bottom: 1px solid #fff;
+        color: $primary;
+      }
+      .line {
         display: none;
       }
-      li.active{
-        background-color:#fff;
+    }
+  }
+
+  /*border-card */
+  .yu-tabs.border-card {
+    box-shadow: $box-shadow;
+    .tabs-nav {
+      height: 40px;
+      background-color: lighten($info, 35);
+      border: 1px solid $dark-border;
+      li {
+        display: inline-block;
+        box-sizing: border-box;
+        border-bottom: none;
+      }
+      .line {
+        display: none;
+      }
+      li.active {
+        background-color: #fff;
         border-bottom: 2px solid #fff;
         border-left: 1px solid $dark-border;
         border-right: 1px solid $dark-border;
         color: $primary;
-        &:first-child{
+        &:first-child {
           border-left: none;
         }
       }
     }
   }
+
   /*不同方位的tab栏*/
+  /*top*/
   /*bottom*/
-  .yu-tabs.bottom{
+  .yu-tabs.default.top{
     display: flex;
-    flex-direction: column-reverse;
-    .tabs-nav{
+    flex-direction: column;
+    .tabs-nav {
       margin: 0;
       position: relative;
-      .line-left{
+      .line {
         display: block;
         height: 3px;
-        width: 100px;
+        width: 84px;
         background-color: $primary;
         position: absolute;
         transition: all .3s linear;
@@ -210,44 +220,72 @@ export default {
         bottom: 0;
         margin: 0;
       }
-      li{
+      li {
+        box-sizing: border-box;
         border-bottom: 3px solid #fff;
       }
-      li.active{
-        border-bottom: 3px solid $primary;
+      li.active {
+        border-bottom: none;
       }
     }
   }
-.yu-tabs.bottom.border-card{
-  .tabs-nav{
-    background-color: lighten($background,15);
-    border: 1px solid $dark-border;
-    border-left: none;
-    border-right: none;
-    li{
-      margin-top: -1px;
-    }
-    li.active{
-      background-color:#fff;
-      border-bottom: 2px solid #fff;
-      border-left: 1px solid $dark-border;
-      border-right: 1px solid $dark-border;
-      color: #409EFF;
-      &:first-child{
-        border-left: none;
-      }
-    }
-  }
-}
-  /*left*/
-  .yu-tabs.left{
+  .yu-tabs.bottom {
     display: flex;
-    .tabs-nav{
+    flex-direction: column-reverse;
+    .tabs-nav {
+      margin: 0;
+      position: relative;
+      .line {
+        display: block;
+        height: 3px;
+        width: 84px;
+        background-color: $primary;
+        position: absolute;
+        transition: all .3s linear;
+        left: 0;
+        bottom: 0;
+        margin: 0;
+      }
+      li {
+        border-bottom: 3px solid #fff;
+      }
+      li.active {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .yu-tabs.bottom.border-card {
+    .tabs-nav {
+      background-color: lighten($background, 15);
+      border: 1px solid $dark-border;
+      border-left: none;
+      border-right: none;
+      li {
+        margin-top: -1px;
+      }
+      li.active {
+        background-color: #fff;
+        border-bottom: 2px solid #fff;
+        border-left: 1px solid $dark-border;
+        border-right: 1px solid $dark-border;
+        color: #409EFF;
+        &:first-child {
+          border-left: none;
+        }
+      }
+    }
+  }
+
+  /*left*/
+  .yu-tabs.left {
+    display: flex;
+    .tabs-nav {
       max-width: 150px;
       border: none;
       text-align: center;
       position: relative;
-      .line-left{
+      .line {
         display: block;
         height: 40px;
         width: 3px;
@@ -258,33 +296,34 @@ export default {
         top: 0;
         margin: 0;
       }
-      li{
+      li {
         display: block;
         border-bottom: none;
         border-right: 2px solid $light-border;
       }
-      li.active{
+      li.active {
         color: $primary;
       }
     }
-    .tabs-item{
+    .tabs-item {
       width: calc(100% - 150px);
-      .yu-tabs-item{
+      .yu-tabs-item {
         width: 100%;
         color: $dark-text;
       }
     }
   }
+
   /*right*/
-  .yu-tabs.right{
+  .yu-tabs.right {
     display: flex;
     flex-direction: row-reverse;
-    .tabs-nav{
+    .tabs-nav {
       max-width: 150px;
       border: none;
       text-align: center;
       position: relative;
-      .line-left{
+      .line {
         display: block;
         height: 40px;
         width: 3px;
@@ -295,12 +334,12 @@ export default {
         top: 0;
         margin: 0;
       }
-      li{
+      li {
         display: block;
         border-bottom: none;
         border-left: 2px solid $light-border;
       }
-      li.active{
+      li.active {
         color: $primary;
       }
     }

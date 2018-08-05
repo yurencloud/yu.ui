@@ -6,7 +6,7 @@
       <th v-bind:key="i" v-for="(item, i) in thead" :style="{width: columnWidth ? columnWidth[i] : 'auto'}">
         <div class="cell">{{item}}</div>
       </th>
-      <th v-if="fixedHead" width="20px"></th>
+      <th v-if="fixedHead" width="14px"></th>
     </tr>
     </thead>
     <slot name="thead"/>
@@ -36,7 +36,7 @@
       <td v-bind:key="i" v-for="(item, i) in tfoot" :style="{width: columnWidth ? columnWidth[i] : 'auto'}">
         <div class="cell">{{item}}</div>
       </td>
-      <td v-if="fixedFoot" width="20px"></td>
+      <td v-if="fixedFoot" width="14px"></td>
     </tr>
     </tfoot>
     <slot name="tfoot"/>
