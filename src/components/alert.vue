@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'YuAlert',
+  name: 'Alert',
   data() {
     return {
       icons: {
