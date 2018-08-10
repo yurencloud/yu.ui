@@ -186,7 +186,7 @@ import YuSelect from '../components/select'
 import YuCounter from '../components/counter'
 import YuCheckbox from '../components/checkbox'
 import YuDialog from '../components/dialog'
-import YuToolTip from '../components/tooltip'
+import YuTooltip from '../components/tooltip'
 import YuCollapseItem from '../components/collapse-item'
 import YuCollapse from '../components/collapse'
 import YuMenuItem from '../components/menu-item'
@@ -543,7 +543,7 @@ export default {
     },
   },
   components: {
-    YuToolTip,
+    YuTooltip,
     YuDialog,
     YuButton,
     YuButtons,

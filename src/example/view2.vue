@@ -58,12 +58,12 @@
     </div>
     <div class="sub-title" style="margin-top: 50px">文字提示框---按钮大小变化</div>
     <div class="box" style="margin-left: 100px">
-      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true">
+      <yu-tooltip content="TOP 这是位于顶部的" :show-arrow="true">
        <yu-button size="small" >上边</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="TOP 这是位于顶部的" :show-arrow="true" >
+      </yu-tooltip>
+      <yu-tooltip content="TOP 这是位于顶部的" :show-arrow="true" >
         <yu-button size="mini" >上边</yu-button>
-      </yu-tool-tip>
+      </yu-tooltip>
     </div>
     <div class="box" style="margin-left: 100px">
 
@@ -72,72 +72,72 @@
     </div>
     <div class="sub-title" style="margin-top: 100px">文字提示框---方位变化</div>
     <div class="box" style="margin-left: 100px">
-      <!--<yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true">-->
+      <!--<yu-tooltip content="哈哈哈哈哈哈" :show-arrow="true">-->
         <!--<yu-button type="warning">左侧</yu-button>-->
-      <!--</yu-tool-tip>-->
-      <yu-tool-tip content="与君歌一曲，请君为我侧耳听。" :show-arrow="true" effect="light" placement="top">
+      <!--</yu-tooltip>-->
+      <yu-tooltip content="与君歌一曲，请君为我侧耳听。" :show-arrow="true" effect="light" placement="top">
         <yu-button >上左</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="钟鼓馔玉不足贵，但愿长醉不复醒。" :show-arrow="true" effect="light" placement="top-right">
+      </yu-tooltip>
+      <yu-tooltip content="钟鼓馔玉不足贵，但愿长醉不复醒。" :show-arrow="true" effect="light" placement="top-right">
         <yu-button >上右</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="古来圣贤皆寂寞，惟有饮者留其名" :show-arrow="true" effect="light" placement="bottom">
+      </yu-tooltip>
+      <yu-tooltip content="古来圣贤皆寂寞，惟有饮者留其名" :show-arrow="true" effect="light" placement="bottom">
         <yu-button>下面</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="陈王昔时宴平乐，斗酒十千恣欢谑。" :show-arrow="true" effect="light" placement="bottom-left">
+      </yu-tooltip>
+      <yu-tooltip content="陈王昔时宴平乐，斗酒十千恣欢谑。" :show-arrow="true" effect="light" placement="bottom-left">
         <yu-button>下左</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="主人何为言少钱，径须沽取对君酌。" :show-arrow="true" effect="light" placement="bottom-right">
+      </yu-tooltip>
+      <yu-tooltip content="主人何为言少钱，径须沽取对君酌。" :show-arrow="true" effect="light" placement="bottom-right">
         <yu-button>下右</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。" effect="light"  :show-arrow="true" placement="right">
+      </yu-tooltip>
+      <yu-tooltip content="五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。" effect="light"  :show-arrow="true" placement="right">
         <yu-button>右侧</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="哈哈哈哈哈哈哈哈哈哈" effect="light"  :show-arrow="true" placement="right">
+      </yu-tooltip>
+      <yu-tooltip content="哈哈哈哈哈哈哈哈哈哈" effect="light"  :show-arrow="true" placement="right">
         <yu-button>右侧</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="君不见黄河之水天上来，奔流到海不复回。" :show-arrow="true"  placement="top">
+      </yu-tooltip>
+      <yu-tooltip content="君不见黄河之水天上来，奔流到海不复回。" :show-arrow="true"  placement="top">
         <yu-button>上左</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="君不见高堂明镜悲白发，朝如青丝暮成雪。" :show-arrow="true" placement="top-right">
+      </yu-tooltip>
+      <yu-tooltip content="君不见高堂明镜悲白发，朝如青丝暮成雪。" :show-arrow="true" placement="top-right">
         <yu-button>上右</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="人生得意须尽欢，莫使金樽空对月。" :show-arrow="true"  placement="bottom">
+      </yu-tooltip>
+      <yu-tooltip content="人生得意须尽欢，莫使金樽空对月。" :show-arrow="true"  placement="bottom">
         <yu-button>下面</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="天生我材必有用，千金散尽还复来。" :show-arrow="true" placement="bottom-left">
+      </yu-tooltip>
+      <yu-tooltip content="天生我材必有用，千金散尽还复来。" :show-arrow="true" placement="bottom-left">
         <yu-button>下左</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="烹羊宰牛且为乐，会须一饮三百杯。" :show-arrow="true" placement="bottom-right">
+      </yu-tooltip>
+      <yu-tooltip content="烹羊宰牛且为乐，会须一饮三百杯。" :show-arrow="true" placement="bottom-right">
         <yu-button>下右</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="岑夫子，丹丘生，将进酒，杯莫停。"  :show-arrow="true" placement="right">
+      </yu-tooltip>
+      <yu-tooltip content="岑夫子，丹丘生，将进酒，杯莫停。"  :show-arrow="true" placement="right">
         <yu-button>右侧</yu-button>
-      </yu-tool-tip>
+      </yu-tooltip>
     </div>
     <div class="sub-title" style="margin-top: 100px">文字提示框---方位变化</div>
     <div class="box" style="margin-left: 100px">
-      <!--<yu-tool-tip content="哈哈哈哈哈哈" :show-arrow="true">-->
+      <!--<yu-tooltip content="哈哈哈哈哈哈" :show-arrow="true">-->
       <!--<yu-button type="warning">左侧</yu-button>-->
-      <!--</yu-tool-tip>-->
-      <yu-tool-tip content="与君歌一曲，请君为我侧耳听。" :show-arrow="true" effect="light" placement="top">
+      <!--</yu-tooltip>-->
+      <yu-tooltip content="与君歌一曲，请君为我侧耳听。" :show-arrow="true" effect="light" placement="top">
         <yu-button >上左</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="钟鼓馔玉不足贵，但愿长醉不复醒。" :show-arrow="true" effect="light" placement="top-right">
+      </yu-tooltip>
+      <yu-tooltip content="钟鼓馔玉不足贵，但愿长醉不复醒。" :show-arrow="true" effect="light" placement="top-right">
         <yu-button >上右</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="古来圣贤皆寂寞，惟有饮者留其名" :show-arrow="true" effect="light" placement="bottom">
+      </yu-tooltip>
+      <yu-tooltip content="古来圣贤皆寂寞，惟有饮者留其名" :show-arrow="true" effect="light" placement="bottom">
         <yu-button>下面</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="陈王昔时宴平乐，斗酒十千恣欢谑。" :show-arrow="true" effect="light" placement="bottom-left">
+      </yu-tooltip>
+      <yu-tooltip content="陈王昔时宴平乐，斗酒十千恣欢谑。" :show-arrow="true" effect="light" placement="bottom-left">
         <yu-button>下左</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="主人何为言少钱，径须沽取对君酌。" :show-arrow="true" effect="light" placement="bottom-right">
+      </yu-tooltip>
+      <yu-tooltip content="主人何为言少钱，径须沽取对君酌。" :show-arrow="true" effect="light" placement="bottom-right">
         <yu-button>下右</yu-button>
-      </yu-tool-tip>
-      <yu-tool-tip content="五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。" effect="light"  :show-arrow="true" placement="right">
+      </yu-tooltip>
+      <yu-tooltip content="五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。" effect="light"  :show-arrow="true" placement="right">
         <yu-button>右侧</yu-button>
-      </yu-tool-tip>
+      </yu-tooltip>
     </div>
     <div style="height: 100px;"></div>
     <div class="sub-title" style="margin-top: 100px">tabs------>tablan效果</div>
@@ -518,7 +518,7 @@ import 'whatwg-fetch'
 import YuButton from '../components/button'
 import YuSteps from '../components/steps'
 import YuStep from '../components/step'
-import YuToolTip from '../components/tooltip'
+import YuTooltip from '../components/tooltip'
 import YuTabs from '../components/tabs'
 import YuTabsItem from '../components/tabs-item'
 import YuTabsNav from '../components/tabs-nav'
@@ -845,7 +845,7 @@ export default {
     YuButton,
     YuSteps,
     YuStep,
-    YuToolTip,
+    YuTooltip,
     YuTabs,
     YuTabsNav,
     YuTabsItem,

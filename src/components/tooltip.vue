@@ -1,16 +1,11 @@
 <template>
 <div class="yu-tooltip" :class="[placement]">
-    <!--提示框-->
-    <div class="tooltip"
-         v-show="isShow"
-         :class="[effect,]">
+    <div class="tooltip" v-show="visible" :class="[effect,]">
       {{content}}
     </div>
-  <!--文字-->
-    <div class="text" @mouseover="over"
-                      @mouseout="over">
-      <div class="arrow angle" v-if="isLight" v-show="isShow"></div>
-      <div class="arrow iconfont" v-else v-show="isShow"></div>
+    <div class="text" @mouseover="over" @mouseout="over">
+      <div class="arrow angle" v-if="isLight" v-show="visible"></div>
+      <div class="arrow iconfont" v-else v-show="visible"></div>
       <slot/>
     </div>
 </div>
@@ -20,7 +15,7 @@
 import YuButton from './button'
 
 export default {
-  name: 'YuToolTip',
+  name: 'YuTooltip',
   data() {
     return {
       display: false,
@@ -95,7 +90,7 @@ export default {
         border-right: 1px solid #000;
         transform: translateX(-50%) rotate(-45deg);
         z-index: 100000;
-        top: -15px;
+        top: -14px;
       }
       .iconfont{
         position: absolute;
@@ -135,7 +130,7 @@ export default {
 .yu-tooltip.bottom{
   .tooltip{
     top: auto;
-    bottom: -34px;
+    bottom: -35px;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -152,7 +147,7 @@ export default {
     .tooltip{
       left: 0;
       top: auto;
-      bottom: -34px;
+      bottom: -35px;
     }
     .arrow{
       top: auto;
@@ -167,7 +162,7 @@ export default {
     .tooltip{
       right: 8px;
       top: auto;
-      bottom: -34px;
+      bottom: -35px;
     }
     .arrow{
       top: auto;

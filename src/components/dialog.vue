@@ -1,22 +1,20 @@
 <template>
   <div class="yu-dialog">
     <div class="dialog" :class="{'center':center}" v-show="visible">
-      <transition name="zoom-in-top">
         <div class="dialog-inner" :class="[size]" v-show="visible">
           <div class="inner">
-            <div class="dialog-title">{{title}}<i class="iconfont icon-close" @click="handleClose($event)"></i></div>
-            <div class="inner-content" v-if="inner">{{inner}}</div>
+            <div class="dialog-title">{{title}}<i class="iconfont icon-close" v-if="showClose" @click="handleClose($event)"></i></div>
+            <div class="inner-content" v-if="content">{{content}}</div>
             <div class="inner-other" v-else>
               <slot/>
             </div>
           </div>
           <div class="dialog-btn">
-            <yu-button size="medium" v-if="showClose" @click="handleClose($event)">{{closeText}}</yu-button>
-            <yu-button type="primary" size="medium" v-if="showConfirm" @click="handleConfirm($event)">{{confirmText}}
+            <yu-button v-if="showCancel" @click="handleClose($event)">{{closeText}}</yu-button>
+            <yu-button type="primary" v-if="showConfirm" @click="handleConfirm($event)">{{confirmText}}
             </yu-button>
           </div>
         </div>
-      </transition>
     </div>
   </div>
 </template>
@@ -38,8 +36,11 @@ export default {
     lockScroll: Boolean,
     content: String,
     title: String,
-    inner: String,
-    showClose: Boolean,
+    showClose: {
+      type: Boolean,
+      default: true,
+    },
+    showCancel: Boolean,
     showConfirm: Boolean,
     closeText: {
       type: String,
@@ -65,15 +66,16 @@ export default {
       this.$emit('input', !this.visible)
     },
   },
-  mounted() {
-    const classList = document.getElementsByTagName('body')[0].classList
-    if (process.browser) {
-      if (this.visible && this.lockScroll) {
-        classList.add('lock')
-      } else {
-        classList.remove('lock')
+  watch: {
+    visible(visible) {
+      if (process.browser) {
+        if (visible && this.lockScroll) {
+          document.body.classList.add('lock')
+        } else {
+          document.body.classList.remove('lock')
+        }
       }
-    }
+    },
   },
   components: {
     YuButton,
@@ -84,7 +86,6 @@ export default {
 <style lang="scss" scoped type="text/scss">
   @import "../assets/css/varible";
   @import "../assets/css/function";
-  @import "../assets/css/animation";
 
   .yu-dialog {
     .dialog-content {
@@ -99,7 +100,6 @@ export default {
       top: 0;
       left: 0;
       z-index: 99999;
-      @include zoomInTop();
       .dialog-inner {
         position: absolute;
         transform: translate(-50%, -50%);
@@ -122,6 +122,7 @@ export default {
           width: 100%;
           top: 0;
           left: 50%;
+          height: 100%;
           margin: 0;
           box-sizing: border-box;
           transform: translate(-50%, 0);
@@ -134,12 +135,19 @@ export default {
           .dialog-title {
             margin-bottom: 10px;
             font-size: $huge;
+            color: $text;
+            font-weight: bold;
             i {
               float: right;
               cursor: pointer;
+              transition: color .4s;
+              &:hover{
+                color: $primary;
+              }
             }
           }
           .inner-content {
+            color: $text;
             margin: 20px 0;
           }
         }

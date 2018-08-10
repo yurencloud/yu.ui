@@ -8,7 +8,7 @@ import YuSelect from './components/select'
 import YuCounter from './components/counter'
 import YuCheckbox from './components/checkbox'
 import YuDialog from './components/dialog'
-import YuToolTip from './components/tooltip'
+import YuTooltip from './components/tooltip'
 import YuCollapseItem from './components/collapse-item'
 import YuCollapse from './components/collapse'
 import YuMenuItem from './components/menu-item'
@@ -53,10 +53,10 @@ import ConfirmUtil from './components/confirm.util'
 import PromptUtil from './components/prompt.util'
 
 
-const version = '2.0.27'
+const version = '2.1.1'
 
 const components = [
-  YuToolTip,
+  YuTooltip,
   YuDialog,
   YuButton,
   YuButtons,
@@ -128,7 +128,7 @@ export default components
 export {
   version,
   install,
-  YuToolTip,
+  YuTooltip,
   YuDialog,
   YuButton,
   YuButtons,
