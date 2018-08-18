@@ -89,10 +89,8 @@ export default {
   methods: {
     handleEvent(eventName, value) {
       this.value = value
-      console.log(value)
       if (this.$parent.rules) {
         this.trigger = eventName
-        console.log(eventName)
         this.validateByRules(this.$parent.rules, this.value)
       }
     },

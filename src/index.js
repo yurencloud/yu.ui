@@ -53,7 +53,7 @@ import ConfirmUtil from './components/confirm.util'
 import PromptUtil from './components/prompt.util'
 
 
-const version = '2.1.1'
+const version = '2.2.0'
 
 const components = [
   YuTooltip,

@@ -1,4 +1,4 @@
-YU.UI [使用文档](http://ui.yurencloud.com)
+YU.UI [使用文档](http://www.yurencloud.com/ui/install)
 ---
 ## npm 安装
 ~~~
