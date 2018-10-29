@@ -77,6 +77,16 @@
       </yu-field>
     </yu-form>
 
+    <div class="sub-title">无label</div>
+    <yu-form>
+      <yu-field>
+        <yu-input/>
+      </yu-field>
+      <yu-field>
+        <yu-input/>
+      </yu-field>
+    </yu-form>
+
     <div class="sub-title">表单验证</div>
     <yu-form :rules="rules" width="600px" v-model="form2">
       <yu-field label="活动名称">

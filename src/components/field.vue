@@ -1,6 +1,6 @@
 <template>
   <div class="yu-field" :class="[{error:error},{inline:inline}]">
-    <label :class="[align,{noLabel:noLabel}]">
+    <label v-if="label" :class="[align,{noLabel:noLabel}]">
       {{label}}
     </label>
     <div class="field"
