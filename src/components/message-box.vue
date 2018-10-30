@@ -78,7 +78,6 @@ export default {
     return {
       visible: false,
       isActive: false,
-      messageShow: false,
       typeItems: {
         error: {
           icon: 'icon-close-circle',
@@ -127,7 +126,6 @@ export default {
       },
       center: false,
       showClose: true,
-      lockScroll: true,
       inputValue: '',
       cancelButtonClass: '',
       confirmButtonClass: '',

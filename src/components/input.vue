@@ -7,8 +7,8 @@
     <!--前置组件-->
     <slot v-if="$slots.prepend" class="prepend" name="prepend"/>
     <input
-      v-if="type==='input'"
-      type="text"
+      v-if="type!=='textarea'"
+      :type="type"
       :placeholder="placeholder"
       :disabled="disabled"
       :value="value"
@@ -26,7 +26,8 @@
                 {prefix:prefix},
                 {suffix:suffix},
                 {append:$slots.append},
-                {prepend:$slots.prepend}
+                {prepend:$slots.prepend},
+                type,
               ]"
       :style="{width:width}">
 
@@ -378,6 +379,10 @@ export default {
       border-radius: 0 4px 4px 0;
     }
 
+    input.number{
+      padding-right: 0;
+    }
+
     .options {
       background-color: #fff;
       position: absolute;
@@ -420,7 +425,6 @@ export default {
         }
       }
     }
-
   }
 
 </style>

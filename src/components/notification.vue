@@ -113,8 +113,8 @@ export default {
     },
     type(type) {
       if (type) {
-        this.icon = this.typeItem[this.type].icon
-        this.color = this.typeItem[this.type].color
+        this.icon = this.icons[this.type].icon
+        this.color = this.icons[this.type].color
         this.iconClass = ''
       } else {
         this.icon = ''

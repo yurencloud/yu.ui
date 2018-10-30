@@ -4,6 +4,8 @@
     <div class="title">输入框</div>
     <div class="sub-title">基础用法</div>
     <yu-input placeholder="请输入用户名" @change="inputChange" v-model="value1"/>
+    <yu-input placeholder="请输入密码" type="number" @change="inputChange" v-model="value1"/>
+    <input type="number">
 
     <div class="sub-title">禁用状态</div>
     <yu-input placeholder="请输入用户名" disabled v-model="value2"/>
