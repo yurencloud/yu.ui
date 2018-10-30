@@ -245,7 +245,7 @@ export default {
     },
     getMessage(item) {
       let message = this.defaultMessage[item.prop]
-      message = message.replace('$name', item.name).replace('$value', item.value ? item.value.toString() : '').replace('$other', item.other)
+      message = message.replace('$name', item.name || '').replace('$value', item.value ? item.value.toString() : '').replace('$other', item.other)
       return message
     },
   },
