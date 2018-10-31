@@ -8,9 +8,14 @@
          :style="{width:fieldWidth}"
     >
       <slot/>
-      <span v-if="error" class="errorMessage">
-        {{messages}}
+      <span v-if="!list&&error" class="errorMessage">
+        {{messages[0]}}
       </span>
+      <div v-if="list&&error" class="errorMessages">
+        <p v-bind:key="index" v-for="(index, item) in messages">
+          {{item}}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -24,8 +29,7 @@ export default {
   data() {
     return {
       value: {},
-      error: false,
-      messages: '',
+      messages: [],
       trigger: 'submit',
       isField: true, // 提供子组件判断父组件是field使用
       fixCascader: false,
@@ -43,6 +47,7 @@ export default {
       default: 'left',
     },
     noLabel: Boolean,
+    list: Boolean,
     fieldWidth: String,
     defaultMessage: {
       type: Object,
@@ -81,45 +86,49 @@ export default {
       }),
     },
   },
+  computed: {
+    error() {
+      return this.messages.length > 0
+    },
+  },
   methods: {
     handleEvent(eventName, value) {
       this.value = value
       if (this.$parent.rules) {
         this.trigger = eventName
+        console.log(eventName, this.value)
         this.validateByRules(this.$parent.rules, this.value)
       }
     },
     validateByRules(rules, value) {
-      // TODO::错误消息处理待处理
       const the = this
       const validates = rules[value.name]
       if (!validates) return
+
       // 若出现错误，则立即停止继续验证
       for (let i = 0; i < validates.length; i++) {
         const item = validates[i]
-        // name: [
-        //   { prop: 'required', value: true, message: '必填选项', trigger: 'blur', name: '字段的中文名或英文名(这个值默认为'')', other: '另一字段的中文名称' },
-        // ],
-        if (!item.trigger) {
-          item.trigger = 'submit'
+        // if (!item.trigger) {
+        //   item.trigger = 'blur'
+        // }
+        if (this.trigger !== item.trigger) {
+          continue
         }
-        // 若触发事件和rules中的触发事件不一样，并且已经有错误，则路过，防止被不同事件消除错误
-        // 若一样，或者没有错误，则继续执行验证
-        if (this.trigger !== item.trigger) return
-        let result
-        const notEmpty = (value.name && value.value.toString().trim().length !== 0)
-        let error = false
 
+        this.messages = []
+
+        let result
+        const notEmpty = (value.name && typeof value.value !== 'undefined' && value.value.toString().trim().length !== 0)
         // 判断是否有自定义的验证函数
+
         if (item.validator) {
           const message = item.validator(value.value)
           if (message && message.length > 0) {
-            this.messages = message
-            this.error = true
-            return
+            // 按这个格式来创建错误message
+            this.messages.push({ index: i, item, message })
           }
-          this.error = false
         } else {
+          let error = false
           switch (item.prop) {
             case 'required':
               error = !notEmpty
@@ -158,7 +167,7 @@ export default {
             case 'match':
               error = (notEmpty && the.$parent.getValue(item.value) !== value.value)
               break
-            case 'derror =ferent':
+            case 'different':
               error = (notEmpty && the.$parent.getValue(item.value) === value.value)
               break
             case 'chinese':
@@ -246,18 +255,14 @@ export default {
             default:
               break
           }
-
           if (error) {
             this.setError(item)
-            return
           }
-          this.error = false
         }
       }
     },
     setError(item) {
-      this.error = true
-      this.messages = item.message || this.getMessage(item)
+      this.messages.push(item.message || this.getMessage(item))
     },
     getMessage(item) {
       let message = this.defaultMessage[item.prop]
@@ -351,6 +356,13 @@ export default {
           /*float: left;*/
           font-size: 14px;
           color: $danger;
+        }
+        .errorMessages {
+          font-size: 14px;
+          color: $danger;
+          p {
+            margin: 2px;
+          }
         }
       }
     }

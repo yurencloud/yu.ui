@@ -32,7 +32,7 @@ export default {
       console.log(this.value)
       this.$children.forEach((item) => {
         if (item.isField && item.prop) {
-          item.handleEvent('submit', { name: item.prop, value: the.value[item.prop] })
+          item.handleEvent('blur', { name: item.prop, value: the.value[item.prop] })
           if (item.error) {
             errors = errors.concat(item.messages)
           }

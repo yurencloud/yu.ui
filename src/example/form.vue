@@ -260,19 +260,21 @@ export default {
         counter: 0,
       },
       form3: {
-        id: 0,
+        id: undefined,
         fruit: '',
       },
       rules2: {
         id: [
-          { prop: 'required' },
+          { prop: 'required', trigger: 'blur' },
+          { prop: 'number', trigger: 'blur' },
           {
+            trigger: 'change',
             validator: (value) => {
-              if (value !== null && value < 10) {
+              console.log('validator', value)
+              if (value < 10) {
                 return 'id不能小于10'
               }
             },
-            trigger: 'blur',
           },
         ],
         fruit: [
