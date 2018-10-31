@@ -116,7 +116,7 @@
           <yu-option label="狗" value="5"/>
         </yu-select>
       </yu-field>
-      <yu-field label="选择日期" inline >
+      <yu-field label="选择日期" inline>
         <yu-date-picker name="date" v-model="form2.date1"/>
       </yu-field>
       <yu-field no-label inline>
@@ -155,7 +155,7 @@
         <yu-slider name="range"/>
       </yu-field>
       <!--<yu-field label="级联选择">-->
-        <!--<yu-cascader name="cascader" :cascader="cascader"/>-->
+      <!--<yu-cascader name="cascader" :cascader="cascader"/>-->
       <!--</yu-field>-->
       <yu-field label="计数器">
         <yu-counter name="counter" v-model="form2.counter"/>
@@ -179,6 +179,20 @@
       <yu-button type="primary" submit>提交</yu-button>
       <yu-button>重置</yu-button>
 
+    </yu-form>
+
+    <div class="sub-title">自定义验证器</div>
+    <yu-form :rules="rules2" width="600px" method="POST" v-model="form3" ref="form3">
+      <yu-field label="水果id" prop="id">
+        <yu-input name="id" v-model="form3.id"/>
+      </yu-field>
+
+      <yu-field label="水果名称" prop="fruit">
+        <yu-input name="fruit" v-model="form3.fruit"/>
+      </yu-field>
+
+      <yu-button type="primary" @click="submitForm3()">提交</yu-button>
+      <yu-button>重置</yu-button>
     </yu-form>
 
     <div style="margin-bottom: 400px"></div>
@@ -244,6 +258,31 @@ export default {
         type: '',
         rate: 0,
         counter: 0,
+      },
+      form3: {
+        id: null,
+        fruit: '',
+      },
+      rules2: {
+        id: [
+          {
+            validator: (value) => {
+              if (value < 10) {
+                return 'id不能小于10'
+              }
+            },
+            trigger: 'blur',
+          },
+        ],
+        fruit: [
+          {
+            validator: (value) => {
+              if (value.length > 2) {
+                return '水果不得大于2个字'
+              }
+            },
+          },
+        ],
       },
       rules: {
         activity1: [
@@ -550,6 +589,12 @@ export default {
   methods: {
     success(data) {
       console.log('表单接收成功', data)
+    },
+    submitForm3() {
+      const errors = this.$refs.form3.validate()
+      if (errors) {
+        console.log(errors)
+      }
     },
   },
   components: {

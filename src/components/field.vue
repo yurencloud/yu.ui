@@ -37,6 +37,7 @@ export default {
     }
   },
   props: {
+    prop: String,
     label: String,
     inline: {
       type: Boolean,
@@ -95,6 +96,7 @@ export default {
       }
     },
     validateByRules(rules, value) {
+      // TODO::错误消息处理待处理
       const the = this
       const validates = rules[value.name]
       if (!validates) return
@@ -105,138 +107,152 @@ export default {
         // name: [
         //   { prop: 'required', value: true, message: '必填选项', trigger: 'blur', name: '字段的中文名或英文名(这个值默认为'')', other: '另一字段的中文名称' },
         // ],
-        if (item.trigger && this.trigger !== item.trigger) return
+        if (!item.trigger) {
+          item.trigger = 'submit'
+        }
+        if (this.trigger !== item.trigger) return
         let result
         const notEmpty = (value.name && value.value.toString().trim().length !== 0)
         let error = false
-        switch (item.prop) {
-          case 'required':
-            error = !notEmpty
-            break
-          case 'max':
-            error = (notEmpty && item.value < value.value.length)
-            break
-          case 'min':
-            error = (notEmpty && item.value > value.value.length)
-            break
-          case 'maxNumber':
-            error = (notEmpty && item.value < value.value)
-            break
-          case 'minNumber':
-            error = (notEmpty && item.value > value.value)
-            break
-          case 'email':
-            error = (notEmpty && !validation.isEmail(value.value))
-            break
-          case 'url':
-            error = (notEmpty && !validation.isUrl(value.value))
-            break
-          case 'integer':
-            error = (notEmpty && !validation.isInteger(value.value))
-            break
-          case 'number':
-            error = (notEmpty && !validation.isNumber(value.value))
-            break
-          case 'contain':
-            error = (notEmpty && value.value.indexOf(item.value) === -1)
-            break
-          case 'notContain':
-            error = (notEmpty && value.value.indexOf(item.value) > -1)
-            break
-            // 要和已经存在的字段的值相同,每次只能match一个，但可以添加多个match验证
-          case 'match':
-            error = (notEmpty && the.$parent.getValue(item.value) !== value.value)
-            break
-          case 'derror =ferent':
-            error = (notEmpty && the.$parent.getValue(item.value) === value.value)
-            break
-          case 'chinese':
-            error = (notEmpty && !validation.isChinese(value.value))
-            break
-          case 'idNumber':
-            error = (notEmpty && !validation.isIdNumber(value.value))
-            break
-          case 'password':
-            error = (notEmpty && !validation.isPassword(value.value))
-            break
-          case 'mobile':
-            error = (notEmpty && !validation.isMobile(value.value))
-            break
-          case 'telephone':
-            error = (notEmpty && !validation.isTelephone(value.value))
-            break
-          case 'domain':
-            error = (notEmpty && !validation.isDomain(value.value))
-            break
-          case 'username':
-            error = (notEmpty && !validation.isUsername(value.value))
-            break
-          case 'ip':
-            error = (notEmpty && !validation.isIp(value.value))
-            break
-            // 判断接受，比如同意
-          case 'accepted':
-            error = (notEmpty && value.value !== 'on' && value.value !== true && value.value !== 1)
-            break
-            // 数字区间 [low, high],含边界
-          case 'between':
-            error = (notEmpty && (item.value[0] > value.value || item.value[1] < value.value))
-            break
-            // 值在数组中 [1,2,3] ['a','b','c']
-          case 'in':
-            error = (notEmpty && item.value.indexOf(value.value) === -1)
-            break
-            // 值不在数组中 [1,2,3] ['a','b','c']
-          case 'notIn':
-            error = (notEmpty && item.value.indexOf(value.value) !== -1)
-            break
-            // 自定义正则 验证
-          case 'regex':
-            error = (notEmpty && !item.value.test(value.value))
-            break
-            // 如果指定1个字段有值，那么该字段也必须有
-          case 'requiredIf':
-            error = (the.$parent.hasValue(item.value) && !notEmpty)
-            break
-            // 如果指定1个字段没值，那么该字段也必须有
-          case 'requiredWithout':
-            error = (!the.$parent.hasValue(item.value) && !notEmpty)
-            break
-            // 如果指定多个字段其中一个有值['name','age']，那么该字段也必须有
-          case 'requiredWith':
-            result = false
-            item.value.forEach((i) => {
-              if (the.$parent.hasValue(i)) {
-                result = true
-              }
-            })
-            error = (result && !notEmpty)
-            break
-            // 如果指定多个字段全部有值['name','age']，那么该字段也必须有
-          case 'requiredWithAll':
-            result = true
-            item.value.forEach((i) => {
-              if (!the.$parent.hasValue(i)) {
-                result = false
-              }
-            })
-            error = (result && !notEmpty)
-            break
-            // 如果指定多个字段全部没有值['name','age']，那么该字段也必须有
-          case 'requiredWithoutAll':
-            result = true
-            item.value.forEach((i) => {
-              if (the.$parent.hasValue(i)) {
-                result = false
-              }
-            })
-            error = (result && !notEmpty)
-            break
-          default:
-            break
-        }
 
-        if (error) this.setError(item)
+        // 判断是否有自定义的验证函数
+        if (item.validator) {
+          const message = item.validator(value.value)
+          console.log(message)
+          if (message && message.length > 0) {
+            this.error = true
+            this.messages.push(message)
+          }
+        } else {
+          switch (item.prop) {
+            case 'required':
+              error = !notEmpty
+              break
+            case 'max':
+              error = (notEmpty && item.value < value.value.length)
+              break
+            case 'min':
+              error = (notEmpty && item.value > value.value.length)
+              break
+            case 'maxNumber':
+              error = (notEmpty && item.value < value.value)
+              break
+            case 'minNumber':
+              error = (notEmpty && item.value > value.value)
+              break
+            case 'email':
+              error = (notEmpty && !validation.isEmail(value.value))
+              break
+            case 'url':
+              error = (notEmpty && !validation.isUrl(value.value))
+              break
+            case 'integer':
+              error = (notEmpty && !validation.isInteger(value.value))
+              break
+            case 'number':
+              error = (notEmpty && !validation.isNumber(value.value))
+              break
+            case 'contain':
+              error = (notEmpty && value.value.indexOf(item.value) === -1)
+              break
+            case 'notContain':
+              error = (notEmpty && value.value.indexOf(item.value) > -1)
+              break
+            // 要和已经存在的字段的值相同,每次只能match一个，但可以添加多个match验证
+            case 'match':
+              error = (notEmpty && the.$parent.getValue(item.value) !== value.value)
+              break
+            case 'derror =ferent':
+              error = (notEmpty && the.$parent.getValue(item.value) === value.value)
+              break
+            case 'chinese':
+              error = (notEmpty && !validation.isChinese(value.value))
+              break
+            case 'idNumber':
+              error = (notEmpty && !validation.isIdNumber(value.value))
+              break
+            case 'password':
+              error = (notEmpty && !validation.isPassword(value.value))
+              break
+            case 'mobile':
+              error = (notEmpty && !validation.isMobile(value.value))
+              break
+            case 'telephone':
+              error = (notEmpty && !validation.isTelephone(value.value))
+              break
+            case 'domain':
+              error = (notEmpty && !validation.isDomain(value.value))
+              break
+            case 'username':
+              error = (notEmpty && !validation.isUsername(value.value))
+              break
+            case 'ip':
+              error = (notEmpty && !validation.isIp(value.value))
+              break
+            // 判断接受，比如同意
+            case 'accepted':
+              error = (notEmpty && value.value !== 'on' && value.value !== true && value.value !== 1)
+              break
+            // 数字区间 [low, high],含边界
+            case 'between':
+              error = (notEmpty && (item.value[0] > value.value || item.value[1] < value.value))
+              break
+            // 值在数组中 [1,2,3] ['a','b','c']
+            case 'in':
+              error = (notEmpty && item.value.indexOf(value.value) === -1)
+              break
+            // 值不在数组中 [1,2,3] ['a','b','c']
+            case 'notIn':
+              error = (notEmpty && item.value.indexOf(value.value) !== -1)
+              break
+            // 自定义正则 验证
+            case 'regex':
+              error = (notEmpty && !item.value.test(value.value))
+              break
+            // 如果指定1个字段有值，那么该字段也必须有
+            case 'requiredIf':
+              error = (the.$parent.hasValue(item.value) && !notEmpty)
+              break
+            // 如果指定1个字段没值，那么该字段也必须有
+            case 'requiredWithout':
+              error = (!the.$parent.hasValue(item.value) && !notEmpty)
+              break
+            // 如果指定多个字段其中一个有值['name','age']，那么该字段也必须有
+            case 'requiredWith':
+              result = false
+              item.value.forEach((i) => {
+                if (the.$parent.hasValue(i)) {
+                  result = true
+                }
+              })
+              error = (result && !notEmpty)
+              break
+            // 如果指定多个字段全部有值['name','age']，那么该字段也必须有
+            case 'requiredWithAll':
+              result = true
+              item.value.forEach((i) => {
+                if (!the.$parent.hasValue(i)) {
+                  result = false
+                }
+              })
+              error = (result && !notEmpty)
+              break
+            // 如果指定多个字段全部没有值['name','age']，那么该字段也必须有
+            case 'requiredWithoutAll':
+              result = true
+              item.value.forEach((i) => {
+                if (the.$parent.hasValue(i)) {
+                  result = false
+                }
+              })
+              error = (result && !notEmpty)
+              break
+            default:
+              break
+          }
+
+          if (error) this.setError(item)
+        }
       })
     },
     setError(item) {
