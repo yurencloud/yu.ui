@@ -260,14 +260,15 @@ export default {
         counter: 0,
       },
       form3: {
-        id: null,
+        id: 0,
         fruit: '',
       },
       rules2: {
         id: [
+          { prop: 'required' },
           {
             validator: (value) => {
-              if (value < 10) {
+              if (value !== null && value < 10) {
                 return 'id不能小于10'
               }
             },

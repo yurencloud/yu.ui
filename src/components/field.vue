@@ -8,14 +8,9 @@
          :style="{width:fieldWidth}"
     >
       <slot/>
-      <span v-if="!list&&error" class="errorMessage">
-        {{messages[0]}}
+      <span v-if="error" class="errorMessage">
+        {{messages}}
       </span>
-      <div v-if="list&&error" class="errorMessages">
-        <p v-bind:key="index" v-for="(index, item) in messages">
-          {{item}}
-        </p>
-      </div>
     </div>
   </div>
 </template>
@@ -30,7 +25,7 @@ export default {
     return {
       value: {},
       error: false,
-      messages: [],
+      messages: '',
       trigger: 'submit',
       isField: true, // 提供子组件判断父组件是field使用
       fixCascader: false,
@@ -48,7 +43,6 @@ export default {
       default: 'left',
     },
     noLabel: Boolean,
-    list: Boolean,
     fieldWidth: String,
     defaultMessage: {
       type: Object,
@@ -100,16 +94,17 @@ export default {
       const the = this
       const validates = rules[value.name]
       if (!validates) return
-      // 初始化错误信息
-      this.error = false
-      this.messages = []
-      validates.forEach((item) => {
+      // 若出现错误，则立即停止继续验证
+      for (let i = 0; i < validates.length; i++) {
+        const item = validates[i]
         // name: [
         //   { prop: 'required', value: true, message: '必填选项', trigger: 'blur', name: '字段的中文名或英文名(这个值默认为'')', other: '另一字段的中文名称' },
         // ],
         if (!item.trigger) {
           item.trigger = 'submit'
         }
+        // 若触发事件和rules中的触发事件不一样，并且已经有错误，则路过，防止被不同事件消除错误
+        // 若一样，或者没有错误，则继续执行验证
         if (this.trigger !== item.trigger) return
         let result
         const notEmpty = (value.name && value.value.toString().trim().length !== 0)
@@ -118,11 +113,12 @@ export default {
         // 判断是否有自定义的验证函数
         if (item.validator) {
           const message = item.validator(value.value)
-          console.log(message)
           if (message && message.length > 0) {
+            this.messages = message
             this.error = true
-            this.messages.push(message)
+            return
           }
+          this.error = false
         } else {
           switch (item.prop) {
             case 'required':
@@ -251,13 +247,17 @@ export default {
               break
           }
 
-          if (error) this.setError(item)
+          if (error) {
+            this.setError(item)
+            return
+          }
+          this.error = false
         }
-      })
+      }
     },
     setError(item) {
       this.error = true
-      this.messages.push(item.message || this.getMessage(item))
+      this.messages = item.message || this.getMessage(item)
     },
     getMessage(item) {
       let message = this.defaultMessage[item.prop]
@@ -351,13 +351,6 @@ export default {
           /*float: left;*/
           font-size: 14px;
           color: $danger;
-        }
-        .errorMessages {
-          font-size: 14px;
-          color: $danger;
-          p {
-            margin: 2px;
-          }
         }
       }
     }
