@@ -322,6 +322,7 @@ export default {
     }
     &.error {
       .field {
+        text-align: left;
         .yu-input {
           input {
             border: 1px solid $danger;
