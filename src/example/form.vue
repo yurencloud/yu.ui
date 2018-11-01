@@ -270,9 +270,8 @@ export default {
           {
             trigger: 'change',
             validator: (value) => {
-              console.log('validator', value)
-              if (value < 10) {
-                return 'id不能小于10'
+              if (value > 10) {
+                return 'id不得大于10'
               }
             },
           },

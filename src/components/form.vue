@@ -27,19 +27,25 @@ export default {
   methods: {
     validate() {
       const the = this
-      let errors = []
+      const errors = []
       // 触发每个field的submit检查
-      console.log(this.value)
       this.$children.forEach((item) => {
         if (item.isField && item.prop) {
           item.handleEvent('blur', { name: item.prop, value: the.value[item.prop] })
           if (item.error) {
-            errors = errors.concat(item.messages)
+            errors.push(item.error)
           }
         }
       })
 
       return errors
+    },
+    hasValue(name) {
+      if (this.value.hasOwnProperty(name)) {
+        const value = this.value[name]
+        return (typeof value !== 'undefined' && value.toString().trim().length !== 0)
+      }
+      return false
     },
   },
 }

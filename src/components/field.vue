@@ -8,14 +8,9 @@
          :style="{width:fieldWidth}"
     >
       <slot/>
-      <span v-if="!list&&error" class="errorMessage">
-        {{messages[0]}}
+      <span v-if="error" class="errorMessage">
+        {{error.message}}
       </span>
-      <div v-if="list&&error" class="errorMessages">
-        <p v-bind:key="index" v-for="(index, item) in messages">
-          {{item}}
-        </p>
-      </div>
     </div>
   </div>
 </template>
@@ -29,7 +24,7 @@ export default {
   data() {
     return {
       value: {},
-      messages: [],
+      error: null,
       trigger: 'submit',
       isField: true, // 提供子组件判断父组件是field使用
       fixCascader: false,
@@ -86,64 +81,69 @@ export default {
       }),
     },
   },
-  computed: {
-    error() {
-      return this.messages.length > 0
-    },
-  },
   methods: {
     handleEvent(eventName, value) {
       this.value = value
       if (this.$parent.rules) {
+        // 如果已经有错误，并且触发事件和原有的错误不一样，说明还没把原有的错误消除，则跳过
+        if (this.error && this.error.trigger !== eventName) return
+
+        if (!this.$parent.rules[value.name]) return
+
         this.trigger = eventName
-        console.log(eventName, this.value)
-        this.validateByRules(this.$parent.rules, this.value)
+
+        this.validateByRules(this.$parent.rules[value.name], this.value)
       }
     },
-    validateByRules(rules, value) {
+    validateByRules(validates, value) {
       const the = this
-      const validates = rules[value.name]
-      if (!validates) return
 
-      // 若出现错误，则立即停止继续验证
       for (let i = 0; i < validates.length; i++) {
-        const item = validates[i]
-        // if (!item.trigger) {
-        //   item.trigger = 'blur'
-        // }
-        if (this.trigger !== item.trigger) {
-          continue
+        const validate = validates[i]
+
+        // 若未提供trigger，则默认blur
+        if (!validate.trigger) {
+          validate.trigger = 'blur'
         }
 
-        this.messages = []
+        if (this.trigger !== validate.trigger) continue
+
+        // 一旦有错误，除非错误被解决，不然一直显示这个错误，不进行其他验证
+        if (this.error && this.error.index !== i) continue
 
         let result
+
+        // value的可能值应该是 字符串、数组、数字、布尔值
+        // TODO::value不为空的标准要定一下，并且form要收集错误
         const notEmpty = (value.name && typeof value.value !== 'undefined' && value.value.toString().trim().length !== 0)
         // 判断是否有自定义的验证函数
 
-        if (item.validator) {
-          const message = item.validator(value.value)
+        if (validate.validator) {
+          const message = validate.validator(value.value)
+          console.log(value, message)
           if (message && message.length > 0) {
             // 按这个格式来创建错误message
-            this.messages.push({ index: i, item, message })
+            this.error = { index: i, message, trigger: validate.trigger }
+          } else {
+            this.error = null
           }
         } else {
           let error = false
-          switch (item.prop) {
+          switch (validate.prop) {
             case 'required':
               error = !notEmpty
               break
             case 'max':
-              error = (notEmpty && item.value < value.value.length)
+              error = (notEmpty && validate.value < value.value.length)
               break
             case 'min':
-              error = (notEmpty && item.value > value.value.length)
+              error = (notEmpty && validate.value > value.value.length)
               break
             case 'maxNumber':
-              error = (notEmpty && item.value < value.value)
+              error = (notEmpty && validate.value < value.value)
               break
             case 'minNumber':
-              error = (notEmpty && item.value > value.value)
+              error = (notEmpty && validate.value > value.value)
               break
             case 'email':
               error = (notEmpty && !validation.isEmail(value.value))
@@ -158,17 +158,17 @@ export default {
               error = (notEmpty && !validation.isNumber(value.value))
               break
             case 'contain':
-              error = (notEmpty && value.value.indexOf(item.value) === -1)
+              error = (notEmpty && value.value.indexOf(validate.value) === -1)
               break
             case 'notContain':
-              error = (notEmpty && value.value.indexOf(item.value) > -1)
+              error = (notEmpty && value.value.indexOf(validate.value) > -1)
               break
             // 要和已经存在的字段的值相同,每次只能match一个，但可以添加多个match验证
             case 'match':
-              error = (notEmpty && the.$parent.getValue(item.value) !== value.value)
+              error = (notEmpty && the.$parent.getValue(validate.value) !== value.value)
               break
             case 'different':
-              error = (notEmpty && the.$parent.getValue(item.value) === value.value)
+              error = (notEmpty && the.$parent.getValue(validate.value) === value.value)
               break
             case 'chinese':
               error = (notEmpty && !validation.isChinese(value.value))
@@ -200,32 +200,32 @@ export default {
               break
             // 数字区间 [low, high],含边界
             case 'between':
-              error = (notEmpty && (item.value[0] > value.value || item.value[1] < value.value))
+              error = (notEmpty && (validate.value[0] > value.value || validate.value[1] < value.value))
               break
             // 值在数组中 [1,2,3] ['a','b','c']
             case 'in':
-              error = (notEmpty && item.value.indexOf(value.value) === -1)
+              error = (notEmpty && validate.value.indexOf(value.value) === -1)
               break
             // 值不在数组中 [1,2,3] ['a','b','c']
             case 'notIn':
-              error = (notEmpty && item.value.indexOf(value.value) !== -1)
+              error = (notEmpty && validate.value.indexOf(value.value) !== -1)
               break
             // 自定义正则 验证
             case 'regex':
-              error = (notEmpty && !item.value.test(value.value))
+              error = (notEmpty && !validate.value.test(value.value))
               break
             // 如果指定1个字段有值，那么该字段也必须有
             case 'requiredIf':
-              error = (the.$parent.hasValue(item.value) && !notEmpty)
+              error = (the.$parent.hasValue(validate.value) && !notEmpty)
               break
             // 如果指定1个字段没值，那么该字段也必须有
             case 'requiredWithout':
-              error = (!the.$parent.hasValue(item.value) && !notEmpty)
+              error = (!the.$parent.hasValue(validate.value) && !notEmpty)
               break
             // 如果指定多个字段其中一个有值['name','age']，那么该字段也必须有
             case 'requiredWith':
               result = false
-              item.value.forEach((i) => {
+              validate.value.forEach((i) => {
                 if (the.$parent.hasValue(i)) {
                   result = true
                 }
@@ -235,7 +235,7 @@ export default {
             // 如果指定多个字段全部有值['name','age']，那么该字段也必须有
             case 'requiredWithAll':
               result = true
-              item.value.forEach((i) => {
+              validate.value.forEach((i) => {
                 if (!the.$parent.hasValue(i)) {
                   result = false
                 }
@@ -245,7 +245,7 @@ export default {
             // 如果指定多个字段全部没有值['name','age']，那么该字段也必须有
             case 'requiredWithoutAll':
               result = true
-              item.value.forEach((i) => {
+              validate.value.forEach((i) => {
                 if (the.$parent.hasValue(i)) {
                   result = false
                 }
@@ -256,13 +256,15 @@ export default {
               break
           }
           if (error) {
-            this.setError(item)
+            this.setError(validate, i)
+          } else {
+            this.error = null
           }
         }
       }
     },
-    setError(item) {
-      this.messages.push(item.message || this.getMessage(item))
+    setError(item, i) {
+      this.error = { index: i, message: item.message || this.getMessage(item), trigger: item.trigger }
     },
     getMessage(item) {
       let message = this.defaultMessage[item.prop]
