@@ -1,26 +1,29 @@
 <template>
-  <div class="yu-collapse-item" @click="toggle">
-    <div class="content">
-          <div class="top">
-            <span>{{title}}</span>
-            <i class="iconfont icon-angle-down" :class="{rotate:visible}"></i>
-          </div>
-        <div class="bottom" :class="{show:!visible,trans:accordion}">
-          <slot/>
-        </div>
+  <div class="yu-collapse-item">
+    <div class="content" :class="{active:visible}">
+      <div class="top" @click="toggle">
+        <span>{{title}}</span>
+        <i class="iconfont icon-angle-down"></i>
+      </div>
+      <div class="bottom" :style="{height: visible ? height : 0 }" ref="bottom">
+        <slot/>
       </div>
     </div>
+  </div>
 </template>
 <script>
 export default {
   name: 'YuCollapseItem',
   data() {
     return {
-      visible: true,
+      visible: false,
+      height: 0,
     }
   },
   props: {
     title: String,
+    // TODO::添加padding
+    // padding: Boolean,
     accordion: {
       type: Boolean,
       default: true,
@@ -29,7 +32,17 @@ export default {
   methods: {
     toggle() {
       this.visible = !this.visible
+      if (this.accordion) {
+        const temp = this.visible
+        this.$parent.$children.forEach((item) => {
+          item.visible = false
+        })
+        this.visible = temp
+      }
     },
+  },
+  mounted() {
+    this.height = `${this.$refs.bottom.scrollHeight}px`
   },
 }
 </script>
@@ -37,43 +50,37 @@ export default {
 <style lang="scss" scoped type="text/scss">
   @import "../assets/css/varible";
   @import "../assets/css/function";
-  .yu-collapse-item{
+
+  .yu-collapse-item {
     width: 100%;
     margin: 0;
-    .content{
-      padding: 10px;
+    font-size: $normal;
+    .content {
       width: 100%;
       border-bottom: 1px solid $border;
       overflow: hidden;
-      animation: all 2s linear;
       box-sizing: border-box;
       display: inline-block;
-      .top{
+      .top {
+        height: 50px;
         cursor: pointer;
+        line-height: 50px;
       }
-      .bottom{
-        max-height: 0;
+      .bottom {
+        height: 0;
         overflow: hidden;
-        padding-top: 5px;
-        div{
-          padding-bottom: 5px;
-        }
+        transition: 0.3s height ease-in-out;
       }
-      .bottom.show{
-        max-height:80px;
-      }
-      .bottom.trans{
-        transition: all 0.2s linear;
-      }
-      i{
+      i {
         float: right;
         cursor: pointer;
         transition: all .2s ease;
       }
-      i.rotate{
-        transform: rotate(-180deg);
+      &.active {
+        i {
+          transform: rotate(-180deg);
+        }
       }
     }
-
   }
 </style>
