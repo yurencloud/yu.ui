@@ -150,7 +150,6 @@ export default {
         .then((response) => {
           response.text().then((data) => {
             data = JSON.parse(data)
-            console.log(data)
             // 返回对象data中要有status属性表明上传成功或失败
             if (parseInt(data.status, 0) === 1) {
               the.status = '上传成功.'

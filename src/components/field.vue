@@ -121,7 +121,6 @@ export default {
 
         if (validate.validator) {
           const message = validate.validator(value.value)
-          console.log(value, message)
           if (message && message.length > 0) {
             // 按这个格式来创建错误message
             this.error = { index: i, message, trigger: validate.trigger }
