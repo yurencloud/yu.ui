@@ -10,6 +10,7 @@
 
 <script>
 import 'whatwg-fetch'
+import isEmpty from '../utils/util'
 
 export default {
   name: 'YuForm',
@@ -40,10 +41,20 @@ export default {
 
       return errors
     },
+    clearAllError() {
+      this.$children.forEach((item) => {
+        if (item.isField) {
+          item.error = null
+        }
+      })
+    },
+    getValue(name) {
+      return this.value[name]
+    },
     hasValue(name) {
       if (this.value.hasOwnProperty(name)) {
         const value = this.value[name]
-        return (typeof value !== 'undefined' && value.toString().trim().length !== 0)
+        return !isEmpty(value)
       }
       return false
     },

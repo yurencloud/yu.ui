@@ -16,8 +16,9 @@
 </template>
 
 <script>
-const validation = require('yu.validation')
+import isEmpty from '../utils/util'
 
+const validation = require('yu.validation')
 
 export default {
   name: 'YuField',
@@ -114,8 +115,8 @@ export default {
         let result
 
         // value的可能值应该是 字符串、数组、数字、布尔值
-        // TODO::value不为空的标准要定一下，并且form要收集错误
-        const notEmpty = (value.name && typeof value.value !== 'undefined' && value.value.toString().trim().length !== 0)
+        const notEmpty = (value.name && !isEmpty(value.value))
+
         // 判断是否有自定义的验证函数
 
         if (validate.validator) {
@@ -270,6 +271,9 @@ export default {
       let message = this.defaultMessage[item.prop]
       message = message.replace('$name', item.name || '').replace('$value', item.value ? item.value.toString() : '').replace('$other', item.other)
       return message
+    },
+    clearError() {
+      this.error = null
     },
   },
 }

@@ -310,8 +310,8 @@ export default {
         activeName2: [
           // { prop: 'match', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
           // { prop: 'different', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
-          // { prop: 'requiredIf', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
-          // { prop: 'requiredWithout', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          // { prop: 'requiredIf', value: 'activity1', trigger: 'blur', name: '活动名称2', other: '活动名称' },
+          { prop: 'requiredWithout', value: 'activeName', trigger: 'blur', name: '活动名称2', other: '活动名称' },
           // { prop: 'requiredWith', value: ['activeName'], trigger: 'blur', name: '活动名称2', other: '活动名称' },
         ],
         activeName3: [
