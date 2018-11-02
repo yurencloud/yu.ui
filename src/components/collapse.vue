@@ -10,14 +10,17 @@ export default {
   props: {
     width: {
       type: String,
-      default: '500px',
+      default: '100%',
+    },
+    accordion: {
+      type: Boolean,
+      default: true,
     },
   },
 }
 </script>
 
 <style lang="scss" scoped type="text/scss">
-  @import "../assets/css/varible";
   @import "../assets/css/varible";
   .yu-collapse{
     div{
