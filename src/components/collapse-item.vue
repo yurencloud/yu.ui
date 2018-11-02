@@ -63,9 +63,9 @@ export default {
       box-sizing: border-box;
       display: inline-block;
       .top {
-        height: 50px;
+        height: 40px;
         cursor: pointer;
-        line-height: 50px;
+        line-height: 40px;
       }
       .bottom {
         height: 0;
