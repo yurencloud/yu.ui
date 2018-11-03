@@ -73,13 +73,13 @@ export default {
         overflow: hidden;
         transition: 0.3s height ease-in-out;
       }
-      i {
+      i.icon-angle-down {
         float: right;
         cursor: pointer;
         transition: all .2s ease;
       }
       &.active {
-        i {
+        i.icon-angle-down {
           transform: rotate(-180deg);
         }
       }
