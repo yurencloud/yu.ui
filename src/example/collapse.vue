@@ -13,6 +13,8 @@
       </yu-collapse-item>
     </yu-collapse>
 
+    <br>
+
     <yu-collapse padding :accordion="false">
       <yu-collapse-item>
         <div slot="title"><h2>kkkk</h2></div>

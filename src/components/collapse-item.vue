@@ -54,20 +54,21 @@ export default {
 
   .yu-collapse-item {
     width: 100%;
-    margin: 0;
-    font-size: $normal;
     .content {
-      width: 100%;
-      border-bottom: 1px solid $border;
-      overflow: hidden;
+      font-size: $normal;
       box-sizing: border-box;
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: -1px;
       display: inline-block;
       .top {
+        border-top: 1px solid $border;
         height: 40px;
         cursor: pointer;
         line-height: 40px;
       }
       .bottom {
+        width: 100%;
         height: 0;
         overflow: hidden;
         transition: 0.3s height ease-in-out;
