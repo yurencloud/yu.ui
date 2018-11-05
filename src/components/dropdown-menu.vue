@@ -1,5 +1,9 @@
 <template>
-    <div class="yu-dropdown-menu" v-if="rootDrop.visible">
+    <div class="yu-dropdown-menu"
+         v-if="rootDrop.visible"
+         @mouseover="handleMouseover"
+         @mouseout="handleMouseout"
+    >
       <div class="dropdown-angle"></div>
       <ul class="menu-ul">
         <slot/>
@@ -12,6 +16,17 @@ export default {
   name: 'YuDropdownMenu',
   inject: ['rootDrop'],
   methods: {
+    handleMouseover() {
+      if (this.$parent.trigger === 'hover') {
+        clearTimeout(this.$parent.timer)
+      }
+    },
+    handleMouseout() {
+      if (this.$parent.trigger === 'hover') {
+        clearTimeout(this.$parent.timer)
+        this.$parent.visible = false
+      }
+    },
   },
 }
 </script>
@@ -22,7 +37,6 @@ export default {
   .yu-dropdown-menu{
     background-color: #fff;
     box-shadow: $box-shadow;
-    max-width: 100px;
     box-sizing: border-box;
     position: absolute;
     z-index: 200;

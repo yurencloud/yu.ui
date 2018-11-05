@@ -16,7 +16,7 @@
      :value="label"
     />
     <transition name="zoom-in-top">
-      <div class="options" :class="[{overflow:overflow}]" v-show="visible">
+      <div class="options" :class="[{overflow:overflow},size]" v-show="visible">
         <slot/>
       </div>
       <!--选中选项显示-->
@@ -184,6 +184,15 @@ export default {
       background-color: #fff;
       position: absolute;
       top: 40px;
+      &.medium{
+        top: $medium-height;
+      }
+      &.small{
+        top: $small-height;
+      }
+      &.mini{
+        top: $mini-height;
+      }
       z-index: 1000;
       min-width: 175px;
       border: 1px solid $border;

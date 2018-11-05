@@ -17,7 +17,7 @@ import YuLoading from './components/loading'
 import YuCounterSide from './components/counter-side'
 import YuCascader from './components/cascader'
 import YuSwitch from './components/switch'
-import YuDropDown from './components/dropdown'
+import YuDropdown from './components/dropdown'
 import YuDropdownMenu from './components/dropdown-menu'
 import YuDropdownItem from './components/dropdown-item'
 import YuBreadcrumb from './components/breadcrumb'
@@ -104,6 +104,9 @@ const components = [
   YuFixedTable,
   YuPagination,
   YuPopover,
+  YuDropdown,
+  YuDropdownMenu,
+  YuDropdownItem,
 ]
 
 // 在Vue全局安装一些快捷方法
@@ -147,7 +150,7 @@ export {
   YuCounterSide,
   YuCascader,
   YuSwitch,
-  YuDropDown,
+  YuDropdown,
   YuDropdownMenu,
   YuDropdownItem,
   YuBreadcrumb,

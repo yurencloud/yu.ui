@@ -8,6 +8,20 @@
       <yu-option label="狗" value="2"/>
     </yu-select>
 
+    <div class="sub-title">尺寸大小</div>
+    <yu-select placeholder="请选择动物" v-model="value1" size="medium">
+      <yu-option label="猫" value="1"/>
+      <yu-option label="狗" value="2"/>
+    </yu-select>
+    <yu-select placeholder="请选择动物" v-model="value1" size="small">
+      <yu-option label="猫" value="1"/>
+      <yu-option label="狗" value="2"/>
+    </yu-select>
+    <yu-select placeholder="请选择动物" v-model="value1" size="mini">
+      <yu-option label="猫" value="1"/>
+      <yu-option label="狗" value="2"/>
+    </yu-select>
+
     <div class="sub-title">多选项滚动</div>
     <yu-select placeholder="请选择动物" overflow v-model="value2">
       <yu-option label="猫" value="1"/>

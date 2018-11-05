@@ -59,6 +59,10 @@
     <yu-input placeholder="请输入用户名" @change="inputChange" size="medium" prefix="icon-user" v-model="value7"/>
     <yu-input placeholder="请输入用户名" @change="inputChange" size="small" prefix="icon-user" v-model="value7"/>
     <yu-input placeholder="请输入用户名" @change="inputChange" size="mini" prefix="icon-user" v-model="value7"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" suffix="icon-user" v-model="value7"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" size="medium" suffix="icon-user" v-model="value7"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" size="small" suffix="icon-user" v-model="value7"/>
+    <yu-input placeholder="请输入用户名" @change="inputChange" size="mini" suffix="icon-angle-down" v-model="value7"/>
 
     <div class="sub-title">控制长度</div>
     <yu-input placeholder="请输入用户名" @change="inputChange" width="50%" v-model="value8"/>

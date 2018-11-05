@@ -1,23 +1,30 @@
 <template>
- <div class="yu-drop-down"
-      @click="command($event)">
-   <!--触发下拉框的部分-->
-   <div class="trigger" >
-     <slot/>
-   </div>
-   <div class="list">
-     <slot name="list"/>
-   </div>
- </div>
+  <div class="yu-dropdown"
+       @click="command($event)"
+       @mouseover="handleMouseover"
+       @mouseout="handleMouseout"
+  >
+    <!--触发下拉框的部分-->
+    <div class="trigger">
+      <slot/>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'YuDropDown',
+  name: 'YuDropdown',
   data() {
     return {
       visible: false,
+      timer: null,
     }
+  },
+  props: {
+    trigger: {
+      type: String,
+      default: 'hover',
+    },
   },
   provide() {
     return {
@@ -25,6 +32,19 @@ export default {
     }
   },
   methods: {
+    handleMouseover() {
+      if (this.trigger === 'hover') {
+        clearTimeout(this.timer)
+        this.visible = true
+      }
+    },
+    handleMouseout() {
+      if (this.trigger === 'hover') {
+        this.timer = setTimeout(() => {
+          this.visible = false
+        }, 1000)
+      }
+    },
     command(event) {
       this.visible = !this.visible
       const target = event.target
@@ -44,10 +64,18 @@ export default {
 <style lang="scss" type="text/scss" scoped>
   @import "../assets/css/varible";
   @import "../assets/css/function";
-.yu-drop-down{
-  display: inline-block;
-  .list{
-    position: relative;
+
+  .yu-dropdown {
+    color: $text;
+    display: inline-block;
+    .trigger{
+      line-height: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: $normal;
+    }
+    .list {
+      position: relative;
+    }
   }
-}
 </style>

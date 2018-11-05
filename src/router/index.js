@@ -32,6 +32,7 @@ import Dialog from '../example/dialog'
 import Tooltip from '../example/tooltip'
 import Popover from '../example/popover'
 import Collapse from '../example/collapse'
+import Dropdown from '../example/dropdown'
 import Tabs from '../example/tabs'
 import View from '../example/view'
 import View2 from '../example/view2'
@@ -191,6 +192,10 @@ export default new Router({
     {
       path: '/tabs',
       component: Tabs,
+    },
+    {
+      path: '/dropdown',
+      component: Dropdown,
     },
   ],
 })
