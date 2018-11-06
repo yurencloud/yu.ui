@@ -75,7 +75,7 @@ const components = [
   YuCounterSide,
   YuCascader,
   YuSwitch,
-  YuDropDown,
+  YuDropdown,
   YuDropdownMenu,
   YuDropdownItem,
   YuBreadcrumb,
@@ -104,9 +104,6 @@ const components = [
   YuFixedTable,
   YuPagination,
   YuPopover,
-  YuDropdown,
-  YuDropdownMenu,
-  YuDropdownItem,
 ]
 
 // 在Vue全局安装一些快捷方法
