@@ -1,5 +1,5 @@
 <template>
-  <div class="yu-field" :class="[{error:error},{inline:inline}]">
+  <div class="yu-field" :class="[{error:error},{inline:inline},{flex:align === 'left' || align === 'right'}]">
     <label v-if="label" :class="[align,{noLabel:noLabel}]">
       {{label}}
     </label>
@@ -8,9 +8,9 @@
          :style="{width:fieldWidth}"
     >
       <slot/>
-      <span v-if="error" class="errorMessage">
+      <div v-if="error" class="errorMessage">
         {{error.message}}
-      </span>
+      </div>
     </div>
   </div>
 </template>
@@ -285,8 +285,11 @@ export default {
     color: $text;
     font-size: 0;
     margin-bottom: 14px;
-    display: block;
     vertical-align: top;
+    display: block;
+    &.flex{
+      display: flex;
+    }
     &.inline {
       display: inline-block;
       .field {
@@ -304,13 +307,14 @@ export default {
     }
     label {
       font-size: 16px;
-      width: 90px;
+      width: 100px;
       height: 40px;
       line-height: 40px;
       box-sizing: border-box;
       padding-right: 12px;
     }
     label.top {
+      flex-wrap: nowrap;
       display: block;
       margin-bottom: 12px;
     }
@@ -327,8 +331,9 @@ export default {
       vertical-align: top;
       display: inline-block;
       box-sizing: border-box;
-      width: 80%;
+      width: 100%;
       .yu-input {
+        margin: 0;
         input{
           width: 100%;
         }
@@ -358,16 +363,9 @@ export default {
           }
         }
         .errorMessage {
-          /*float: left;*/
           font-size: 14px;
           color: $danger;
-        }
-        .errorMessages {
-          font-size: 14px;
-          color: $danger;
-          p {
-            margin: 2px;
-          }
+          line-height: 30px;
         }
       }
     }

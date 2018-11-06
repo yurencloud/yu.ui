@@ -18,7 +18,10 @@ export default {
   props: {
     inline: Boolean,
     rules: Object,
-    width: String,
+    width: {
+      type: String,
+      default: '100%',
+    },
     isForm: {
       type: Boolean,
       default: true,
@@ -66,7 +69,6 @@ export default {
   @import "../assets/css/varible";
 
   .yu-form {
-    width: 460px;
     &.inline {
       width: 100%;
       .yu-field {
