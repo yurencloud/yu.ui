@@ -37,6 +37,7 @@
 <script>
 import YuInput from './input'
 import YuTag from './tag'
+import { isEmpty } from '../utils/util'
 
 export default {
   name: 'YuSelect',
@@ -135,10 +136,20 @@ export default {
       this.cancelSelect({ value: item.value })
     },
   },
+  mounted() {
+    if (!isEmpty(this.value)) {
+      for (let i = 0; i < this.$slots.default.length; i++) {
+        const item = this.$slots.default[i].componentOptions.propsData
+        if (item.value === this.value) {
+          this.label = item.label
+          break
+        }
+      }
+    }
+  },
   watch: {
     value(value) {
       const the = this
-
       if (this.multi) {
         const selects = []
         const label = []

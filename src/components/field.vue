@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import isEmpty from '../utils/util'
+import { isEmpty } from '../utils/util'
 
 const validation = require('yu.validation')
 

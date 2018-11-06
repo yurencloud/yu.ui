@@ -8,6 +8,11 @@
       <yu-option label="狗" value="2"/>
     </yu-select>
 
+    <yu-select placeholder="请选择动物" v-model="value10">
+      <yu-option label="猫" value="1"/>
+      <yu-option label="狗" value="2"/>
+    </yu-select>
+
     <div class="sub-title">尺寸大小</div>
     <yu-select placeholder="请选择动物" v-model="value1" size="medium">
       <yu-option label="猫" value="1"/>
@@ -50,6 +55,7 @@
       <yu-option label="虎" value="4"/>
       <yu-option label="兔" value="5"/>
     </yu-select>
+
 
     <div class="sub-title">显示多选选项</div>
     <yu-select placeholder="请选择动物" overflow multi showSelects v-model="value6">
@@ -110,6 +116,7 @@
     <div>{{value6}}</div>
     <div>{{value7}}</div>
     <div>{{value8}}</div>
+    <div>{{value10}}</div>
 
     <div style="margin-bottom: 400px"></div>
   </div>
@@ -130,6 +137,7 @@ export default {
       value6: [],
       value7: [],
       value8: [],
+      value10: '1',
     }
   },
   methods: {

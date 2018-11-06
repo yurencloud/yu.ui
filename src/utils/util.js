@@ -1,4 +1,4 @@
-function isEmpty(value) {
+export const isEmpty = (value) => {
   if (typeof value === 'undefined') {
     return true
   }
@@ -13,5 +13,3 @@ function isEmpty(value) {
 
   return false
 }
-
-export default isEmpty

@@ -236,6 +236,9 @@ export default {
     total(val) {
       this.size = val || 1
     },
+    limit(val) {
+      this.$emit('sizeChange', val)
+    },
   },
 }
 </script>

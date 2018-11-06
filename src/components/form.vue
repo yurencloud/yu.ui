@@ -10,7 +10,7 @@
 
 <script>
 import 'whatwg-fetch'
-import isEmpty from '../utils/util'
+import { isEmpty } from '../utils/util'
 
 export default {
   name: 'YuForm',
