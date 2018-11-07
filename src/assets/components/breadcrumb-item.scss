@@ -3,11 +3,10 @@
   font-size: $large;
   cursor: pointer;
   .last{
-    font-weight: 500;
+    color: $dark-text;
   }
   .point{
     color: $light-text;
-    font-weight: 500;
     padding: 0 8px;
   }
 }

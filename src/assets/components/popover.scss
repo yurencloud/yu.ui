@@ -1,40 +1,40 @@
-.yu-popover{
+.yu-popover {
   display: inline-block;
   position: relative;
-  .popover-content{
+  .popover-content {
     display: inline-block;
     position: absolute;
     background-color: #fff;
     box-shadow: $box-shadow;
     padding: 10px;
     width: 200px;
-    .content{
-      .popover-title{
+    .content {
+      .popover-title {
         margin-bottom: 5px;
         font-size: $normal;
       }
       font-size: $small;
     }
   }
-  .tangle{
-    width:0;
-    height:0;
-    border-top:6px solid red;
-    border-right:8px solid transparent;
-    border-bottom:8px solid transparent;
-    border-left:8px solid transparent;
+  .tangle {
+    width: 0;
+    height: 0;
+    border-top: 6px solid red;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid transparent;
     position: absolute;
-    &.top{
+    &.top {
       top: -14px;
       left: 40px;
     }
-    &.bottom{
+    &.bottom {
       bottom: -3px;
       left: 40px;
       transform: rotateX(180deg);
     }
     /*todo*/
-    &.right{
+    &.right {
       right: -21px;
       top: 25%;
       -webkit-transform: rotate(-90deg) translateY(-50%);

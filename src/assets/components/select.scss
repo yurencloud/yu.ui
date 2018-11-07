@@ -1,4 +1,3 @@
-
 .yu-select {
   @include zoomInTop();
 
@@ -7,13 +6,13 @@
     background-color: #fff;
     position: absolute;
     top: 40px;
-    &.medium{
+    &.medium {
       top: $medium-height;
     }
-    &.small{
+    &.small {
       top: $small-height;
     }
-    &.mini{
+    &.mini {
       top: $mini-height;
     }
     z-index: 1000;

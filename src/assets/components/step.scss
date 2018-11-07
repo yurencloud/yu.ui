@@ -2,6 +2,7 @@
   display: inline-block;
   width: calc(100% / 3);
   overflow: hidden;
+  color: $text;
   .head {
     margin-bottom: 20px;
     .status{
@@ -66,11 +67,11 @@
       }
     }
     .have-icon-conduct{
-      color: #000;
+      color: $dark-text;
     }
     .conduct {
-      color: #000;
-      border: 2px solid #000;
+      color: $dark-text;
+      border: 2px solid $dark-text;
     }
     .line {
       height: 2px;
@@ -98,7 +99,7 @@
   }
   .main{
     .conduct-text{
-      color: #000;
+      color: $dark-text;
       font-weight: 800;
     }
     .description{

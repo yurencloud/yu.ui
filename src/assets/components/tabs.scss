@@ -1,10 +1,10 @@
-
 .yu-tabs {
   font-size: $normal;
+  color: $text;
   .tabs-nav {
     padding: 0;
     width: 100%;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $border;
     box-sizing: border-box;
     position: relative;
     i {
@@ -53,11 +53,11 @@
     border-right: none;
     li {
       background-color: #fff;
-      border-right: 1px solid #ddd;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
+      border-right: 1px solid $border;
+      border-top: 1px solid $border;
+      border-bottom: 1px solid $border;
       &:first-child {
-        border-left: 1px solid #ddd;
+        border-left: 1px solid $border;
         border-top-left-radius: 3px;
       }
       &:last-child {
@@ -81,7 +81,7 @@
   .tabs-nav {
     height: 40px;
     background-color: lighten($info, 35);
-    border: 1px solid $dark-border;
+    border: 1px solid $border;
     li {
       display: inline-block;
       box-sizing: border-box;
@@ -93,8 +93,8 @@
     li.active {
       background-color: #fff;
       border-bottom: 2px solid #fff;
-      border-left: 1px solid $dark-border;
-      border-right: 1px solid $dark-border;
+      border-left: 1px solid $border;
+      border-right: 1px solid $border;
       color: $primary;
       &:first-child {
         border-left: none;
@@ -106,7 +106,7 @@
 /*不同方位的tab栏*/
 /*top*/
 /*bottom*/
-.yu-tabs.default.top{
+.yu-tabs.default.top {
   display: flex;
   flex-direction: column;
   .tabs-nav {
@@ -132,6 +132,7 @@
     }
   }
 }
+
 .yu-tabs.bottom {
   display: flex;
   flex-direction: column-reverse;
@@ -161,7 +162,7 @@
 .yu-tabs.bottom.border-card {
   .tabs-nav {
     background-color: lighten($background, 15);
-    border: 1px solid $dark-border;
+    border: 1px solid $border;
     border-left: none;
     border-right: none;
     li {
@@ -170,9 +171,9 @@
     li.active {
       background-color: #fff;
       border-bottom: 2px solid #fff;
-      border-left: 1px solid $dark-border;
-      border-right: 1px solid $dark-border;
-      color: #409EFF;
+      border-left: 1px solid $border;
+      border-right: 1px solid $border;
+      color: $primary;
       &:first-child {
         border-left: none;
       }

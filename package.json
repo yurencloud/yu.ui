@@ -1,6 +1,6 @@
 {
   "name": "yu.ui",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "description": "yu vue ui components project",
   "author": {
     "name": "mackwang/jiaqingzheng",
@@ -12,7 +12,9 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "build-css": "node-sass src/assets/yu.ui.scss > src/assets/yu.ui.css",
+    "build-min-css": "node-sass --output-style compressed src/assets/yu.ui.scss > src/assets/yu.ui.min.css"
   },
   "dependencies": {
     "calculatorjs": "^1.1.1",

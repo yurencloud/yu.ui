@@ -1,4 +1,3 @@
-
 @include fadeIn();
 @include zoomInTop();
 .yu-message-box {
@@ -36,7 +35,7 @@
           cursor: pointer;
           color: $light-text;
           font-size: $huge;
-          &:hover{
+          &:hover {
             color: $primary;
           }
         }
@@ -107,7 +106,8 @@
     }
   }
 }
- .lock-scroll {
-   height: 100%;
-   overflow: hidden;
- }
+
+.lock-scroll {
+  height: 100%;
+  overflow: hidden;
+}

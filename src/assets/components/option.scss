@@ -1,19 +1,19 @@
-.yu-select>.options>.option{
+.yu-select > .options > .option {
   font-size: $normal;
-  padding:8px 8px;
-  &:hover:not(.disabled){
+  padding: 8px 8px;
+  &:hover:not(.disabled) {
     background-color: $background;
   }
-  &.active{
+  &.active {
     background-color: $background;
     font-weight: bold;
     color: $primary;
   }
-  &.hide{
+  &.hide {
     display: none;
   }
-  &.disabled{
-    color:$lighter-text;
+  &.disabled {
+    color: $lighter-text;
     cursor: not-allowed;
   }
 }

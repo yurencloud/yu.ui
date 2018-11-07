@@ -28,6 +28,7 @@
     <a href="/#/slider">slider</a>
     <a href="/#/table">table</a>
     <a href="/#/tag">tag</a>
+    <a href="/#/tabs">tabs</a>
     <a href="/#/tooltip">tooltip</a>
     <a href="/#/time-picker">time-picker</a>
     <a href="/#/popover">popover</a>

@@ -1,66 +1,72 @@
 // !default表示默认值，若有其他非默认值，则默认值会被覆盖
 
 // 背景颜色
-$primary:#409EFF!default;
-$success:#67C23A!default;
-$warning: #e6b322!default;
-$danger:#F56C6C!default;
-$info:#909399!default;
-$background:#f5f7fa!default;
+$primary: #409EFF !default;
+$success: #67C23A !default;
+$warning: #e6b322 !default;
+$danger: #F56C6C !default;
+$info: #909399 !default;
+$background: #f5f7fa !default;
 
 // 文字颜色
-$dark-text:#303133!default;
-$text:#606266!default;
-$light-text:#909399!default;
-$lighter-text:#C0C4CC!default;
+$dark-text: #303133 !default;
+$text: #606266 !default;
+$light-text: #909399 !default;
+$lighter-text: #C0C4CC !default;
 
 // 边框颜色
-$dark-border:#DCDFE6!default;
-$border:#E4E7ED!default;
-$light-border:#EBEEF5!default;
-$lighter-border:#F2F6FC!default;
+$dark-border: #DCDFE6 !default;
+$border: #E4E7ED !default;
+$light-border: #EBEEF5 !default;
+$lighter-border: #F2F6FC !default;
+
+// 等级星星颜色
+$rate-star: #f8c422 !default;
+
+// tooltip深色背景色
+$tooltip-dark: #373737 !default;
 
 // 字体
-$font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif!default;
+$font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif !default;
 
 // 字体大小
-$huge:20px!default;
-$big:18px!default;
-$large:16px!default;
-$normal:14px!default;
-$small:13px!default;
-$tiny:12px!default;
+$huge: 20px !default;
+$big: 18px !default;
+$large: 16px !default;
+$normal: 14px !default;
+$small: 13px !default;
+$tiny: 12px !default;
 
 // 控制元素的大小，主要是由height和padding来控制
 // normal和medium用14px字体，small和mini用12px字体
-$normal-height:40px!default;
-$medium-height:36px!default;
-$small-height:32px!default;
-$mini-height:28px!default;
+$normal-height: 40px !default;
+$medium-height: 36px !default;
+$small-height: 32px !default;
+$mini-height: 28px !default;
 
-$sizes:normal, medium, small, mini!default;
+$sizes: normal, medium, small, mini !default;
 $size-map: (
   normal: $normal-height,
   medium: $medium-height,
   small: $small-height,
   mini: $mini-height,
-)!default;
+) !default;
 
-$types:primary, success, warning, info, danger!default;
+$types: primary, success, warning, info, danger !default;
 $colors: (
   primary: $primary,
   success: $success,
   warning: $warning,
   danger: $danger,
   info: $info
-)!default;
+) !default;
 
-$trBackground: #fafafa!default;
+$trBackground: #fafafa !default;
 
-$box-shadow:0 2px 12px 0 rgba(0,0,0,.1)!default;
+$box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1) !default;
 
 // 默认border-radius圆角大小
-$radius: 4px!default;
+$radius: 4px !default;
 
 
 

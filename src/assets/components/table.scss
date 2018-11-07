@@ -1,4 +1,3 @@
-
 .yu-table {
   border-collapse: collapse;
   thead {
@@ -52,11 +51,11 @@
         .cell {
           padding: 0 8px;
         }
-        a{
+        a {
           color: $primary;
           cursor: pointer;
-          &:hover{
-            color: lighten($primary,10);
+          &:hover {
+            color: lighten($primary, 10);
           }
         }
       }

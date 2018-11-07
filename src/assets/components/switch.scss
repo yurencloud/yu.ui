@@ -1,20 +1,19 @@
-
 .yu-switch {
   font-size: 0;
-  color:$text;
-  input{
+  color: $text;
+  input {
     display: none;
   }
   display: inline-block;
   margin-right: 8px;
   margin-bottom: 12px;
-  span{
+  span {
     font-size: $normal;
   }
-  span:nth-child(1){
+  span:nth-child(1) {
     margin-right: 8px;
   }
-  span:nth-child(3){
+  span:nth-child(3) {
     margin-left: 8px;
   }
   .switch {
@@ -40,15 +39,15 @@
     }
     transition: background-color .4s ease;
     &.on {
-      .circle{
+      .circle {
         transition: all .4s ease;
         transform: translateX(20px);
       }
       @include generalAllColorSwitch();
     }
   }
-  &.disabled{
-    color:lighten($text,25);
+  &.disabled {
+    color: lighten($text, 25);
     cursor: not-allowed;
   }
 }

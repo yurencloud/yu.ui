@@ -1,4 +1,4 @@
-.yu-tabs-nav{
+.yu-tabs-nav {
   transition: background-color .4s, color .4s;
   list-style: none;
   display: inline-block;
@@ -8,11 +8,12 @@
   text-align: center;
   color: $light-text;
   cursor: pointer;
-  i{
+  i {
     margin-right: 5px;
     font-size: $large;
   }
 }
-.yu-tabs-nav.active{
+
+.yu-tabs-nav.active {
 
 }
