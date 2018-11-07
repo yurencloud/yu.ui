@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "./assets/css/varible";
+  @import "./assets/yu.ui.main";
 
   #app {
     font-family: $font-family;

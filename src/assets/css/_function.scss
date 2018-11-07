@@ -96,7 +96,6 @@
       span.prefix {
         line-height: $height;
         i {
-          top: -$height*0.5;
           @if $height > $small-height {
             font-size: $normal
           } @else {
@@ -107,7 +106,6 @@
       span.suffix {
         line-height: $height;
         i {
-          top: -$height*0.5;
           @if $height > $small-height {
             font-size: $normal
           } @else {
@@ -118,7 +116,6 @@
       span.clearable {
         line-height: $height;
         i {
-          top: -$height*0.5;
           @if $height > $small-height {
             font-size: $normal
           } @else {

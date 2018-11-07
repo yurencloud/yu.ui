@@ -56,27 +56,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" type="text/scss" >
-  @import "../assets/css/varible";
-  @import "../assets/css/function";
-
-  .yu-fixed-table {
-    .fixed-box {
-      overflow-y: scroll;
-      overflow-x: hidden;
-      width: 900px;
-      border-bottom: 1px solid $border;
-      border-top: 1px solid $border;
-    }
-    .yu-table{
-      tbody{
-        tr:last-child{
-          td{
-          border-bottom: none;
-          }
-        }
-      }
-    }
-  }
-</style>

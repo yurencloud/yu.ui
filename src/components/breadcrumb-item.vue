@@ -40,21 +40,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="scss" type="text/scss">
-  @import "../assets/css/varible";
-  @import "../assets/css/function";
-  .yu-breadcrumb-item{
-    display: inline-block;
-    font-size: $large;
-    cursor: pointer;
-    .point{
-      color: $light-text;
-      font-weight: 500;
-      padding: 0 8px;
-    }
-  }
-  .last{
-    font-weight: 500;
-  }
-</style>

@@ -126,35 +126,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" type="text/scss">
-  @import "../assets/css/varible";
-
-  .yu-counter {
-    display: inline-block;
-    font-size: 0;
-    .yu-input.counter {
-      display: inline-block;
-      box-sizing: border-box;
-      margin-right: 0;
-      input {
-        width: 80px;
-        border-radius: 0;
-        text-align: center;
-      }
-    }
-    .yu-button.counter {
-      vertical-align: top;
-      background: $background;
-      margin-right: 0;
-      width: 50px;
-    }
-    .yu-button.sub{
-      border-radius: 4px 0 0 4px;
-    }
-    .yu-button.add{
-      border-radius: 0 4px 4px 0;
-    }
-  }
-
-</style>

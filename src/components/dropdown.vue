@@ -60,22 +60,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" type="text/scss" scoped>
-  @import "../assets/css/varible";
-  @import "../assets/css/function";
-
-  .yu-dropdown {
-    color: $text;
-    display: inline-block;
-    .trigger{
-      line-height: 40px;
-      height: 40px;
-      cursor: pointer;
-      font-size: $normal;
-    }
-    .list {
-      position: relative;
-    }
-  }
-</style>

@@ -1,0 +1,13 @@
+.yu-breadcrumb-item{
+  display: inline-block;
+  font-size: $large;
+  cursor: pointer;
+  .last{
+    font-weight: 500;
+  }
+  .point{
+    color: $light-text;
+    font-weight: 500;
+    padding: 0 8px;
+  }
+}

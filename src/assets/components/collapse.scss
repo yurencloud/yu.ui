@@ -1,0 +1,9 @@
+.yu-collapse{
+  color: $text;
+  &>div{
+    font-size: 0;
+  }
+  .yu-collapse-item:last-child{
+    border-bottom: 1px solid $border;
+  }
+}

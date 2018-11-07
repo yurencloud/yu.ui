@@ -38,28 +38,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped type="text/scss">
-  @import "../assets/css/varible";
-
-  .yu-select>.options>.option{
-    font-size: $normal;
-    padding:8px 8px;
-    &:hover:not(.disabled){
-      background-color: $background;
-    }
-    &.active{
-      background-color: $background;
-      font-weight: bold;
-      color: $primary;
-    }
-    &.hide{
-      display: none;
-    }
-    &.disabled{
-      color:$lighter-text;
-      cursor: not-allowed;
-    }
-  }
-
-</style>

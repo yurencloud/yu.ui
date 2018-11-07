@@ -1,0 +1,86 @@
+@import "../css/function";
+
+.yu-button {
+  // 基础属性
+  padding: 0 20px;
+  border-radius: $radius;
+  text-align: center;
+  margin-right: 8px;
+  margin-bottom: 12px;
+  font-family: $font-family;
+  transition: all .3s ease;
+  outline: none;
+
+  // 默认属性
+  background-color: #fff;
+  border: 1px solid $border;
+  color: $text;
+  font-size: $normal;
+  &.default:hover:not(.disabled),&:focus:not(.disabled) {
+    color: $primary;
+    border: 1px solid lighten($primary,10);
+    background-color: lighten($primary,35);
+    z-index: 1;
+  }
+  &.disabled{
+    color:$lighter-text;
+    background: $background;
+    cursor: not-allowed;
+  }
+
+  @include generalAllSizeButton();
+  @include generalAllColorButton();
+
+  &.circle{
+    // circle 默认
+    padding: 0;
+    width: $normal-height;
+    height: $normal-height;
+    border-radius: 50%;
+    @include generalAllSizeCircleButton();
+  }
+
+  &.plain{
+    // plain 默认
+    &:hover:not(.disabled),&:focus:not(.disabled) {
+      border: 1px solid $primary;
+      color: $primary;
+      background: #fff;
+    }
+    @include generalAllColorPlainButton();
+  }
+
+  // loading动画
+  i.loading{
+    display: inline-block;
+    animation: loading 2s linear infinite;
+    @keyframes loading {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  // 以下修复input中使用的button
+  &.append{
+    display: inline-block;
+    vertical-align: top;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin: 0;
+  }
+
+  &.prepend{
+    vertical-align: top;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin: 0;
+  }
+  // 以下修复counter中使用的button
+  &.counter{
+    font-size: 20px;
+  }
+}

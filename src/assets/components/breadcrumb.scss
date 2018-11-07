@@ -1,0 +1,9 @@
+.yu-breadcrumb{
+  .yu-breadcrumb-item{
+    &:last-child{
+      span{
+        font-weight: 500;
+      }
+    }
+  }
+}

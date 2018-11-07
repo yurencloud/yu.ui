@@ -64,24 +64,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" type="text/scss">
-  @import "../assets/css/varible";
-
-  .yu-form {
-    &.inline {
-      width: 100%;
-      .yu-field {
-        vertical-align: top;
-        display: inline-block;
-        label{
-          width: auto;
-        }
-        .field{
-          width: auto;
-        }
-      }
-    }
-  }
-
-</style>

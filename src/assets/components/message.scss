@@ -1,0 +1,35 @@
+@include fadeIn();
+.yu-message {
+  font-family: $font-family;
+  padding: 10px 20px;
+  width: 300px;
+  border-radius: 5px;
+
+  position: fixed;
+  left: calc(50% - 150px);
+  top: 20px;
+  z-index: 999;
+  box-sizing: border-box;
+
+  .icon {
+    font-size: $huge;
+    margin-right: 5px;
+  }
+  .content {
+    display: inline-block;
+  }
+  .close {
+    float: right;
+    cursor: pointer;
+  }
+  /*默认样式*/
+  background-color: lighten($info, 35);
+  color: $info;
+  border: 1px solid lighten($info, 30);
+
+  @include generalAllColorMessage();
+
+  &.center {
+    text-align: center;
+  }
+}

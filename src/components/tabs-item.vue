@@ -12,16 +12,3 @@ export default {
   },
 }
 </script>
-
-<style type="text/scss" lang="scss" scoped>
-  @import "../assets/css/varible";
-  @import "../assets/css/function";
-  .yu-tabs-item{
-    display: none;
-    width: 100%;
-    float: left;
-  }
-  .yu-tabs-item.active{
-    display: block;
-}
-</style>

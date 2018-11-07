@@ -1,0 +1,48 @@
+
+.yu-progress {
+  display: inline-block;
+  margin-bottom: 10px;
+  .line-warp {
+    width: calc(100% - 45px);
+    display: inline-block;
+    border-radius: 100px;
+    background-color: lighten($info, 30);
+    .line-progress {
+      border-radius: 100px;
+      box-sizing: border-box;
+      text-align: right;
+      span {
+        margin: 0 10px;
+      }
+    }
+  }
+  .line-warp.inside {
+    width: 100%;
+  }
+  .circle-warp {
+    position: relative;
+    display: inline-block;
+    .demo2 {
+      transform-origin: center;
+      transform: rotate(-90deg);
+    }
+    .text-warp {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .progress-text {
+    display: inline-block;
+    text-align: right;
+    i {
+      font-size: $huge;
+      color: $success;
+    }
+  }
+}
+
+.yu-progress.line {
+  width: 100%;
+}

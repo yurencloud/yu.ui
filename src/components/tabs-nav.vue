@@ -14,26 +14,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" type="text/scss" scoped>
-  @import "../assets/css/varible";
-  @import "../assets/css/function";
-.yu-tabs-nav{
-  transition: background-color .4s, color .4s;
-  list-style: none;
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 14px;
-  text-align: center;
-  color: $light-text;
-  cursor: pointer;
-  i{
-    margin-right: 5px;
-    font-size: $large;
-  }
-}
-.yu-tabs-nav.active{
-
-  }
-</style>

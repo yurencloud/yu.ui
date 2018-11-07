@@ -1,0 +1,103 @@
+
+.yu-slider {
+  margin-right: 12px;
+  margin-bottom: 20px;
+  &.disabled {
+    .bottom-bar {
+      .top-bar {
+        background-color: lighten($info, 20);
+        .circle {
+          border-color: lighten($info, 20);
+          &.hover {
+            width: 16px;
+            height: 16px;
+            top: -6px;
+          }
+          &:hover {
+            width: 16px;
+            height: 16px;
+            top: -6px;
+          }
+        }
+      }
+    }
+  }
+  .bottom-bar {
+    position: relative;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background-color: $border;
+    .top-bar {
+      height: 6px;
+      border-radius: 3px;
+      background-color: $primary;
+
+      .circle {
+        .tooltip {
+          box-sizing: content-box;
+          position: absolute;
+          top: -36px;
+          height: 20px;
+          padding: 2px 7px;
+          line-height: 20px;
+          background: #373737;
+          border-radius: 4px;
+          color: #fff;
+          font-size: $normal;
+          margin-left: -8px;
+          text-align: center;
+          min-width: 20px;
+          display: none;
+          .tooltip-angle{
+            display: inline-block;
+            height: 8px;
+            width: 8px;
+            background-color: #373737;
+            position: absolute;
+            bottom: -4px;
+            left: 14px;
+            transform: rotate(45deg);
+          }
+        }
+        transform: translateX(-8px);
+        position: absolute;
+        top: -6px;
+        line-height: 16px;
+        vertical-align: middle;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-color: #fff;
+        border: 2px solid $primary;
+        border-radius: 16px;
+        &.hover {
+          width: 20px;
+          height: 20px;
+          top: -8px;
+          .tooltip {
+            display: inline-block;
+          }
+        }
+        &:hover {
+          width: 20px;
+          height: 20px;
+          top: -8px;
+          .tooltip {
+            display: inline-block;
+          }
+        }
+      }
+      .point {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background-color: #fff;
+        border-radius: 4px;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

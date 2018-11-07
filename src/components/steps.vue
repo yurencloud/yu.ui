@@ -55,15 +55,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" type="text/scss" scoped>
-  @import "../assets/css/varible";
-  @import "../assets/css/function";
-  .yu-steps{
-    display:flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-</style>

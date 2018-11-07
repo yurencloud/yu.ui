@@ -1,0 +1,134 @@
+.yu-tooltip{
+  display: inline-block;
+  position: relative;
+  .tooltip{
+    padding: 10px;
+    color: white;
+    background-color:#000;
+    display: block;
+    border-radius: 5px;
+    top: -39px;
+    font-size: $small;
+    transition:all .2s linear;
+    position: absolute;
+    white-space:nowrap;
+    z-index: 9999;
+  }
+  .light{
+    background-color: white;
+    border: 1px solid #000;
+    color: $dark-text;
+  }
+  .text{
+    margin-top: 10px;
+    position: relative;
+    display: inline-block;
+    .angle{
+      width: 8px;
+      height: 8px;
+      display: inline-block;
+      background-color: #fff;
+      position: absolute;
+      left: 50%;
+      bottom:-5px;
+      border-top: 1px solid #000;
+      border-right: 1px solid #000;
+      transform: translateX(-50%) rotate(-45deg);
+      z-index: 100000;
+      top: -14px;
+    }
+    .iconfont{
+      position: absolute;
+      left: 50%; width: 8px;
+      display: inline-block;
+      background-color: #000;
+      height: 8px;
+      transform: translateX(-50%) rotate(-45deg);
+      top: -16px;
+      z-index: 100000;
+    }
+    .icon-angle-down{
+      background-color: #fff;
+    }
+  }
+}
+/*上*/
+.yu-tooltip.top{
+  .tooltip{
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .angle{
+    transform: rotate(135deg);
+  }
+}
+/*上有*/
+.yu-tooltip.top-right{
+  .tooltip{
+    right: 8px;
+  }
+  .angle{
+    transform: rotate(135deg);
+  }
+}
+/*下部*/
+.yu-tooltip.bottom{
+  .tooltip{
+    top: auto;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .arrow{
+    top: auto;
+    bottom: 0;
+  }
+  .arrow.iconfont{
+    bottom: -1px;
+  }
+}
+/*下左*/
+.yu-tooltip.bottom-left{
+  .tooltip{
+    left: 0;
+    top: auto;
+    bottom: -35px;
+  }
+  .arrow{
+    top: auto;
+    bottom: 0;
+  }
+  .arrow.iconfont{
+    bottom: -1px;
+  }
+}
+/*下右*/
+.yu-tooltip.bottom-right{
+  .tooltip{
+    right: 8px;
+    top: auto;
+    bottom: -35px;
+  }
+  .arrow{
+    top: auto;
+    bottom: 0;
+  }
+  .arrow.iconfont{
+    bottom: -1px;
+  }
+}
+/*右侧*/
+.yu-tooltip.right{
+  .text{
+    position: relative;
+    .arrow{
+      left: calc(100% - 4px);
+      top: calc(50% - 4px);
+      transform: translateY(-50%) rotate(-135deg);
+    }
+  }
+  .tooltip{
+    left: 100%;
+    top: 12px;
+  }
+}

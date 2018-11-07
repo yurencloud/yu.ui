@@ -19,16 +19,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped type="text/scss">
-  @import "../assets/css/varible";
-  .yu-collapse{
-    color: $text;
-    div{
-      font-size: 0;
-    }
-    .yu-collapse-item:last-child{
-      border-bottom: 1px solid $border;
-    }
-  }
-</style>

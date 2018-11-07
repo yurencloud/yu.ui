@@ -99,33 +99,5 @@ export default {
 <style lang="scss" scoped type="text/scss">
   @import "../assets/css/varible";
 
-  .yu-rate {
-    padding: 5px 0;
-    height: 30px;
-    font-size: 0;
-    line-height: 30px;
-    i{
-      transition: all .4s;
-      display: inline-block;
-      width: 30px;
-      height: 20px;
-      box-sizing: border-box;
-      font-size: 20px;
-      color: $lighter-text;
-    }
-    .icon-star{
-      color: #f8c422;
-      transform: scale(1.1);
-    }
-    &:hover{
-      cursor: pointer;
-    }
-    span{
-      font-size: 14px;
-      color: $text;
-      display: inline-block;
-    }
-  }
-
 
 </style>

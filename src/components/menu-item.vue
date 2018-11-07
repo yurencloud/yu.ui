@@ -146,34 +146,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped type="text/scss">
-  @import "../assets/css/varible";
-  @import "../assets/css/function";
-.yu-menu-item{
-  list-style: none;
-  display: inline-block;
-  box-sizing: border-box;
-  padding: 20px 10px;
-  text-align: center;
-  cursor: pointer;
-  min-width: 130px;
-  color: $light-text;
-  position: relative;
-  &:hover{
-    color:$dark-text;
-  }
-  .icon-angle-up{
-    position: absolute;
-    right: 5px;
-    top: 23px;
-    transition: all .2s linear;
-  }
-}
-.switch{
-  i{
-    transform: rotate(-180deg);
-  }
-}
-
-</style>

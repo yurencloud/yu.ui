@@ -1,0 +1,57 @@
+.yu-alert {
+  padding: 8px 16px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: $normal;
+  margin-bottom:20px ;
+  position: relative;
+  box-sizing: border-box;
+  i {
+    margin-right: 3px;
+    font-size: $large;
+  }
+  .alert-close {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    cursor: pointer;
+  }
+  .alert-text {
+    display: inline-block;
+  }
+  &.success {
+    background-color: lighten($success, 45);
+    color: $success;
+  }
+  &.warning {
+    background-color: lighten($warning, 40);
+    color: $warning;
+  }
+  &.error {
+    background-color: lighten( $danger,  27);
+    color: $danger;
+  }
+  &.info {
+    background-color: lighten($info, 37);
+  }
+  &.center{
+    text-align: center;
+  }
+  &.description {
+    .icon {
+      font-size: 30px;
+      vertical-align: middle;
+    }
+    .alert-text {
+      vertical-align: middle;
+      .alert-title {
+        font-size: $normal;
+        font-weight: bold;
+      }
+      .alert-auxiliary {
+        padding-top: 6px;
+        font-size: $small;
+      }
+    }
+  }
+}
