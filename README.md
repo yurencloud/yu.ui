@@ -1,62 +1,58 @@
-YU.UI [使用文档](http://www.yurencloud.com/ui/install)
----
-## npm 安装
-~~~
-npm i -S yu.ui
-~~~
+<h2 align="center">YU.UI</h2>
+<p align="center">VUE UI组件库 | VUE UI framework | pc端 | 一套简洁，小巧的基于 Vue 2.0 的桌面端组件库</p>
 
-## 复制文件安装
-复制scss文件 `src/assets/css/_varible.scss`
-复制组件文件 `src/components/*`
-配置vue scss loader   
-~~~
-  npm install --save-dev sass-loader
-  npm install --save-dev node-sass
-~~~   
-~~~
-  // 修改build/webpack.base.conf.js文件
-  module: {
-    rules: [
-      // ... 省略前面的配置
-      // 添加scss 配置
-      {
-        test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
-      },
-      ]
-    }
-~~~
-举例：如果你只想引入button组件，那么你只要复制button.vue文件和_varible.scss文件，  
-并修改button.vue中的@import "../assets/css/varible";即可使用  
+<p align="center">
+   <img src="https://img.shields.io/npm/v/yu.ui.svg" alt="">
+    <img src="https://img.shields.io/github/stars/yurencloud/yu.ui.svg" alt="">
+    <img src="https://img.shields.io/github/issues/yurencloud/yu.ui.svg" alt="">
+    <img src="https://img.shields.io/github/forks/yurencloud/yu.ui.svg" alt="">
+    <img src="https://img.shields.io/github/license/yurencloud/yu.ui.svg" alt="">
+</p>
+
+<p align="center">
+  <a href="http://www.yurencloud.com/ui/install" target="_blank">使用文档</a>
+  |
+  <a href="https://github.com/yurencloud/yu.ui/tree/master/src/example"  target="_blank">完整示例</a>
+  |
+  <a href="http://www.yurencloud.com"  target="_blank">官方网站</a>
+</p>
 
 
-## 配置字体图标
-在根目录下的index.html文件中引入外部字体图标css文件(注：如果你使用的组件中未使用到任何图标，可不引入)
+
+## 快速上手
+
+
+
+#### npm 安装
+
 ~~~
-<!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1.0">
-      <title>yu-vue</title>
-      <!--字体图标css-->
-      <link rel="stylesheet" href="https://at.alicdn.com/t/font_554463_k9gdx8fkgj8m2t9.css">
-      <!--字体图标css-->
-    </head>
-    <body>
-      <div id="app"></div>
-      <!-- built files will be auto injected -->
-    </body>
-  </html>
+npm install --save yu.ui
 ~~~
 
-## 快速上手：Hello World
+
+
+#### 引入样式 
+
+方式一: 在html中引入 
+
+~~~html
+  // 例如vue项目的根目录index.html
+  <link rel="stylesheet" href="https://unpkg.com/yu.ui/src/assets/yu.ui.css">
+~~~
+方式二: 在js中引入 
+
+~~~
+  // 例如vue项目的src/main.js中
+  import 'yu.ui/src/assets/yu.ui.css'
+~~~
+
+
+#### 使用示例
 ~~~
 
   // 引入yu-button组件
   import { YuButton } from 'yu.ui';
   export default {
-    name: 'Example',
     components: { YuButton },
   }
       
