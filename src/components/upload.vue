@@ -142,26 +142,31 @@ export default {
         this.preview = this.getObjectURL(this.files[0])
       }
 
-      fetch(this.url, {
-        method: 'POST',
-        body: formData,
-        headers: this.headers,
-      })
-        .then((response) => {
-          response.text().then((data) => {
-            data = JSON.parse(data)
-            // 返回对象data中要有status属性表明上传成功或失败
-            if (parseInt(data.status, 0) === 1) {
-              the.status = '上传成功.'
-              the.$emit('success', data)
-            } else {
-              the.status = '上传失败!'
-              the.$emit('error', data)
-            }
-          })
-        }, (error) => {
-          the.$emit('error', error)
+      // 如果未定义url, 则由用户通过upload回调上传
+      if (this.url) {
+        fetch(this.url, {
+          method: 'POST',
+          body: formData,
+          headers: this.headers,
         })
+          .then((response) => {
+            response.text().then((data) => {
+              data = JSON.parse(data)
+              // 返回对象data中要有status属性表明上传成功或失败
+              if (parseInt(data.status, 0) === 1) {
+                the.status = '上传成功.'
+                the.$emit('success', data)
+              } else {
+                the.status = '上传失败!'
+                the.$emit('error', data)
+              }
+            })
+          }, (error) => {
+            the.$emit('error', error)
+          })
+      } else {
+        this.$emit('upload', this.files, formData)
+      }
     },
     handleClick() {
       this.$refs.input.click()
