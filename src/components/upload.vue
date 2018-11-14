@@ -83,7 +83,7 @@ export default {
   methods: {
     // 让父级去处理删除事件
     handleClose(item) {
-      this.$emit('handleClose', item)
+      this.$emit('close', item)
     },
     handleChange($event) {
       const the = this
