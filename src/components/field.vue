@@ -1,6 +1,6 @@
 <template>
   <div class="yu-field" :class="[{error:error},{inline:inline},{flex:align === 'left' || align === 'right'}]">
-    <label v-if="label" :class="[align,{noLabel:noLabel}]">
+    <label v-if="label" :class="[align,{noLabel:noLabel}]" :style="{width: labelWidth}">
       {{label}}
     </label>
     <div class="field"
@@ -43,6 +43,10 @@ export default {
       default: 'left',
     },
     noLabel: Boolean,
+    labelWidth: {
+      type: String,
+      default: '100px',
+    },
     list: Boolean,
     fieldWidth: String,
     defaultMessage: {

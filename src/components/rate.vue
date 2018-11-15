@@ -95,9 +95,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped type="text/scss">
-  @import "../assets/css/varible";
-
-
-</style>
