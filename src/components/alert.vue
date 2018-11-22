@@ -46,14 +46,14 @@ export default {
     center: Boolean,
     description: String,
     closeText: String,
-    closeable: Boolean,
-  },
-  mounted() {
-
+    closeable: {
+      type: Boolean,
+      default: true,
+    },
   },
   methods: {
     close() {
-      if (!this.closeable) {
+      if (this.closeable) {
         this.visible = !this.visible
         this.$emit('close', event)
       }

@@ -149,7 +149,6 @@ export default {
       const value = Math.floor(this.total * move / 100)
       this.$emit('input', value)
     },
-    // TODO::这里可能会有循环bug
     value(value) {
       this.move = value / this.total * 100
       if (this.$parent.isField) {

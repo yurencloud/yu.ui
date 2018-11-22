@@ -82,7 +82,6 @@ export default {
     },
     addItem(e) {
       e.stopPropagation()
-      //  todo  添加 New tabs
     },
   },
   mounted() {

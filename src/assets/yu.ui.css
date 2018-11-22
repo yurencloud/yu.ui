@@ -3150,7 +3150,7 @@ body.lock {
     border-bottom: 8px solid transparent;
     border-left: 8px solid transparent;
     position: absolute;
-    /*todo*/ }
+    }
     .yu-popover .tangle.top {
       top: -14px;
       left: 40px; }
